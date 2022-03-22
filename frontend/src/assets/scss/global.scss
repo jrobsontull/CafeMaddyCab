@@ -1,0 +1,87 @@
+/* Colors */
+$dark-blue: #3b3b96;
+$lightest-pink: #f7f5fe;
+$light-form: #fefff3;
+$yellow-btn: #f9dc7c;
+$dark-pink: #dc87cb;
+$light-blue: #9696db;
+$yellow-btn-hover: #fae399;
+
+/* Other variables */
+$border-radius: 12px;
+$max-width: 600px;
+
+/* Global reset */
+* {
+  vertical-align: baseline;
+  font-weight: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  border: 0 none;
+  outline: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+/* Font imports */
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('../fonts/RobotoCondensed-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('../fonts/RobotoCondensed-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+/* Imports */
+@import '_landingPage';
+@import '_requestRide';
+
+/* Styling */
+body {
+  background-color: $lightest-pink;
+  font-family: 'Roboto Condensed', 'sans-serif';
+  font-size: 16px;
+  color: $dark-blue;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    width: inherit;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  a {
+    background-color: $yellow-btn;
+    width: 75%;
+    padding: 8px 18px;
+    text-align: center;
+    font-size: 22px;
+    border-radius: $border-radius;
+    max-width: $max-width;
+    transition: all 0.25s ease;
+  }
+}
+
+.submit-btn a:hover {
+  cursor: pointer;
+  background-color: $yellow-btn-hover;
+}

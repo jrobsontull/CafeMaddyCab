@@ -1,0 +1,122 @@
+/* Colors */
+/* Other variables */
+/* Global reset */
+* {
+  vertical-align: baseline;
+  font-weight: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  border: 0 none;
+  outline: 0;
+  margin: 0;
+  text-decoration: none; }
+
+/* Font imports */
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url("../fonts/RobotoCondensed-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url("../fonts/RobotoCondensed-Bold.ttf") format("truetype");
+  font-weight: bold; }
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url("../fonts/RobotoCondensed-Light.ttf") format("truetype");
+  font-weight: 300; }
+
+/* Imports */
+.logo {
+  margin: 0 auto; }
+  .logo img {
+    height: auto;
+    width: 120px;
+    padding: 24px 0; }
+
+.info-box-title {
+  width: 75%;
+  background-color: #9696db;
+  padding: 8px 18px;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid #3b3b96;
+  font-size: 22px;
+  margin-top: 20px;
+  max-width: 600px; }
+  .info-box-title h3 {
+    color: #f7f5fe;
+    font-size: 20px; }
+
+.info-box {
+  width: 75%;
+  background-color: #fefff3;
+  padding: 18px;
+  border: 1px solid #3b3b96;
+  border-radius: 12px;
+  max-width: 600px; }
+  .info-box p {
+    margin-top: 12px;
+    text-align: justify; }
+  .info-box p:first-child {
+    margin-top: 0; }
+  .info-box ul {
+    margin-top: 12px; }
+    .info-box ul li {
+      margin-bottom: 4px; }
+    .info-box ul li:last-child {
+      margin-bottom: 0; }
+  .info-box ol {
+    padding-left: 18px;
+    text-align: justify; }
+    .info-box ol li {
+      margin-bottom: 4px; }
+    .info-box ol li:last-child {
+      margin-bottom: 0; }
+
+.info-box#child-2,
+.info-box#child-3 {
+  border-radius: 0 0 12px 12px;
+  border-top-width: 0; }
+
+.submit-btn#landing-page {
+  margin: 20px 0 30px 0; }
+
+.titles {
+  text-align: center; }
+  .titles h2 {
+    font-size: 30px; }
+  .titles h3 {
+    font-size: 22px; }
+
+/* Styling */
+body {
+  background-color: #f7f5fe;
+  font-family: 'Roboto Condensed', 'sans-serif';
+  font-size: 16px;
+  color: #3b3b96; }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .content a {
+    width: inherit; }
+
+.submit-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+  .submit-btn a {
+    background-color: #f9dc7c;
+    width: 75%;
+    padding: 8px 18px;
+    text-align: center;
+    font-size: 22px;
+    border-radius: 12px;
+    max-width: 600px;
+    transition: all 0.25s ease; }
+
+.submit-btn a:hover {
+  cursor: pointer;
+  background-color: #fae399; }
