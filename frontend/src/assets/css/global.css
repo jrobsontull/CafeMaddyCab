@@ -107,9 +107,14 @@
     border-radius: 12px;
     border: 1px solid #3b3b96;
     color: #3b3b96;
-    margin: 6px 0; }
+    margin: 6px 0;
+    transition: box-shadow 0.25s ease; }
   .request-form input::placeholder {
     color: #9696db; }
+  .request-form input:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
+  .request-form input:focus {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25); }
   .request-form .radio-check,
   .request-form .check {
     background-color: #fefff3;
@@ -163,6 +168,34 @@
   .request-form .check input[type='checkbox']:checked + label:before {
     background-color: #9696db;
     color: #fefff3; }
+  .request-form .upload {
+    display: flex;
+    align-items: center; }
+    .request-form .upload input.input-file {
+      display: none; }
+    .request-form .upload input.upload-location {
+      width: 70%;
+      background-color: #fefff3;
+      padding: 12px 18px;
+      border-radius: 12px 0 0 12px;
+      border: 1px solid #3b3b96;
+      border-width: 1px 0 1px 1px;
+      color: #9696db; }
+    .request-form .upload .input-file + label {
+      display: inline-block;
+      text-align: center;
+      border-radius: 0 12px 12px 0;
+      padding: 12px 0;
+      font-size: 18px;
+      background-color: #3b3b96;
+      color: #f7f5fe;
+      width: 30%;
+      border: 1px solid #3b3b96;
+      border-width: 1px 1px 1px 0;
+      transition: background-color 0.25s ease; }
+    .request-form .upload .input-file + label:hover {
+      cursor: pointer;
+      background-color: #5c5cb3; }
   .request-form .btn.upload {
     width: 100%;
     padding: 12px 0;
@@ -189,7 +222,7 @@ body {
   text-align: center;
   font-size: 22px;
   border-radius: 12px;
-  max-width: 600px;
+  max-width: calc($max-width - 18px);
   transition: all 0.25s ease; }
 
 .btn-link {
@@ -205,6 +238,10 @@ body {
     border-radius: 12px;
     max-width: 600px;
     transition: all 0.25s ease; }
+  .btn-link a:visited,
+  .btn-link a:link,
+  .btn-link a:active {
+    color: inherit; }
 
 .btn-link.submit a {
   background-color: #f9dc7c; }

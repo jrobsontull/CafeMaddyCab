@@ -75,7 +75,7 @@ body {
   text-align: center;
   font-size: $heading-font-size;
   border-radius: $border-radius;
-  max-width: $max-width;
+  max-width: calc($max-width - 18px);
   transition: all 0.25s ease;
 }
 
@@ -93,6 +93,12 @@ body {
     border-radius: $border-radius;
     max-width: $max-width;
     transition: all 0.25s ease;
+  }
+
+  a:visited,
+  a:link,
+  a:active {
+    color: inherit;
   }
 }
 

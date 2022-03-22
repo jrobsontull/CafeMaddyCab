@@ -1,18 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RidesAPI from '../utils/rides.api';
 
 function RequestRide() {
-  const rideDetails = useState({});
+  const [rideDetails, setRideDetails] = useState({});
+  const [selfie, setSelfie] = useState({ location: null, fileName: null });
+  const [photoId, setPhotoId] = useState({ location: null, fileName: null });
 
   function validator() {}
 
   function submitHandler() {
-    console.log('Submitting request...');
+    console.log('Submitting ride request...');
     const response = RidesAPI.requestRide({ firstName: 'test' });
     if (response) {
       console.log(response);
     }
   }
+
+  function selectFile(target, type) {
+    let fileName = target.value.split('\\');
+    fileName = fileName[fileName.length - 1];
+
+    if (type === 'selfie') {
+      setSelfie({
+        location: target.value,
+        fileName: fileName,
+      });
+    } else if (type === 'photoId') {
+      console.log('photo');
+      setPhotoId({
+        location: target.value,
+        fileName: fileName,
+      });
+    }
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="react-container">
@@ -102,11 +126,41 @@ function RequestRide() {
 
           <h3>Please submit a selfie / photo of the elderly person</h3>
 
-          <div className="btn upload">Upload photo</div>
+          <div className="upload">
+            <input
+              type="text"
+              disabled
+              className="upload-location"
+              value={selfie.fileName ? selfie.fileName : 'No photo selected'}
+            ></input>
+            <input
+              name="selfie"
+              type="file"
+              className="input-file"
+              id="selfie"
+              onChange={(e) => selectFile(e.target, 'selfie')}
+            />
+            <label htmlFor="selfie">Upload Photo</label>
+          </div>
 
           <h3>Please submit a copy/ photo of your photo ID</h3>
 
-          <div className="btn upload">Upload photo</div>
+          <div className="upload">
+            <input
+              type="text"
+              disabled
+              className="upload-location"
+              value={photoId.fileName ? photoId.fileName : 'No photo selected'}
+            ></input>
+            <input
+              name="photoId"
+              type="file"
+              className="input-file"
+              id="photoId"
+              onChange={(e) => selectFile(e.target, 'photoId')}
+            />
+            <label htmlFor="photoId">Upload Photo</label>
+          </div>
 
           <h3>
             I understand that the code is for 1 ride up to $25, and the

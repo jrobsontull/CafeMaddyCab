@@ -30,10 +30,19 @@
     border: 1px solid $dark-blue;
     color: $dark-blue;
     margin: 6px 0;
+    transition: box-shadow 0.25s ease;
   }
 
   input::placeholder {
     color: $light-blue;
+  }
+
+  input:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+  }
+
+  input:focus {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
   }
 
   .radio-check,
@@ -118,6 +127,44 @@
     input[type='checkbox']:checked + label:before {
       background-color: $light-blue;
       color: $light-form;
+    }
+  }
+
+  .upload {
+    display: flex;
+    align-items: center;
+
+    input.input-file {
+      display: none;
+    }
+
+    input.upload-location {
+      width: 70%;
+      background-color: $light-form;
+      padding: 12px 18px;
+      border-radius: $border-radius 0 0 $border-radius;
+      border: 1px solid $dark-blue;
+      border-width: 1px 0 1px 1px;
+      color: $light-blue;
+    }
+
+    .input-file + label {
+      display: inline-block;
+      text-align: center;
+      border-radius: 0 $border-radius $border-radius 0;
+      padding: 12px 0;
+      font-size: 18px;
+      background-color: $dark-blue;
+      color: $lightest-pink;
+      width: 30%;
+      border: 1px solid $dark-blue;
+      border-width: 1px 1px 1px 0;
+      transition: background-color 0.25s ease;
+    }
+
+    .input-file + label:hover {
+      cursor: pointer;
+      background-color: $blue-btn-hover;
     }
   }
 
