@@ -1,5 +1,5 @@
-import RidesDAO from "../dao/ridesDAO.js";
-import { UUID } from "bson";
+import RidesDAO from '../dao/ridesDAO.js';
+import { UUID } from 'bson';
 
 export default class RidesController {
   /* Post request for ride */
