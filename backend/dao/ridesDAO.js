@@ -1,4 +1,4 @@
-import mongodb from 'mongodb';
+import mongodb from "mongodb";
 
 const ObjectId = mongodb.ObjectId;
 
@@ -12,15 +12,15 @@ export default class RidesDAO {
     try {
       // Check if production environment
       let db_uri = process.env.CAFEMADDYCAB_NS_DEV;
-      if (process.env.NODE_ENV === 'production') {
-        console.log('Enabling ridesDAO production mode.');
+      if (process.env.NODE_ENV === "production") {
+        console.log("Enabling ridesDAO production mode.");
         db_uri = process.env.CAFEMADDYCAB_NS_PRODUCTION;
       }
 
-      rides = await conn.db(db_uri).collection('rides');
+      rides = await conn.db(db_uri).collection("rides");
     } catch (e) {
       console.error(
-        'Unable to establish a connection handle in ridesDAO: ' + e
+        "Unable to establish a connection handle in ridesDAO: " + e
       );
     }
   }
@@ -53,7 +53,7 @@ export default class RidesDAO {
 
       return await rides.insertOne(rideDoc);
     } catch (e) {
-      console.log('Unable to post ride: ' + e);
+      console.log("Unable to post ride: " + e);
       return { error: e };
     }
   }
