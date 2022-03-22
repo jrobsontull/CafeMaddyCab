@@ -68,7 +68,7 @@ function LandingPage() {
             </li>
           </ol>
         </div>
-        <div className="submit-btn" id="landing-page">
+        <div className="btn submit" id="landing-page">
           <Link to={'/request-ride'}>Request Reimbursment</Link>
         </div>
       </div>

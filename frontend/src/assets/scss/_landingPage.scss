@@ -9,12 +9,12 @@
 }
 
 .info-box-title {
-  width: 75%;
+  width: $content-width;
   background-color: $light-blue;
   padding: 8px 18px;
   border-radius: $border-radius $border-radius 0 0;
   border: 1px solid $dark-blue;
-  font-size: 22px;
+  font-size: $heading-font-size;
   margin-top: 20px;
   max-width: $max-width;
 
@@ -25,7 +25,7 @@
 }
 
 .info-box {
-  width: 75%;
+  width: $content-width;
   background-color: $light-form;
   padding: 18px;
   border: 1px solid $dark-blue;

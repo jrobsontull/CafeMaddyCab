@@ -6,10 +6,14 @@ $yellow-btn: #f9dc7c;
 $dark-pink: #dc87cb;
 $light-blue: #9696db;
 $yellow-btn-hover: #fae399;
+$blue-btn-hover: #5c5cb3;
 
 /* Other variables */
 $border-radius: 12px;
 $max-width: 600px;
+$content-width: 75%;
+$smaller-font-size: 16px;
+$heading-font-size: 22px;
 
 /* Global reset */
 * {
@@ -50,7 +54,7 @@ $max-width: 600px;
 body {
   background-color: $lightest-pink;
   font-family: 'Roboto Condensed', 'sans-serif';
-  font-size: 16px;
+  font-size: $smaller-font-size;
   color: $dark-blue;
 }
 
@@ -64,24 +68,69 @@ body {
   }
 }
 
-.submit-btn {
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  width: $content-width;
+  padding: 8px 18px;
+  text-align: center;
+  font-size: $heading-font-size;
+  border-radius: $border-radius;
+  max-width: $max-width;
+  transition: all 0.25s ease;
+}
+
+.btn.link {
   width: 100%;
   display: flex;
   justify-content: center;
 
   a {
-    background-color: $yellow-btn;
-    width: 75%;
+    width: $content-width;
     padding: 8px 18px;
     text-align: center;
-    font-size: 22px;
+    font-size: $heading-font-size;
     border-radius: $border-radius;
     max-width: $max-width;
     transition: all 0.25s ease;
   }
 }
 
-.submit-btn a:hover {
+.btn.link.submit {
+  a {
+    background-color: $yellow-btn;
+  }
+}
+
+.btn:hover {
   cursor: pointer;
+}
+
+.btn.link.submit a:hover {
   background-color: $yellow-btn-hover;
+}
+
+.btn.submit {
+  background-color: $yellow-btn;
+}
+
+.btn.submit:hover {
+  background-color: $yellow-btn-hover;
+}
+
+.btn.upload {
+  background-color: $dark-blue;
+  width: $content-width;
+  padding: 8px 18px;
+  text-align: center;
+  font-size: $smaller-font-size;
+  border-radius: $border-radius;
+  max-width: $max-width;
+  transition: all 0.25s ease;
+  color: $lightest-pink;
+}
+
+.btn.upload:hover {
+  background-color: $blue-btn-hover;
 }
