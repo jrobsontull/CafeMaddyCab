@@ -1,4 +1,19 @@
+import { useState } from 'react';
+import RidesAPI from '../utils/rides.api';
+
 function RequestRide() {
+  const rideDetails = useState({});
+
+  function validator() {}
+
+  function submitHandler() {
+    console.log('Submitting request...');
+    const response = RidesAPI.requestRide({ firstName: 'test' });
+    if (response) {
+      console.log(response);
+    }
+  }
+
   return (
     <div className="react-container">
       <div className="content">
@@ -73,13 +88,13 @@ function RequestRide() {
             </div>
             <div className="check-item">
               <input type="radio" name="purpose" id="11"></input>
-              <label htmlFor="12">
+              <label htmlFor="11">
                 Academic reasons (university, school, mandatory meeting)
               </label>
             </div>
             <div className="check-item last-child">
-              <input type="radio" name="purpose" id="13"></input>
-              <label htmlFor="13">
+              <input type="radio" name="purpose" id="12"></input>
+              <label htmlFor="12" className="other-input">
                 <input placeholder="Other"></input>
               </label>
             </div>
@@ -102,8 +117,8 @@ function RequestRide() {
 
           <div className="check">
             <div className="check-item">
-              <input type="checkbox" name="understand-1" id="14"></input>
-              <label htmlFor="14">Yes, I understand</label>
+              <input type="checkbox" name="understand-1" id="13"></input>
+              <label htmlFor="13">Yes, I understand</label>
             </div>
           </div>
 
@@ -114,8 +129,8 @@ function RequestRide() {
 
           <div className="check">
             <div className="check-item">
-              <input type="checkbox" name="understand-2" id="15"></input>
-              <label htmlFor="15">
+              <input type="checkbox" name="understand-2" id="14"></input>
+              <label htmlFor="14">
                 Yes, my ride will be within the 5 boroughs of NYC
               </label>
             </div>
@@ -125,8 +140,8 @@ function RequestRide() {
 
           <div className="check">
             <div className="check-item">
-              <input type="checkbox" name="understand-3" id="16"></input>
-              <label htmlFor="16">
+              <input type="checkbox" name="understand-3" id="15"></input>
+              <label htmlFor="15">
                 I have read and agree to the terms and conditions
               </label>
             </div>
@@ -138,7 +153,10 @@ function RequestRide() {
           </h3>
         </div>
 
-        <div className="btn submit">Submit Request</div>
+        <div className="btn submit" onClick={() => submitHandler()}>
+          Submit Request
+        </div>
+        <br></br>
         <br></br>
       </div>
     </div>

@@ -96,7 +96,8 @@
   display: flex;
   flex-direction: column;
   font-size: 18px;
-  margin-top: 20px; }
+  margin-top: 20px;
+  max-width: 600px; }
   .request-form h3 {
     font-size: 20px;
     margin: 14px 0 12px 0; }
@@ -118,6 +119,8 @@
     border-radius: 12px; }
   .request-form .radio-check .check-item {
     margin-bottom: 4px; }
+    .request-form .radio-check .check-item label.other-input input {
+      width: 80%; }
   .request-form .radio-check .check-item.last-child {
     margin-bottom: 0; }
   .request-form .radio-check input[type='radio'] {
@@ -181,8 +184,6 @@ body {
 
 .btn {
   width: 100%;
-  display: flex;
-  justify-content: center;
   width: 75%;
   padding: 8px 18px;
   text-align: center;
@@ -191,11 +192,12 @@ body {
   max-width: 600px;
   transition: all 0.25s ease; }
 
-.btn.link {
+.btn-link {
   width: 100%;
   display: flex;
-  justify-content: center; }
-  .btn.link a {
+  justify-content: center;
+  margin: 20px 0 30px 0; }
+  .btn-link a {
     width: 75%;
     padding: 8px 18px;
     text-align: center;
@@ -204,13 +206,13 @@ body {
     max-width: 600px;
     transition: all 0.25s ease; }
 
-.btn.link.submit a {
+.btn-link.submit a {
   background-color: #f9dc7c; }
 
 .btn:hover {
   cursor: pointer; }
 
-.btn.link.submit a:hover {
+.btn-link.submit a:hover {
   background-color: #fae399; }
 
 .btn.submit {
