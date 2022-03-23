@@ -3,6 +3,8 @@
 /frontend/node_modules
 /backend/.env
 /frontend/.env
+/backend/google-credientials.json
+
 # dependencies
 /node_modules
 /.pnp

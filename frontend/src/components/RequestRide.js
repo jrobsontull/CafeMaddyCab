@@ -120,16 +120,16 @@ function RequestRide() {
       }
     }
 
-    if (errorPresent) {
+    if (false) {
       console.log('errors present');
     } else {
       // Update other purpose field if present
-      if (rideDetails.purpose.value === '6') {
-        setRideDetails((prevDetails) => ({
-          ...prevDetails,
-          purpose: { value: '6', text: otherPurpose },
-        }));
-      }
+      // if (rideDetails.purpose.value === '6') {
+      //   setRideDetails((prevDetails) => ({
+      //     ...prevDetails,
+      //     purpose: { value: '6', text: otherPurpose },
+      //   }));
+      // }
 
       // Post data
       //console.log('Submitting ride request...');

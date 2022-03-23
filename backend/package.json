@@ -10,7 +10,8 @@
     "build": "cd ../frontend && npm run build",
     "install-frontend": "cd ../frontend && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "node index.js"
+    "start": "node --experimental-json-modules index.js",
+    "dev": "nodemon --experimental-json-modules index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "googleapis": "^97.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.1"
   },
   "devDependencies": {
