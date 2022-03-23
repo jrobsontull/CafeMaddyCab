@@ -2,7 +2,7 @@ import app from './server.js';
 import mongodb from 'mongodb';
 import dotenv from 'dotenv';
 import RidesDAO from './dao/ridesDAO.js';
-import GoogleDAO from './dao/googleDAO.js';
+import DriveDAO from './dao/driveDAO.js';
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
@@ -26,10 +26,9 @@ MongoClient.connect(db_uri, {
   })
   .then(async (client) => {
     await RidesDAO.injectRidesDB(client);
+    await DriveDAO.googleAuth();
 
     app.listen(port, () => {
       console.log('Listening on port ' + port);
     });
-
-    GoogleDAO.authBackend();
   });

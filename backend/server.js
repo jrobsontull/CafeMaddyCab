@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import rides from './routes/rides.route.js';
+import drive from './routes/drive.route.js';
 
 dotenv.config();
 const app = express();
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/rides', rides);
+app.use('api/v1/drive', drive);
 
 // Serve static files if production mode
 if (process.env.NODE_ENV === 'production') {
