@@ -5,14 +5,90 @@ function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
   const [selfie, setSelfie] = useState({ location: null, fileName: null });
   const [photoId, setPhotoId] = useState({ location: null, fileName: null });
+  const [otherPurpose, setOtherPurpose] = useState('');
+  let errors = {
+    firstName: true,
+    lastName: true,
+    email: true,
+    identity: true,
+    income: true,
+    purpose: true,
+    selfie: true,
+    photoId: true,
+    understand1: true,
+    understand2: true,
+    understand3: true,
+  };
 
-  function validator() {}
+  function basicInputFieldChange(target, prop) {
+    setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
+  }
 
-  function submitHandler() {
-    console.log('Submitting ride request...');
-    const response = RidesAPI.requestRide({ firstName: 'test' });
-    if (response) {
-      console.log(response);
+  function validateNames(target, prop) {
+    const re =
+      /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+    if (target.value !== '' && re.test(target.value)) {
+      basicInputFieldChange(target, prop);
+      errors = { ...errors, [prop]: false };
+    } else {
+      errors = { ...errors, [prop]: true };
+    }
+  }
+
+  function validateEmail(target) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (target.value !== '' && re.test(target.value)) {
+      basicInputFieldChange(target, 'email');
+      errors = { ...errors, email: false };
+    } else {
+      errors = { ...errors, email: true };
+    }
+  }
+
+  function validateIdentity(target) {
+    if (target.checked && target.value) {
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        identity: target.value,
+      }));
+      errors = { ...errors, identity: false };
+    }
+  }
+
+  function validateIncome(target) {
+    if (target.checked && target.value) {
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        income: target.value,
+      }));
+      errors = { ...errors, income: false };
+    }
+  }
+
+  function validatePurpose(target) {
+    if (target.checked && target.value) {
+      let purpose = {};
+      if (target.value === '6') {
+        // Other box checked
+        purpose = { value: target.value, text: otherPurpose };
+      } else {
+        purpose = { value: target.value, text: null };
+      }
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        purpose: purpose,
+      }));
+      errors = { ...errors, purpose: false };
+    }
+  }
+
+  function validateUnderstand(target, prop) {
+    if (target.checked) {
+      errors = { ...errors, [prop]: false };
+    } else {
+      errors = { ...errors, [prop]: true };
     }
   }
 
@@ -22,15 +98,46 @@ function RequestRide() {
 
     if (type === 'selfie') {
       setSelfie({
-        location: target.value,
-        fileName: fileName,
+        file: target.files[0],
       });
+      errors = { ...errors, selfie: false };
     } else if (type === 'photoId') {
       console.log('photo');
       setPhotoId({
-        location: target.value,
-        fileName: fileName,
+        file: target.files[0],
       });
+      errors = { ...errors, photoId: false };
+    }
+  }
+
+  function submitHandler() {
+    console.log('Validating form');
+    let errorPresent = false;
+    for (const error in errors) {
+      if (error) {
+        errorPresent = true;
+        break;
+      }
+    }
+
+    if (errorPresent) {
+      console.log('errors present');
+    } else {
+      // Update other purpose field if present
+      if (rideDetails.purpose.value === '6') {
+        setRideDetails((prevDetails) => ({
+          ...prevDetails,
+          purpose: { value: '6', text: otherPurpose },
+        }));
+      }
+
+      // Post data
+      //console.log('Submitting ride request...');
+      // const response = RidesAPI.requestRide({ firstName: 'test' });
+      // if (response) {
+      //   console.log(response);
+      // }
+      console.log('submitting images first');
     }
   }
 
@@ -46,27 +153,42 @@ function RequestRide() {
           <h3>Ride Reimbursment</h3>
         </div>
         <div className="request-form">
-          <input type="text" placeholder="First name"></input>
-          <input type="text" placeholder="Last name"></input>
-          <input type="email" placeholder="Email address"></input>
+          <input
+            type="text"
+            placeholder="First name"
+            onChange={(e) => validateNames(e.target, 'firstName')}
+          ></input>
+          <input
+            type="text"
+            placeholder="Last name"
+            onChange={(e) => validateNames(e.target, 'lastName')}
+          ></input>
+          <input
+            type="email"
+            placeholder="Email address"
+            onChange={(e) => validateEmail(e.target)}
+          ></input>
 
           <h3>What group do you most identify with?</h3>
 
-          <div className="radio-check">
+          <div
+            className="radio-check"
+            onChange={(e) => validateIdentity(e.target)}
+          >
             <div className="check-item">
-              <input type="radio" name="identity" id="1"></input>
+              <input type="radio" name="identity" id="1" value="1"></input>
               <label htmlFor="1">Asian female</label>
             </div>
             <div className="check-item">
-              <input type="radio" name="identity" id="2"></input>
+              <input type="radio" name="identity" id="2" value="2"></input>
               <label htmlFor="2">Asian LGBTQ+</label>
             </div>
             <div className="check-item">
-              <input type="radio" name="identity" id="3"></input>
+              <input type="radio" name="identity" id="3" value="3"></input>
               <label htmlFor="3">Asian elderly person</label>
             </div>
             <div className="check-item last-child">
-              <input type="radio" name="identity" id="4"></input>
+              <input type="radio" name="identity" id="4" value="4"></input>
               <label htmlFor="4">
                 I am submitting on behalf of an Asian Elderly person
               </label>
@@ -78,48 +200,57 @@ function RequestRide() {
             for your ride?
           </h3>
 
-          <div className="radio-check">
+          <div
+            className="radio-check"
+            onChange={(e) => validateIncome(e.target)}
+          >
             <div className="check-item">
-              <input type="radio" name="low-income" id="5"></input>
+              <input type="radio" name="low-income" id="5" value="yes"></input>
               <label htmlFor="5">Yes</label>
             </div>
             <div className="check-item last-child">
-              <input type="radio" name="low-income" id="6"></input>
+              <input type="radio" name="low-income" id="6" value="no"></input>
               <label htmlFor="6">No</label>
             </div>
           </div>
 
           <h3>What is the purpose of your planned ride?</h3>
 
-          <div className="radio-check">
+          <div
+            className="radio-check"
+            onChange={(e) => validatePurpose(e.target)}
+          >
             <div className="check-item">
-              <input type="radio" name="purpose" id="7"></input>
+              <input type="radio" name="purpose" id="7" value="1"></input>
               <label htmlFor="7">Medical appointment</label>
             </div>
             <div className="check-item">
-              <input type="radio" name="purpose" id="8"></input>
+              <input type="radio" name="purpose" id="8" value="2"></input>
               <label htmlFor="8">Vaccination</label>
             </div>
             <div className="check-item">
-              <input type="radio" name="purpose" id="9"></input>
+              <input type="radio" name="purpose" id="9" value="3"></input>
               <label htmlFor="9">Work (going to/from work)</label>
             </div>
             <div className="check-item">
-              <input type="radio" name="purpose" id="10"></input>
+              <input type="radio" name="purpose" id="10" value="4"></input>
               <label htmlFor="10">
                 Care taking for an Asian elderly person
               </label>
             </div>
             <div className="check-item">
-              <input type="radio" name="purpose" id="11"></input>
+              <input type="radio" name="purpose" id="11" value="5"></input>
               <label htmlFor="11">
                 Academic reasons (university, school, mandatory meeting)
               </label>
             </div>
             <div className="check-item last-child">
-              <input type="radio" name="purpose" id="12"></input>
+              <input type="radio" name="purpose" id="12" value="6"></input>
               <label htmlFor="12" className="other-input">
-                <input placeholder="Other"></input>
+                <input
+                  placeholder="Other"
+                  onChange={(e) => setOtherPurpose(e.target.value)}
+                ></input>
               </label>
             </div>
           </div>
@@ -131,7 +262,7 @@ function RequestRide() {
               type="text"
               disabled
               className="upload-location"
-              value={selfie.fileName ? selfie.fileName : 'No photo selected'}
+              value={selfie.file ? selfie.file.name : 'No photo selected'}
             ></input>
             <input
               name="selfie"
@@ -150,7 +281,7 @@ function RequestRide() {
               type="text"
               disabled
               className="upload-location"
-              value={photoId.fileName ? photoId.fileName : 'No photo selected'}
+              value={photoId.file ? photoId.file.name : 'No photo selected'}
             ></input>
             <input
               name="photoId"
@@ -171,7 +302,12 @@ function RequestRide() {
 
           <div className="check">
             <div className="check-item">
-              <input type="checkbox" name="understand-1" id="13"></input>
+              <input
+                type="checkbox"
+                name="understand-1"
+                id="13"
+                onChange={(e) => validateUnderstand(e.target, 'understand1')}
+              ></input>
               <label htmlFor="13">Yes, I understand</label>
             </div>
           </div>
@@ -183,7 +319,12 @@ function RequestRide() {
 
           <div className="check">
             <div className="check-item">
-              <input type="checkbox" name="understand-2" id="14"></input>
+              <input
+                type="checkbox"
+                name="understand-2"
+                id="14"
+                onChange={(e) => validateUnderstand(e.target, 'understand2')}
+              ></input>
               <label htmlFor="14">
                 Yes, my ride will be within the 5 boroughs of NYC
               </label>
@@ -194,7 +335,12 @@ function RequestRide() {
 
           <div className="check">
             <div className="check-item">
-              <input type="checkbox" name="understand-3" id="15"></input>
+              <input
+                type="checkbox"
+                name="understand-3"
+                id="15"
+                onChange={(e) => validateUnderstand(e.target, 'understand3')}
+              ></input>
               <label htmlFor="15">
                 I have read and agree to the terms and conditions
               </label>
