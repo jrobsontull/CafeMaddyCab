@@ -52,6 +52,7 @@
     border: 1px solid $dark-blue;
     padding: 12px 18px;
     border-radius: $border-radius;
+    transition: box-shadow 0.25s ease;
   }
 
   .radio-check {
@@ -93,6 +94,11 @@
     input[type='radio']:checked + label:before {
       background-color: $light-blue;
     }
+  }
+
+  .radio-check:hover,
+  .check:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
   }
 
   .check {

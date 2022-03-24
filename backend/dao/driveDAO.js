@@ -1,8 +1,6 @@
-import { firebase_v1beta1, google } from 'googleapis';
-import { MongoDriverError } from 'mongodb';
+import { google } from 'googleapis';
 import credentials from '../google-credentials.json' assert { type: 'json' };
-import fs from 'fs';
-import { resolve } from 'path';
+import stream from 'stream';
 
 let drive;
 
@@ -51,7 +49,7 @@ export default class DriveDAO {
     }
   }
 
-  static async uploadPhoto(name, fileLocation, storageLocation = null) {
+  static async uploadPhoto(name, file, storageLocation = null) {
     let parentFolder = backendFolderId;
     if (storageLocation === 'selfie') {
       parentFolder = selfieFolderId;
@@ -62,10 +60,15 @@ export default class DriveDAO {
     var fileMetadata = {
       name: name,
       parents: [parentFolder],
+      mimeType: file.mimetype,
     };
 
+    // Convert file buffer to stream
+    let bufferStream = new stream.PassThrough();
+    bufferStream.end(file.buffer);
+
     var media = {
-      body: fs.createReadStream(fileLocation),
+      body: bufferStream,
     };
 
     const uploadedRes = await new Promise((resolve, reject) => {
@@ -79,7 +82,6 @@ export default class DriveDAO {
           if (err) {
             reject(err);
           }
-          console.log('resolved');
           resolve(file);
         }
       );
@@ -89,8 +91,8 @@ export default class DriveDAO {
       file_id: uploadedRes.data.id,
       file_name: name,
       parentFolder: parentFolder,
+      status: 'ok',
     };
-    console.log('resolved');
 
     return finalFile;
   }

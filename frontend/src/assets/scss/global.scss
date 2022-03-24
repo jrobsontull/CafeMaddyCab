@@ -75,7 +75,7 @@ body {
   text-align: center;
   font-size: $heading-font-size;
   border-radius: $border-radius;
-  max-width: calc($max-width - 18px);
+  max-width: calc(#{$max-width} - 32px);
   transition: all 0.25s ease;
 }
 

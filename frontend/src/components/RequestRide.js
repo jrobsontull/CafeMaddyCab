@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import RidesAPI from '../utils/rides.api';
+import DriveAPI from '../utils/drive.api';
 
 function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
-  const [selfie, setSelfie] = useState({ location: null, fileName: null });
-  const [photoId, setPhotoId] = useState({ location: null, fileName: null });
+  const [selfie, setSelfie] = useState({ file: null, fileName: null });
+  const [photoId, setPhotoId] = useState({ file: null, fileName: null });
   const [otherPurpose, setOtherPurpose] = useState('');
   let errors = {
     firstName: true,
@@ -102,7 +103,6 @@ function RequestRide() {
       });
       errors = { ...errors, selfie: false };
     } else if (type === 'photoId') {
-      console.log('photo');
       setPhotoId({
         file: target.files[0],
       });
@@ -137,7 +137,9 @@ function RequestRide() {
       // if (response) {
       //   console.log(response);
       // }
-      console.log('submitting images first');
+      //console.log('submitting images first');
+      DriveAPI.uploadPhoto(selfie.file);
+      //console.log(DriveAPI.uploadPhoto(selfie.location));
     }
   }
 

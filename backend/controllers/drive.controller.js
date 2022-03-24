@@ -29,11 +29,11 @@ export default class DriveController {
   static async apiPostPhoto(req, res, next) {
     try {
       const fileName = new UUID().toString();
-      const fileLocation = req.body.file_location;
+      let file_obj = req.file;
       const storageFolder = req.body.storageFolder || null;
       const response = await DriveDAO.uploadPhoto(
         fileName,
-        fileLocation,
+        file_obj,
         storageFolder
       );
       res.json(response);
