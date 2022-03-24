@@ -1,8 +1,11 @@
 import { firebase_v1beta1, google } from 'googleapis';
 import { MongoDriverError } from 'mongodb';
 import credentials from '../google-credentials.json' assert { type: 'json' };
+import fs from 'fs';
+import { resolve } from 'path';
 
 let drive;
+
 const selfieFolderId = '1VCEuqL2zhBb9avYUlYK5aF9JWxwOZ5pT';
 const photoFolderId = '1UZr4I6BNTuv_TPQG16p_moj41rf3TcRg';
 const backendFolderId = '1xNtznBGDfp7GJXSjBTaOU_adqTXT41Dg';
@@ -21,37 +24,98 @@ export default class DriveDAO {
 
       drive = google.drive({ version: 'v3', auth });
       console.log('Backend authed for drive API.');
+      return { status: 'Backend authed for drive API.' };
     } catch (e) {
       console.log(e.message);
+      return { status: e.message };
     }
   }
 
-  static async uploadPhoto(photo) {}
-
-  static async getAllPhotos(folder) {
+  static async getPhoto(file_id) {
     if (drive) {
-      let q = {};
-      if (folder === 'selfie') {
-        q = { q: "'" + selfieFolderId + "' in parents" };
-      } else if (folder === 'photoId') {
-        q = { q: "'" + photoFolderId + "' in parents" };
-      } else {
-        q = { q: "'" + backendFolderId + "' in parents" };
-      }
-      drive.files.list(q, (err, res) => {
-        if (err) {
-          console.log('Unable to get photos in folder: ' + err);
-          return { error: err };
-        }
-        const files = res.data.files;
-        if (files.length) {
-          console.log('Search for all photos in folder');
-          return files;
-        } else {
-          console.log('No files found');
-          return { message: 'No files found' };
-        }
+      const file = await new Promise((resolve, reject) => {
+        const query = {
+          fileId: file_id,
+          fields: 'name, id, mimeType, webViewLink, webContentLink',
+        };
+
+        drive.files.get(query, function (err, res) {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        });
       });
+
+      return file.data;
+    }
+  }
+
+  static async uploadPhoto(name, fileLocation, storageLocation = null) {
+    let parentFolder = backendFolderId;
+    if (storageLocation === 'selfie') {
+      parentFolder = selfieFolderId;
+    } else if (storageLocation === 'photoId') {
+      parentFolder = photoFolderId;
+    }
+
+    var fileMetadata = {
+      name: name,
+      parents: [parentFolder],
+    };
+
+    var media = {
+      body: fs.createReadStream(fileLocation),
+    };
+
+    const uploadedRes = await new Promise((resolve, reject) => {
+      drive.files.create(
+        {
+          resource: fileMetadata,
+          media: media,
+          fields: 'id',
+        },
+        function (err, file) {
+          if (err) {
+            reject(err);
+          }
+          console.log('resolved');
+          resolve(file);
+        }
+      );
+    });
+
+    const finalFile = {
+      file_id: uploadedRes.data.id,
+      file_name: name,
+      parentFolder: parentFolder,
+    };
+    console.log('resolved');
+
+    return finalFile;
+  }
+
+  static async listPhotos(folder) {
+    if (drive) {
+      let query = {};
+      if (folder === 'selfie') {
+        query = { q: "'" + selfieFolderId + "' in parents" };
+      } else if (folder === 'photoId') {
+        query = { q: "'" + photoFolderId + "' in parents" };
+      } else {
+        query = { q: "'" + backendFolderId + "' in parents" };
+      }
+
+      const fileList = await new Promise((resolve, reject) => {
+        drive.files.list(query, function (err, res) {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        });
+      });
+
+      return fileList.data;
     }
   }
 }

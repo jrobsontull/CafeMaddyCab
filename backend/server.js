@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/rides', rides);
-app.use('api/v1/drive', drive);
+app.use('/api/v1/drive', drive);
 
 // Serve static files if production mode
 if (process.env.NODE_ENV === 'production') {
