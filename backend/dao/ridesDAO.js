@@ -34,7 +34,7 @@ export default class RidesDAO {
     identity,
     income,
     purpose,
-    photo,
+    selfie,
     photoId
   ) {
     try {
@@ -47,8 +47,8 @@ export default class RidesDAO {
         identity: identity,
         income: income,
         purpose: purpose,
-        photo: photo,
-        photoId,
+        selfie: selfie,
+        photoId: photoId,
       };
 
       return await rides.insertOne(rideDoc);

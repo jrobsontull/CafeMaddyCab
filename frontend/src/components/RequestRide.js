@@ -7,7 +7,8 @@ function RequestRide() {
   const [selfie, setSelfie] = useState({ file: null, fileName: null });
   const [photoId, setPhotoId] = useState({ file: null, fileName: null });
   const [otherPurpose, setOtherPurpose] = useState('');
-  let errors = {
+
+  const [errors, setErrors] = useState({
     firstName: true,
     lastName: true,
     email: true,
@@ -19,7 +20,7 @@ function RequestRide() {
     understand1: true,
     understand2: true,
     understand3: true,
-  };
+  });
 
   function basicInputFieldChange(target, prop) {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
@@ -30,9 +31,9 @@ function RequestRide() {
       /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
     if (target.value !== '' && re.test(target.value)) {
       basicInputFieldChange(target, prop);
-      errors = { ...errors, [prop]: false };
+      setErrors((prevErrors) => ({ ...prevErrors, [prop]: false }));
     } else {
-      errors = { ...errors, [prop]: true };
+      setErrors((prevErrors) => ({ ...prevErrors, [prop]: true }));
     }
   }
 
@@ -42,9 +43,9 @@ function RequestRide() {
 
     if (target.value !== '' && re.test(target.value)) {
       basicInputFieldChange(target, 'email');
-      errors = { ...errors, email: false };
+      setErrors((prevErrors) => ({ ...prevErrors, email: false }));
     } else {
-      errors = { ...errors, email: true };
+      setErrors((prevErrors) => ({ ...prevErrors, email: true }));
     }
   }
 
@@ -54,7 +55,7 @@ function RequestRide() {
         ...prevDetails,
         identity: target.value,
       }));
-      errors = { ...errors, identity: false };
+      setErrors((prevErrors) => ({ ...prevErrors, identity: false }));
     }
   }
 
@@ -64,7 +65,7 @@ function RequestRide() {
         ...prevDetails,
         income: target.value,
       }));
-      errors = { ...errors, income: false };
+      setErrors((prevErrors) => ({ ...prevErrors, income: false }));
     }
   }
 
@@ -81,15 +82,15 @@ function RequestRide() {
         ...prevDetails,
         purpose: purpose,
       }));
-      errors = { ...errors, purpose: false };
+      setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
     }
   }
 
   function validateUnderstand(target, prop) {
     if (target.checked) {
-      errors = { ...errors, [prop]: false };
+      setErrors((prevErrors) => ({ ...prevErrors, [prop]: false }));
     } else {
-      errors = { ...errors, [prop]: true };
+      setErrors((prevErrors) => ({ ...prevErrors, [prop]: true }));
     }
   }
 
@@ -101,48 +102,73 @@ function RequestRide() {
       setSelfie({
         file: target.files[0],
       });
-      errors = { ...errors, selfie: false };
+      setErrors((prevErrors) => ({ ...prevErrors, selfie: false }));
     } else if (type === 'photoId') {
       setPhotoId({
         file: target.files[0],
       });
-      errors = { ...errors, photoId: false };
+      setErrors((prevErrors) => ({ ...prevErrors, photoId: false }));
     }
   }
 
   function submitHandler() {
-    console.log('Validating form');
+    console.log('Validating form...');
     let errorPresent = false;
     for (const error in errors) {
-      if (error) {
+      if (errors[error] === true) {
         errorPresent = true;
         break;
       }
     }
 
-    if (false) {
-      console.log('errors present');
+    if (errorPresent) {
+      console.log('Invalid form.');
     } else {
+      console.log('Valid form.');
+
       // Update other purpose field if present
-      // if (rideDetails.purpose.value === '6') {
-      //   setRideDetails((prevDetails) => ({
-      //     ...prevDetails,
-      //     purpose: { value: '6', text: otherPurpose },
-      //   }));
-      // }
+      if (rideDetails.purpose && rideDetails.purpose.value === '6') {
+        setRideDetails((prevDetails) => ({
+          ...prevDetails,
+          purpose: { value: '6', text: otherPurpose },
+        }));
+      }
 
       // Post data
-      //console.log('Submitting ride request...');
-      // const response = RidesAPI.requestRide({ firstName: 'test' });
-      // if (response) {
-      //   console.log(response);
-      // }
-      //console.log('submitting images first');
-      DriveAPI.uploadPhoto(selfie.file);
-      //console.log(DriveAPI.uploadPhoto(selfie.location));
+      let selfieResponse;
+      let photoIdResponse;
+
+      console.log('Submitting images first...');
+      DriveAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
+        if (sResponse) {
+          selfieResponse = sResponse.data;
+          DriveAPI.uploadPhoto(photoId.file, 'photoId').then((pResponse) => {
+            if (pResponse) {
+              console.log('Photos uploaded');
+              photoIdResponse = pResponse.data;
+
+              let rideToReq = rideDetails;
+              rideToReq.selfie = selfieResponse;
+              rideToReq.photoId = photoIdResponse;
+              requestRide(rideToReq);
+            }
+          });
+        }
+      });
     }
   }
 
+  function requestRide(ride) {
+    console.log(ride);
+    console.log('Submitting ride request...');
+    RidesAPI.requestRide(ride).then((rResponse) => {
+      if (rResponse && rResponse.data.acknowledged === true) {
+        console.log('Got good response. Ride requested.');
+      }
+    });
+  }
+
+  // Scroll to top on component load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -91,7 +91,6 @@ export default class DriveDAO {
       file_id: uploadedRes.data.id,
       file_name: name,
       parentFolder: parentFolder,
-      status: 'ok',
     };
 
     return finalFile;

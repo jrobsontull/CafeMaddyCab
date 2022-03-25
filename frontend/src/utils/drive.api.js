@@ -1,12 +1,14 @@
 import http from './http.upload.common.js';
 
 export default class DriveAPI {
-  static async uploadPhoto(file) {
+  static async uploadPhoto(file, parentFolder) {
     var formData = new FormData();
     formData.append('file', file);
-    postRequest(formData, '/api/v1/drive/photos/').then((res) => {
-      console.log(res);
-    });
+    formData.append('storageFolder', parentFolder);
+    const response = postRequest(formData, '/api/v1/drive/photos/');
+    if (response) {
+      return response;
+    }
   }
 }
 

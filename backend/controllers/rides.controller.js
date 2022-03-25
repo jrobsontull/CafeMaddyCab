@@ -13,7 +13,7 @@ export default class RidesController {
       const identity = req.body.identity;
       const income = req.body.income;
       const purpose = req.body.purpose;
-      const photo = req.body.photo;
+      const selfie = req.body.selfie;
       const photoId = req.body.photoId;
 
       const ridesResponse = await RidesDAO.requestRide(
@@ -25,7 +25,7 @@ export default class RidesController {
         identity,
         income,
         purpose,
-        photo,
+        selfie,
         photoId
       );
       res.json(ridesResponse);

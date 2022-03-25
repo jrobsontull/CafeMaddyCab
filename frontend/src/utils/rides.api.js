@@ -15,7 +15,6 @@ async function postRequest(body, url) {
     const response = await http.post(url, payload);
 
     if (response.status === 200) {
-      //console.log('Posted: ' + body + ' to ' + url + ' and got good response.');
       return response;
     } else {
       return null;
