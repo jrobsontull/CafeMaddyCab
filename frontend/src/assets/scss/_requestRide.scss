@@ -181,7 +181,7 @@
       display: inline-block;
       text-align: center;
       border-radius: 0 $border-radius $border-radius 0;
-      padding: 12px 0;
+      padding: 12px 4px;
       font-size: 18px;
       background-color: $dark-blue;
       color: $lightest-pink;
@@ -194,6 +194,14 @@
     .input-file + label:hover {
       cursor: pointer;
       background-color: $blue-btn-hover;
+    }
+  }
+
+  @media screen and (max-width: 456px) {
+    .upload {
+      input.upload-location {
+        padding: 23px 18px;
+      }
     }
   }
 

@@ -219,7 +219,7 @@
       display: inline-block;
       text-align: center;
       border-radius: 0 12px 12px 0;
-      padding: 12px 0;
+      padding: 12px 4px;
       font-size: 18px;
       background-color: #3b3b96;
       color: #f7f5fe;
@@ -230,6 +230,9 @@
     .request-form .upload .input-file + label:hover {
       cursor: pointer;
       background-color: #5c5cb3; }
+  @media screen and (max-width: 456px) {
+    .request-form .upload input.upload-location {
+      padding: 23px 18px; } }
   .request-form .btn.upload {
     width: 100%;
     padding: 12px 0;
