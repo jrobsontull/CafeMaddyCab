@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../assets/img/logo.svg';
 
 function LandingPage() {
+  // Scroll to top on component load/refresh
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="react-container">
       <div className="content">

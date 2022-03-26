@@ -52,6 +52,7 @@ $heading-font-size: 22px;
 @import '_landingPage';
 @import '_requestRide';
 @import '_loading';
+@import '_login';
 
 /* Styling */
 body {
@@ -69,6 +70,14 @@ body {
   a {
     width: inherit;
   }
+}
+
+html,
+body,
+#root,
+.container,
+.react-container {
+  height: 100%;
 }
 
 .btn {

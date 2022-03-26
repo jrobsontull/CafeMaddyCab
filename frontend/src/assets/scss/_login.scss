@@ -1,0 +1,28 @@
+.content.login {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content.login {
+  .titles {
+    margin-bottom: 14px;
+  }
+}
+
+.btn.login {
+  background-color: $dark-blue;
+  width: calc(#{$content-width} - 8px);
+  padding: 8px 18px;
+  text-align: center;
+  font-size: $heading-font-size;
+  border-radius: $border-radius;
+  max-width: $max-width;
+  transition: all 0.25s ease;
+  color: $lightest-pink;
+  margin: 8px 0 80px 0;
+}
+
+.btn.login:hover {
+  background-color: $blue-btn-hover;
+}

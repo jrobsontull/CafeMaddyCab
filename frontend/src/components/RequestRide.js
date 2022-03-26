@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import RidesAPI from '../utils/rides.api';
 import DriveAPI from '../utils/drive.api';
 
-import Loading from './loading';
+import Loading from './Loading';
 
 function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
@@ -185,7 +185,7 @@ function RequestRide() {
     });
   }
 
-  // Scroll to top on component load
+  // Scroll to top on component load/refresh
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
