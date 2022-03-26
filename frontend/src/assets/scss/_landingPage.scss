@@ -37,6 +37,25 @@
     text-align: justify;
   }
 
+  span {
+    font-weight: bold;
+  }
+
+  a {
+    color: inherit;
+    font-weight: bold;
+    transition: color 0.25s ease;
+  }
+
+  a:hover {
+    color: $blue-btn-hover;
+    cursor: pointer;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
   p:first-child {
     margin-top: 0;
   }
@@ -71,6 +90,10 @@
 .info-box#child-3 {
   border-radius: 0 0 $border-radius $border-radius;
   border-top-width: 0;
+}
+
+.info-box.success {
+  text-align: justify;
 }
 
 .submit-btn#landing-page {

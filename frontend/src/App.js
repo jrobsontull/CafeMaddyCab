@@ -4,6 +4,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './assets/css/global.css';
 import LandingPage from './components/LandingPage';
 import RequestRide from './components/RequestRide';
+import Success from './components/Success';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<LandingPage />} />
           <Route path={'/request-ride'} element={<RequestRide />} />
+          <Route path={'/success/:id'} element={<Success />} />
         </Routes>
       </BrowserRouter>
     </div>

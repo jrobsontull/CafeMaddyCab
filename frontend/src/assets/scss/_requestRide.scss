@@ -8,6 +8,17 @@
   h3 {
     font-size: $heading-font-size;
   }
+  margin-bottom: 20px;
+}
+
+.content .error {
+  background-color: #fa7575;
+  color: $lightest-pink;
+  width: calc(80% - 36px);
+  padding: 8px 18px;
+  border-radius: $border-radius;
+  border: 1px solid $error;
+  margin-bottom: 14px;
 }
 
 .request-form {
@@ -15,7 +26,6 @@
   display: flex;
   flex-direction: column;
   font-size: 18px;
-  margin-top: 20px;
   max-width: $max-width;
 
   h3 {
@@ -43,6 +53,19 @@
 
   input:focus {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+  }
+
+  input.invalid {
+    border-color: $error;
+    color: $error;
+  }
+
+  input.invalid:hover {
+    box-shadow: 0px 0px 5px 1px $error-shadow;
+  }
+
+  input.invalid:focus {
+    box-shadow: 0px 0px 5px 1px $error-shadow;
   }
 
   .radio-check,
