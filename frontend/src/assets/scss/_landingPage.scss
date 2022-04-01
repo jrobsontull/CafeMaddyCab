@@ -4,7 +4,7 @@
   img {
     height: auto;
     width: 120px;
-    padding: 24px 0;
+    padding: 24px 0 6px 0;
   }
 }
 
@@ -14,7 +14,6 @@
   padding: 8px 18px;
   border-radius: $border-radius $border-radius 0 0;
   border: 1px solid $dark-blue;
-  font-size: $heading-font-size;
   margin-top: 20px;
   max-width: $max-width;
 
@@ -29,7 +28,8 @@
   background-color: $light-form;
   padding: 18px;
   border: 1px solid $dark-blue;
-  border-radius: $border-radius;
+  border-radius: 0 0 $border-radius $border-radius;
+  border-top-width: 0;
   max-width: $max-width;
 
   p {
@@ -86,16 +86,16 @@
   }
 }
 
-.info-box#child-2,
-.info-box#child-3 {
-  border-radius: 0 0 $border-radius $border-radius;
-  border-top-width: 0;
+.info-box#no-title {
+  margin-top: 20px;
+  border-width: 1px;
+  border-radius: $border-radius;
+}
+
+.btn-link.donate {
+  margin-top: 20px;
 }
 
 .info-box.success {
   text-align: justify;
-}
-
-.submit-btn#landing-page {
-  margin: 20px 0 30px 0;
 }

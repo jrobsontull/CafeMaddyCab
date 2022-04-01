@@ -34,7 +34,7 @@
   .logo img {
     height: auto;
     width: 120px;
-    padding: 24px 0; }
+    padding: 24px 0 6px 0; }
 
 .info-box-title {
   width: 75%;
@@ -42,7 +42,6 @@
   padding: 8px 18px;
   border-radius: 12px 12px 0 0;
   border: 1px solid #3b3b96;
-  font-size: 22px;
   margin-top: 20px;
   max-width: 600px; }
   .info-box-title h3 {
@@ -54,7 +53,8 @@
   background-color: #fefff3;
   padding: 18px;
   border: 1px solid #3b3b96;
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
+  border-top-width: 0;
   max-width: 600px; }
   .info-box p {
     margin-top: 12px;
@@ -86,16 +86,48 @@
     .info-box ol li:last-child {
       margin-bottom: 0; }
 
-.info-box#child-2,
-.info-box#child-3 {
-  border-radius: 0 0 12px 12px;
-  border-top-width: 0; }
+.info-box#no-title {
+  margin-top: 20px;
+  border-width: 1px;
+  border-radius: 12px; }
+
+.btn-link.donate {
+  margin-top: 20px; }
 
 .info-box.success {
   text-align: justify; }
 
-.submit-btn#landing-page {
-  margin: 20px 0 30px 0; }
+.info-box.how-to ul {
+  list-style-type: none;
+  padding: 0; }
+  .info-box.how-to ul li h3 {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 6px; }
+  .info-box.how-to ul li p {
+    margin-top: 4px;
+    margin-bottom: 24px; }
+  .info-box.how-to ul li p#last-child {
+    margin-bottom: 0; }
+
+.btn-link.ride {
+  margin-top: 20px; }
+
+@media screen and (min-width: 710px) {
+  .info-box.how-to ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap; }
+    .info-box.how-to ul li {
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+      max-width: 240px;
+      margin-bottom: 20px; }
+      .info-box.how-to ul li p {
+        margin-bottom: 0; }
+    .info-box.how-to ul li#responsive-no-pad {
+      margin-bottom: 0; } }
 
 .titles {
   text-align: center;
@@ -331,7 +363,6 @@
   text-align: center;
   font-size: 22px;
   border-radius: 12px;
-  max-width: 600px;
   transition: all 0.25s ease;
   color: #f7f5fe;
   margin: 8px 0 80px 0; }
@@ -371,22 +402,36 @@ body,
   transition: all 0.25s ease; }
 
 .btn-link {
-  width: 100%;
+  width: calc(75% + 36px);
+  max-width: calc(600px + 36px);
   display: flex;
-  justify-content: center;
-  margin: 20px 0 30px 0; }
-  .btn-link a {
-    width: 75%;
-    padding: 8px 18px;
-    text-align: center;
-    font-size: 22px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #f9dc7c;
+  border-radius: 12px;
+  transition: background-color 0.25s ease; }
+  .btn-link .icon {
+    background-color: #3b3b96;
     border-radius: 12px;
-    max-width: 600px;
-    transition: all 0.25s ease; }
+    margin: 0 auto;
+    padding: 11px 13px; }
+    .btn-link .icon img {
+      width: 20px;
+      height: auto;
+      display: inline-block;
+      vertical-align: middle; }
+  .btn-link a {
+    font-size: 22px;
+    width: 100%;
+    text-align: center; }
   .btn-link a:visited,
   .btn-link a:link,
   .btn-link a:active {
     color: inherit; }
+
+.btn-link:hover {
+  background-color: #fae399; }
 
 .btn-link.submit a {
   background-color: #f9dc7c; }
@@ -416,3 +461,45 @@ body,
 
 .btn.upload:hover {
   background-color: #5c5cb3; }
+
+.content .footer {
+  width: 75%;
+  margin-top: 30px;
+  padding: 18px 18px 12px 18px;
+  max-width: 600px;
+  border: 1px solid #9696db;
+  border-width: 1px 0 0 0; }
+  .content .footer ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    color: #f7f5fe; }
+    .content .footer ul li {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .content .footer ul li img {
+        width: 20px;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle; }
+      .content .footer ul li p {
+        font-size: 16px;
+        margin: 0 0 0 8px; }
+      .content .footer ul li a,
+      .content .footer ul li a:visited,
+      .content .footer ul li a:link,
+      .content .footer ul li a:active {
+        color: inherit; }
+      .content .footer ul li a {
+        display: flex;
+        flex-direction: row;
+        transition: transform 0.25s ease; }
+      .content .footer ul li a:hover {
+        transform: scale(1.08); }
+  .content .footer p {
+    color: #9696db;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px; }

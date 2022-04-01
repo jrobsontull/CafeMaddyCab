@@ -3,13 +3,14 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './utils/auth.context';
 
 import './assets/css/global.css';
-import LandingPage from './components/LandingPage';
-import RequestRide from './components/RequestRide';
-import Success from './components/Success';
-import Login from './components/Login';
-import Management from './components/Management';
+import LandingPage from './components/front-facing/LandingPage';
+import HowToPage from './components/front-facing/HowTo';
+import RequestRide from './components/front-facing/RequestRide';
+import Success from './components/front-facing/Success';
+import Login from './components/dashboard/Login';
+import Dashboard from './components/dashboard/Dashboard';
 
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/general/ProtectedRoute';
 
 function App() {
   return (
@@ -18,14 +19,15 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path={'/'} element={<LandingPage />} />
+            <Route path={'/how-to-ride'} element={<HowToPage />} />
             <Route path={'/request-ride'} element={<RequestRide />} />
             <Route path={'/success/:id'} element={<Success />} />
             <Route path={'/login'} element={<Login />} />
             <Route
-              path={'/management'}
+              path={'/dashboard'}
               element={
                 <ProtectedRoute>
-                  <Management />
+                  <Dashboard />
                 </ProtectedRoute>
               }
             />

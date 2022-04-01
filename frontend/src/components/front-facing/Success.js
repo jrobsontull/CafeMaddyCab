@@ -23,7 +23,7 @@ function Success() {
           <h3>Ride Reimbursment</h3>
         </div>
 
-        <div className="info-box success">
+        <div className="info-box success" id="no-title">
           Thank you <span>{name}</span> for submitting a ride request, your
           request is now with us! We will get back to you if your request is
           approved.

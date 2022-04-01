@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RidesAPI from '../utils/rides.api';
-import DriveAPI from '../utils/drive.api';
+import RidesAPI from '../../utils/rides.api';
+import DriveAPI from '../../utils/drive.api';
 
 import Loading from './Loading';
 
@@ -198,7 +198,7 @@ function RequestRide() {
         <div className="content">
           <div className="titles">
             <h2>CAFE MADDY CAB</h2>
-            <h3>Ride Reimbursment</h3>
+            <h3>Ride Reimburesment</h3>
           </div>
 
           {errorOnSubmit ? (

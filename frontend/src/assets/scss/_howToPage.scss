@@ -1,0 +1,53 @@
+.info-box.how-to {
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      h3 {
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 6px;
+      }
+
+      p {
+        margin-top: 4px;
+        margin-bottom: 24px;
+      }
+
+      p#last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.btn-link.ride {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 710px) {
+  .info-box.how-to {
+    ul {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+        max-width: 240px;
+        margin-bottom: 20px;
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      li#responsive-no-pad {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
