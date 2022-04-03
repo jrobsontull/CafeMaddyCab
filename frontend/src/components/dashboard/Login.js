@@ -28,6 +28,7 @@ function Login() {
     if (!user.isVerifying && user.verified) {
       navigate('/dashboard');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   function validateUsername(target) {
