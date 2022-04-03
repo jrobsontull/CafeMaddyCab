@@ -76,7 +76,8 @@ export default class DriveDAO {
         {
           resource: fileMetadata,
           media: media,
-          fields: 'id',
+          fields:
+            'id, webContentLink, webViewLink, mimeType, thumbnailLink, createdTime',
         },
         function (err, file) {
           if (err) {
@@ -88,9 +89,14 @@ export default class DriveDAO {
     });
 
     const finalFile = {
-      file_id: uploadedRes.data.id,
-      file_name: name,
+      fileId: uploadedRes.data.id,
       parentFolder: parentFolder,
+      fileName: name,
+      mimeType: uploadedRes.data.mimeType,
+      webContentLink: uploadedRes.data.webContentLink,
+      webViewLink: uploadedRes.data.webViewLink,
+      thumbnailLink: uploadedRes.data.thumbnailLink,
+      dateCreated: uploadedRes.data.createdTime,
     };
 
     return finalFile;
