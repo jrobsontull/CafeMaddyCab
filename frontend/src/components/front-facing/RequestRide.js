@@ -9,8 +9,8 @@ import Loading from './Loading';
 
 function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
-  const [selfie, setSelfie] = useState({ file: null, fileName: null });
-  const [photoId, setPhotoId] = useState({ file: null, fileName: null });
+  const [selfie, setSelfie] = useState({ file: null });
+  const [photoId, setPhotoId] = useState({ file: null });
   const [otherPurpose, setOtherPurpose] = useState('');
 
   const [errors, setErrors] = useState({
@@ -113,9 +113,6 @@ function RequestRide() {
   }
 
   function selectFile(target, type) {
-    let fileName = target.value.split('\\');
-    fileName = fileName[fileName.length - 1];
-
     if (type === 'selfie') {
       setSelfie({
         file: target.files[0],

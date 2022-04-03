@@ -63,7 +63,7 @@ export default class AuthDAO {
       const registerResonse = await users.insertOne({
         username: username,
         password: hashedPass,
-        date: new Date(),
+        date_created: new Date(),
       });
 
       return new User(registerResonse.insertedId, username);
