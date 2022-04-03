@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
 import DriveAPI from '../../utils/drive.api';
+import RecaptchaAPI from '../../utils/recaptcha.api';
 
 import Loading from './Loading';
 
@@ -23,9 +25,13 @@ function RequestRide() {
     understand1: true,
     understand2: true,
     understand3: true,
+    recaptcha: true,
   });
 
-  const [errorOnSubmit, setErrorOnSubmit] = useState(false);
+  const [errorOnSubmit, setErrorOnSubmit] = useState({
+    state: false,
+    message: null,
+  });
   const [isRequesting, setIsRequesting] = useState(false);
 
   const navigate = useNavigate();
@@ -123,6 +129,21 @@ function RequestRide() {
     }
   }
 
+  function validateCaptcha(event) {
+    const testResponse = event;
+    RecaptchaAPI.verifyResponse(testResponse).then((response) => {
+      if (response.data.success) {
+        setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
+      } else {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'ReCAPTCHA submission invalid. Please try again or reload the page.',
+        });
+      }
+    });
+  }
+
   function submitHandler() {
     console.log('Validating form...');
     let errorPresent = false;
@@ -135,7 +156,67 @@ function RequestRide() {
 
     if (errorPresent) {
       console.log('Invalid form.');
-      setErrorOnSubmit(true);
+
+      if (errors.firstName) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'You need to write a first name.',
+        });
+      } else if (errors.lastName) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'You need to write a last name.',
+        });
+      } else if (errors.email) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'You need to write a valid email.',
+        });
+      } else if (errors.identity) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'Please check which group you most identify with.',
+        });
+      } else if (errors.income) {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'Please tell us if whether you need financial assistance for your ride.',
+        });
+      } else if (errors.purpose) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'Please tell us the purpose of your ride.',
+        });
+      } else if (errors.selfie) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'Please provide us with a selfie for verification.',
+        });
+      } else if (errors.photoId) {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'Please provide us with a picture of your photo ID for verification.',
+        });
+      } else if (
+        errors.understand1 ||
+        errors.understand2 ||
+        errors.understand3
+      ) {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'You have not agreed to all our terms. You will need to do so to continue with a reimbursement request.',
+        });
+      } else if (errors.recaptcha) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'Please complete the ReCAPTCHA before continuing.',
+        });
+      }
+
+      //setErrorOnSubmit({ state: true, message: null });
       window.scrollTo(0, 0);
     } else {
       console.log('Valid form.');
@@ -201,9 +282,11 @@ function RequestRide() {
             <h3>Ride Reimburesment</h3>
           </div>
 
-          {errorOnSubmit ? (
+          {errorOnSubmit.state ? (
             <div className="error">
-              Not all the information has been filled out correctly.
+              {errorOnSubmit.message
+                ? errorOnSubmit.message
+                : 'Not all the information has been filled out correctly.'}
             </div>
           ) : (
             ''
@@ -415,7 +498,14 @@ function RequestRide() {
             </h3>
           </div>
 
-          <div className="btn submit" onClick={() => submitHandler()}>
+          <div className="recaptcha-react">
+            <ReCAPTCHA
+              sitekey="6Le78D0fAAAAAGCFMp-jkHsx_fOlK4nmOMdcd6_5"
+              onChange={(e) => validateCaptcha(e)}
+            />
+          </div>
+
+          <div className="btn submit ride" onClick={() => submitHandler()}>
             Submit Request
           </div>
 

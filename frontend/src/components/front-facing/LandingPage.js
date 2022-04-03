@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/img/logo.svg';
 import Donate from '../../assets/img/donate_icon.svg';
 import Taxi from '../../assets/img/taxi_icon.svg';
+import Arrow from '../../assets/img/arrow_right.svg';
 import Insta from '../../assets/img/insta_icon.svg';
 import Share from '../../assets/img/share_icon.svg';
 
@@ -17,7 +18,9 @@ function LandingPage() {
     <div className="react-container">
       <div className="content">
         <div className="logo">
-          <img src={Logo} alt="Cafe Maddy Cab" />
+          <Link to={'/'}>
+            <img src={Logo} alt="Cafe Maddy Cab" />
+          </Link>
         </div>
         <div className="info-box-title">
           <h3>What is Cafe Maddy Cab?</h3>
@@ -64,12 +67,14 @@ function LandingPage() {
             <img src={Donate} alt="Donate" />
           </div>
           <a href="https://www.donate.com">Donate to the cause</a>
+          <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
         <div className="btn-link learn" id="landing-page">
           <div className="icon">
             <img src={Taxi} alt="Taxi" />
           </div>
           <Link to={'/how-to-ride'}>Learn how to get a ride</Link>
+          <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
         <div className="footer">
           <ul>

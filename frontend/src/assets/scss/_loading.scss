@@ -4,6 +4,11 @@
   align-items: center;
   margin-top: 10px;
 
+  .info-box {
+    border-width: 1px;
+    border-radius: $border-radius;
+  }
+
   .lds-default {
     display: inline-block;
     position: relative;

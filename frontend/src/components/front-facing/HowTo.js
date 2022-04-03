@@ -9,6 +9,7 @@ import HowTo3 from '../../assets/img/how_to_3.svg';
 import HowTo4 from '../../assets/img/how_to_4.svg';
 
 import Taxi from '../../assets/img/taxi_icon.svg';
+import Arrow from '../../assets/img/arrow_right.svg';
 import Insta from '../../assets/img/insta_icon.svg';
 import Share from '../../assets/img/share_icon.svg';
 
@@ -22,7 +23,9 @@ function HowToPage() {
     <div className="react-container">
       <div className="content">
         <div className="logo">
-          <img src={Logo} alt="Cafe Maddy Cab" />
+          <Link to={'/'}>
+            <img src={Logo} alt="Cafe Maddy Cab" />
+          </Link>
         </div>
         <div className="info-box how-to" id="no-title">
           <p>
@@ -98,6 +101,7 @@ function HowToPage() {
             <img src={Taxi} alt="Taxi" />
           </div>
           <Link to={'/request-ride'}>Request Reimbursement</Link>
+          <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
         <div className="footer">
           <ul>
