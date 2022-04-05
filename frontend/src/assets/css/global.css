@@ -385,6 +385,156 @@
 .btn.login:hover {
   background-color: #5c5cb3; }
 
+.backend .nav-bar {
+  width: 100%;
+  background-color: #3b3b96;
+  color: #f7f5fe; }
+  .backend .nav-bar .header {
+    display: flex; }
+  .backend .nav-bar .nav ul {
+    list-style-type: none;
+    padding-left: 0; }
+
+/* Styling of table */
+.dashboard {
+  background-color: #fefff3;
+  width: 90%;
+  min-width: 1400px;
+  border-radius: 12px;
+  border: 1px solid #3b3b96;
+  margin-top: 36px;
+  display: flex;
+  justify-content: space-between;
+  /* Styling of table search functions and action btns */ }
+  .dashboard .menu {
+    background-color: #9696db;
+    border-radius: 12px 0 0 12px;
+    color: #f7f5fe;
+    width: 10%;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #3b3b96;
+    border-width: 0 1px 0 0; }
+    .dashboard .menu ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: center;
+      padding: 0 16px; }
+      .dashboard .menu ul li {
+        padding: 14px 0;
+        margin: 0 auto;
+        max-width: 120px;
+        transition: transform 0.25s ease; }
+      .dashboard .menu ul li:hover {
+        cursor: pointer;
+        transform: scale(1.04); }
+    .dashboard .menu .action-btns div {
+      background-color: #3b3b96;
+      text-align: center;
+      padding: 14px 16px;
+      border: 1px solid #9696db;
+      border-width: 0 0 1px 0;
+      transition: background-color 0.25s ease; }
+    .dashboard .menu .action-btns div#last-child {
+      border-radius: 0 0 0 12px;
+      border-width: 0; }
+    .dashboard .menu .action-btns div:hover {
+      cursor: pointer;
+      background-color: #5c5cb3; }
+  .dashboard .table-content {
+    width: 90%;
+    /* Styling of table headings */
+    /* Styling of table entries */ }
+    .dashboard .table-content .table-headings {
+      border: 1px solid #3b3b96;
+      border-width: 0 0 1px 0; }
+      .dashboard .table-content .table-headings ul {
+        display: flex;
+        list-style-type: none;
+        padding-left: 0; }
+        .dashboard .table-content .table-headings ul li {
+          padding-left: 0;
+          text-align: center;
+          border: 1px solid #3b3b96;
+          border-width: 0 1px 0 0;
+          padding: 14px 4px;
+          margin: auto; }
+        .dashboard .table-content .table-headings ul li#col-1 {
+          width: 8%; }
+        .dashboard .table-content .table-headings ul li#col-2 {
+          width: 8%; }
+        .dashboard .table-content .table-headings ul li#col-3 {
+          width: 14%; }
+        .dashboard .table-content .table-headings ul li#col-4 {
+          width: 10%; }
+        .dashboard .table-content .table-headings ul li#col-5 {
+          width: 8%; }
+        .dashboard .table-content .table-headings ul li#col-6 {
+          width: 12%; }
+        .dashboard .table-content .table-headings ul li#col-7 {
+          width: 8%; }
+        .dashboard .table-content .table-headings ul li#col-8 {
+          width: 6%; }
+        .dashboard .table-content .table-headings ul li#col-9 {
+          width: 10%; }
+        .dashboard .table-content .table-headings ul li#col-10 {
+          width: 8%; }
+        .dashboard .table-content .table-headings ul li#col-11 {
+          width: 10%;
+          border-width: 0; }
+    .dashboard .table-content .table-entries .entry ul {
+      display: flex;
+      list-style-type: none;
+      padding-left: 0; }
+      .dashboard .table-content .table-entries .entry ul li {
+        padding-left: 0;
+        text-align: center;
+        padding: 12px 4px; }
+      .dashboard .table-content .table-entries .entry ul li#col-1 {
+        width: 8%; }
+      .dashboard .table-content .table-entries .entry ul li#col-2 {
+        width: 8%; }
+      .dashboard .table-content .table-entries .entry ul li#col-3 {
+        width: 14%; }
+      .dashboard .table-content .table-entries .entry ul li#col-4 {
+        width: 10%; }
+      .dashboard .table-content .table-entries .entry ul li#col-5 {
+        width: 8%; }
+      .dashboard .table-content .table-entries .entry ul li#col-6 {
+        width: 12%; }
+      .dashboard .table-content .table-entries .entry ul li#col-7 {
+        width: 8%; }
+      .dashboard .table-content .table-entries .entry ul li#col-8 {
+        width: 6%; }
+      .dashboard .table-content .table-entries .entry ul li#col-9 {
+        width: 10%; }
+      .dashboard .table-content .table-entries .entry ul li#col-10 {
+        width: 8%; }
+      .dashboard .table-content .table-entries .entry ul li#col-11 {
+        width: 10%; }
+    .dashboard .table-content .table-footer {
+      display: flex;
+      border: 1px solid #3b3b96;
+      border-width: 1px 0 0 0;
+      justify-content: space-between; }
+      .dashboard .table-content .table-footer .nav {
+        padding: 14px 0;
+        text-align: center;
+        width: 92%; }
+      .dashboard .table-content .table-footer .download-btn {
+        background-color: #3b3b96;
+        color: #f7f5fe;
+        padding: 14px 20px;
+        border-radius: 0 0 12px 0;
+        transition: background-color 0.25s ease;
+        text-align: center;
+        width: 8%; }
+      .dashboard .table-content .table-footer .download-btn:hover {
+        background-color: #5c5cb3;
+        cursor: pointer; }
+
 /* Styling */
 body {
   background-color: #f7f5fe;

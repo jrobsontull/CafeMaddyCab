@@ -1,0 +1,239 @@
+.backend .nav-bar {
+  width: 100%;
+  background-color: $dark-blue;
+  color: $lightest-pink;
+
+  .header {
+    display: flex;
+  }
+
+  .nav {
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+  }
+}
+
+/* Styling of table */
+.dashboard {
+  background-color: $light-form;
+  width: 90%;
+  min-width: 1400px;
+  border-radius: $border-radius;
+  border: 1px solid $dark-blue;
+  margin-top: 36px;
+  display: flex;
+  justify-content: space-between;
+
+  /* Styling of table search functions and action btns */
+  .menu {
+    background-color: $light-blue;
+    border-radius: $border-radius 0 0 $border-radius;
+    color: $lightest-pink;
+    width: 10%;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid $dark-blue;
+    border-width: 0 1px 0 0;
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: center;
+      padding: 0 16px;
+
+      li {
+        padding: 14px 0;
+        margin: 0 auto;
+        max-width: 120px;
+        transition: transform 0.25s ease;
+      }
+
+      li:hover {
+        cursor: pointer;
+        transform: scale(1.04);
+      }
+    }
+
+    .action-btns div {
+      background-color: $dark-blue;
+      text-align: center;
+      padding: 14px 16px;
+      border: 1px solid $light-blue;
+      border-width: 0 0 1px 0;
+      transition: background-color 0.25s ease;
+    }
+
+    .action-btns div#last-child {
+      border-radius: 0 0 0 $border-radius;
+      border-width: 0;
+    }
+
+    .action-btns div:hover {
+      cursor: pointer;
+      background-color: $blue-btn-hover;
+    }
+  }
+
+  .table-content {
+    width: 90%;
+
+    /* Styling of table headings */
+    .table-headings {
+      border: 1px solid $dark-blue;
+      border-width: 0 0 1px 0;
+
+      ul {
+        display: flex;
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+          padding-left: 0;
+          text-align: center;
+          border: 1px solid $dark-blue;
+          border-width: 0 1px 0 0;
+          padding: 14px 4px;
+          margin: auto;
+        }
+
+        li#col-1 {
+          width: 8%;
+        }
+
+        li#col-2 {
+          width: 8%;
+        }
+
+        li#col-3 {
+          width: 14%;
+        }
+
+        li#col-4 {
+          width: 10%;
+        }
+
+        li#col-5 {
+          width: 8%;
+        }
+
+        li#col-6 {
+          width: 12%;
+        }
+
+        li#col-7 {
+          width: 8%;
+        }
+
+        li#col-8 {
+          width: 6%;
+        }
+
+        li#col-9 {
+          width: 10%;
+        }
+
+        li#col-10 {
+          width: 8%;
+        }
+
+        li#col-11 {
+          width: 10%;
+          border-width: 0;
+        }
+      }
+    }
+
+    /* Styling of table entries */
+    .table-entries {
+      .entry {
+        ul {
+          display: flex;
+          list-style-type: none;
+          padding-left: 0;
+
+          li {
+            padding-left: 0;
+            text-align: center;
+            padding: 12px 4px;
+          }
+
+          li#col-1 {
+            width: 8%;
+          }
+
+          li#col-2 {
+            width: 8%;
+          }
+
+          li#col-3 {
+            width: 14%;
+          }
+
+          li#col-4 {
+            width: 10%;
+          }
+
+          li#col-5 {
+            width: 8%;
+          }
+
+          li#col-6 {
+            width: 12%;
+          }
+
+          li#col-7 {
+            width: 8%;
+          }
+
+          li#col-8 {
+            width: 6%;
+          }
+
+          li#col-9 {
+            width: 10%;
+          }
+
+          li#col-10 {
+            width: 8%;
+          }
+
+          li#col-11 {
+            width: 10%;
+          }
+        }
+      }
+    }
+
+    .table-footer {
+      display: flex;
+      border: 1px solid $dark-blue;
+      border-width: 1px 0 0 0;
+      justify-content: space-between;
+
+      .nav {
+        padding: 14px 0;
+        text-align: center;
+        width: 92%;
+      }
+
+      .download-btn {
+        background-color: $dark-blue;
+        color: $lightest-pink;
+        padding: 14px 20px;
+        border-radius: 0 0 $border-radius 0;
+        transition: background-color 0.25s ease;
+        text-align: center;
+        width: 8%;
+      }
+
+      .download-btn:hover {
+        background-color: $blue-btn-hover;
+        cursor: pointer;
+      }
+    }
+  }
+}
