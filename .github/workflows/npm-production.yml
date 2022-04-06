@@ -1,4 +1,4 @@
-name: Deployment test 
+name: Deployment 
 on:
   push:
     branches: [ master ]
