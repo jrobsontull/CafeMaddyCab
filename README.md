@@ -1,5 +1,10 @@
 # CafeMaddyCab
+![example workflow](https://github.com/jrobsontull/CafeMaddyCab/actions/workflows/frontend-linting.yml/badge.svg) 
+![example workflow](https://github.com/jrobsontull/CafeMaddyCab/actions/workflows/npm-production.yml/badge.svg)
+
 Cab rides for Asian women, Asian LGBTQ, Asian elderly in NYC in need. MERN stack app built for a non-profit to distribute Lyft/Uber codes to those in need.
+
+
 
 ## Wireframes for Website
 
