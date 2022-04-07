@@ -1,24 +1,10 @@
+import Navbar from './Navbar';
+
 function Dashboard() {
   return (
     <div className="react-container">
       <div className="content backend">
-        <div className="nav-bar">
-          <div className="header">
-            <p className="brand">CAFE MADDY CAB</p>
-            <p className="page-name">Ride Dashboard</p>
-            <div className="ham"></div>
-          </div>
-          <div className="nav">
-            <ul>
-              <li>How to use</li>
-              <li>View feedback</li>
-              <li>
-                <p>Logout</p>
-                <div className="logout-icon"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <Navbar />
 
         <div className="dashboard">
           <div className="menu">

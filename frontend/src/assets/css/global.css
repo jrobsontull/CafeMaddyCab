@@ -385,15 +385,71 @@
 .btn.login:hover {
   background-color: #5c5cb3; }
 
-.backend .nav-bar {
+.backend .navbar {
   width: 100%;
-  background-color: #3b3b96;
   color: #f7f5fe; }
-  .backend .nav-bar .header {
-    display: flex; }
-  .backend .nav-bar .nav ul {
-    list-style-type: none;
-    padding-left: 0; }
+  .backend .navbar .header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #3b3b96;
+    margin: auto;
+    padding: 12px 5%;
+    align-items: center; }
+    .backend .navbar .header .branding {
+      display: flex;
+      font-size: 18px; }
+      .backend .navbar .header .branding .cmc {
+        margin-right: 10px; }
+      .backend .navbar .header .branding .page-name {
+        margin-left: 10px;
+        font-weight: 300; }
+    .backend .navbar .header .nav-ham {
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid #f7f5fe;
+      border-radius: 8px;
+      padding: 0 6px;
+      transition: background-color 0.4s ease; }
+      .backend .navbar .header .nav-ham .ham1,
+      .backend .navbar .header .nav-ham .ham2,
+      .backend .navbar .header .nav-ham .ham3 {
+        width: 22px;
+        height: 1px;
+        background-color: #f7f5fe;
+        margin: 6px 0;
+        transition: 0.4s; }
+    .backend .navbar .header .change-state.nav-ham {
+      background-color: #f7f5fe; }
+    .backend .navbar .header .change-state .ham1,
+    .backend .navbar .header .change-state .ham2,
+    .backend .navbar .header .change-state .ham3 {
+      background-color: #3b3b96; }
+  .backend .navbar .nav {
+    transform: translateY(-100vh);
+    background-color: #3b3b96;
+    position: absolute;
+    width: 100%; }
+    .backend .navbar .nav ul {
+      width: 90%;
+      margin: auto;
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+      border: 1px solid #f7f5fe;
+      padding-top: 10px;
+      border-width: 1px 0 0 0; }
+      .backend .navbar .nav ul li {
+        padding: 2px 0; }
+      .backend .navbar .nav ul li a,
+      .backend .navbar .nav ul li p {
+        color: inherit;
+        font-weight: 300; }
+      .backend .navbar .nav ul li a:hover,
+      .backend .navbar .nav ul li p:hover {
+        cursor: pointer;
+        font-weight: 400; }
+  .backend .navbar .nav.active {
+    transform: translateY(0vh); }
 
 /* Styling of table */
 .dashboard {
