@@ -7,12 +7,41 @@ export default class RidesAPI {
       return response;
     }
   }
+
+  static async getRides(urlParams = null) {
+    let url = 'api/v1/rides/';
+
+    if (urlParams) {
+      url += urlParams;
+    }
+
+    const response = await getRequest(url);
+    if (response) {
+      const rides = response.data;
+      return rides;
+    }
+  }
 }
 
 async function postRequest(body, url) {
   try {
     const payload = body;
     const response = await http.post(url, payload);
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error: ' + e.message);
+    return null;
+  }
+}
+
+async function getRequest(url) {
+  try {
+    const response = await http.get(url);
 
     if (response.status === 200) {
       return response;

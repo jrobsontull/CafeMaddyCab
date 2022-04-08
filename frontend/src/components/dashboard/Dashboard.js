@@ -1,6 +1,38 @@
+import { useEffect, useState } from 'react';
+import RidesAPI from '../../utils/rides.api';
+
 import Navbar from './Navbar';
 
 function Dashboard() {
+  const [rides, setRides] = useState([]);
+  const [ridesData, setRidesData] = useState({
+    totalRides: 0,
+    currentPage: 0,
+    totalPages: 0,
+  });
+
+  function calculateTotalPageNums(numPerPage, totalEntries) {
+    let count = 1;
+    let tracker = totalEntries;
+    while (tracker > numPerPage) {
+      tracker -= numPerPage;
+      count += 1;
+    }
+    return count;
+  }
+
+  useEffect(() => {
+    RidesAPI.getRides().then((response) => {
+      setRides(response.rides);
+
+      setRidesData({
+        totalRides: response.totalResults,
+        currentPage: 0,
+        totalPages: calculateTotalPageNums(15, response.totalResults),
+      });
+    });
+  }, []);
+
   return (
     <div className="react-container">
       <div className="content backend">
@@ -28,6 +60,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
+
           <div className="table-content">
             <div className="table-headings">
               <ul>
@@ -46,7 +79,33 @@ function Dashboard() {
             </div>
 
             <div className="table-entries">
-              <div className="entry">
+              {rides ? (
+                rides.map((ride) => (
+                  <div className="entry" key={ride._id}>
+                    <ul>
+                      <li id="col-1">{ride.firstName}</li>
+                      <li id="col-2">{ride.lastName}</li>
+                      <li id="col-3">{ride.email}</li>
+                      <li id="col-4">{ride.identity}</li>
+                      <li id="col-5">{ride.income}</li>
+                      <li id="col-6">{ride.purpose.text}</li>
+                      <li id="col-7">{ride.verified}</li>
+                      <li id="col-8">{ride.approver}</li>
+                      <li id="col-9">{ride.notes}</li>
+                      <li id="col-10">{ride.coupon}</li>
+                      <li id="col-11">{ride.status}</li>
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <div className="entry">
+                  <ul>
+                    <li id="col-1">No data.</li>
+                  </ul>
+                </div>
+              )}
+
+              {/* <div className="entry">
                 <ul>
                   <li id="col-1">John</li>
                   <li id="col-2">Doe</li>
@@ -240,7 +299,7 @@ function Dashboard() {
                   <li id="col-10">N/A</li>
                   <li id="col-11">Awaiting code</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
 
             <div className="table-footer">
