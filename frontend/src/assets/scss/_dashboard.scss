@@ -63,6 +63,9 @@
 
   .table-content {
     width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     /* Styling of table headings */
     .table-headings {
@@ -132,6 +135,9 @@
 
     /* Styling of table entries */
     .table-entries {
+      height: 100%;
+      margin: 6px 0;
+
       .entry {
         ul {
           display: flex;
@@ -141,7 +147,8 @@
           li {
             padding-left: 0;
             text-align: center;
-            padding: 12px 4px;
+            padding: 12px 10px;
+            word-break: break-all;
           }
 
           li#col-1 {

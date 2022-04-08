@@ -1,20 +1,55 @@
 import RidesDAO from '../dao/ridesDAO.js';
+import { nanoid } from 'nanoid/async';
 
 export default class RidesController {
   /* Post request for ride */
   static async apiRequestRide(req, res, next) {
     try {
+      // Async generate short ID for reference
+      const userId = await nanoid(10);
+
       const dateRequested = new Date();
       const firstName = req.body.firstName;
       const lastName = req.body.lastName;
       const email = req.body.email;
       const identity = req.body.identity;
       const income = req.body.income;
-      const purpose = req.body.purpose;
+      const purposeOption = parseInt(req.body.purpose.value, 10);
+      let purpose;
+
+      switch (purposeOption) {
+        case 1:
+          purpose = { value: 1, text: 'Medical appointment' };
+          break;
+        case 2:
+          purpose = { value: 2, text: 'Vaccination' };
+          break;
+        case 3:
+          purpose = { value: 3, text: 'Work (going to/from home)' };
+          break;
+        case 4:
+          purpose = {
+            value: 4,
+            text: 'Care taking for an Asian elderly person',
+          };
+          break;
+        case 5:
+          purpose = {
+            value: 5,
+            text: 'Academic reasons (university, school, mandatory meeting)',
+          };
+          break;
+        case 6:
+          purpose = req.body.purpose;
+          break;
+      }
+
+      //const purpose = req.body.purpose;
       const selfie = req.body.selfie;
       const photoId = req.body.photoId;
 
       const ridesResponse = await RidesDAO.requestRide(
+        userId,
         dateRequested,
         firstName,
         lastName,
@@ -51,8 +86,8 @@ export default class RidesController {
         rides: ridesList,
         page: page,
         filters: filters,
-        entires_per_page: ridesPerPage,
-        total_results: totalNumRides,
+        entiresPerPage: ridesPerPage,
+        totalResults: totalNumRides,
       };
 
       res.json(response);

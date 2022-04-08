@@ -501,6 +501,9 @@
       background-color: #5c5cb3; }
   .dashboard .table-content {
     width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     /* Styling of table headings */
     /* Styling of table entries */ }
     .dashboard .table-content .table-headings {
@@ -540,36 +543,40 @@
         .dashboard .table-content .table-headings ul li#col-11 {
           width: 10%;
           border-width: 0; }
-    .dashboard .table-content .table-entries .entry ul {
-      display: flex;
-      list-style-type: none;
-      padding-left: 0; }
-      .dashboard .table-content .table-entries .entry ul li {
-        padding-left: 0;
-        text-align: center;
-        padding: 12px 4px; }
-      .dashboard .table-content .table-entries .entry ul li#col-1 {
-        width: 8%; }
-      .dashboard .table-content .table-entries .entry ul li#col-2 {
-        width: 8%; }
-      .dashboard .table-content .table-entries .entry ul li#col-3 {
-        width: 14%; }
-      .dashboard .table-content .table-entries .entry ul li#col-4 {
-        width: 10%; }
-      .dashboard .table-content .table-entries .entry ul li#col-5 {
-        width: 8%; }
-      .dashboard .table-content .table-entries .entry ul li#col-6 {
-        width: 12%; }
-      .dashboard .table-content .table-entries .entry ul li#col-7 {
-        width: 8%; }
-      .dashboard .table-content .table-entries .entry ul li#col-8 {
-        width: 6%; }
-      .dashboard .table-content .table-entries .entry ul li#col-9 {
-        width: 10%; }
-      .dashboard .table-content .table-entries .entry ul li#col-10 {
-        width: 8%; }
-      .dashboard .table-content .table-entries .entry ul li#col-11 {
-        width: 10%; }
+    .dashboard .table-content .table-entries {
+      height: 100%;
+      margin: 6px 0; }
+      .dashboard .table-content .table-entries .entry ul {
+        display: flex;
+        list-style-type: none;
+        padding-left: 0; }
+        .dashboard .table-content .table-entries .entry ul li {
+          padding-left: 0;
+          text-align: center;
+          padding: 12px 10px;
+          word-break: break-all; }
+        .dashboard .table-content .table-entries .entry ul li#col-1 {
+          width: 8%; }
+        .dashboard .table-content .table-entries .entry ul li#col-2 {
+          width: 8%; }
+        .dashboard .table-content .table-entries .entry ul li#col-3 {
+          width: 14%; }
+        .dashboard .table-content .table-entries .entry ul li#col-4 {
+          width: 10%; }
+        .dashboard .table-content .table-entries .entry ul li#col-5 {
+          width: 8%; }
+        .dashboard .table-content .table-entries .entry ul li#col-6 {
+          width: 12%; }
+        .dashboard .table-content .table-entries .entry ul li#col-7 {
+          width: 8%; }
+        .dashboard .table-content .table-entries .entry ul li#col-8 {
+          width: 6%; }
+        .dashboard .table-content .table-entries .entry ul li#col-9 {
+          width: 10%; }
+        .dashboard .table-content .table-entries .entry ul li#col-10 {
+          width: 8%; }
+        .dashboard .table-content .table-entries .entry ul li#col-11 {
+          width: 10%; }
     .dashboard .table-content .table-footer {
       display: flex;
       border: 1px solid #3b3b96;
