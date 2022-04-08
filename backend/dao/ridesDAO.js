@@ -1,4 +1,5 @@
 import mongodb from 'mongodb';
+import { nanoid } from 'nanoid/async';
 
 const ObjectId = mongodb.ObjectId;
 
@@ -26,7 +27,6 @@ export default class RidesDAO {
   }
 
   static async requestRide(
-    userId,
     dateRequested,
     firstName,
     lastName,
@@ -38,6 +38,9 @@ export default class RidesDAO {
     photoId
   ) {
     try {
+      // Async generate short ID for reference
+      const userId = await nanoid(10);
+
       const rideDoc = {
         user_id: userId,
         dateRequested: dateRequested,
