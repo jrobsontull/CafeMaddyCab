@@ -57,4 +57,35 @@ export default class RidesDAO {
       return { error: e };
     }
   }
+
+  static async getRides(filters = null, page = 0, ridesPerPage = 15) {
+    let query = {};
+
+    if (filters) {
+      // do something
+    }
+
+    let cursor;
+
+    try {
+      cursor = await rides.find(query);
+    } catch (e) {
+      console.log('Unable to issue find command: ' + e);
+      return { ridesList: [], totalNumRides: 0 };
+    }
+
+    const displayCursor = cursor.limit(ridesPerPage).skip(ridesPerPage * page);
+
+    try {
+      const ridesList = await displayCursor.toArray();
+      const totalNumRides = await rides.countDocuments(query);
+
+      return { ridesList, totalNumRides };
+    } catch (e) {
+      console.log(
+        'Unable to convert cursor to array or problem counting documents.\n' + e
+      );
+      return { ridesList: [], totalNumRides: 0 };
+    }
+  }
 }

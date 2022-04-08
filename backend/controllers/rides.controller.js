@@ -33,4 +33,34 @@ export default class RidesController {
       res.status(500).json({ error: e.message });
     }
   }
+
+  /* General GET request for ride quieries */
+  static async apiGetRides(req, res, next) {
+    try {
+      const ridesPerPage = req.query.ridesPerPage
+        ? parseInt(req.query.ridesPerPage, 10)
+        : 15;
+      const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+
+      let filters;
+
+      const { ridesList, totalNumRides } = await RidesDAO.getRides({
+        filters,
+        page,
+        ridesPerPage,
+      });
+
+      let response = {
+        rides: ridesList,
+        page: page,
+        filters: filters,
+        entires_per_page: ridesPerPage,
+        total_results: totalNumRides,
+      };
+
+      res.json(response);
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  }
 }
