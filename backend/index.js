@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import RidesDAO from './dao/ridesDAO.js';
 import DriveDAO from './dao/driveDAO.js';
 import AuthDAO from './dao/authDAO.js';
+import FeedbackDAO from './dao/feedbackDAO.js';
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
@@ -28,6 +29,7 @@ MongoClient.connect(db_uri, {
   .then(async (client) => {
     await RidesDAO.injectRidesDB(client);
     await AuthDAO.injectAuthDB(client);
+    await FeedbackDAO.injectFeedbackDB(client);
     await DriveDAO.googleAuth();
 
     app.listen(port, () => {

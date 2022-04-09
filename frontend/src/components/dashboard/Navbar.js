@@ -13,10 +13,10 @@ function Header() {
   }
 
   function logoutHandler(ham) {
-    //localStorage.removeItem('user');
+    localStorage.removeItem('user');
     authUser();
-    //toggleHamburger(ham);
-    //navigate('/');
+    toggleHamburger(ham);
+    navigate('/');
   }
 
   return (
