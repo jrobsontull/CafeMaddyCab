@@ -117,4 +117,25 @@ export default class RidesController {
       res.status(500).json({ error: e.message });
     }
   }
+
+  static async apiGetRideById(req, res, next) {
+    try {
+      let id = req.query.id || {};
+      let ride = await RidesDAO.getRideById(id);
+
+      var { error } = ride;
+      if (error) {
+        res.status(400).json({ error: error.message });
+      } else {
+        if (!ride.ride) {
+          res.status(404).json({ error: 'Ride not found.' });
+        } else {
+          res.json(ride);
+        }
+      }
+    } catch (e) {
+      console.log('Failed to get ride by ID: ' + e.message);
+      res.status(500).json({ error: e });
+    }
+  }
 }
