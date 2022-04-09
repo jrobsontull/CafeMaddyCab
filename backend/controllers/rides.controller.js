@@ -96,7 +96,10 @@ export default class RidesController {
         : 15;
       const page = req.query.page ? parseInt(req.query.page, 10) : 0;
 
-      let filters;
+      let filters = {};
+      if (req.query.status) {
+        filters.status = req.query.status;
+      }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
         filters,

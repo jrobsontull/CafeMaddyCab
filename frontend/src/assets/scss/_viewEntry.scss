@@ -24,19 +24,29 @@
       color: $lightest-pink;
 
       .title {
-        padding: 16px 0;
-        margin-left: 18px;
         display: flex;
+        align-items: center;
 
-        img.nav-arrow {
-          transform: rotate(180deg);
-          margin-right: 12px;
-          transition: transform 0.25s ease;
+        .back-btn {
+          background-color: $dark-blue;
+          padding: 16px 16px;
+          margin-right: 16px;
+          border-radius: $border-radius 0 0 0;
+          transition: background-color 0.25s ease;
+
+          img.nav-arrow {
+            transform: rotate(180deg);
+            transition: transform 0.25s ease;
+          }
         }
 
-        img.nav-arrow:hover {
-          transform: scale(1.15) rotate(180deg);
+        .back-btn:hover {
           cursor: pointer;
+          background-color: $blue-btn-hover;
+
+          img.nav-arrow {
+            transform: scale(1.15) rotate(180deg);
+          }
         }
       }
 
@@ -79,10 +89,54 @@
         padding: 12px 0;
       }
 
+      li div.description {
+        margin-right: 6px;
+      }
+
       li div.value {
         border: 1px solid $dark-blue;
         padding: 4px 12px;
         width: 65%;
+      }
+
+      li.photo-comparison {
+        flex-direction: column;
+        padding-top: 6px;
+
+        .photo-container {
+          display: flex;
+          background-color: $lightest-pink;
+          margin-top: 6px;
+
+          .photo-box {
+            border: 1px solid $dark-blue;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .title {
+              border: 1px solid $dark-blue;
+              border-width: 0 0 1px 0;
+              padding: 4px 0;
+              width: 100%;
+              text-align: center;
+            }
+
+            img {
+              max-width: 100px;
+              max-height: 140px;
+              padding: 6px;
+            }
+          }
+
+          .photo-box#photo-id {
+            border-left-width: 0;
+          }
+        }
+      }
+
+      li#notes {
       }
     }
   }

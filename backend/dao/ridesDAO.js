@@ -54,7 +54,7 @@ export default class RidesDAO {
         approver: null,
         notes: '',
         coupon: null,
-        status: 'Needs approval',
+        status: 'New',
       };
 
       return await rides.insertOne(rideDoc);
@@ -67,8 +67,13 @@ export default class RidesDAO {
   static async getRides(filters = null, page = 0, ridesPerPage = 15) {
     let query = {};
 
+    console.log(filters);
+
     if (filters) {
-      // do something
+      if ('status' in filters) {
+        /* Query documents by status */
+        query = { status: filters['status'] };
+      }
     }
 
     let cursor;

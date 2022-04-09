@@ -17,13 +17,11 @@ function ViewEntry({ rideId, onClose }) {
       <div className="view-entry-window">
         <div className="header">
           <div className="title">
-            <img
-              className="nav-arrow"
-              src={Arrow}
-              alt="arrow"
-              onClick={onClose}
-            />
-            <p>Ride Request: John Doe</p>
+            <div className="back-btn" onClick={onClose}>
+              <img className="nav-arrow" src={Arrow} alt="arrow" />
+            </div>
+
+            <p>Ride Request: John Doe ({rideDetails.userId})</p>
           </div>
           <div className="save-changes-btn">Save changes</div>
         </div>
@@ -89,12 +87,34 @@ function ViewEntry({ rideId, onClose }) {
                 {rideDetails.coupon ? rideDetails.coupon : 'N/A'}
               </div>
             </li>
-            <li>
+            <li className="photo-comparison">
               <div className="description">Photo comparison:</div>
-              <div className="value">Yes</div>
-              <img src={''} alt="loading..." />
+              <div className="photo-container">
+                <div className="photo-box">
+                  <div className="title">Selfie</div>
+                  <img
+                    src={
+                      rideDetails.selfie
+                        ? rideDetails.selfie.webContentLink
+                        : '/'
+                    }
+                    alt="loading..."
+                  />
+                </div>
+                <div className="photo-box" id="photo-id">
+                  <div className="title">Photo ID</div>
+                  <img
+                    src={
+                      rideDetails.photoId
+                        ? rideDetails.photoId.webContentLink
+                        : '/'
+                    }
+                    alt="loading..."
+                  />
+                </div>
+              </div>
             </li>
-            <li>
+            <li id="notes">
               <div className="value">
                 {rideDetails.notes ? rideDetails.notes : 'Write notes here...'}
               </div>

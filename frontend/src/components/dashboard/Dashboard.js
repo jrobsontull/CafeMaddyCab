@@ -64,10 +64,37 @@ function Dashboard() {
     setOpenRideEntryView(false);
   }
 
+  function searchRides(status = null) {
+    if (status) {
+      RidesAPI.getRides('status=' + status).then((response) => {
+        setRides(response.rides);
+        setRidesData({
+          totalRides: response.totalResults,
+          currentPage: 0,
+          totalPages: calculateTotalPageNums(
+            entiresPerPage,
+            response.totalResults
+          ),
+        });
+      });
+    } else {
+      RidesAPI.getRides().then((response) => {
+        setRides(response.rides);
+        setRidesData({
+          totalRides: response.totalResults,
+          currentPage: 0,
+          totalPages: calculateTotalPageNums(
+            entiresPerPage,
+            response.totalResults
+          ),
+        });
+      });
+    }
+  }
+
   useEffect(() => {
     RidesAPI.getRides().then((response) => {
       setRides(response.rides);
-
       setRidesData({
         totalRides: response.totalResults,
         currentPage: 0,
@@ -94,9 +121,11 @@ function Dashboard() {
           <div className="menu">
             <div className="search-options">
               <ul>
-                <li>All ride requests (X)</li>
-                <li>New requests (X)</li>
-                <li>In progress requests (X)</li>
+                <li onClick={() => searchRides()}>All ride requests (X)</li>
+                <li onClick={() => searchRides('New')}>New requests (X)</li>
+                <li onClick={() => searchRides('In progress')}>
+                  In progress requests (X)
+                </li>
                 <li>Approved (X)</li>
                 <li>Rejected (X)</li>
                 <li>Done (X)</li>

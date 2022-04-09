@@ -637,16 +637,22 @@
       border-width: 0 0 1px 0;
       color: #f7f5fe; }
       .react-container.view-entry .view-entry-window .header .title {
-        padding: 16px 0;
-        margin-left: 18px;
-        display: flex; }
-        .react-container.view-entry .view-entry-window .header .title img.nav-arrow {
-          transform: rotate(180deg);
-          margin-right: 12px;
-          transition: transform 0.25s ease; }
-        .react-container.view-entry .view-entry-window .header .title img.nav-arrow:hover {
-          transform: scale(1.15) rotate(180deg);
-          cursor: pointer; }
+        display: flex;
+        align-items: center; }
+        .react-container.view-entry .view-entry-window .header .title .back-btn {
+          background-color: #3b3b96;
+          padding: 16px 16px;
+          margin-right: 16px;
+          border-radius: 12px 0 0 0;
+          transition: background-color 0.25s ease; }
+          .react-container.view-entry .view-entry-window .header .title .back-btn img.nav-arrow {
+            transform: rotate(180deg);
+            transition: transform 0.25s ease; }
+        .react-container.view-entry .view-entry-window .header .title .back-btn:hover {
+          cursor: pointer;
+          background-color: #5c5cb3; }
+          .react-container.view-entry .view-entry-window .header .title .back-btn:hover img.nav-arrow {
+            transform: scale(1.15) rotate(180deg); }
       .react-container.view-entry .view-entry-window .header .save-changes-btn {
         padding: 16px 24px;
         background-color: #dc87cb;
@@ -672,10 +678,37 @@
         display: flex;
         justify-content: space-between;
         padding: 12px 0; }
+      .react-container.view-entry .view-entry-window .entry-content li div.description {
+        margin-right: 6px; }
       .react-container.view-entry .view-entry-window .entry-content li div.value {
         border: 1px solid #3b3b96;
         padding: 4px 12px;
         width: 65%; }
+      .react-container.view-entry .view-entry-window .entry-content li.photo-comparison {
+        flex-direction: column;
+        padding-top: 6px; }
+        .react-container.view-entry .view-entry-window .entry-content li.photo-comparison .photo-container {
+          display: flex;
+          background-color: #f7f5fe;
+          margin-top: 6px; }
+          .react-container.view-entry .view-entry-window .entry-content li.photo-comparison .photo-container .photo-box {
+            border: 1px solid #3b3b96;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; }
+            .react-container.view-entry .view-entry-window .entry-content li.photo-comparison .photo-container .photo-box .title {
+              border: 1px solid #3b3b96;
+              border-width: 0 0 1px 0;
+              padding: 4px 0;
+              width: 100%;
+              text-align: center; }
+            .react-container.view-entry .view-entry-window .entry-content li.photo-comparison .photo-container .photo-box img {
+              max-width: 100px;
+              max-height: 140px;
+              padding: 6px; }
+          .react-container.view-entry .view-entry-window .entry-content li.photo-comparison .photo-container .photo-box#photo-id {
+            border-left-width: 0; }
 
 /* Styling */
 body {

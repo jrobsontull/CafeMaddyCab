@@ -34,8 +34,7 @@ export default class DriveDAO {
       const file = await new Promise((resolve, reject) => {
         const query = {
           fileId: file_id,
-          fields:
-            'name, id, mimeType, webViewLink, webContentLink, permissions',
+          fields: 'name, id, mimeType, webViewLink, webContentLink',
         };
 
         drive.files.get(query, function (err, res) {
