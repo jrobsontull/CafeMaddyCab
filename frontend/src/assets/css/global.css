@@ -559,12 +559,12 @@
           width: 10%;
           border-width: 0; }
     .dashboard .table-content .table-entries {
-      height: 100%;
-      margin: 6px 0; }
+      height: 100%; }
       .dashboard .table-content .table-entries .entry ul {
         display: flex;
         list-style-type: none;
-        padding-left: 0; }
+        padding-left: 0;
+        transition: background-color 0.25s ease; }
         .dashboard .table-content .table-entries .entry ul li {
           padding-left: 0;
           text-align: center;
@@ -577,21 +577,27 @@
         .dashboard .table-content .table-entries .entry ul li#col-3 {
           width: 14%; }
         .dashboard .table-content .table-entries .entry ul li#col-4 {
-          width: 10%; }
+          width: 10%;
+          word-break: normal; }
         .dashboard .table-content .table-entries .entry ul li#col-5 {
           width: 8%; }
         .dashboard .table-content .table-entries .entry ul li#col-6 {
-          width: 12%; }
+          width: 12%;
+          word-break: normal; }
         .dashboard .table-content .table-entries .entry ul li#col-7 {
           width: 8%; }
         .dashboard .table-content .table-entries .entry ul li#col-8 {
           width: 6%; }
         .dashboard .table-content .table-entries .entry ul li#col-9 {
-          width: 10%; }
+          width: 10%;
+          word-break: normal; }
         .dashboard .table-content .table-entries .entry ul li#col-10 {
           width: 8%; }
         .dashboard .table-content .table-entries .entry ul li#col-11 {
           width: 10%; }
+      .dashboard .table-content .table-entries .entry ul:hover {
+        cursor: pointer;
+        background-color: #f7f5fe; }
     .dashboard .table-content .table-footer {
       display: flex;
       border: 1px solid #3b3b96;
