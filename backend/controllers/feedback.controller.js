@@ -7,7 +7,12 @@ export default class FeedbackController {
   }
 
   /* POST feedback to MongoDB Feedback collection */
-  static async apiPostFeedback() {
-    console.log('Feedback POST request.');
+  static async apiPostFeedback(req, res, next) {
+    const rideId = req.body.rideId;
+    const feedbackText = req.body.text;
+    const feedbackResponse = await FeedbackDAO.postFeedback(rideId, feedbackText);
+    res.json(feedbackResponse);
+  } catch (e) {
+    res.status(500).json({error: e.message});
   }
 }
