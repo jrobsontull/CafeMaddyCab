@@ -8,6 +8,10 @@ function Success() {
 
   const [name, setName] = useState('');
   const [feedbackText, setFeedbackText] = useState('');
+  const [errorStateMessage, setErrorStateMessage] = useState({
+    state: false,
+    message: null,
+  });
   const [sentFeedbackConfirm, setFeedbackConfirm] = useState(false);
 
   useEffect(() => {
@@ -20,6 +24,13 @@ function Success() {
 
   function submitFeedback() {
     console.log('Feedback text to be submitted: ' + feedbackText);
+    if (feedbackText === '') {
+      setErrorStateMessage({
+        state: true,
+        message: 'Please fill out the feedback form before clicking Send Feedback.',
+      });
+      return;
+    }
     let feedbackToReq = {
       text: feedbackText,
     }
@@ -27,6 +38,11 @@ function Success() {
       if (fResponse) {
         console.log('successful feedback response');
         setFeedbackConfirm(true);
+      } else {
+        setErrorStateMessage({
+          state: true,
+          message: 'There was an error sending feedback. Please try again.',
+        });
       }
     });
   };
@@ -51,11 +67,20 @@ function Success() {
         <div className="info-box-title">
           <h3>How did we do?</h3>
         </div>
-        { !sentFeedbackConfirm ?
+        {!sentFeedbackConfirm ? (
         <div className="info-box success" id="child-2">
           If you have any feedback on your experience, please feel free to leave it here. Your feedback is important to us for improving this service, thank you!
           <br></br>
           <br></br>
+          {errorStateMessage.state ? (
+          <div className="error">
+            {errorStateMessage.message
+              ? errorStateMessage.message
+              : 'Not all the information has been filled out correctly.'}
+          </div>
+          ) : (
+            ''
+          )}
           <textarea className="info-box feedback-form"
             placeholder="Write feedback here..."
             onChange={(e) => setFeedbackText(e.target.value)}
@@ -63,10 +88,12 @@ function Success() {
           <div className="btn submit send-feedback" onClick={() => submitFeedback()}>
             Send Feedback
           </div>
-        </div> : 
+        </div> 
+        ) : ( 
         <div className="info-box success" id="child-2">
           Thank you for your feedback!
-        </div> }
+        </div> 
+        )}
       </div>
     </div>
   );
