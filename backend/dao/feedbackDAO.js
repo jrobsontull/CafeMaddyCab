@@ -29,7 +29,7 @@ export default class FeedbackDAO {
   static async postFeedback(rideId, feedbackText) {
     try {
       const feedbackResponse = {
-        rideId: rideId,
+        rideId: rideId.id,
         text: feedbackText,
       };
 
