@@ -31,6 +31,21 @@ function Success() {
           <br></br>If you have any questions or technical difficulties, please
           get in touch with us <a href="mailto:example@domain.com">here</a>.
         </div>
+
+        <div className="info-box-title">
+          <h3>How did we do?</h3>
+        </div>
+        <div className="info-box success" id="child-2">
+          If you have any feedback on your experience, please feel free to leave it here. Your feedback is important to us for improving this service, thank you!
+          <br></br>
+          <br></br>
+          <textarea className="info-box feedback-form"
+            placeholder="Write feedback here..."
+          ></textarea>
+          <div className="btn submit send-feedback" onClick={console.log('CLICKED ON SUBMIT FEEDBACK')}>
+            Send Feedback
+          </div>
+        </div>
       </div>
     </div>
   );
