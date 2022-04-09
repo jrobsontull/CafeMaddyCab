@@ -2,7 +2,6 @@ import http from './http.common';
 
 export default class FeedbackAPI {
   static async submitFeedback(feedbackText) {
-    console.log('reached submit feedback in API');
     const response = await postRequest(feedbackText, '/api/v1/feedback/submit');
     if (response) {
       return response;

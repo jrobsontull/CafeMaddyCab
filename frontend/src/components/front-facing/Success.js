@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import FeedbackAPI from '../../utils/feedback.api';
 
 function Success() {
@@ -13,6 +13,7 @@ function Success() {
     message: null,
   });
   const [sentFeedbackConfirm, setFeedbackConfirm] = useState(false);
+  let id = useParams();
 
   useEffect(() => {
     if (location.state) {
@@ -23,7 +24,6 @@ function Success() {
   }, []);
 
   function submitFeedback() {
-    console.log('Feedback text to be submitted: ' + feedbackText);
     if (feedbackText === '') {
       setErrorStateMessage({
         state: true,
@@ -32,11 +32,11 @@ function Success() {
       return;
     }
     let feedbackToReq = {
+      rideId: id,
       text: feedbackText,
     }
     FeedbackAPI.submitFeedback(feedbackToReq).then((fResponse) => {
       if (fResponse) {
-        console.log('successful feedback response');
         setFeedbackConfirm(true);
       } else {
         setErrorStateMessage({
