@@ -21,6 +21,16 @@ export default class RidesAPI {
       return rides;
     }
   }
+
+  static async getRideById(id) {
+    const url = 'api/v1/rides/getById?id=' + id;
+
+    const response = await getRequest(url);
+    if (response) {
+      const ride = response.data;
+      return ride;
+    }
+  }
 }
 
 async function postRequest(body, url) {

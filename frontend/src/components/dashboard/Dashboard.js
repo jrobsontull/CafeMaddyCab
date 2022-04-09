@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import RidesAPI from '../../utils/rides.api';
 
 import Navbar from './Navbar';
+import ViewEntry from './ViewEntry';
 
 function Dashboard() {
   const [rides, setRides] = useState([]);
@@ -11,6 +12,9 @@ function Dashboard() {
     totalPages: 0,
   });
   const entiresPerPage = 15;
+
+  const [selectedRideId, setSelectedRideId] = useState();
+  const [openRideEntryView, setOpenRideEntryView] = useState(false);
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
     let count = 1;
@@ -51,6 +55,15 @@ function Dashboard() {
     }
   }
 
+  function viewRideEntry(rideId) {
+    setSelectedRideId(rideId);
+    setOpenRideEntryView(true);
+  }
+
+  function closeRideEntryView() {
+    setOpenRideEntryView(false);
+  }
+
   useEffect(() => {
     RidesAPI.getRides().then((response) => {
       setRides(response.rides);
@@ -70,6 +83,12 @@ function Dashboard() {
     <div className="react-container">
       <div className="content backend">
         <Navbar />
+
+        {openRideEntryView ? (
+          <ViewEntry onClose={closeRideEntryView} rideId={selectedRideId} />
+        ) : (
+          ''
+        )}
 
         <div className="dashboard">
           <div className="menu">
@@ -97,17 +116,18 @@ function Dashboard() {
           <div className="table-content">
             <div className="table-headings">
               <ul>
-                <li id="col-1">First Name</li>
-                <li id="col-2">Last Name</li>
-                <li id="col-3">Email</li>
-                <li id="col-4">Identity</li>
-                <li id="col-5">Low Income</li>
-                <li id="col-6">Ride Purpose</li>
-                <li id="col-7">ID Verification</li>
-                <li id="col-8">Approver</li>
-                <li id="col-9">Notes</li>
-                <li id="col-10">Ride Coupon</li>
-                <li id="col-11">Status</li>
+                <li id="col-1">Date Requested</li>
+                <li id="col-2">ID</li>
+                <li id="col-3">First Name</li>
+                <li id="col-4">Last Name</li>
+                <li id="col-5">Email</li>
+                <li id="col-6">Identity</li>
+                <li id="col-7">Low Income</li>
+                <li id="col-8">Ride Purpose</li>
+                <li id="col-9">ID Verification</li>
+                <li id="col-10">Approver</li>
+                <li id="col-11">Ride Coupon</li>
+                <li id="col-12">Status</li>
               </ul>
             </div>
 
@@ -115,22 +135,27 @@ function Dashboard() {
               {rides ? (
                 rides.map((ride) => (
                   <div className="entry" key={ride._id}>
-                    <ul>
-                      <li id="col-1">{ride.firstName}</li>
-                      <li id="col-2">{ride.lastName}</li>
-                      <li id="col-3">{ride.email}</li>
-                      <li id="col-4">{ride.identity.text}</li>
-                      <li id="col-5">{ride.income ? 'yes' : 'no'}</li>
-                      <li id="col-6">{ride.purpose.text}</li>
-                      <li id="col-7">
+                    <ul onClick={() => viewRideEntry(ride._id)}>
+                      <li id="col-1">
+                        {new Date(ride.dateRequested).toLocaleDateString(
+                          'en-us'
+                        )}
+                      </li>
+                      <li id="col-2">{ride.userId}</li>
+                      <li id="col-3">{ride.firstName}</li>
+                      <li id="col-4">{ride.lastName}</li>
+                      <li id="col-5">{ride.email}</li>
+                      <li id="col-6">{ride.identity.text}</li>
+                      <li id="col-7">{ride.income ? 'yes' : 'no'}</li>
+                      <li id="col-8">{ride.purpose.text}</li>
+                      <li id="col-9">
                         {ride.verified ? 'verified' : 'unverified'}
                       </li>
-                      <li id="col-8">
+                      <li id="col-10">
                         {ride.approver ? ride.approver : 'N/A'}
                       </li>
-                      <li id="col-9">{ride.notes}</li>
-                      <li id="col-10">{ride.coupon ? ride.coupon : 'N/A'}</li>
-                      <li id="col-11">{ride.status}</li>
+                      <li id="col-11">{ride.coupon ? ride.coupon : 'N/A'}</li>
+                      <li id="col-12">{ride.status}</li>
                     </ul>
                   </div>
                 ))

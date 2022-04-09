@@ -4,6 +4,7 @@ $lightest-pink: #f7f5fe;
 $light-form: #fefff3;
 $yellow-btn: #f9dc7c;
 $dark-pink: #dc87cb;
+$dark-pink-hover: #e99fdc;
 $light-blue: #9696db;
 $yellow-btn-hover: #fae399;
 $blue-btn-hover: #5c5cb3;
@@ -56,6 +57,7 @@ $heading-font-size: 22px;
 @import '_login';
 @import '_dashboardNav';
 @import '_dashboard';
+@import '_viewEntry';
 
 /* Styling */
 body {

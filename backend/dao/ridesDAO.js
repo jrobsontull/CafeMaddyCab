@@ -1,3 +1,4 @@
+import e from 'cors';
 import mongodb from 'mongodb';
 
 const ObjectId = mongodb.ObjectId;
@@ -91,6 +92,28 @@ export default class RidesDAO {
         'Unable to convert cursor to array or problem counting documents.\n' + e
       );
       return { ridesList: [], totalNumRides: 0 };
+    }
+  }
+
+  static async getRideById(id) {
+    try {
+      const query = { _id: ObjectId(id) };
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.log(
+          'Unable to issue find command with query: ' + query + '\n' + e.message
+        );
+        return { error: e };
+      }
+
+      const rideList = await cursor.toArray();
+      return { ride: rideList[0] };
+    } catch (e) {
+      console.log('Error getting recipe by ID: ' + e.message);
+      return { error: e };
     }
   }
 }
