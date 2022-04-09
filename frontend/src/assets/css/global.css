@@ -600,7 +600,14 @@
       .dashboard .table-content .table-footer .nav {
         padding: 14px 0;
         text-align: center;
-        width: 92%; }
+        width: 92%;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .dashboard .table-content .table-footer .nav .arrow.left {
+          margin-right: 16px; }
+        .dashboard .table-content .table-footer .nav .arrow.right {
+          margin-left: 16px; }
       .dashboard .table-content .table-footer .download-btn {
         background-color: #3b3b96;
         color: #f7f5fe;
@@ -758,3 +765,42 @@ body,
     text-align: center;
     margin-top: 12px;
     font-size: 14px; }
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  transition: all 0.25s ease; }
+
+.arrow.right {
+  border-left: 7px solid #3b3b96; }
+
+.arrow.left {
+  border-right: 7px solid #3b3b96; }
+
+.arrow.right:hover {
+  border-left-color: #5c5cb3;
+  transform: scale(1.2);
+  cursor: pointer; }
+
+.arrow.left:hover {
+  border-right-color: #5c5cb3;
+  transform: scale(1.2);
+  cursor: pointer; }
+
+.arrow.right.disabled {
+  border-left-color: #9696db; }
+
+.arrow.left.disabled {
+  border-right-color: #9696db; }
+
+.arrow.right.disabled:hover {
+  cursor: default;
+  transform: scale(1);
+  border-left-color: #9696db; }
+
+.arrow.left.disabled:hover {
+  cursor: default;
+  transform: scale(1);
+  border-right-color: #9696db; }

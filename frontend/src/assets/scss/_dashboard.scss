@@ -208,6 +208,17 @@
         padding: 14px 0;
         text-align: center;
         width: 92%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .arrow.left {
+          margin-right: 16px;
+        }
+
+        .arrow.right {
+          margin-left: 16px;
+        }
       }
 
       .download-btn {
