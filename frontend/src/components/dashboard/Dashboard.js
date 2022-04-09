@@ -119,13 +119,17 @@ function Dashboard() {
                       <li id="col-1">{ride.firstName}</li>
                       <li id="col-2">{ride.lastName}</li>
                       <li id="col-3">{ride.email}</li>
-                      <li id="col-4">{ride.identity}</li>
-                      <li id="col-5">{ride.income}</li>
+                      <li id="col-4">{ride.identity.text}</li>
+                      <li id="col-5">{ride.income ? 'yes' : 'no'}</li>
                       <li id="col-6">{ride.purpose.text}</li>
-                      <li id="col-7">{ride.verified}</li>
-                      <li id="col-8">{ride.approver}</li>
+                      <li id="col-7">
+                        {ride.verified ? 'verified' : 'unverified'}
+                      </li>
+                      <li id="col-8">
+                        {ride.approver ? ride.approver : 'N/A'}
+                      </li>
                       <li id="col-9">{ride.notes}</li>
-                      <li id="col-10">{ride.coupon}</li>
+                      <li id="col-10">{ride.coupon ? ride.coupon : 'N/A'}</li>
                       <li id="col-11">{ride.status}</li>
                     </ul>
                   </div>

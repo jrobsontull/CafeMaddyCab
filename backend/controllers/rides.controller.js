@@ -12,8 +12,30 @@ export default class RidesController {
       const firstName = req.body.firstName;
       const lastName = req.body.lastName;
       const email = req.body.email;
-      const identity = req.body.identity;
+
+      const identityOption = parseInt(req.body.identity, 10);
+      let identity;
+
+      switch (identityOption) {
+        case 1:
+          identity = { value: 1, text: 'Asian female' };
+          break;
+        case 2:
+          identity = { value: 2, text: 'Asian LGBTQ+' };
+          break;
+        case 3:
+          identity = { value: 3, text: 'Asian elderly person' };
+          break;
+        case 4:
+          identity = {
+            value: 4,
+            text: 'I am submitting on behalf of an Asian Elderly person',
+          };
+          break;
+      }
+
       const income = req.body.income;
+
       const purposeOption = parseInt(req.body.purpose.value, 10);
       let purpose;
 

@@ -136,13 +136,13 @@
     /* Styling of table entries */
     .table-entries {
       height: 100%;
-      margin: 6px 0;
 
       .entry {
         ul {
           display: flex;
           list-style-type: none;
           padding-left: 0;
+          transition: background-color 0.25s ease;
 
           li {
             padding-left: 0;
@@ -165,6 +165,7 @@
 
           li#col-4 {
             width: 10%;
+            word-break: normal;
           }
 
           li#col-5 {
@@ -173,6 +174,7 @@
 
           li#col-6 {
             width: 12%;
+            word-break: normal;
           }
 
           li#col-7 {
@@ -185,6 +187,7 @@
 
           li#col-9 {
             width: 10%;
+            word-break: normal;
           }
 
           li#col-10 {
@@ -194,6 +197,11 @@
           li#col-11 {
             width: 10%;
           }
+        }
+
+        ul:hover {
+          cursor: pointer;
+          background-color: $lightest-pink;
         }
       }
     }

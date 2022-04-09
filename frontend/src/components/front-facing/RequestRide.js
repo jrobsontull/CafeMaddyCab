@@ -79,10 +79,18 @@ function RequestRide() {
 
   function validateIncome(target) {
     if (target.checked && target.value) {
-      setRideDetails((prevDetails) => ({
-        ...prevDetails,
-        income: target.value,
-      }));
+      if (target.value === '1') {
+        setRideDetails((prevDetails) => ({
+          ...prevDetails,
+          income: true,
+        }));
+      } else {
+        setRideDetails((prevDetails) => ({
+          ...prevDetails,
+          income: false,
+        }));
+      }
+
       setErrors((prevErrors) => ({ ...prevErrors, income: false }));
     }
   }
@@ -340,16 +348,11 @@ function RequestRide() {
               onChange={(e) => validateIncome(e.target)}
             >
               <div className="check-item">
-                <input
-                  type="radio"
-                  name="low-income"
-                  id="5"
-                  value="yes"
-                ></input>
+                <input type="radio" name="low-income" id="5" value="1"></input>
                 <label htmlFor="5">Yes</label>
               </div>
               <div className="check-item last-child">
-                <input type="radio" name="low-income" id="6" value="no"></input>
+                <input type="radio" name="low-income" id="6" value="2"></input>
                 <label htmlFor="6">No</label>
               </div>
             </div>
