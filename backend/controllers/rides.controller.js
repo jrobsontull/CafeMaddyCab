@@ -76,11 +76,11 @@ export default class RidesController {
 
       let filters;
 
-      const { ridesList, totalNumRides } = await RidesDAO.getRides({
+      const { ridesList, totalNumRides } = await RidesDAO.getRides(
         filters,
         page,
-        ridesPerPage,
-      });
+        ridesPerPage
+      );
 
       let response = {
         rides: ridesList,

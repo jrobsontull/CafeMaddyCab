@@ -9,10 +9,10 @@ export default class RidesAPI {
   }
 
   static async getRides(urlParams = null) {
-    let url = 'api/v1/rides/';
+    let url = 'api/v1/rides';
 
     if (urlParams) {
-      url += urlParams;
+      url += '?' + urlParams;
     }
 
     const response = await getRequest(url);

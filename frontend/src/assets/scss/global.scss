@@ -248,3 +248,51 @@ body,
     font-size: 14px;
   }
 }
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.arrow.right {
+  border-left: 7px solid $dark-blue;
+}
+
+.arrow.left {
+  border-right: 7px solid $dark-blue;
+}
+
+.arrow.right:hover {
+  border-left-color: $blue-btn-hover;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.arrow.left:hover {
+  border-right-color: $blue-btn-hover;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.arrow.right.disabled {
+  border-left-color: $light-blue;
+}
+
+.arrow.left.disabled {
+  border-right-color: $light-blue;
+}
+
+.arrow.right.disabled:hover {
+  cursor: default;
+  transform: scale(1);
+  border-left-color: $light-blue;
+}
+
+.arrow.left.disabled:hover {
+  cursor: default;
+  transform: scale(1);
+  border-right-color: $light-blue;
+}

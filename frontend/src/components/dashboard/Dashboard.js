@@ -10,6 +10,7 @@ function Dashboard() {
     currentPage: 0,
     totalPages: 0,
   });
+  const entiresPerPage = 15;
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
     let count = 1;
@@ -21,6 +22,35 @@ function Dashboard() {
     return count;
   }
 
+  function nextPage(target) {
+    if (
+      ridesData.totalPages > 1 &&
+      ridesData.totalPages - 1 !== ridesData.currentPage
+    ) {
+      const pageToScrollTo = ridesData.currentPage + 1;
+      RidesAPI.getRides('page=' + pageToScrollTo).then((response) => {
+        setRides(response.rides);
+        setRidesData((prevData) => ({
+          ...prevData,
+          currentPage: pageToScrollTo,
+        }));
+      });
+    }
+  }
+
+  function prevPage(target) {
+    if (ridesData.currentPage > 0) {
+      const pageToScrollTo = ridesData.currentPage - 1;
+      RidesAPI.getRides('page=' + pageToScrollTo).then((response) => {
+        setRides(response.rides);
+        setRidesData((prevData) => ({
+          ...prevData,
+          currentPage: pageToScrollTo,
+        }));
+      });
+    }
+  }
+
   useEffect(() => {
     RidesAPI.getRides().then((response) => {
       setRides(response.rides);
@@ -28,7 +58,10 @@ function Dashboard() {
       setRidesData({
         totalRides: response.totalResults,
         currentPage: 0,
-        totalPages: calculateTotalPageNums(15, response.totalResults),
+        totalPages: calculateTotalPageNums(
+          entiresPerPage,
+          response.totalResults
+        ),
       });
     });
   }, []);
@@ -104,208 +137,55 @@ function Dashboard() {
                   </ul>
                 </div>
               )}
-
-              {/* <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div>
-              <div className="entry">
-                <ul>
-                  <li id="col-1">John</li>
-                  <li id="col-2">Doe</li>
-                  <li id="col-3">jdoe@gmail.com</li>
-                  <li id="col-4">Asian LGBTQ+</li>
-                  <li id="col-5">Yes</li>
-                  <li id="col-6">Vaccination</li>
-                  <li id="col-7">Verified</li>
-                  <li id="col-8">jake</li>
-                  <li id="col-9">No notes.</li>
-                  <li id="col-10">N/A</li>
-                  <li id="col-11">Awaiting code</li>
-                </ul>
-              </div> */}
             </div>
 
             <div className="table-footer">
-              <div className="nav">
-                <div>Page 1 of 5</div>
-              </div>
+              {ridesData.totalPages > 1 ? (
+                <div className="nav">
+                  {ridesData.currentPage === 0 ? (
+                    <div
+                      className="arrow left disabled"
+                      onClick={(e) => prevPage(e.target)}
+                    ></div>
+                  ) : (
+                    <div
+                      className="arrow left"
+                      onClick={(e) => prevPage(e.target)}
+                    ></div>
+                  )}
+
+                  <div>
+                    Page {ridesData.currentPage + 1} of {ridesData.totalPages}
+                  </div>
+
+                  {ridesData.currentPage === ridesData.totalPages - 1 ? (
+                    <div
+                      className="arrow right disabled"
+                      onClick={(e) => nextPage(e.target)}
+                    ></div>
+                  ) : (
+                    <div
+                      className="arrow right"
+                      onClick={(e) => nextPage(e.target)}
+                    ></div>
+                  )}
+                </div>
+              ) : (
+                <div className="nav">
+                  <div
+                    className="arrow left disabled"
+                    onClick={(e) => prevPage(e.target)}
+                  ></div>
+                  <div>
+                    Page {ridesData.currentPage + 1} of {ridesData.totalPages}
+                  </div>
+                  <div
+                    className="arrow right disabled"
+                    onClick={(e) => nextPage(e.target)}
+                  ></div>
+                </div>
+              )}
+
               <div className="download-btn">Download CSV</div>
             </div>
           </div>
