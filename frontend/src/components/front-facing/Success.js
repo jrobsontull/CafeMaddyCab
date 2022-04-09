@@ -8,6 +8,7 @@ function Success() {
 
   const [name, setName] = useState('');
   const [feedbackText, setFeedbackText] = useState('');
+  const [sentFeedbackConfirm, setFeedbackConfirm] = useState(false);
 
   useEffect(() => {
     if (location.state) {
@@ -22,8 +23,11 @@ function Success() {
     let feedbackToReq = {
       text: feedbackText,
     }
-    FeedbackAPI.submitFeedback(feedbackToReq).then((sResponse) => {
-      console.log('made it back');
+    FeedbackAPI.submitFeedback(feedbackToReq).then((fResponse) => {
+      if (fResponse) {
+        console.log('successful feedback response');
+        setFeedbackConfirm(true);
+      }
     });
   };
 
@@ -47,6 +51,7 @@ function Success() {
         <div className="info-box-title">
           <h3>How did we do?</h3>
         </div>
+        { !sentFeedbackConfirm ?
         <div className="info-box success" id="child-2">
           If you have any feedback on your experience, please feel free to leave it here. Your feedback is important to us for improving this service, thank you!
           <br></br>
@@ -58,7 +63,10 @@ function Success() {
           <div className="btn submit send-feedback" onClick={() => submitFeedback()}>
             Send Feedback
           </div>
-        </div>
+        </div> : 
+        <div className="info-box success" id="child-2">
+          Thank you for your feedback!
+        </div> }
       </div>
     </div>
   );
