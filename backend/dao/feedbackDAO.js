@@ -26,5 +26,16 @@ export default class FeedbackDAO {
 
   static async getFeedback() {}
 
-  static async postFeedback() {}
+  static async postFeedback(feedbackText) {
+    try {
+      const feedbackResponse = {
+        text: feedbackText,
+      };
+
+      return feedback.insertOne(feedbackResponse);
+    } catch (e) {
+      console.log('Unable to post feedback: ' + e);
+      return {error: e};
+    }
+  }
 }

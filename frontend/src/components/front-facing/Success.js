@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import FeedbackAPI from '../../utils/feedback.api';
 
 function Success() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
+  const [feedbackText, setFeedbackText] = useState('');
 
   useEffect(() => {
     if (location.state) {
@@ -14,6 +16,16 @@ function Success() {
       navigate('/');
     }
   }, []);
+
+  function submitFeedback() {
+    console.log('Feedback text to be submitted: ' + feedbackText);
+    let feedbackToReq = {
+      text: feedbackText,
+    }
+    FeedbackAPI.submitFeedback(feedbackToReq).then((sResponse) => {
+      console.log('made it back');
+    });
+  };
 
   return (
     <div className="react-container">
@@ -41,8 +53,9 @@ function Success() {
           <br></br>
           <textarea className="info-box feedback-form"
             placeholder="Write feedback here..."
+            onChange={(e) => setFeedbackText(e.target.value)}
           ></textarea>
-          <div className="btn submit send-feedback" onClick={console.log('CLICKED ON SUBMIT FEEDBACK')}>
+          <div className="btn submit send-feedback" onClick={() => submitFeedback()}>
             Send Feedback
           </div>
         </div>
