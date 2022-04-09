@@ -40,7 +40,7 @@ export default class RidesController {
           };
           break;
         case 6:
-          purpose = req.body.purpose.text;
+          purpose = req.body.purpose;
           break;
       }
 

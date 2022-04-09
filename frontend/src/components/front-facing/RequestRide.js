@@ -219,14 +219,6 @@ function RequestRide() {
       console.log('Valid form.');
       setIsRequesting(true);
 
-      // Update other purpose field if present
-      if (rideDetails.purpose && rideDetails.purpose.value === '6') {
-        setRideDetails((prevDetails) => ({
-          ...prevDetails,
-          purpose: { value: '6', text: otherPurpose },
-        }));
-      }
-
       // Post data
       let selfieResponse;
       let photoIdResponse;
@@ -243,6 +235,12 @@ function RequestRide() {
               let rideToReq = rideDetails;
               rideToReq.selfie = selfieResponse;
               rideToReq.photoId = photoIdResponse;
+
+              // Update other purpose field if present
+              if (rideDetails.purpose && rideDetails.purpose.value === '6') {
+                rideToReq.purpose.text = otherPurpose;
+              }
+
               requestRide(rideToReq);
             }
           });
