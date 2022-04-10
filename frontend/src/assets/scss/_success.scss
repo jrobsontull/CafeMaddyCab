@@ -1,0 +1,37 @@
+.info-box.success {
+  text-align: justify;
+
+  .info-box.feedback-form {
+    resize: none;
+    vertical-align: top;
+    border-radius: $border-radius $border-radius 0 0;
+    border: 1px solid $dark-blue;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  textarea {
+    color: $dark-blue;
+    transition: box-shadow 0.25s ease;
+  }
+
+  textarea::placeholder {
+    color: $light-blue;
+  }
+
+  textarea:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+  }
+
+  textarea:focus {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+  }
+
+  .btn.send-feedback {
+    border-radius: 0 0 $border-radius $border-radius;
+    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+}

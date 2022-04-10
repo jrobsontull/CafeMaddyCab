@@ -95,24 +95,3 @@
 .btn-link.donate {
   margin-top: 20px;
 }
-
-.info-box.success {
-  text-align: justify;
-}
-
-.info-box.feedback-form {
-  resize: none;
-  vertical-align: top;
-  border-radius: $border-radius $border-radius 0 0;
-  border: 1px solid $dark-blue;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.btn.send-feedback {
-  border-radius: 0 0 $border-radius $border-radius;
-  font-size: 16px;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-}

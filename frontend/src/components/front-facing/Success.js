@@ -12,8 +12,9 @@ function Success() {
     state: false,
     message: null,
   });
-  const [sentFeedbackConfirm, setFeedbackConfirm] = useState(false);
-  let id = useParams();
+  const [feedbackConfirm, setFeedbackConfirm] = useState(false);
+
+  const rideId = useParams();
 
   useEffect(() => {
     if (location.state) {
@@ -21,20 +22,24 @@ function Success() {
     } else {
       navigate('/');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function submitFeedback() {
     if (feedbackText === '') {
       setErrorStateMessage({
         state: true,
-        message: 'Please fill out the feedback form before clicking Send Feedback.',
+        message:
+          'Please fill out the feedback form before clicking Send Feedback.',
       });
       return;
     }
-    let feedbackToReq = {
-      rideId: id,
+
+    const feedbackToReq = {
+      rideId: rideId,
       text: feedbackText,
-    }
+    };
+
     FeedbackAPI.submitFeedback(feedbackToReq).then((fResponse) => {
       if (fResponse) {
         setFeedbackConfirm(true);
@@ -45,7 +50,7 @@ function Success() {
         });
       }
     });
-  };
+  }
 
   return (
     <div className="react-container">
@@ -67,32 +72,38 @@ function Success() {
         <div className="info-box-title">
           <h3>How did we do?</h3>
         </div>
-        {!sentFeedbackConfirm ? (
-        <div className="info-box success" id="child-2">
-          If you have any feedback on your experience, please feel free to leave it here. Your feedback is important to us for improving this service, thank you!
-          <br></br>
-          <br></br>
-          {errorStateMessage.state ? (
-          <div className="error">
-            {errorStateMessage.message
-              ? errorStateMessage.message
-              : 'Not all the information has been filled out correctly.'}
+        {!feedbackConfirm ? (
+          <div className="info-box success" id="child-2">
+            If you have any feedback on your experience, please feel free to
+            leave it here. Your feedback is important to us for improving this
+            service, thank you!
+            <br></br>
+            <br></br>
+            {errorStateMessage.state ? (
+              <div className="error">
+                {errorStateMessage.message
+                  ? errorStateMessage.message
+                  : 'Not all the information has been filled out correctly.'}
+              </div>
+            ) : (
+              ''
+            )}
+            <textarea
+              className="info-box feedback-form"
+              placeholder="Write feedback here..."
+              onChange={(e) => setFeedbackText(e.target.value)}
+            ></textarea>
+            <div
+              className="btn submit send-feedback"
+              onClick={() => submitFeedback()}
+            >
+              Send Feedback
+            </div>
           </div>
-          ) : (
-            ''
-          )}
-          <textarea className="info-box feedback-form"
-            placeholder="Write feedback here..."
-            onChange={(e) => setFeedbackText(e.target.value)}
-          ></textarea>
-          <div className="btn submit send-feedback" onClick={() => submitFeedback()}>
-            Send Feedback
+        ) : (
+          <div className="info-box success" id="child-2">
+            Thank you for your feedback!
           </div>
-        </div> 
-        ) : ( 
-        <div className="info-box success" id="child-2">
-          Thank you for your feedback!
-        </div> 
         )}
       </div>
     </div>

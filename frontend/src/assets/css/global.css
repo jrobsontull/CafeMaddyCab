@@ -94,24 +94,6 @@
 .btn-link.donate {
   margin-top: 20px; }
 
-.info-box.success {
-  text-align: justify; }
-
-.info-box.feedback-form {
-  resize: none;
-  vertical-align: top;
-  border-radius: 12px 12px 0 0;
-  border: 1px solid #3b3b96;
-  box-sizing: border-box;
-  width: 100%; }
-
-.btn.send-feedback {
-  border-radius: 0 0 12px 12px;
-  font-size: 16px;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%; }
-
 .info-box.how-to ul {
   list-style-type: none;
   padding: 0; }
@@ -377,6 +359,31 @@
     transform: scale(1.5); } }
   .loading .info-box {
     width: calc(80% - 36px); }
+
+.info-box.success {
+  text-align: justify; }
+  .info-box.success .info-box.feedback-form {
+    resize: none;
+    vertical-align: top;
+    border-radius: 12px 12px 0 0;
+    border: 1px solid #3b3b96;
+    box-sizing: border-box;
+    width: 100%; }
+  .info-box.success textarea {
+    color: #3b3b96;
+    transition: box-shadow 0.25s ease; }
+  .info-box.success textarea::placeholder {
+    color: #9696db; }
+  .info-box.success textarea:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
+  .info-box.success textarea:focus {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25); }
+  .info-box.success .btn.send-feedback {
+    border-radius: 0 0 12px 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%; }
 
 .content.login {
   height: 100%;
