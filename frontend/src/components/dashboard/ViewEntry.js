@@ -10,6 +10,7 @@ function ViewEntry({ rideId, onClose }) {
     RidesAPI.getRideById(rideId).then((response) => {
       setRideDetails(response.ride);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

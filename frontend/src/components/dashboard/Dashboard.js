@@ -26,7 +26,7 @@ function Dashboard() {
     return count;
   }
 
-  function nextPage(target) {
+  function nextPage() {
     if (
       ridesData.totalPages > 1 &&
       ridesData.totalPages - 1 !== ridesData.currentPage
@@ -42,7 +42,7 @@ function Dashboard() {
     }
   }
 
-  function prevPage(target) {
+  function prevPage() {
     if (ridesData.currentPage > 0) {
       const pageToScrollTo = ridesData.currentPage - 1;
       RidesAPI.getRides('page=' + pageToScrollTo).then((response) => {
@@ -203,12 +203,12 @@ function Dashboard() {
                   {ridesData.currentPage === 0 ? (
                     <div
                       className="arrow left disabled"
-                      onClick={(e) => prevPage(e.target)}
+                      onClick={() => prevPage()}
                     ></div>
                   ) : (
                     <div
                       className="arrow left"
-                      onClick={(e) => prevPage(e.target)}
+                      onClick={() => prevPage()}
                     ></div>
                   )}
 
@@ -219,12 +219,12 @@ function Dashboard() {
                   {ridesData.currentPage === ridesData.totalPages - 1 ? (
                     <div
                       className="arrow right disabled"
-                      onClick={(e) => nextPage(e.target)}
+                      onClick={() => nextPage()}
                     ></div>
                   ) : (
                     <div
                       className="arrow right"
-                      onClick={(e) => nextPage(e.target)}
+                      onClick={() => nextPage()}
                     ></div>
                   )}
                 </div>
@@ -232,14 +232,14 @@ function Dashboard() {
                 <div className="nav">
                   <div
                     className="arrow left disabled"
-                    onClick={(e) => prevPage(e.target)}
+                    onClick={() => prevPage()}
                   ></div>
                   <div>
                     Page {ridesData.currentPage + 1} of {ridesData.totalPages}
                   </div>
                   <div
                     className="arrow right disabled"
-                    onClick={(e) => nextPage(e.target)}
+                    onClick={() => nextPage()}
                   ></div>
                 </div>
               )}
