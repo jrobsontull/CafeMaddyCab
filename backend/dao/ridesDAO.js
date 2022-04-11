@@ -121,4 +121,42 @@ export default class RidesDAO {
       return { error: e };
     }
   }
+
+  static async editRideById(
+    id,
+    editUser,
+    firstName,
+    lastName,
+    email,
+    identity,
+    status,
+    coupon,
+    notes
+  ) {
+    try {
+      const updateResponse = await rides.findOneAndUpdate(
+        {
+          _id: ObjectId(id),
+        },
+        {
+          $set: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            identity: identity,
+            status: status,
+            lastEditedBy: editUser,
+            coupon: coupon,
+            notes: notes,
+          },
+        },
+        { returnNewDocument: true }
+      );
+
+      return updateResponse;
+    } catch (e) {
+      console.log('Unable to update ride (' + id + '): ' + e);
+      return { error: e };
+    }
+  }
 }

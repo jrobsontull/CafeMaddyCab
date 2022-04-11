@@ -132,7 +132,7 @@ function ViewEntry({ rideId, onClose }) {
                     <img
                       src={
                         rideDetails.selfie
-                          ? rideDetails.selfie.webContentLink
+                          ? rideDetails.selfie.altMediaView
                           : '/'
                       }
                       alt="loading..."
@@ -143,7 +143,7 @@ function ViewEntry({ rideId, onClose }) {
                     <img
                       src={
                         rideDetails.photoId
-                          ? rideDetails.photoId.webContentLink
+                          ? rideDetails.photoId.altMediaView
                           : '/'
                       }
                       alt="loading..."
