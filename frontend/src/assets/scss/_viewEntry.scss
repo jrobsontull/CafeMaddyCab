@@ -8,6 +8,7 @@
 
   .view-entry-window {
     width: 50%;
+    min-width: 850px;
     background-color: $light-form;
     border: 1px solid $dark-blue;
     border-radius: $border-radius;
@@ -67,10 +68,34 @@
 
     .entry-content {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      textarea.notes {
+        background-color: $lightest-pink;
+        width: 91.5%;
+        padding: 8px 12px;
+        margin-bottom: 22px;
+        background-color: $lightest-pink;
+        color: $dark-blue;
+        border: 1px solid $dark-blue;
+        resize: none;
+      }
+
+      textarea.notes::placeholder {
+        color: $light-blue;
+      }
+    }
+
+    .entry-content-columns {
+      width: 94%;
+      display: flex;
       padding: 12px 22px;
+      justify-content: space-between;
 
       ul {
-        width: 50%;
+        width: 48%;
         padding-left: 0;
       }
 
@@ -86,7 +111,7 @@
         list-style-type: none;
         display: flex;
         justify-content: space-between;
-        padding: 12px 0;
+        padding: 10px 0;
       }
 
       li div.description {
@@ -94,10 +119,59 @@
       }
 
       li div.value {
-        border: 1px solid $dark-blue;
         padding: 4px 12px;
-        width: 65%;
+        width: 62%;
+        border: 1px solid $dark-blue;
       }
+
+      li div.value:hover {
+        cursor: default;
+      }
+
+      li input.value {
+        width: 62%;
+        padding: 4px 12px;
+        background-color: $lightest-pink;
+        border: 1px solid $dark-blue;
+        color: $dark-blue;
+        transition: box-shadow 0.25s ease;
+      }
+
+      li select {
+        width: 68%;
+        padding: 4px 12px;
+        background-color: $lightest-pink;
+        border: 1px solid $dark-blue;
+        color: $dark-blue;
+        transition: box-shadow 0.25s ease;
+      }
+
+      li select.status-dropdown {
+        font-weight: bold;
+      }
+
+      li input.value:hover,
+      li select:hover {
+        box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+      }
+
+      li input.value:focus,
+      li select:focus {
+        box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+      }
+
+      // li textarea {
+      //   width: 100%;
+      //   padding: 8px 12px;
+      //   background-color: $lightest-pink;
+      //   color: $dark-blue;
+      //   border: 1px solid $dark-blue;
+      //   resize: none;
+      // }
+
+      // li textarea::placeholder {
+      //   color: $light-blue;
+      // }
 
       li.photo-comparison {
         flex-direction: column;
@@ -107,6 +181,7 @@
           display: flex;
           background-color: $lightest-pink;
           margin-top: 6px;
+          height: 156px;
 
           .photo-box {
             border: 1px solid $dark-blue;
@@ -125,7 +200,7 @@
 
             img {
               max-width: 100px;
-              max-height: 140px;
+              max-height: 114px;
               padding: 6px;
             }
           }
@@ -134,9 +209,6 @@
             border-left-width: 0;
           }
         }
-      }
-
-      li#notes {
       }
     }
   }
