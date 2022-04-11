@@ -6,7 +6,7 @@ export default class RidesController {
   static async apiRequestRide(req, res, next) {
     try {
       // Async generate short ID for reference
-      const userId = await nanoid(10);
+      const shortId = await nanoid(10);
 
       const dateRequested = new Date();
       const firstName = req.body.firstName;
@@ -84,7 +84,7 @@ export default class RidesController {
       photoId.altMediaView = photoIdAltMediaView;
 
       const ridesResponse = await RidesDAO.requestRide(
-        userId,
+        shortId,
         dateRequested,
         firstName,
         lastName,
@@ -111,7 +111,7 @@ export default class RidesController {
 
       let filters = {};
       if (req.query.status) {
-        filters.status = req.query.status;
+        filters.status = parseInt(req.query.status, 10);
       }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
@@ -180,7 +180,6 @@ export default class RidesController {
         coupon,
         notes
       );
-      console.log(rideResponse);
 
       var { error } = rideResponse;
       if (error) {

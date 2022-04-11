@@ -27,7 +27,7 @@ export default class RidesDAO {
   }
 
   static async requestRide(
-    userId,
+    shortId,
     dateRequested,
     firstName,
     lastName,
@@ -40,7 +40,7 @@ export default class RidesDAO {
   ) {
     try {
       const rideDoc = {
-        userId: userId,
+        shortId: shortId,
         dateRequested: dateRequested,
         firstName: firstName,
         lastName: lastName,
@@ -67,12 +67,10 @@ export default class RidesDAO {
   static async getRides(filters = null, page = 0, ridesPerPage = 15) {
     let query = {};
 
-    console.log(filters);
-
     if (filters) {
       if ('status' in filters) {
         /* Query documents by status */
-        query = { status: filters['status'] };
+        query = { 'status.value': filters['status'] };
       }
     }
 

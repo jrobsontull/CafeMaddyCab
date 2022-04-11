@@ -2,9 +2,9 @@ import bcrypt from 'bcrypt';
 
 let users;
 
-function User(id, username) {
+function User(id, commonName) {
   this._id = id;
-  this.username = username;
+  this.commonName = commonName;
   this.token = null;
 }
 
@@ -42,14 +42,14 @@ export default class AuthDAO {
         return { error: 'Invalid username or password.' };
       }
       console.log(userFound);
-      return new User(userFound._id, userFound.username);
+      return new User(userFound._id, userFound.commonName);
     } catch (e) {
       console.log('Failed to login: ' + e);
       return { error: e };
     }
   }
 
-  static async registerUser(username, pass) {
+  static async registerUser(username, pass, commonName) {
     try {
       // Check if has secret before registering
       //   const registerSecret = env.process.REGISTER_SECRET;
@@ -70,6 +70,7 @@ export default class AuthDAO {
       const registerResonse = await users.insertOne({
         username: username,
         password: hashedPass,
+        commonName: commonName,
         dateCreated: new Date(),
       });
 

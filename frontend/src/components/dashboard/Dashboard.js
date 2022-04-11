@@ -133,13 +133,14 @@ function Dashboard() {
             <div className="search-options">
               <ul>
                 <li onClick={() => searchRides()}>All ride requests (X)</li>
-                <li onClick={() => searchRides('New')}>New requests (X)</li>
-                <li onClick={() => searchRides('In progress')}>
+                <li onClick={() => searchRides('1')}>New requests (X)</li>
+                <li onClick={() => searchRides('2')}>
                   In progress requests (X)
                 </li>
-                <li>Approved (X)</li>
-                <li>Rejected (X)</li>
-                <li>Done (X)</li>
+                <li onClick={() => searchRides('3')}>Approved (X)</li>
+                <li onClick={() => searchRides('4')}>Rejected (X)</li>
+                <li onClick={() => searchRides('5')}>Unsure (X)</li>
+                <li onClick={() => searchRides('6')}>Done (X)</li>
                 <li>Search for request</li>
               </ul>
             </div>
@@ -181,7 +182,7 @@ function Dashboard() {
                           'en-us'
                         )}
                       </li>
-                      <li id="col-2">{ride.userId}</li>
+                      <li id="col-2">{ride.shortId}</li>
                       <li id="col-3">{ride.firstName}</li>
                       <li id="col-4">{ride.lastName}</li>
                       <li id="col-5">{ride.email}</li>

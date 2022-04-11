@@ -28,7 +28,8 @@ export default class AuthController {
     try {
       const registerResponse = await AuthDAO.registerUser(
         req.body.username,
-        req.body.password
+        req.body.password,
+        req.body.commonName
       );
 
       // Error handling

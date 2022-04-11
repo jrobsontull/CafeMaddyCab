@@ -71,7 +71,7 @@ function ViewEntry({ rideId, onClose }) {
 
   function saveChanges() {
     const updatedRide = rideDetails;
-    updatedRide.lastEditedBy = user.user.username;
+    updatedRide.lastEditedBy = user.user.commonName;
 
     RidesAPI.editRideById(updatedRide).then(() => {
       onClose();
@@ -94,7 +94,7 @@ function ViewEntry({ rideId, onClose }) {
               <img className="nav-arrow" src={Arrow} alt="arrow" />
             </div>
 
-            <p>Ride Request: John Doe ({rideDetails.userId})</p>
+            <p>Ride Request: John Doe ({rideDetails.shortId})</p>
           </div>
           <div className="save-changes-btn" onClick={() => saveChanges()}>
             Save changes
@@ -105,7 +105,7 @@ function ViewEntry({ rideId, onClose }) {
             <ul id="first-child">
               <li>
                 <div className="description">ID:</div>
-                <div className="value">{rideDetails.userId}</div>
+                <div className="value">{rideDetails.shortId}</div>
               </li>
               <li>
                 <div className="description">First name:</div>
