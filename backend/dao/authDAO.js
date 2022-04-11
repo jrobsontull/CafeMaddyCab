@@ -31,11 +31,18 @@ export default class AuthDAO {
     try {
       // Check user credentials
       const userFound = await users.findOne({ username: username });
-      if (!userFound)
-        return { error: 'An account with this username does not exist.' };
+
+      if (!userFound) {
+        return { error: 'Invalid username or password.' };
+      }
+
       const validPass = await bcrypt.compare(pass, userFound.password);
-      if (!validPass) return { error: 'Invalid password.' };
-      return new User(userFound._id, userFound.name, userFound.email);
+
+      if (!validPass) {
+        return { error: 'Invalid username or password.' };
+      }
+      console.log(userFound);
+      return new User(userFound._id, userFound.username);
     } catch (e) {
       console.log('Failed to login: ' + e);
       return { error: e };
@@ -63,7 +70,7 @@ export default class AuthDAO {
       const registerResonse = await users.insertOne({
         username: username,
         password: hashedPass,
-        date_created: new Date(),
+        dateCreated: new Date(),
       });
 
       return new User(registerResonse.insertedId, username);

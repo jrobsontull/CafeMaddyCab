@@ -31,6 +31,15 @@ export default class RidesAPI {
       return ride;
     }
   }
+
+  static async editRideById(ride) {
+    const url = 'api/v1/rides';
+
+    const response = await putRequest(ride, url);
+    if (response) {
+      return response;
+    }
+  }
 }
 
 async function postRequest(body, url) {
@@ -52,6 +61,22 @@ async function postRequest(body, url) {
 async function getRequest(url) {
   try {
     const response = await http.get(url);
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error: ' + e.message);
+    return null;
+  }
+}
+
+async function putRequest(body, url) {
+  try {
+    const payload = body;
+    const response = await http.put(url, payload);
 
     if (response.status === 200) {
       return response;

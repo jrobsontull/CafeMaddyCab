@@ -160,7 +160,7 @@ export default class RidesController {
   static async apiEditRideById(req, res, next) {
     try {
       const id = req.body._id;
-      const editUser = req.body.editUser;
+      const lastEditedBy = req.body.lastEditedBy;
       const firstName = req.body.firstName;
       const lastName = req.body.lastName;
       const email = req.body.email;
@@ -171,7 +171,7 @@ export default class RidesController {
 
       const rideResponse = await RidesDAO.editRideById(
         id,
-        editUser,
+        lastEditedBy,
         firstName,
         lastName,
         email,

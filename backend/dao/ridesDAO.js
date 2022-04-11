@@ -54,7 +54,7 @@ export default class RidesDAO {
         approver: null,
         notes: '',
         coupon: null,
-        status: 'New',
+        status: { value: 1, text: 'New' },
       };
 
       return await rides.insertOne(rideDoc);
@@ -124,7 +124,7 @@ export default class RidesDAO {
 
   static async editRideById(
     id,
-    editUser,
+    lastEditedBy,
     firstName,
     lastName,
     email,
@@ -145,12 +145,11 @@ export default class RidesDAO {
             email: email,
             identity: identity,
             status: status,
-            lastEditedBy: editUser,
+            lastEditedBy: lastEditedBy,
             coupon: coupon,
             notes: notes,
           },
-        },
-        { returnNewDocument: true }
+        }
       );
 
       return updateResponse;

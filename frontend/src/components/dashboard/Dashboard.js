@@ -62,6 +62,17 @@ function Dashboard() {
 
   function closeRideEntryView() {
     setOpenRideEntryView(false);
+    RidesAPI.getRides().then((response) => {
+      setRides(response.rides);
+      setRidesData({
+        totalRides: response.totalResults,
+        currentPage: 0,
+        totalPages: calculateTotalPageNums(
+          entiresPerPage,
+          response.totalResults
+        ),
+      });
+    });
   }
 
   function searchRides(status = null) {
@@ -178,13 +189,13 @@ function Dashboard() {
                       <li id="col-7">{ride.income ? 'yes' : 'no'}</li>
                       <li id="col-8">{ride.purpose.text}</li>
                       <li id="col-9">
-                        {ride.verified ? 'verified' : 'unverified'}
+                        {ride.verified ? 'Verified' : 'Unverified'}
                       </li>
                       <li id="col-10">
                         {ride.approver ? ride.approver : 'N/A'}
                       </li>
                       <li id="col-11">{ride.coupon ? ride.coupon : 'N/A'}</li>
-                      <li id="col-12">{ride.status}</li>
+                      <li id="col-12">{ride.status.text}</li>
                     </ul>
                   </div>
                 ))
