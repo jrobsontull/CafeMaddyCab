@@ -4,6 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
 import DriveAPI from '../../utils/drive.api';
 import RecaptchaAPI from '../../utils/recaptcha.api';
+import AwsAPI from '../../utils/aws.api';
 
 import Loading from './Loading';
 
@@ -159,102 +160,107 @@ function RequestRide() {
       }
     }
 
-    if (errorPresent) {
-      console.log('Invalid form.');
+    // if (errorPresent) {
+    //   console.log('Invalid form.');
 
-      if (errors.firstName) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'You need to write a first name.',
-        });
-      } else if (errors.lastName) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'You need to write a last name.',
-        });
-      } else if (errors.email) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'You need to write a valid email.',
-        });
-      } else if (errors.identity) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'Please check which group you most identify with.',
-        });
-      } else if (errors.income) {
-        setErrorOnSubmit({
-          state: true,
-          message:
-            'Please tell us if whether you need financial assistance for your ride.',
-        });
-      } else if (errors.purpose) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'Please tell us the purpose of your ride.',
-        });
-      } else if (errors.selfie) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'Please provide us with a selfie for verification.',
-        });
-      } else if (errors.photoId) {
-        setErrorOnSubmit({
-          state: true,
-          message:
-            'Please provide us with a picture of your photo ID for verification.',
-        });
-      } else if (
-        errors.understand1 ||
-        errors.understand2 ||
-        errors.understand3
-      ) {
-        setErrorOnSubmit({
-          state: true,
-          message:
-            'You have not agreed to all our terms. You will need to do so to continue with a reimbursement request.',
-        });
-      } else if (errors.recaptcha) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'Please complete the ReCAPTCHA before continuing.',
-        });
-      }
+    //   if (errors.firstName) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'You need to write a first name.',
+    //     });
+    //   } else if (errors.lastName) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'You need to write a last name.',
+    //     });
+    //   } else if (errors.email) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'You need to write a valid email.',
+    //     });
+    //   } else if (errors.identity) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'Please check which group you most identify with.',
+    //     });
+    //   } else if (errors.income) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message:
+    //         'Please tell us if whether you need financial assistance for your ride.',
+    //     });
+    //   } else if (errors.purpose) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'Please tell us the purpose of your ride.',
+    //     });
+    //   } else if (errors.selfie) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'Please provide us with a selfie for verification.',
+    //     });
+    //   } else if (errors.photoId) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message:
+    //         'Please provide us with a picture of your photo ID for verification.',
+    //     });
+    //   } else if (
+    //     errors.understand1 ||
+    //     errors.understand2 ||
+    //     errors.understand3
+    //   ) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message:
+    //         'You have not agreed to all our terms. You will need to do so to continue with a reimbursement request.',
+    //     });
+    //   } else if (errors.recaptcha) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message: 'Please complete the ReCAPTCHA before continuing.',
+    //     });
+    //   }
 
-      //setErrorOnSubmit({ state: true, message: null });
-      window.scrollTo(0, 0);
-    } else {
-      console.log('Valid form.');
-      setIsRequesting(true);
+    //   //setErrorOnSubmit({ state: true, message: null });
+    //   window.scrollTo(0, 0);
+    // } else {
+    //   console.log('Valid form.');
+    //   setIsRequesting(true);
 
-      // Post data
-      let selfieResponse;
-      let photoIdResponse;
+    //   // Post data
+    //   let selfieResponse;
+    //   let photoIdResponse;
 
-      console.log('Submitting images first...');
-      DriveAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
-        if (sResponse) {
-          selfieResponse = sResponse.data;
-          DriveAPI.uploadPhoto(photoId.file, 'photoId').then((pResponse) => {
-            if (pResponse) {
-              console.log('Photos uploaded');
-              photoIdResponse = pResponse.data;
+    //   console.log('Submitting images first...');
+    //   DriveAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
+    //     if (sResponse) {
+    //       selfieResponse = sResponse.data;
+    //       DriveAPI.uploadPhoto(photoId.file, 'photoId').then((pResponse) => {
+    //         if (pResponse) {
+    //           console.log('Photos uploaded');
+    //           photoIdResponse = pResponse.data;
 
-              let rideToReq = rideDetails;
-              rideToReq.selfie = selfieResponse;
-              rideToReq.photoId = photoIdResponse;
+    //           let rideToReq = rideDetails;
+    //           rideToReq.selfie = selfieResponse;
+    //           rideToReq.photoId = photoIdResponse;
 
-              // Update other purpose field if present
-              if (rideDetails.purpose && rideDetails.purpose.value === '6') {
-                rideToReq.purpose.text = otherPurpose;
-              }
+    //           // Update other purpose field if present
+    //           if (rideDetails.purpose && rideDetails.purpose.value === '6') {
+    //             rideToReq.purpose.text = otherPurpose;
+    //           }
 
-              requestRide(rideToReq);
-            }
-          });
-        }
-      });
-    }
+    //           requestRide(rideToReq);
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
+
+    console.log('Submitting image');
+    AwsAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
+      console.log(sResponse);
+    });
   }
 
   function requestRide(ride) {
