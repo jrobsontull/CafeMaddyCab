@@ -13,6 +13,7 @@ function Loading() {
         "We're sending your request right now! This page will automatically refresh when your request has sent."
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

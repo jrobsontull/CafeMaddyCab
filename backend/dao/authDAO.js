@@ -2,9 +2,9 @@ import bcrypt from 'bcrypt';
 
 let users;
 
-function User(id, username) {
+function User(id, commonName) {
   this._id = id;
-  this.username = username;
+  this.commonName = commonName;
   this.token = null;
 }
 
@@ -31,18 +31,25 @@ export default class AuthDAO {
     try {
       // Check user credentials
       const userFound = await users.findOne({ username: username });
-      if (!userFound)
-        return { error: 'An account with this username does not exist.' };
+
+      if (!userFound) {
+        return { error: 'Invalid username or password.' };
+      }
+
       const validPass = await bcrypt.compare(pass, userFound.password);
-      if (!validPass) return { error: 'Invalid password.' };
-      return new User(userFound._id, userFound.name, userFound.email);
+
+      if (!validPass) {
+        return { error: 'Invalid username or password.' };
+      }
+      console.log(userFound);
+      return new User(userFound._id, userFound.commonName);
     } catch (e) {
       console.log('Failed to login: ' + e);
       return { error: e };
     }
   }
 
-  static async registerUser(username, pass) {
+  static async registerUser(username, pass, commonName) {
     try {
       // Check if has secret before registering
       //   const registerSecret = env.process.REGISTER_SECRET;
@@ -63,7 +70,8 @@ export default class AuthDAO {
       const registerResonse = await users.insertOne({
         username: username,
         password: hashedPass,
-        date_created: new Date(),
+        commonName: commonName,
+        dateCreated: new Date(),
       });
 
       return new User(registerResonse.insertedId, username);

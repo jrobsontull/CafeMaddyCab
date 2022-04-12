@@ -4,7 +4,7 @@ import AuthContext from '../../utils/auth.context';
 
 function Header() {
   const { authUser } = useContext(AuthContext);
-  const [isHamOpen, setHamOpen] = useState(false);
+  const [hamOpen, setHamOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const linkArray = [
@@ -21,7 +21,7 @@ function Header() {
 
   function toggleHamburger(ham) {
     ham.classList.toggle('change-state');
-    setHamOpen(!isHamOpen);
+    setHamOpen(!hamOpen);
   }
 
   function logoutHandler(ham) {
@@ -51,7 +51,7 @@ function Header() {
           <div className="ham3"></div>
         </div>
       </div>
-      <div className={isHamOpen ? 'nav active' : 'nav'}>
+      <div className={hamOpen ? 'nav active' : 'nav'}>
         <ul>
           {listLink}
           <li onClick={(e) => logoutHandler(e.currentTarget)}>

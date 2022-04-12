@@ -1,11 +1,11 @@
 import http from './http.upload.common.js';
 
-export default class DriveAPI {
+export default class AwsAPI {
   static async uploadPhoto(file, parentFolder) {
     var formData = new FormData();
     formData.append('file', file);
-    formData.append('storageFolder', parentFolder);
-    const response = postRequest(formData, '/api/v1/drive/photos/');
+    formData.append('parentFolder', parentFolder);
+    const response = postRequest(formData, '/api/v1/aws/images/');
     if (response) {
       return response;
     }

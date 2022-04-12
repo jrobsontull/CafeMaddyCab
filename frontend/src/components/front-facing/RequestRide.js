@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
-import DriveAPI from '../../utils/drive.api';
 import RecaptchaAPI from '../../utils/recaptcha.api';
+import AwsAPI from '../../utils/aws.api';
 
 import Loading from './Loading';
 
@@ -121,16 +121,28 @@ function RequestRide() {
   }
 
   function selectFile(target, type) {
-    if (type === 'selfie') {
-      setSelfie({
-        file: target.files[0],
-      });
-      setErrors((prevErrors) => ({ ...prevErrors, selfie: false }));
-    } else if (type === 'photoId') {
-      setPhotoId({
-        file: target.files[0],
-      });
-      setErrors((prevErrors) => ({ ...prevErrors, photoId: false }));
+    /* Validate file type */
+    const file = target.files[0];
+    const dotIndx = file.name.lastIndexOf('.') + 1;
+    const ext = file.name.substring(dotIndx, file.name.length).toLowerCase();
+
+    if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
+      /* Store data */
+      if (type === 'selfie') {
+        setSelfie({
+          file: file,
+        });
+        setErrors((prevErrors) => ({ ...prevErrors, selfie: false }));
+      } else if (type === 'photoId') {
+        setPhotoId({
+          file: target.files[0],
+        });
+        setErrors((prevErrors) => ({ ...prevErrors, photoId: false }));
+      }
+    } else {
+      /* Incorrect format */
+      setErrors((prevErrors) => ({ ...prevErrors, [type]: true }));
+      alert('The file you selected is not an image.');
     }
   }
 
@@ -160,8 +172,6 @@ function RequestRide() {
     }
 
     if (errorPresent) {
-      console.log('Invalid form.');
-
       if (errors.firstName) {
         setErrorOnSubmit({
           state: true,
@@ -196,13 +206,14 @@ function RequestRide() {
       } else if (errors.selfie) {
         setErrorOnSubmit({
           state: true,
-          message: 'Please provide us with a selfie for verification.',
+          message:
+            'Please provide us with a valid selfie image for verification.',
         });
       } else if (errors.photoId) {
         setErrorOnSubmit({
           state: true,
           message:
-            'Please provide us with a picture of your photo ID for verification.',
+            'Please provide us with a valid image of your photo ID for verification.',
         });
       } else if (
         errors.understand1 ||
@@ -221,23 +232,19 @@ function RequestRide() {
         });
       }
 
-      //setErrorOnSubmit({ state: true, message: null });
       window.scrollTo(0, 0);
     } else {
-      console.log('Valid form.');
       setIsRequesting(true);
 
       // Post data
       let selfieResponse;
       let photoIdResponse;
 
-      console.log('Submitting images first...');
-      DriveAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
+      AwsAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
         if (sResponse) {
           selfieResponse = sResponse.data;
-          DriveAPI.uploadPhoto(photoId.file, 'photoId').then((pResponse) => {
+          AwsAPI.uploadPhoto(photoId.file, 'photoId').then((pResponse) => {
             if (pResponse) {
-              console.log('Photos uploaded');
               photoIdResponse = pResponse.data;
 
               let rideToReq = rideDetails;
@@ -258,10 +265,8 @@ function RequestRide() {
   }
 
   function requestRide(ride) {
-    console.log('Submitting ride request...');
     RidesAPI.requestRide(ride).then((rResponse) => {
       if (rResponse && rResponse.data.acknowledged === true) {
-        console.log('Got good response. Ride requested.');
         const id = rResponse.data.insertedId;
         setIsRequesting(false);
         navigate('/success/' + id, { state: { name: ride.firstName } });
@@ -413,6 +418,7 @@ function RequestRide() {
                 className="input-file"
                 id="selfie"
                 onChange={(e) => selectFile(e.target, 'selfie')}
+                accept=".jpg,.jpeg,.png"
               />
               <label htmlFor="selfie">Upload Photo</label>
             </div>
@@ -432,6 +438,7 @@ function RequestRide() {
                 className="input-file"
                 id="photoId"
                 onChange={(e) => selectFile(e.target, 'photoId')}
+                accept=".jpg,.jpeg,.png"
               />
               <label htmlFor="photoId">Upload Photo</label>
             </div>

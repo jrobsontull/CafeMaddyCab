@@ -1,4 +1,3 @@
-import e from 'cors';
 import mongodb from 'mongodb';
 
 const ObjectId = mongodb.ObjectId;
@@ -27,7 +26,7 @@ export default class RidesDAO {
   }
 
   static async requestRide(
-    userId,
+    shortId,
     dateRequested,
     firstName,
     lastName,
@@ -40,7 +39,7 @@ export default class RidesDAO {
   ) {
     try {
       const rideDoc = {
-        userId: userId,
+        shortId: shortId,
         dateRequested: dateRequested,
         firstName: firstName,
         lastName: lastName,
@@ -54,7 +53,7 @@ export default class RidesDAO {
         approver: null,
         notes: '',
         coupon: null,
-        status: 'New',
+        status: { value: 1, text: 'New' },
       };
 
       return await rides.insertOne(rideDoc);
@@ -67,12 +66,10 @@ export default class RidesDAO {
   static async getRides(filters = null, page = 0, ridesPerPage = 15) {
     let query = {};
 
-    console.log(filters);
-
     if (filters) {
       if ('status' in filters) {
         /* Query documents by status */
-        query = { status: filters['status'] };
+        query = { 'status.value': filters['status'] };
       }
     }
 
@@ -118,6 +115,43 @@ export default class RidesDAO {
       return { ride: rideList[0] };
     } catch (e) {
       console.log('Error getting recipe by ID: ' + e.message);
+      return { error: e };
+    }
+  }
+
+  static async editRideById(
+    id,
+    lastEditedBy,
+    firstName,
+    lastName,
+    email,
+    identity,
+    status,
+    coupon,
+    notes
+  ) {
+    try {
+      const updateResponse = await rides.findOneAndUpdate(
+        {
+          _id: ObjectId(id),
+        },
+        {
+          $set: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            identity: identity,
+            status: status,
+            lastEditedBy: lastEditedBy,
+            coupon: coupon,
+            notes: notes,
+          },
+        }
+      );
+
+      return updateResponse;
+    } catch (e) {
+      console.log('Unable to update ride (' + id + '): ' + e);
       return { error: e };
     }
   }

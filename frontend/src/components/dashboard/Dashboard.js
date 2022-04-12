@@ -26,7 +26,7 @@ function Dashboard() {
     return count;
   }
 
-  function nextPage(target) {
+  function nextPage() {
     if (
       ridesData.totalPages > 1 &&
       ridesData.totalPages - 1 !== ridesData.currentPage
@@ -42,7 +42,7 @@ function Dashboard() {
     }
   }
 
-  function prevPage(target) {
+  function prevPage() {
     if (ridesData.currentPage > 0) {
       const pageToScrollTo = ridesData.currentPage - 1;
       RidesAPI.getRides('page=' + pageToScrollTo).then((response) => {
@@ -62,6 +62,17 @@ function Dashboard() {
 
   function closeRideEntryView() {
     setOpenRideEntryView(false);
+    RidesAPI.getRides().then((response) => {
+      setRides(response.rides);
+      setRidesData({
+        totalRides: response.totalResults,
+        currentPage: 0,
+        totalPages: calculateTotalPageNums(
+          entiresPerPage,
+          response.totalResults
+        ),
+      });
+    });
   }
 
   function searchRides(status = null) {
@@ -122,13 +133,14 @@ function Dashboard() {
             <div className="search-options">
               <ul>
                 <li onClick={() => searchRides()}>All ride requests (X)</li>
-                <li onClick={() => searchRides('New')}>New requests (X)</li>
-                <li onClick={() => searchRides('In progress')}>
+                <li onClick={() => searchRides('1')}>New requests (X)</li>
+                <li onClick={() => searchRides('2')}>
                   In progress requests (X)
                 </li>
-                <li>Approved (X)</li>
-                <li>Rejected (X)</li>
-                <li>Done (X)</li>
+                <li onClick={() => searchRides('3')}>Approved (X)</li>
+                <li onClick={() => searchRides('4')}>Rejected (X)</li>
+                <li onClick={() => searchRides('5')}>Unsure (X)</li>
+                <li onClick={() => searchRides('6')}>Done (X)</li>
                 <li>Search for request</li>
               </ul>
             </div>
@@ -170,7 +182,7 @@ function Dashboard() {
                           'en-us'
                         )}
                       </li>
-                      <li id="col-2">{ride.userId}</li>
+                      <li id="col-2">{ride.shortId}</li>
                       <li id="col-3">{ride.firstName}</li>
                       <li id="col-4">{ride.lastName}</li>
                       <li id="col-5">{ride.email}</li>
@@ -178,13 +190,13 @@ function Dashboard() {
                       <li id="col-7">{ride.income ? 'yes' : 'no'}</li>
                       <li id="col-8">{ride.purpose.text}</li>
                       <li id="col-9">
-                        {ride.verified ? 'verified' : 'unverified'}
+                        {ride.verified ? 'Verified' : 'Unverified'}
                       </li>
                       <li id="col-10">
                         {ride.approver ? ride.approver : 'N/A'}
                       </li>
                       <li id="col-11">{ride.coupon ? ride.coupon : 'N/A'}</li>
-                      <li id="col-12">{ride.status}</li>
+                      <li id="col-12">{ride.status.text}</li>
                     </ul>
                   </div>
                 ))
@@ -203,12 +215,12 @@ function Dashboard() {
                   {ridesData.currentPage === 0 ? (
                     <div
                       className="arrow left disabled"
-                      onClick={(e) => prevPage(e.target)}
+                      onClick={() => prevPage()}
                     ></div>
                   ) : (
                     <div
                       className="arrow left"
-                      onClick={(e) => prevPage(e.target)}
+                      onClick={() => prevPage()}
                     ></div>
                   )}
 
@@ -219,12 +231,12 @@ function Dashboard() {
                   {ridesData.currentPage === ridesData.totalPages - 1 ? (
                     <div
                       className="arrow right disabled"
-                      onClick={(e) => nextPage(e.target)}
+                      onClick={() => nextPage()}
                     ></div>
                   ) : (
                     <div
                       className="arrow right"
-                      onClick={(e) => nextPage(e.target)}
+                      onClick={() => nextPage()}
                     ></div>
                   )}
                 </div>
@@ -232,14 +244,14 @@ function Dashboard() {
                 <div className="nav">
                   <div
                     className="arrow left disabled"
-                    onClick={(e) => prevPage(e.target)}
+                    onClick={() => prevPage()}
                   ></div>
                   <div>
                     Page {ridesData.currentPage + 1} of {ridesData.totalPages}
                   </div>
                   <div
                     className="arrow right disabled"
-                    onClick={(e) => nextPage(e.target)}
+                    onClick={() => nextPage()}
                   ></div>
                 </div>
               )}

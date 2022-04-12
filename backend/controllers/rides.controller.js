@@ -2,11 +2,11 @@ import RidesDAO from '../dao/ridesDAO.js';
 import { nanoid } from 'nanoid/async';
 
 export default class RidesController {
-  /* Post request for ride */
+  /* POST request for single ride request */
   static async apiRequestRide(req, res, next) {
     try {
       // Async generate short ID for reference
-      const userId = await nanoid(10);
+      const shortId = await nanoid(10);
 
       const dateRequested = new Date();
       const firstName = req.body.firstName;
@@ -71,7 +71,7 @@ export default class RidesController {
       const photoId = req.body.photoId;
 
       const ridesResponse = await RidesDAO.requestRide(
-        userId,
+        shortId,
         dateRequested,
         firstName,
         lastName,
@@ -82,6 +82,7 @@ export default class RidesController {
         selfie,
         photoId
       );
+
       res.json(ridesResponse);
     } catch (e) {
       res.status(500).json({ error: e.message });
@@ -98,7 +99,7 @@ export default class RidesController {
 
       let filters = {};
       if (req.query.status) {
-        filters.status = req.query.status;
+        filters.status = parseInt(req.query.status, 10);
       }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
@@ -121,6 +122,7 @@ export default class RidesController {
     }
   }
 
+  /* GET request to get ride by _id */
   static async apiGetRideById(req, res, next) {
     try {
       let id = req.query.id || {};
@@ -138,6 +140,48 @@ export default class RidesController {
       }
     } catch (e) {
       console.log('Failed to get ride by ID: ' + e.message);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  /* PUT request for making edits to specific ride */
+  static async apiEditRideById(req, res, next) {
+    try {
+      const id = req.body._id;
+      const lastEditedBy = req.body.lastEditedBy;
+      const firstName = req.body.firstName;
+      const lastName = req.body.lastName;
+      const email = req.body.email;
+      const identity = req.body.identity;
+      const status = req.body.status;
+      const coupon = req.body.coupon || null;
+      const notes = req.body.notes || null;
+
+      const rideResponse = await RidesDAO.editRideById(
+        id,
+        lastEditedBy,
+        firstName,
+        lastName,
+        email,
+        identity,
+        status,
+        coupon,
+        notes
+      );
+
+      var { error } = rideResponse;
+      if (error) {
+        res.status(400).json({ error: error.message });
+      }
+
+      if (rideResponse.value === null) {
+        /* Ride not updated */
+        throw new Error('Unable to update the ride. Might be an auth problem.');
+      } else {
+        res.json({ status: 'success' });
+      }
+    } catch (e) {
+      console.log('Failed to edit ride by ID: ' + e.message);
       res.status(500).json({ error: e });
     }
   }

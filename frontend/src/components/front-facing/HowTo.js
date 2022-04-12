@@ -47,7 +47,7 @@ function HowToPage() {
         <div className="info-box how-to" id="child-2">
           <ul>
             <li>
-              <img src={HowTo1} />
+              <img src={HowTo1} alt="how-to-1" />
               <h3>Eligibility</h3>
               <p>
                 Asian female, LGBTQ, elderly pensioner in need of financial aid
@@ -55,12 +55,12 @@ function HowToPage() {
               </p>
             </li>
             <li>
-              <img src={HowTo2} />
+              <img src={HowTo2} alt="how-to-2" />
               <h3>Ride request submission</h3>
               <p>Eligible Asian person fills out request form</p>
             </li>
             <li id="responsive-no-pad">
-              <img src={HowTo3} />
+              <img src={HowTo3} alt="how-to-3" />
               <h3>Verification</h3>
               <p>
                 Cafe Maddy Cab volunteer reviews and verifies eligibility, then
@@ -68,7 +68,7 @@ function HowToPage() {
               </p>
             </li>
             <li id="responsive-no-pad">
-              <img src={HowTo4} />
+              <img src={HowTo4} alt="how-to-4" />
               <h3>Ride provided</h3>
               <p id="last-child">
                 Recipient activates code through Uber app, gets a ride for
@@ -100,7 +100,7 @@ function HowToPage() {
           <div className="icon">
             <img src={Taxi} alt="Taxi" />
           </div>
-          <Link to={'/request-ride'}>Request Reimbursement</Link>
+          <Link to={'/request-ride'}>Request a ride</Link>
           <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
         <div className="footer">

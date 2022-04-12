@@ -16,5 +16,13 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
-  rules: {},
+  rules: {
+    'react/boolean-prop-naming': 'warn',
+    'react/prop-types': 'warn',
+    'react/hook-use-state': 'warn',
+    'react/no-danger': 'error',
+    'react/no-invalid-html-attribute': 'warn',
+    'react/no-typos': 'warn',
+    'react/prefer-es6-class': 'warn',
+  },
 };

@@ -66,6 +66,6 @@ User frames were designed in Figma. We will generally be following the ideas lay
 
         npm run dev
  
-2. Ton start the frontend locally, `cd` into the frontend folder and type:
+2. To start the frontend locally, `cd` into the frontend folder and type:
 
         npm run all
