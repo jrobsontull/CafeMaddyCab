@@ -67,21 +67,8 @@ export default class RidesController {
       }
 
       //const purpose = req.body.purpose;
-      let selfie = req.body.selfie;
-
-      let selfieAltMediaView = selfie.webContentLink.replace(
-        'export=download',
-        'alt=media'
-      );
-      selfie.altMediaView = selfieAltMediaView;
-
-      let photoId = req.body.photoId;
-
-      let photoIdAltMediaView = photoId.webContentLink.replace(
-        'export=download',
-        'alt=media'
-      );
-      photoId.altMediaView = photoIdAltMediaView;
+      const selfie = req.body.selfie;
+      const photoId = req.body.photoId;
 
       const ridesResponse = await RidesDAO.requestRide(
         shortId,
@@ -95,6 +82,7 @@ export default class RidesController {
         selfie,
         photoId
       );
+
       res.json(ridesResponse);
     } catch (e) {
       res.status(500).json({ error: e.message });
