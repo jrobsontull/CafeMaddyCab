@@ -1,11 +1,23 @@
 import { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AuthContext from '../../utils/auth.context';
 
 function Header() {
   const { authUser } = useContext(AuthContext);
   const [hamOpen, setHamOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const pageArray = [
+    {name: 'Ride Dashboard', path: '/dashboard'},
+    {name: 'How to Use', path: '/how-to-use'},
+    {name: 'View Feedback', path: '/view-feedback'},
+  ];
+  const pageName = pageArray.find( ({path}) => path === location.pathname).name;
+  const pageList = pageArray.map((link) => 
+    <li key={link.name}>
+      <Link to={link.path}>{link.name}</Link>
+    </li>
+  );
 
   function toggleHamburger(ham) {
     ham.classList.toggle('change-state');
@@ -25,7 +37,7 @@ function Header() {
         <div className="branding">
           <p className="cmc">CAFE MADDY CAB</p>
           <p>&#124;</p>
-          <p className="page-name">Ride Dashboard</p>
+          <p className="page-name">{pageName}</p>
         </div>
 
         <div
@@ -41,12 +53,7 @@ function Header() {
       </div>
       <div className={hamOpen ? 'nav active' : 'nav'}>
         <ul>
-          <li>
-            <Link to={'dashboard/how-to-use'}>How to use</Link>
-          </li>
-          <li>
-            <Link to={'dashboard/view-feedback'}>View feedback</Link>
-          </li>
+          {pageList}
           <li onClick={(e) => logoutHandler(e.currentTarget)}>
             <p>Logout</p>
             <div className="logout-icon"></div>
