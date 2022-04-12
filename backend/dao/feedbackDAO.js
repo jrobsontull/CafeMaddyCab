@@ -12,7 +12,7 @@ export default class FeedbackDAO {
       // Check if production environment
       let db_uri = process.env.CAFEMADDYCAB_NS_DEV;
       if (process.env.NODE_ENV === 'production') {
-        console.log('Enabling ridesDAO production mode.');
+        console.log('Enabling feedbackDAO production mode.');
         db_uri = process.env.CAFEMADDYCAB_NS_PRODUCTION;
       }
 
@@ -24,7 +24,29 @@ export default class FeedbackDAO {
     }
   }
 
-  static async getFeedback() {}
+  static async getFeedback(page = 0, entriesPerPage = 15) {
+    let query = {};
+    let cursor;
+    try {
+      cursor = await feedback.find(query);
+    } catch (e) {
+      console.log('Unable to find command: ' + e);
+      return { feedbackList: [], totalNumEntries: 0 };
+    }
+
+    const displayCursor = cursor.limit(entriesPerPage).skip(entriesPerPage * page);
+    try {
+      const feedbackList = await displayCursor.toArray();
+      const totalNumEntries = await feedback.countDocuments(query);
+
+      return { feedbackList, totalNumEntries};
+    } catch (e) {
+      console.log(        
+        'Unable to convert cursor to array or problem counting documents.\n' + e
+      );
+      return { feedbackList: [], totalNumEntries: 0 };
+    }
+  }
 
   static async postFeedback(rideId, feedbackText) {
     try {

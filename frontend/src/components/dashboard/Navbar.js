@@ -13,7 +13,7 @@ function Header() {
     {name: 'View Feedback', path: '/view-feedback'},
   ];
   const pageName = linkArray.find( ({path}) => path === location.pathname).name;
-  const listLink = linkArray.filter( ({path}) => path !== location.pathname).map((link) => 
+  const listLink = linkArray.map((link) => 
     <li key={link.name}>
       <Link to={link.path}>{link.name}</Link>
     </li>
