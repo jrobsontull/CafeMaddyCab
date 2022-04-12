@@ -17,7 +17,8 @@ export default class FeedbackAPI {
 
     const response = await getRequest(url);
     if (response) {
-      return response.data;
+      const feedback = response.data;
+      return feedback;
     }
   }
 }

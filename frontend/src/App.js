@@ -8,7 +8,7 @@ import RequestRide from './components/front-facing/RequestRide';
 import Success from './components/front-facing/Success';
 import Login from './components/dashboard/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import FeedbackTable from './components/dashboard/FeedbackTable';
+import Feedback from './components/dashboard/Feedback';
 
 import ProtectedRoute from './components/general/ProtectedRoute';
 
@@ -35,7 +35,7 @@ function App() {
               path={'/view-feedback'}
               element={
                 <ProtectedRoute>
-                  <FeedbackTable />
+                  <Feedback />
                 </ProtectedRoute>
               }
             />

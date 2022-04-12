@@ -4,7 +4,7 @@ import FeedbackAPI from '../../utils/feedback.api';
 import Navbar from './Navbar';
 import ViewFeedback from './ViewFeedback';
 
-function FeedbackTable() {
+function Feedback() {
   const [entries, setEntries] = useState([]);
   const [feedbackData, setFeedbackData] = useState({
     totalEntries: 0,
@@ -84,10 +84,8 @@ function FeedbackTable() {
       <div className="content backend">
         <Navbar />
 
-        {openFeedbackEntryView ? (
+        {openFeedbackEntryView && (
           <ViewFeedback onClose={closeFeedbackEntryView} rideId={selectedRideId} feedbackText={selectedFeedbackText}/>
-        ) : (
-          ''
         )}
 
         <div className="feedback">
@@ -174,4 +172,4 @@ function FeedbackTable() {
   );
 }
 
-export default FeedbackTable;
+export default Feedback;

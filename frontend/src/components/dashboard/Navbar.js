@@ -7,13 +7,13 @@ function Header() {
   const [hamOpen, setHamOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const linkArray = [
+  const pageArray = [
     {name: 'Ride Dashboard', path: '/dashboard'},
     {name: 'How to Use', path: '/how-to-use'},
     {name: 'View Feedback', path: '/view-feedback'},
   ];
-  const pageName = linkArray.find( ({path}) => path === location.pathname).name;
-  const listLink = linkArray.map((link) => 
+  const pageName = pageArray.find( ({path}) => path === location.pathname).name;
+  const pageList = pageArray.map((link) => 
     <li key={link.name}>
       <Link to={link.path}>{link.name}</Link>
     </li>
@@ -53,7 +53,7 @@ function Header() {
       </div>
       <div className={hamOpen ? 'nav active' : 'nav'}>
         <ul>
-          {listLink}
+          {pageList}
           <li onClick={(e) => logoutHandler(e.currentTarget)}>
             <p>Logout</p>
             <div className="logout-icon"></div>
