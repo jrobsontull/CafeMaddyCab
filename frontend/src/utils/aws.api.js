@@ -5,7 +5,7 @@ export default class AwsAPI {
     var formData = new FormData();
     formData.append('file', file);
     formData.append('parentFolder', parentFolder);
-    const response = postRequest(formData, '/api/v1/aws/upload/');
+    const response = postRequest(formData, '/api/v1/aws/images/');
     if (response) {
       return response;
     }

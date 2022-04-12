@@ -6,7 +6,9 @@ const upload = multer();
 const router = express.Router();
 
 router
-  .route('/upload')
+  .route('/images')
   .post(upload.single('file'), AwsController.apiUploadFile);
+
+router.route('/images/:folder/:id').get(AwsController.apiGetFileStream);
 
 export default router;

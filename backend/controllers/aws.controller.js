@@ -14,10 +14,20 @@ export default class AwsController {
         parentFolder
       );
 
-      console.log(response);
       res.json(response);
     } catch (e) {
       console.log('DriveController error: ' + e.message);
+      res.status(500).json({ error: e.message });
+    }
+  }
+
+  static async apiGetFileStream(req, res, next) {
+    try {
+      const key = req.params.folder + '/' + req.params.id;
+      const readStream = await AwsDAO.getFileStream(key);
+      readStream.pipe(res);
+    } catch (e) {
+      console.log('AWSController error: ' + e.message);
       res.status(500).json({ error: e.message });
     }
   }

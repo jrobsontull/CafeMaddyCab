@@ -100,7 +100,7 @@ function HowToPage() {
           <div className="icon">
             <img src={Taxi} alt="Taxi" />
           </div>
-          <Link to={'/request-ride'}>Request Reimbursement</Link>
+          <Link to={'/request-ride'}>Request a ride</Link>
           <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
         <div className="footer">

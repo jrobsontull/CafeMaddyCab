@@ -46,9 +46,30 @@ export default class AwsDAO {
         ContentType: file.mimetype,
       };
 
-      return AWSClient.upload(uploadParams).promise();
+      const uploadResponse = await AWSClient.upload(uploadParams).promise();
+
+      return {
+        Key: uploadResponse.Key,
+        mimeType: uploadParams.ContentType,
+        fileName: fileName,
+      };
     } catch (e) {
       console.log('Failed to upload file: ' + e.message);
+      return { error: e };
+    }
+  }
+
+  static async getFileStream(key) {
+    try {
+      const bucketName = process.env.AWS_BUCKET_NAME;
+      const downloadParams = {
+        Key: key,
+        Bucket: bucketName,
+      };
+
+      return AWSClient.getObject(downloadParams).createReadStream();
+    } catch (e) {
+      console.log('Failed to get filestream (' + key + '): ' + e.message);
       return { error: e };
     }
   }
