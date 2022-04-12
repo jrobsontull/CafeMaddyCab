@@ -211,5 +211,14 @@
         }
       }
     }
+    .feedback-text {
+      height: 200px;
+      width: 92%;
+      border: 1px solid $dark-blue;
+      border-radius: $border-radius;
+      padding: 10px;
+      margin: 23px;
+      overflow: scroll;
+    }
   }
 }
