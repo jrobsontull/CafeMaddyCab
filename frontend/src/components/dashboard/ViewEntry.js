@@ -7,6 +7,14 @@ import Arrow from '../../assets/img/arrow_right.svg';
 function ViewEntry({ rideId, onClose }) {
   const { user } = useContext(AuthContext);
   const [rideDetails, setRideDetails] = useState({});
+  const [selfieUrl, setSelfieUrl] = useState('/');
+  const [photoIdUrl, setPhotoIdUrl] = useState('/');
+
+  let baseImgUrl = 'http://localhost:5000/api/v1/aws/images/';
+  /* Set base URL for photo GET requests */
+  if (process.env.NODE_ENV === 'production') {
+    baseImgUrl = 'https://cafemaddycab.herokuapp.com/api/v1/aws/images/';
+  }
 
   function updateGenericField(target, prop) {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
@@ -15,7 +23,7 @@ function ViewEntry({ rideId, onClose }) {
   function updateIdentity(target) {
     let newIdentity = {};
 
-    switch (parseInt(target.value)) {
+    switch (parseInt(target.value, 10)) {
       case 1:
         newIdentity = { value: 1, text: 'Asian female' };
         break;
@@ -31,6 +39,7 @@ function ViewEntry({ rideId, onClose }) {
           text: 'I am submitting on behalf of an Asian Elderly person',
         };
         break;
+      // no default
     }
 
     setRideDetails((prevDetails) => ({
@@ -61,6 +70,7 @@ function ViewEntry({ rideId, onClose }) {
       case 6:
         newStatus = { value: 6, text: 'Done' };
         break;
+      // no default
     }
 
     setRideDetails((prevDetails) => ({
@@ -81,6 +91,9 @@ function ViewEntry({ rideId, onClose }) {
   useEffect(() => {
     RidesAPI.getRideById(rideId).then((response) => {
       setRideDetails(response.ride);
+      setSelfieUrl(baseImgUrl + response.ride.selfie.Key);
+      setPhotoIdUrl(baseImgUrl + response.ride.photoId.Key);
+      console.log(photoIdUrl);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -221,25 +234,11 @@ function ViewEntry({ rideId, onClose }) {
                 <div className="photo-container">
                   <div className="photo-box">
                     <div className="title">Selfie</div>
-                    <img
-                      src={
-                        rideDetails.selfie
-                          ? rideDetails.selfie.altMediaView
-                          : '/'
-                      }
-                      alt="loading..."
-                    />
+                    <img src={selfieUrl} alt="loading..." />
                   </div>
                   <div className="photo-box" id="photo-id">
                     <div className="title">Photo ID</div>
-                    <img
-                      src={
-                        rideDetails.photoId
-                          ? rideDetails.photoId.altMediaView
-                          : '/'
-                      }
-                      alt="loading..."
-                    />
+                    <img src={photoIdUrl} alt="loading..." />
                   </div>
                 </div>
               </li>

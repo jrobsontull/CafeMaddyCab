@@ -3,10 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import rides from './routes/rides.route.js';
-import drive from './routes/drive.route.js';
 import auth from './routes/auth.route.js';
 import recaptcha from './routes/recaptcha.route.js';
 import feedback from './routes/feedback.route.js';
+import aws from './routes/aws.route.js';
 
 dotenv.config();
 const app = express();
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/rides', rides);
-app.use('/api/v1/drive', drive);
+app.use('/api/v1/aws', aws);
 app.use('/api/v1/user', auth);
 app.use('/api/v1/captcha/verifyCaptcha', recaptcha);
 app.use('/api/v1/feedback', feedback);
