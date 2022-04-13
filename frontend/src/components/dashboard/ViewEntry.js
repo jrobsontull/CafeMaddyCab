@@ -93,7 +93,6 @@ function ViewEntry({ rideId, onClose }) {
       setRideDetails(response.ride);
       setSelfieUrl(baseImgUrl + response.ride.selfie.Key);
       setPhotoIdUrl(baseImgUrl + response.ride.photoId.Key);
-      console.log(photoIdUrl);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
