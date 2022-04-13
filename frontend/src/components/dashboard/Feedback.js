@@ -13,8 +13,8 @@ function Feedback() {
   });
   const entiresPerPage = 15;
 
-  const [selectedRideId, setSelectedRideId] = useState();
-  const [selectedFeedbackText, setSelectedFeedback] = useState();
+  const [selectedRideId, setSelectedRideId] = useState('');
+  const [selectedFeedbackText, setSelectedFeedback] = useState('');
   const [openFeedbackEntryView, setOpenFeedbackEntryView] = useState(false);
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
@@ -40,7 +40,8 @@ function Feedback() {
           currentPage: pageToScrollTo,
         }));
       });
-    }  }
+    }
+  }
 
   function prevPage() {
     if (feedbackData.currentPage > 0) {
@@ -85,10 +86,29 @@ function Feedback() {
         <Navbar />
 
         {openFeedbackEntryView && (
-          <ViewFeedback onClose={closeFeedbackEntryView} rideId={selectedRideId} feedbackText={selectedFeedbackText}/>
+          <ViewFeedback
+            onClose={closeFeedbackEntryView}
+            rideId={selectedRideId}
+            feedbackText={selectedFeedbackText}
+          />
         )}
 
         <div className="feedback">
+          <div className="menu">
+            <div className="search-options">
+              <ul>
+                <li>All feedback (X)</li>
+                <li>Filter by date</li>
+                <li>Search for feedback</li>
+              </ul>
+            </div>
+            <div className="action-btns">
+              <div className="action" id="last-child">
+                Delete feedback
+              </div>
+            </div>
+          </div>
+
           <div className="table-content">
             <div className="table-headings">
               <ul>
@@ -102,8 +122,15 @@ function Feedback() {
               {entries ? (
                 entries.map((entry, index) => (
                   <div className="entry" key={entry._id}>
-                    <ul onClick={() => viewFeedbackEntry(entry.rideId, entry.text)}>
-                      <li id="col-1">{(feedbackData.currentPage * entiresPerPage) + (index + 1)}</li>
+                    <ul
+                      onClick={() =>
+                        viewFeedbackEntry(entry.rideId, entry.text)
+                      }
+                    >
+                      <li id="col-1">
+                        {feedbackData.currentPage * entiresPerPage +
+                          (index + 1)}
+                      </li>
                       <li id="col-2">{entry.text}</li>
                     </ul>
                   </div>
@@ -133,7 +160,8 @@ function Feedback() {
                   )}
 
                   <div>
-                    Page {feedbackData.currentPage + 1} of {feedbackData.totalPages}
+                    Page {feedbackData.currentPage + 1} of{' '}
+                    {feedbackData.totalPages}
                   </div>
 
                   {feedbackData.currentPage === feedbackData.totalPages - 1 ? (
@@ -155,7 +183,8 @@ function Feedback() {
                     onClick={() => prevPage()}
                   ></div>
                   <div>
-                    Page {feedbackData.currentPage + 1} of {feedbackData.totalPages}
+                    Page {feedbackData.currentPage + 1} of{' '}
+                    {feedbackData.totalPages}
                   </div>
                   <div
                     className="arrow right disabled"
@@ -163,12 +192,12 @@ function Feedback() {
                   ></div>
                 </div>
               )}
+              <div className="download-btn">Download CSV</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 }
 

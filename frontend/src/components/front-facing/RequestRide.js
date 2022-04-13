@@ -6,6 +6,7 @@ import RecaptchaAPI from '../../utils/recaptcha.api';
 import AwsAPI from '../../utils/aws.api';
 
 import Loading from './Loading';
+import Footer from './Footer';
 
 function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
@@ -514,8 +515,7 @@ function RequestRide() {
             Submit Request
           </div>
 
-          <br></br>
-          <br></br>
+          <Footer />
         </div>
       )}
     </div>

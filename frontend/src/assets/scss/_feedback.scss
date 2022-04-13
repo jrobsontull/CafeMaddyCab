@@ -10,6 +10,59 @@
   display: flex;
   justify-content: space-between;
 
+  /* Styling of table search functions and action btns */
+  .menu {
+    background-color: $light-blue;
+    border-radius: $border-radius 0 0 $border-radius;
+    color: $lightest-pink;
+    width: 10%;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid $dark-blue;
+    border-width: 0 1px 0 0;
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: center;
+      padding: 0 16px;
+
+      li {
+        padding: 14px 0;
+        margin: 0 auto;
+        max-width: 120px;
+        transition: transform 0.25s ease;
+      }
+
+      li:hover {
+        cursor: pointer;
+        transform: scale(1.04);
+      }
+    }
+
+    .action-btns div {
+      background-color: $dark-blue;
+      text-align: center;
+      padding: 14px 16px;
+      border: 1px solid $light-blue;
+      border-width: 0 0 1px 0;
+      transition: background-color 0.25s ease;
+    }
+
+    .action-btns div#last-child {
+      border-radius: 0 0 0 $border-radius;
+      border: 1px solid $dark-blue;
+      border-width: 1px 0 0 0;
+    }
+
+    .action-btns div:hover {
+      cursor: pointer;
+      background-color: $blue-btn-hover;
+    }
+  }
+
   .table-content {
     width: 100%;
     display: flex;
@@ -102,6 +155,21 @@
         .arrow.right {
           margin-left: 16px;
         }
+      }
+
+      .download-btn {
+        background-color: $dark-blue;
+        color: $lightest-pink;
+        padding: 14px 20px;
+        border-radius: 0 0 $border-radius 0;
+        transition: background-color 0.25s ease;
+        text-align: center;
+        width: 8%;
+      }
+
+      .download-btn:hover {
+        background-color: $blue-btn-hover;
+        cursor: pointer;
       }
     }
   }

@@ -5,19 +5,23 @@ import AuthContext from '../../utils/auth.context';
 function Header() {
   const { authUser } = useContext(AuthContext);
   const [hamOpen, setHamOpen] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
+
   const pageArray = [
-    {name: 'Ride Dashboard', path: '/dashboard'},
-    {name: 'How to Use', path: '/how-to-use'},
-    {name: 'View Feedback', path: '/view-feedback'},
+    { name: 'Ride Dashboard', path: '/dashboard' },
+    { name: 'View Feedback', path: '/view-feedback' },
+    { name: 'How to Use', path: '/how-to-use' },
   ];
-  const pageName = pageArray.find( ({path}) => path === location.pathname).name;
-  const pageList = pageArray.map((link) => 
+  const pageName = pageArray.find(
+    ({ path }) => path === location.pathname
+  ).name;
+  const pageList = pageArray.map((link) => (
     <li key={link.name}>
       <Link to={link.path}>{link.name}</Link>
     </li>
-  );
+  ));
 
   function toggleHamburger(ham) {
     ham.classList.toggle('change-state');

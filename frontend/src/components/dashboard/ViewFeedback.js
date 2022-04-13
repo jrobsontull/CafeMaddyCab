@@ -34,21 +34,29 @@ function ViewFeedback({ rideId, onClose, feedbackText }) {
             <ul id="first-child">
               <li>
                 <div className="description">Ride ID:</div>
-                <div className="value">{userDetails ? userDetails.shortId : 'N/A'}</div>
+                <div className="value">
+                  {userDetails ? userDetails.shortId : 'N/A'}
+                </div>
               </li>
               <li>
                 <div className="description">Email:</div>
-                <div className="value">{userDetails ? userDetails.email : 'N/A'}</div>
+                <div className="value">
+                  {userDetails ? userDetails.email : 'N/A'}
+                </div>
               </li>
             </ul>
             <ul id="last-child">
               <li>
                 <div className="description">First Name:</div>
-                <div className="value">{userDetails ? userDetails.firstName : 'N/A'}</div>
+                <div className="value">
+                  {userDetails ? userDetails.firstName : 'N/A'}
+                </div>
               </li>
               <li>
                 <div className="description">Last Name:</div>
-                <div className="value">{userDetails? userDetails.lastName : 'N/A'}</div>
+                <div className="value">
+                  {userDetails ? userDetails.lastName : 'N/A'}
+                </div>
               </li>
             </ul>
           </div>

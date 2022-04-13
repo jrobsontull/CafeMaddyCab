@@ -211,14 +211,31 @@
         }
       }
     }
+
+    /* Styling for ViewFeedback component */
+
     .feedback-text {
-      height: 200px;
-      width: 92%;
+      min-height: 180px;
+      max-height: 180px;
+      width: 91%;
       border: 1px solid $dark-blue;
       border-radius: $border-radius;
-      padding: 10px;
-      margin: 23px;
-      overflow: scroll;
+      padding: 10px 14px;
+      margin: 6px 0 22px 0;
+      overflow-y: auto;
+    }
+
+    .feedback-text::-webkit-scrollbar {
+      width: 14px;
+      background-color: $lightest-pink;
+      border-radius: 0 $border-radius $border-radius 0;
+      border: 1px solid $dark-blue;
+      border-width: 0 0 0 1px;
+    }
+
+    .feedback-text::-webkit-scrollbar-thumb {
+      background-color: $light-blue;
+      border-radius: 0 $border-radius $border-radius 0;
     }
   }
 }

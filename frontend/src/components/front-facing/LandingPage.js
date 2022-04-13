@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import Footer from './Footer';
+
 import Logo from '../../assets/img/logo.svg';
 import Donate from '../../assets/img/donate_icon.svg';
 import Taxi from '../../assets/img/taxi_icon.svg';
 import Arrow from '../../assets/img/arrow_right.svg';
-import Insta from '../../assets/img/insta_icon.svg';
-import Share from '../../assets/img/share_icon.svg';
 
 function LandingPage() {
   // Scroll to top on component load/refresh
@@ -76,25 +76,8 @@ function LandingPage() {
           <Link to={'/how-to-ride'}>Learn how to get a ride</Link>
           <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
-        <div className="footer">
-          <ul>
-            <li>
-              <a href="https://www.instagram.com/cafemaddycab/">
-                <img src={Insta} alt="Instagram" />
-                <p>@cafemaddycab</p>
-              </a>
-            </li>
-            <li>
-              <img src={Share} alt="Share" />
-              <p>Share</p>
-            </li>
-          </ul>
-          <p>
-            All donations are a tax-deductible contribution to Cafe Maddy Cab.
-            Cafe Maddy Cab is a 501(c)(3) tax-exempt organisation for both
-            federal and state purposes. Federal tax ID: XX-XXXXXXX.
-          </p>
-        </div>
+
+        <Footer />
       </div>
     </div>
   );
