@@ -149,17 +149,17 @@ function RequestRide() {
 
   function validateCaptcha(event) {
     const testResponse = event;
-    RecaptchaAPI.verifyResponse(testResponse).then((response) => {
-      if (response.data.success) {
-        setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
-      } else {
-        setErrorOnSubmit({
-          state: true,
-          message:
-            'ReCAPTCHA submission invalid. Please try again or reload the page.',
-        });
-      }
-    });
+    // RecaptchaAPI.verifyResponse(testResponse).then((response) => {
+    //   if (response.data.success) {
+    //     setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
+    //   } else {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message:
+    //         'ReCAPTCHA submission invalid. Please try again or reload the page.',
+    //     });
+    //   }
+    // });
   }
 
   function submitHandler() {

@@ -7,6 +7,8 @@ import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 function ApprovalWindow({ onCancel }) {
   const [newTotal, setNewTotal] = useState(0);
 
+  function submitHandler() {}
+
   useEffect(() => {
     RidesAPI.getStats('status=1').then((response) => {
       setNewTotal(response.count);
@@ -31,7 +33,9 @@ function ApprovalWindow({ onCancel }) {
           </p>
           <div className="approve-input">
             <input type="text" placeholder="Write number here"></input>
-            <div className="approve-btn">Approve now</div>
+            <div className="approve-btn" onClick={() => submitHandler()}>
+              Approve now
+            </div>
           </div>
           <p>
             On the next page, you will be asked to approve ride requests based

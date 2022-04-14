@@ -210,4 +210,7 @@ export default class RidesController {
       res.status(500).json({ error: e });
     }
   }
+
+  /* Set status of rides to in progress and get rides back */
+  static async apiSetInProgress(req, res, next) {}
 }

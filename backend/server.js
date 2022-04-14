@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import https from 'https';
 
 import rides from './routes/rides.route.js';
 import auth from './routes/auth.route.js';
