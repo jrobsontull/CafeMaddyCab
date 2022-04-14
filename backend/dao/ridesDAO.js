@@ -20,7 +20,7 @@ export default class RidesDAO {
       rides = await conn.db(db_uri).collection('rides');
     } catch (e) {
       console.error(
-        'Unable to establish a connection handle in ridesDAO: ' + e
+        'ridesDAO: Unable to establish a connection handle in ridesDAO. ' + e
       );
     }
   }
@@ -58,7 +58,7 @@ export default class RidesDAO {
 
       return await rides.insertOne(rideDoc);
     } catch (e) {
-      console.log('Unable to post ride: ' + e);
+      console.log('ridesDAO: Unable to post ride. ' + e);
       return { error: e };
     }
   }
@@ -78,7 +78,7 @@ export default class RidesDAO {
     try {
       cursor = await rides.find(query);
     } catch (e) {
-      console.log('Unable to issue find command: ' + e);
+      console.log('ridesDAO: Unable to issue find command. ' + e);
       return { ridesList: [], totalNumRides: 0 };
     }
 
@@ -91,7 +91,8 @@ export default class RidesDAO {
       return { ridesList, totalNumRides };
     } catch (e) {
       console.log(
-        'Unable to convert cursor to array or problem counting documents.\n' + e
+        'ridesDAO: Unable to convert cursor to array or problem counting documents.\n' +
+          e
       );
       return { ridesList: [], totalNumRides: 0 };
     }
@@ -106,7 +107,10 @@ export default class RidesDAO {
         cursor = await rides.find(query);
       } catch (e) {
         console.log(
-          'Unable to issue find command with query: ' + query + '\n' + e.message
+          'ridesDAO: Unable to issue find command with query ' +
+            query +
+            '\n' +
+            e.message
         );
         return { error: e };
       }
@@ -114,7 +118,62 @@ export default class RidesDAO {
       const rideList = await cursor.toArray();
       return { ride: rideList[0] };
     } catch (e) {
-      console.log('Error getting recipe by ID: ' + e.message);
+      console.log('ridesDAO: Error getting recipe by ID. ' + e.message);
+      return { error: e };
+    }
+  }
+
+  static async getStats(filters) {
+    try {
+      if ('status' in filters) {
+        /* Query documents by status */
+        const query = { 'status.value': filters['status'] };
+
+        let count;
+
+        try {
+          count = await rides.count(query);
+        } catch (e) {
+          console.log('ridesDAO: Unable to issue count in getStats. ' + e);
+          return { error: e };
+        }
+
+        return { filters: filters, count: count };
+      }
+
+      /* Else perform all counts */
+      let result = {};
+      let count;
+
+      try {
+        count = await rides.count();
+        result.all = count;
+
+        count = await rides.count({ 'status.value': 1 });
+        result.new = count;
+
+        count = await rides.count({ 'status.value': 2 });
+        result.inProgress = count;
+
+        count = await rides.count({ 'status.value': 3 });
+        result.approved = count;
+
+        count = await rides.count({ 'status.value': 4 });
+        result.rejected = count;
+
+        count = await rides.count({ 'status.value': 5 });
+        result.unsure = count;
+
+        count = await rides.count({ 'status.value': 6 });
+        result.done = count;
+      } catch (e) {
+        console.log('ridesDAO: Unable to issue count in getStats. ' + e);
+        return { error: e };
+      }
+
+      return { filters: {}, count: result };
+    } catch (e) {
+      console.log('ridesDAO: Error getting stats. ' + e.message);
       return { error: e };
     }
   }
@@ -151,7 +210,7 @@ export default class RidesDAO {
 
       return updateResponse;
     } catch (e) {
-      console.log('Unable to update ride (' + id + '): ' + e);
+      console.log('ridesDAO: Unable to update ride (' + id + '). ' + e);
       return { error: e };
     }
   }

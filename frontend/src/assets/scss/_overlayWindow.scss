@@ -238,4 +238,99 @@
       border-radius: 0 $border-radius $border-radius 0;
     }
   }
+
+  /* Approval window styling */
+  .view-entry-window.approve-window {
+    width: 25%;
+    min-width: 400px;
+
+    .entry-content {
+      padding: 22px 0;
+      display: flex;
+      justify-content: center;
+
+      p {
+        width: 90%;
+        text-align: justify;
+      }
+
+      .approve-input {
+        display: flex;
+        width: 90%;
+        margin: 10px 0;
+
+        input {
+          width: 65%;
+          padding: 8px 12px;
+          border: 1px solid $dark-blue;
+          background-color: $lightest-pink;
+          color: $dark-blue;
+        }
+
+        input::placeholder {
+          color: $light-blue;
+        }
+
+        .approve-btn {
+          width: 35%;
+          text-align: center;
+          padding: 8px 0;
+          background-color: $dark-pink;
+          color: $lightest-pink;
+          border: 1px solid $dark-blue;
+          border-width: 1px 1px 1px 0;
+          transition: background-color 0.25s ease;
+        }
+
+        .approve-btn:hover {
+          cursor: pointer;
+          background-color: $dark-pink-hover;
+        }
+      }
+
+      .photo-container {
+        background-color: $lightest-pink;
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin: 20px 0 6px;
+
+        .titles {
+          display: flex;
+          margin: 0;
+
+          p {
+            border: 1px solid $dark-blue;
+            border-width: 1px 1px 0 1px;
+            text-align: center;
+            padding: 4px 0;
+          }
+        }
+
+        .titles p:last-child {
+          border-width: 1px 1px 0 0;
+        }
+
+        .photo-boxes {
+          display: flex;
+
+          .photo-box {
+            border: 1px solid $dark-blue;
+            width: 50%;
+            text-align: center;
+
+            img {
+              width: 30px;
+              padding: 60px 0;
+              vertical-align: middle;
+            }
+          }
+
+          .photo-box#last-child {
+            border-width: 1px 1px 1px 0;
+          }
+        }
+      }
+    }
+  }
 }

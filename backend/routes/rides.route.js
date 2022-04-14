@@ -6,8 +6,9 @@ const router = express.Router();
 router
   .route('/')
   .get(RidesController.apiGetRides)
+  .post(RidesController.apiRequestRide)
   .put(RidesController.apiEditRideById);
 router.route('/getById').get(RidesController.apiGetRideById);
-router.route('/request').post(RidesController.apiRequestRide);
+router.route('/getStats').get(RidesController.apiGetStats);
 
 export default router;

@@ -85,6 +85,7 @@ export default class RidesController {
 
       res.json(ridesResponse);
     } catch (e) {
+      console.log('RidesController: Failed to push ride. ' + e.message);
       res.status(500).json({ error: e.message });
     }
   }
@@ -139,7 +140,29 @@ export default class RidesController {
         }
       }
     } catch (e) {
-      console.log('Failed to get ride by ID: ' + e.message);
+      console.log('RidesController: Failed to get ride by ID. ' + e.message);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  /* GET request for general DB stats on rides */
+  static async apiGetStats(req, res, next) {
+    try {
+      let filters = {};
+      if (req.query.status) {
+        filters.status = parseInt(req.query.status, 10);
+      }
+
+      const statsResponse = await RidesDAO.getStats(filters);
+
+      var { error } = statsResponse;
+      if (error) {
+        res.status(400).json({ error: error.message });
+      }
+
+      res.json(statsResponse);
+    } catch (e) {
+      console.log('RidesController: Failed to get stats. ' + e.message);
       res.status(500).json({ error: e });
     }
   }
@@ -176,12 +199,14 @@ export default class RidesController {
 
       if (rideResponse.value === null) {
         /* Ride not updated */
-        throw new Error('Unable to update the ride. Might be an auth problem.');
+        throw new Error(
+          'RidesController: Unable to update the ride. Might be an auth problem.'
+        );
       } else {
         res.json({ status: 'success' });
       }
     } catch (e) {
-      console.log('Failed to edit ride by ID: ' + e.message);
+      console.log('RidesController: Failed to edit ride by ID. ' + e.message);
       res.status(500).json({ error: e });
     }
   }

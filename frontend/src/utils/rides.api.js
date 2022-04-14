@@ -2,7 +2,7 @@ import http from './http.common';
 
 export default class RidesAPI {
   static async requestRide(rideDetails) {
-    const response = await postRequest(rideDetails, '/api/v1/rides/request');
+    const response = await postRequest(rideDetails, '/api/v1/rides');
     if (response) {
       return response;
     }
@@ -38,6 +38,20 @@ export default class RidesAPI {
     const response = await putRequest(ride, url);
     if (response) {
       return response;
+    }
+  }
+
+  static async getStats(urlParams = null) {
+    let url = 'api/v1/rides/getStats';
+
+    if (urlParams) {
+      url += '?' + urlParams;
+    }
+
+    const response = await getRequest(url);
+    if (response) {
+      const stats = response.data;
+      return stats;
     }
   }
 }

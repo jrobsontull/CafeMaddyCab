@@ -3,6 +3,7 @@ import RidesAPI from '../../utils/rides.api';
 
 import Navbar from './Navbar';
 import ViewEntry from './ViewEntry';
+import ApprovalWindow from './ApprovalWindow';
 
 function Dashboard() {
   const [rides, setRides] = useState([]);
@@ -13,8 +14,23 @@ function Dashboard() {
   });
   const entiresPerPage = 15;
 
+  /* Edit ride window states */
   const [selectedRideId, setSelectedRideId] = useState();
   const [openRideEntryView, setOpenRideEntryView] = useState(false);
+
+  /* Approval window states */
+  const [openAporovalWindow, setOpenApprovalWindow] = useState(false);
+
+  /* Counts for status types */
+  const [statusCount, setStatusCount] = useState({
+    all: 0,
+    new: 0,
+    inProgress: 0,
+    approved: 0,
+    rejected: 0,
+    unsure: 0,
+    done: 0,
+  });
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
     let count = 1;
@@ -75,6 +91,10 @@ function Dashboard() {
     });
   }
 
+  function closeApprovalWindow() {
+    setOpenApprovalWindow(false);
+  }
+
   function searchRides(status = null) {
     if (status) {
       RidesAPI.getRides('status=' + status).then((response) => {
@@ -104,6 +124,7 @@ function Dashboard() {
   }
 
   useEffect(() => {
+    /* Populate table with all rides */
     RidesAPI.getRides().then((response) => {
       setRides(response.rides);
       setRidesData({
@@ -114,6 +135,11 @@ function Dashboard() {
           response.totalResults
         ),
       });
+    });
+
+    /* Set status quantities in left menu - might be a CPU intensive process so be WARNED */
+    RidesAPI.getStats().then((response) => {
+      setStatusCount(response.count);
     });
   }, []);
 
@@ -128,24 +154,47 @@ function Dashboard() {
           ''
         )}
 
+        {openAporovalWindow ? (
+          <ApprovalWindow onCancel={closeApprovalWindow} />
+        ) : (
+          ''
+        )}
+
         <div className="dashboard">
           <div className="menu">
             <div className="search-options">
               <ul>
-                <li onClick={() => searchRides()}>All ride requests (X)</li>
-                <li onClick={() => searchRides('1')}>New requests (X)</li>
-                <li onClick={() => searchRides('2')}>
-                  In progress requests (X)
+                <li onClick={() => searchRides()}>
+                  All ride requests ({statusCount.all})
                 </li>
-                <li onClick={() => searchRides('3')}>Approved (X)</li>
-                <li onClick={() => searchRides('4')}>Rejected (X)</li>
-                <li onClick={() => searchRides('5')}>Unsure (X)</li>
-                <li onClick={() => searchRides('6')}>Done (X)</li>
+                <li onClick={() => searchRides('1')}>
+                  New requests ({statusCount.new})
+                </li>
+                <li onClick={() => searchRides('2')}>
+                  In progress requests ({statusCount.inProgress})
+                </li>
+                <li onClick={() => searchRides('3')}>
+                  Approved ({statusCount.approved})
+                </li>
+                <li onClick={() => searchRides('4')}>
+                  Rejected ({statusCount.rejected})
+                </li>
+                <li onClick={() => searchRides('5')}>
+                  Unsure ({statusCount.unsure})
+                </li>
+                <li onClick={() => searchRides('6')}>
+                  Done ({statusCount.done})
+                </li>
                 <li>Search for request</li>
               </ul>
             </div>
             <div className="action-btns">
-              <div className="action">Approve requests</div>
+              <div
+                className="action"
+                onClick={() => setOpenApprovalWindow(true)}
+              >
+                Approve requests
+              </div>
               <div className="action">Edit request</div>
               <div className="action">Send codes</div>
               <div className="action" id="last-child">
