@@ -461,7 +461,17 @@ function RequestRide() {
               </div>
             </div>
 
-            <h3>Do you agree to our <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>?</h3>
+            <h3>
+              Do you agree to our{' '}
+              <a
+                href="/terms-and-conditions"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Terms and Conditions
+              </a>
+              ?
+            </h3>
 
             <div className="check">
               <div className="check-item">

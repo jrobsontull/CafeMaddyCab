@@ -50,16 +50,18 @@ $heading-font-size: 22px;
 }
 
 /* Imports */
-@import '_landingPage';
-@import '_howToPage';
-@import '_requestRide';
-@import '_loading';
-@import '_success';
-@import '_login';
-@import '_dashboardNav';
-@import '_dashboard';
-@import '_overlayWindow';
-@import '_feedback';
+@import './front-facing/_landingPage';
+@import './front-facing/_howToPage';
+@import './front-facing/_requestRide';
+@import './front-facing/_loading';
+@import './front-facing/_success';
+@import './front-facing/_frontFacingNav';
+
+@import './dashboard/_login';
+@import './dashboard/_dashboardNav';
+@import './dashboard/_dashboard';
+@import './dashboard/_overlayWindow';
+@import './dashboard/_feedback';
 
 /* Styling */
 body {

@@ -22,7 +22,10 @@ function App() {
             <Route path={'/'} element={<LandingPage />} />
             <Route path={'/how-to-ride'} element={<HowToPage />} />
             <Route path={'/request-ride'} element={<RequestRide />} />
-            <Route path={'/terms-and-conditions'} element={<TermsAndConditions />} />
+            <Route
+              path={'/terms-and-conditions'}
+              element={<TermsAndConditions />}
+            />
             <Route path={'/success/:id'} element={<Success />} />
             <Route path={'/login'} element={<Login />} />
             <Route

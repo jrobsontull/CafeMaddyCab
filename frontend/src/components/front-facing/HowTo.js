@@ -23,7 +23,7 @@ function HowToPage() {
   return (
     <div className="react-container">
       <div className="content frontend">
-      <Navbar />
+        <Navbar />
 
         <div className="logo">
           <Link to={'/'}>

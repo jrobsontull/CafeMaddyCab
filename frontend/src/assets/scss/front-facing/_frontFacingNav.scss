@@ -1,0 +1,33 @@
+.navbar.frontend {
+  background-color: $dark-blue;
+
+  .header {
+    width: calc(#{$content-width} + 32px);
+    max-width: calc(#{$max-width} + 32px);
+    padding: 12px 0;
+  }
+
+  .nav {
+    border: 1px solid $lightest-pink;
+    border-width: 1px 0 0 0;
+    ul {
+      border: none;
+      width: calc(#{$content-width} + 32px);
+      max-width: calc(#{$max-width} + 32px);
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .header {
+      width: 90%;
+      max-width: 90%;
+    }
+
+    .nav {
+      ul {
+        width: 90%;
+        max-width: 90%;
+      }
+    }
+  }
+}

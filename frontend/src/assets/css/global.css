@@ -453,6 +453,27 @@
     width: 100%;
     max-width: 100%; }
 
+.navbar.frontend {
+  background-color: #3b3b96; }
+  .navbar.frontend .header {
+    width: calc(75% + 32px);
+    max-width: calc(600px + 32px);
+    padding: 12px 0; }
+  .navbar.frontend .nav {
+    border: 1px solid #f7f5fe;
+    border-width: 1px 0 0 0; }
+    .navbar.frontend .nav ul {
+      border: none;
+      width: calc(75% + 32px);
+      max-width: calc(600px + 32px); }
+  @media screen and (min-width: 800px) {
+    .navbar.frontend .header {
+      width: 90%;
+      max-width: 90%; }
+    .navbar.frontend .nav ul {
+      width: 90%;
+      max-width: 90%; } }
+
 .content.login {
   height: 100%;
   display: flex;
