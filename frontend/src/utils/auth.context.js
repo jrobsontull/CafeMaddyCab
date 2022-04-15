@@ -41,10 +41,6 @@ function AuthProvider({ children }) {
     console.log('authUser() finished');
   }
 
-  //useEffect(() => {
-  //    console.log('Is verifying: ' + user.isVerifying);
-  //}, [user])
-
   async function verifyToken(userJSON) {
     try {
       setUser({ user: null, verified: false, isVerifying: true });
