@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
-import RecaptchaAPI from '../../utils/recaptcha.api';
-import AwsAPI from '../../utils/aws.api';
 
 import Loading from './Loading';
 import Navbar from './Navbar';
@@ -148,19 +146,21 @@ function RequestRide() {
     }
   }
 
-  function validateCaptcha(event) {
-    const testResponse = event;
-    // RecaptchaAPI.verifyResponse(testResponse).then((response) => {
-    //   if (response.data.success) {
-    //     setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
-    //   } else {
-    //     setErrorOnSubmit({
-    //       state: true,
-    //       message:
-    //         'ReCAPTCHA submission invalid. Please try again or reload the page.',
-    //     });
-    //   }
-    // });
+  function setCaptcha(event) {
+    const gResponse = event;
+    if (gResponse) {
+      setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        gResponse: gResponse,
+      }));
+    } else {
+      setErrorOnSubmit({
+        state: true,
+        message:
+          'ReCAPTCHA submission invalid. Please try again or reload the page.',
+      });
+    }
   }
 
   function submitHandler() {
@@ -238,42 +238,18 @@ function RequestRide() {
     } else {
       setIsRequesting(true);
 
-      // Post data
-      let selfieResponse;
-      let photoIdResponse;
-
-      AwsAPI.uploadPhoto(selfie.file, 'selfie').then((sResponse) => {
-        if (sResponse) {
-          selfieResponse = sResponse.data;
-          AwsAPI.uploadPhoto(photoId.file, 'photoId').then((pResponse) => {
-            if (pResponse) {
-              photoIdResponse = pResponse.data;
-
-              let rideToReq = rideDetails;
-              rideToReq.selfie = selfieResponse;
-              rideToReq.photoId = photoIdResponse;
-
-              // Update other purpose field if present
-              if (rideDetails.purpose && rideDetails.purpose.value === '6') {
-                rideToReq.purpose.text = otherPurpose;
-              }
-
-              requestRide(rideToReq);
-            }
-          });
+      RidesAPI.requestRide(rideDetails, selfie.file, photoId.file).then(
+        (response) => {
+          if (response && response.data.acknowledged === true) {
+            const id = response.data.insertedId;
+            setIsRequesting(false);
+            navigate('/success/' + id, {
+              state: { name: rideDetails.firstName },
+            });
+          }
         }
-      });
+      );
     }
-  }
-
-  function requestRide(ride) {
-    RidesAPI.requestRide(ride).then((rResponse) => {
-      if (rResponse && rResponse.data.acknowledged === true) {
-        const id = rResponse.data.insertedId;
-        setIsRequesting(false);
-        navigate('/success/' + id, { state: { name: ride.firstName } });
-      }
-    });
   }
 
   // Scroll to top on component load/refresh
@@ -510,7 +486,7 @@ function RequestRide() {
           <div className="recaptcha-react">
             <ReCAPTCHA
               sitekey="6Le78D0fAAAAAGCFMp-jkHsx_fOlK4nmOMdcd6_5"
-              onChange={(e) => validateCaptcha(e)}
+              onChange={(e) => setCaptcha(e)}
             />
           </div>
 

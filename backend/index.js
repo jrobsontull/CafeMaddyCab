@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import RidesDAO from './dao/ridesDAO.js';
 import AuthDAO from './dao/authDAO.js';
 import FeedbackDAO from './dao/feedbackDAO.js';
-import AwsDAO from './dao/awsDAO.js';
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
@@ -30,7 +29,6 @@ MongoClient.connect(db_uri, {
     await RidesDAO.injectRidesDB(client);
     await AuthDAO.injectAuthDB(client);
     await FeedbackDAO.injectFeedbackDB(client);
-    await AwsDAO.establishClient();
 
     app.listen(port, () => {
       console.log('Listening on port ' + port);
