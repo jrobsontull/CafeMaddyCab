@@ -6,6 +6,7 @@ import RecaptchaAPI from '../../utils/recaptcha.api';
 import AwsAPI from '../../utils/aws.api';
 
 import Loading from './Loading';
+import Navbar from './Navbar';
 import Footer from './Footer';
 
 function RequestRide() {
@@ -285,7 +286,9 @@ function RequestRide() {
       {isRequesting ? (
         <Loading />
       ) : (
-        <div className="content">
+        <div className="content frontend">
+          <Navbar />
+
           <div className="titles">
             <h2>CAFE MADDY CAB</h2>
             <h3>Ride Reimburesment</h3>

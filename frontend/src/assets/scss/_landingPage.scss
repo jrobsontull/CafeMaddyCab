@@ -4,7 +4,7 @@
   img {
     height: auto;
     width: 120px;
-    padding: 24px 0 6px 0;
+    padding: 32px 0 6px 0;
   }
 }
 
@@ -94,4 +94,99 @@
 
 .btn-link.donate {
   margin-top: 20px;
+}
+
+.frontend .navbar {
+  width: 100%;
+  color: $lightest-pink;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $dark-blue;
+    margin: auto;
+    padding: 12px 5%;
+    align-items: center;
+
+    .branding {
+      display: flex;
+      font-size: 18px;
+
+      .cmc {
+        margin-right: 10px;
+      }
+
+      .page-name {
+        margin-left: 10px;
+        font-weight: 300;
+      }
+    }
+
+    .nav-ham {
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid $lightest-pink;
+      border-radius: 8px;
+      padding: 0 6px;
+      transition: background-color 0.4s ease;
+
+      .ham1,
+      .ham2,
+      .ham3 {
+        width: 22px;
+        height: 1px;
+        background-color: $lightest-pink;
+        margin: 6px 0;
+        transition: 0.4s;
+      }
+    }
+
+    .change-state.nav-ham {
+      background-color: $lightest-pink;
+    }
+
+    .change-state .ham1,
+    .change-state .ham2,
+    .change-state .ham3 {
+      background-color: $dark-blue;
+    }
+  }
+
+  .nav {
+    transform: translateY(-100vh);
+    background-color: $dark-blue;
+    position: absolute;
+    width: 100%;
+
+    ul {
+      width: 90%;
+      margin: auto;
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+      border: 1px solid $lightest-pink;
+      padding-top: 10px;
+      border-width: 1px 0 0 0;
+
+      li {
+        padding: 2px 0;
+      }
+
+      li a,
+      li p {
+        color: inherit;
+        font-weight: 300;
+      }
+
+      li a:hover,
+      li p:hover {
+        cursor: pointer;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .nav.active {
+    transform: translateY((0vh));
+  }
 }

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import Navbar from './Navbar';
 import Footer from './Footer';
 
 import Logo from '../../assets/img/logo.svg';
@@ -21,7 +22,9 @@ function HowToPage() {
 
   return (
     <div className="react-container">
-      <div className="content">
+      <div className="content frontend">
+      <Navbar />
+
         <div className="logo">
           <Link to={'/'}>
             <img src={Logo} alt="Cafe Maddy Cab" />
