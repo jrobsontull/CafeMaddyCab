@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export default class RecaptchaDAO {
-  static async verifyResponse(testResponse, secret) {
+  static async verifyResponse(gResponse, secret) {
     try {
-      const params = '?secret=' + secret + '&response=' + testResponse;
+      const params = '?secret=' + secret + '&response=' + gResponse;
       const requestRes = await axios
         .post('https://www.google.com/recaptcha/api/siteverify' + params)
         .then((response) => {

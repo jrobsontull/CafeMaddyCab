@@ -15,7 +15,6 @@ export default class RidesController {
 
       const identityOption = parseInt(req.body.identity, 10);
       let identity;
-
       switch (identityOption) {
         case 1:
           identity = { value: 1, text: 'Asian female' };
@@ -36,9 +35,8 @@ export default class RidesController {
 
       const income = req.body.income;
 
-      const purposeOption = parseInt(req.body.purpose.value, 10);
+      const purposeOption = parseInt(req.body.purpose, 10);
       let purpose;
-
       switch (purposeOption) {
         case 1:
           purpose = { value: 1, text: 'Medical appointment' };
@@ -62,13 +60,25 @@ export default class RidesController {
           };
           break;
         case 6:
-          purpose = req.body.purpose;
+          purpose = { value: 6, text: req.body.purposeText };
           break;
       }
 
-      //const purpose = req.body.purpose;
-      const selfie = req.body.selfie;
-      const photoId = req.body.photoId;
+      const selfieFile = req.files.selfie[0];
+      const photoIdFile = req.files.photoId[0];
+
+      const selfie = {
+        fileName: selfieFile.filename,
+        mimeType: selfieFile.mimetype,
+        path: selfieFile.path,
+        size: selfieFile.size,
+      };
+      const photoId = {
+        fileName: photoIdFile.filename,
+        mimeType: photoIdFile.mimetype,
+        path: photoIdFile.path,
+        size: photoIdFile.size,
+      };
 
       const ridesResponse = await RidesDAO.requestRide(
         shortId,

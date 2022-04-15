@@ -3,7 +3,8 @@
 /frontend/node_modules
 /backend/.env
 /frontend/.env
-/backend/google-credientials.json
+/backend/uploads/selfie/*
+/backend/uploads/photoId/*
 
 # dependencies
 /node_modules

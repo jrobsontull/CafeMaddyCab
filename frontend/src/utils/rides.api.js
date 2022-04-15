@@ -1,8 +1,25 @@
 import http from './http.common';
+import httpMulti from './http.upload.common';
 
 export default class RidesAPI {
-  static async requestRide(rideDetails) {
-    const response = await postRequest(rideDetails, '/api/v1/rides');
+  static async requestRide(rideDetails, selfie, photoId) {
+    var formData = new FormData();
+    formData.append('selfie', selfie);
+    formData.append('photoId', photoId);
+    formData.append('firstName', rideDetails.firstName);
+    formData.append('lastName', rideDetails.lastName);
+    formData.append('email', rideDetails.email);
+    formData.append('identity', rideDetails.identity);
+    formData.append('income', rideDetails.income);
+    formData.append('purpose', rideDetails.purpose.value);
+    formData.append('purposeText', rideDetails.purpose.text);
+
+    const response = postRequestMulti(
+      formData,
+      '/api/v1/rides/',
+      rideDetails.gResponse
+    );
+
     if (response) {
       return response;
     }
@@ -56,10 +73,12 @@ export default class RidesAPI {
   }
 }
 
-async function postRequest(body, url) {
+async function postRequestMulti(body, url, gResponse) {
   try {
     const payload = body;
-    const response = await http.post(url, payload);
+    /* Set reCAPTCHA response to header for validation */
+    const config = { headers: { 'g-response': gResponse } };
+    const response = await httpMulti.post(url, payload, config);
 
     if (response.status === 200) {
       return response;
