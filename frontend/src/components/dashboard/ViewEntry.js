@@ -10,11 +10,7 @@ function ViewEntry({ rideId, onClose }) {
   const [selfieUrl, setSelfieUrl] = useState('/');
   const [photoIdUrl, setPhotoIdUrl] = useState('/');
 
-  let baseImgUrl = 'http://localhost:5000/api/v1/aws/images/';
-  /* Set base URL for photo GET requests */
-  if (process.env.NODE_ENV === 'production') {
-    baseImgUrl = 'https://cafemaddycab.herokuapp.com/api/v1/aws/images/';
-  }
+  let baseImgUrl = 'http://localhost:5000/api/v1/image/';
 
   function updateGenericField(target, prop) {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
@@ -91,8 +87,8 @@ function ViewEntry({ rideId, onClose }) {
   useEffect(() => {
     RidesAPI.getRideById(rideId).then((response) => {
       setRideDetails(response.ride);
-      setSelfieUrl(baseImgUrl + response.ride.selfie.Key);
-      setPhotoIdUrl(baseImgUrl + response.ride.photoId.Key);
+      setSelfieUrl(baseImgUrl + response.ride.selfie.path);
+      setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

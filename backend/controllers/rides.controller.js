@@ -70,13 +70,13 @@ export default class RidesController {
       const selfie = {
         fileName: selfieFile.filename,
         mimeType: selfieFile.mimetype,
-        path: selfieFile.path,
+        path: selfieFile.path.replace('uploads\\', ''),
         size: selfieFile.size,
       };
       const photoId = {
         fileName: photoIdFile.filename,
         mimeType: photoIdFile.mimetype,
-        path: photoIdFile.path,
+        path: photoIdFile.path.replace('uploads\\', ''),
         size: photoIdFile.size,
       };
 

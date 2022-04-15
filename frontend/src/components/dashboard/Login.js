@@ -4,7 +4,6 @@ import AuthContext from '../../utils/auth.context';
 import http from '../../utils/http.common';
 
 import ReCAPTCHA from 'react-google-recaptcha';
-import RecaptchaAPI from '../../utils/recaptcha.api';
 
 function Login() {
   const { user, authUser } = useContext(AuthContext);
@@ -61,17 +60,17 @@ function Login() {
 
   function validateCaptcha(event) {
     const testResponse = event;
-    RecaptchaAPI.verifyResponse(testResponse).then((response) => {
-      if (response.data.success) {
-        setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
-      } else {
-        setErrorStateMessage({
-          state: true,
-          message:
-            'ReCAPTCHA submission invalid. Please try again or reload the page.',
-        });
-      }
-    });
+    // RecaptchaAPI.verifyResponse(testResponse).then((response) => {
+    //   if (response.data.success) {
+    //     setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
+    //   } else {
+    //     setErrorStateMessage({
+    //       state: true,
+    //       message:
+    //         'ReCAPTCHA submission invalid. Please try again or reload the page.',
+    //     });
+    //   }
+    // });
   }
 
   async function loginHandler(e) {

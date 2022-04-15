@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
-import RecaptchaAPI from '../../utils/recaptcha.api';
-import AwsAPI from '../../utils/aws.api';
 
 import Loading from './Loading';
 import Footer from './Footer';
@@ -251,16 +249,6 @@ function RequestRide() {
         }
       );
     }
-  }
-
-  function requestRide(ride) {
-    RidesAPI.requestRide(ride).then((rResponse) => {
-      if (rResponse && rResponse.data.acknowledged === true) {
-        const id = rResponse.data.insertedId;
-        setIsRequesting(false);
-        navigate('/success/' + id, { state: { name: ride.firstName } });
-      }
-    });
   }
 
   // Scroll to top on component load/refresh
