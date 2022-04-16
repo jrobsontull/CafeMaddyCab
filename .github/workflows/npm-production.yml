@@ -5,8 +5,6 @@ on:
   pull_request:
     branches: [ master ]
 
-  workflow_dispatch:
-
 env:
   CAFEMADDYCAB_DB_URI_PRODUCTION: ${{ secrets.CAFEMADDYCAB_DB_URI_PRODUCTION }}
   CAFEMADDYCAB_NS_PRODUCTION: ${{ secrets.CAFEMADDYCAB_NS_PRODUCTION }}
