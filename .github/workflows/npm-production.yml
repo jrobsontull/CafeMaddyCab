@@ -7,6 +7,14 @@ on:
 
   workflow_dispatch:
 
+env:
+  CAFEMADDYCAB_DB_URI_PRODUCTION: ${{ secrets.CAFEMADDYCAB_DB_URI_PRODUCTION }}
+  CAFEMADDYCAB_NS_PRODUCTION: ${{ secrets.CAFEMADDYCAB_NS_PRODUCTION }}
+  PORT: 5000
+  TOKEN_SECRET: ${{ secrets.TOKEN_SECRET  }}
+  RECAPTCHA_SECRET: ${{ secrets.RECAPTCHA_SECRET }}
+  NODE_ENV: production
+
 jobs:
   build:
     runs-on: ubuntu-latest
