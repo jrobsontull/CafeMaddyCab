@@ -1,7 +1,11 @@
+import Navbar from './Navbar';
+
 function ApproveRides() {
   return (
     <div className="react-container">
-      <p>Ride approval page</p>
+      <div className="content backend">
+        <Navbar />
+      </div>
     </div>
   );
 }

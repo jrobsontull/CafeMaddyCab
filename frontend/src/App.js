@@ -10,7 +10,7 @@ import Success from './components/front-facing/Success';
 import Login from './components/dashboard/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Feedback from './components/dashboard/Feedback';
-import ApproveRides from './components/dashboard/Approval';
+import ApproveRides from './components/dashboard/ApproveRides';
 
 import ProtectedRoute from './components/general/ProtectedRoute';
 
@@ -38,7 +38,7 @@ function App() {
               }
             />
             <Route
-              path={'/view-feedback'}
+              path={'/dashboard/view-feedback'}
               element={
                 <ProtectedRoute>
                   <Feedback />

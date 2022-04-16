@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-let baseU = 'https://localhost:8080/';
+let baseU = 'http://localhost:8080/';
 if (process.env.NODE_ENV === 'production') {
-  //baseU = 'https://cafemaddycab.herokuapp.com/';
+  baseU = 'https://localhost:8080/';
   console.log('Base API URL set to PROD.');
 } else {
   console.log('Base API URL set to DEV.');

@@ -10,7 +10,10 @@ function ViewEntry({ rideId, onClose }) {
   const [selfieUrl, setSelfieUrl] = useState('/');
   const [photoIdUrl, setPhotoIdUrl] = useState('/');
 
-  let baseImgUrl = 'http://localhost:5000/api/v1/image/';
+  let baseImgUrl = 'http://localhost:8080/api/v1/image/';
+  if (process.env.NODE_ENV === 'production') {
+    baseImgUrl = 'https://localhost:8080/api/v1/image/';
+  }
 
   function updateGenericField(target, prop) {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));

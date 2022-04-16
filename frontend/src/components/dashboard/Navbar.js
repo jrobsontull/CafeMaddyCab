@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AuthContext from '../../utils/auth.context';
 
 function Header() {
-  const { authUser } = useContext(AuthContext);
+  const { user, authUser } = useContext(AuthContext);
   const [hamOpen, setHamOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -11,12 +11,18 @@ function Header() {
 
   const pageArray = [
     { name: 'Ride Dashboard', path: '/dashboard' },
-    { name: 'View Feedback', path: '/view-feedback' },
-    { name: 'How to Use', path: '/how-to-use' },
+    {
+      name: 'Approve Rides',
+      path: '/dashboard/approve-rides/' + user.user._id,
+    },
+    { name: 'View Feedback', path: '/dashboard/view-feedback' },
+    { name: 'How to Use', path: '/dashboard/how-to-use' },
   ];
+
   const pageName = pageArray.find(
     ({ path }) => path === location.pathname
   ).name;
+
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
       <Link to={link.path}>{link.name}</Link>

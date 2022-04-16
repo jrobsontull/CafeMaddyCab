@@ -33,13 +33,20 @@ if (process.env.NODE_ENV === 'production') {
 // If page doesn't exist
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
-// Generate HTTPS server with temp dev SSL certificate
-const httpsServer = https.createServer(
-  {
-    key: fs.readFileSync('ssl/key.pem'),
-    cert: fs.readFileSync('ssl/cert.pem'),
-  },
-  app
-);
+// Generate HTTPS server with temp dev SSL certificate if production
+let server;
+if (process.env.NODE_ENV === 'production') {
+  console.log('Starting HTTPS server.');
+  const server = https.createServer(
+    {
+      key: fs.readFileSync('ssl/key.pem'),
+      cert: fs.readFileSync('ssl/cert.pem'),
+    },
+    app
+  );
+} else {
+  console.log('Starting HTTP server.');
+  server = app;
+}
 
-export default httpsServer;
+export default server;

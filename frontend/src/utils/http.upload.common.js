@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-let baseU = 'https://localhost:8080/';
+let baseU = 'http://localhost:8080/';
 if (process.env.NODE_ENV === 'production') {
-  //baseU = 'https://cafemaddycab.herokuapp.com/';
+  baseU = 'https://localhost:8080/';
   console.log('Drive API URL set to PROD.');
 } else {
   console.log('Drive API URL set to DEV.');
