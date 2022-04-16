@@ -121,26 +121,35 @@ function RequestRide() {
   }
 
   function selectFile(target, type) {
-    /* Validate file type */
     const file = target.files[0];
+
+    /* Validate file type and size */
     const dotIndx = file.name.lastIndexOf('.') + 1;
     const ext = file.name.substring(dotIndx, file.name.length).toLowerCase();
 
     if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
-      /* Store data */
-      if (type === 'selfie') {
-        setSelfie({
-          file: file,
-        });
-        setErrors((prevErrors) => ({ ...prevErrors, selfie: false }));
-      } else if (type === 'photoId') {
-        setPhotoId({
-          file: target.files[0],
-        });
-        setErrors((prevErrors) => ({ ...prevErrors, photoId: false }));
+      if (file.size < 10 * 1024 * 1024) {
+        /* Store data */
+        if (type === 'selfie') {
+          setSelfie({
+            file: file,
+          });
+          setErrors((prevErrors) => ({ ...prevErrors, selfie: false }));
+        } else if (type === 'photoId') {
+          setPhotoId({
+            file: target.files[0],
+          });
+          setErrors((prevErrors) => ({ ...prevErrors, photoId: false }));
+        }
+      } else {
+        /* File too big */
+        setErrors((prevErrors) => ({ ...prevErrors, [type]: true }));
+        alert(
+          'The image you selected is more than 10 MB. Please use an image smaller than this. '
+        );
       }
     } else {
-      /* Incorrect format */
+      /* Incorrect file format */
       setErrors((prevErrors) => ({ ...prevErrors, [type]: true }));
       alert('The file you selected is not an image.');
     }
