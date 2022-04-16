@@ -69,3 +69,45 @@ User frames were designed in Figma. We will generally be following the ideas lay
 2. To start the frontend locally, `cd` into the frontend folder and type:
 
         npm run all
+
+## Deployment
+
+1. SSH into server with RSA key.
+2. `cd` into the CafeMaddyCab directory and pull new code with:
+
+        git pull
+
+3. `cd` into the `/frontend/` folder and run:
+
+        npm install
+        npm run build
+
+4. `cd` into the `/backend/` folder and run:
+
+        npm install
+
+5. `cd` back to the root folder for the repo. Check that pm2 is installed by typing:
+
+        pm2 status
+        
+6. If you get an error, run the following:
+
+        npm install -g pm2
+
+7. Then kill the current web server with:
+
+        pm2 kill
+
+8. Start the new web server from the root repo directory with:
+
+        pm2 start npm -- start
+
+9. You can also give the process a name with `pm2 start npm --name "app name" -- start`. Now save the process, so that pm2 knows what to restart on server reboot:
+
+        pm2 save
+        
+10. Then enable pm2 on startup with:
+
+        pm2 startup
+        
+Server logs can be viewed at any time with `pm2 logs`. If you need to temporarily stop pm2, you can do so with `pm2 stop PROCESS_NAME`. In the future I will prepare build scripts for this process.
