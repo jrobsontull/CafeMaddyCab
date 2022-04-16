@@ -7,7 +7,7 @@ import FeedbackDAO from './dao/feedbackDAO.js';
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 let db_uri = process.env.CAFEMADDYCAB_DB_URI_DEV;
 
 if (process.env.NODE_ENV === 'production') {

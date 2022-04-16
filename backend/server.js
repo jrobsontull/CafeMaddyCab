@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import https from 'https';
+import fs from 'fs';
 
 import rides from './routes/rides.route.js';
 import auth from './routes/auth.route.js';
@@ -32,4 +33,13 @@ if (process.env.NODE_ENV === 'production') {
 // If page doesn't exist
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
-export default app;
+// Generate HTTPS server with temp dev SSL certificate
+const httpsServer = https.createServer(
+  {
+    key: fs.readFileSync('ssl/key.pem'),
+    cert: fs.readFileSync('ssl/cert.pem'),
+  },
+  app
+);
+
+export default httpsServer;
