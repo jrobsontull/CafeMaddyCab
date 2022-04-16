@@ -19,6 +19,9 @@ jobs:
       - name: Build frontend
         working-directory: ./frontend
         run: npm run build
+      - name: Install modules for backend
+        working-directory: ./backend
+        run: npm install
       - name: Start backend server
         working-directory: ./backend
         run: node --experimental-json-modules index.js
