@@ -59,7 +59,6 @@ function Login() {
   }
 
   function validateCaptcha(event) {
-    const testResponse = event;
     // RecaptchaAPI.verifyResponse(testResponse).then((response) => {
     //   if (response.data.success) {
     //     setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));

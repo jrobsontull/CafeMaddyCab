@@ -97,9 +97,9 @@ function ApprovalWindow({ onCancel }) {
           </div>
           <p>
             On the next page, you will be asked to approve ride requests based
-            on need, valid photo ID and purpose. User selfie's and their photo
-            IDs will be presented next to each other like below. You can click
-            these photos for an enlarged version.
+            on need, valid photo ID and purpose. User selfie&apos;s and their
+            photo IDs will be presented next to each other like below. You can
+            click these photos for an enlarged version.
           </p>
           <div className="photo-container">
             <div className="titles">
