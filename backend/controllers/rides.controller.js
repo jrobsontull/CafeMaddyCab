@@ -114,6 +114,9 @@ export default class RidesController {
       if (req.query.status) {
         filters.status = parseInt(req.query.status, 10);
       }
+      if (req.query.approverId) {
+        filters.approverId = req.query.approverId;
+      }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
         filters,

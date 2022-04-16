@@ -71,6 +71,14 @@ export default class RidesDAO {
         /* Query documents by status */
         query = { 'status.value': filters['status'] };
       }
+
+      if ('status' in filters && 'approverId' in filters) {
+        /* Check for rides to approve */
+        query = {
+          'status.value': filters['status'],
+          'approver.id': filters['approverId'],
+        };
+      }
     }
 
     let cursor;
