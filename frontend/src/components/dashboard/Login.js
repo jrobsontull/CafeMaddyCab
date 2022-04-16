@@ -9,6 +9,7 @@ function Login() {
   const { user, authUser } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [gResponse, setGResponse] = useState('');
   const [errors, setErrors] = useState({
     username: true,
     password: true,
@@ -59,17 +60,17 @@ function Login() {
   }
 
   function validateCaptcha(event) {
-    // RecaptchaAPI.verifyResponse(testResponse).then((response) => {
-    //   if (response.data.success) {
-    //     setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
-    //   } else {
-    //     setErrorStateMessage({
-    //       state: true,
-    //       message:
-    //         'ReCAPTCHA submission invalid. Please try again or reload the page.',
-    //     });
-    //   }
-    // });
+    const gResponse = event;
+    if (gResponse) {
+      setErrors((prevErrors) => ({ ...prevErrors, recaptcha: false }));
+      setGResponse(event);
+    } else {
+      setErrorStateMessage({
+        state: true,
+        message:
+          'ReCAPTCHA submission invalid. Please try again or reload the page.',
+      });
+    }
   }
 
   async function loginHandler(e) {
@@ -105,6 +106,7 @@ function Login() {
         const header = {
           headers: {
             'Content-type': 'application/json',
+            'g-response': gResponse,
           },
         };
         const payload = {
@@ -122,8 +124,7 @@ function Login() {
         setIsLoading(false);
         navigate('/dashboard');
       } catch (e) {
-        console.log(e);
-        setErrorStateMessage({ state: true, message: e.response.data.error });
+        setErrorStateMessage({ state: true, message: e.message + '.' });
         setIsLoading(false);
       }
     }

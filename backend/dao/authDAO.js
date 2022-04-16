@@ -41,7 +41,7 @@ export default class AuthDAO {
       if (!validPass) {
         return { error: 'Invalid username or password.' };
       }
-      console.log('authDAO: User ' + userFound.id + ' attempted login.');
+      console.log('authDAO: User ' + userFound._id + ' attempted login.');
       return new User(userFound._id, userFound.commonName);
     } catch (e) {
       console.log('Failed to login: ' + e);
