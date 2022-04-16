@@ -946,6 +946,8 @@
               vertical-align: middle; }
           .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box#last-child {
             border-width: 1px 1px 1px 0; }
+      .react-container.view-entry .view-entry-window.approve-window .entry-content .error {
+        width: 82%; }
 
 /* Styling of table */
 .feedback {

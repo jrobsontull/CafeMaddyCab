@@ -207,7 +207,9 @@ function ViewEntry({ rideId, onClose }) {
               <li>
                 <div className="description">Approved by:</div>
                 <div className="value">
-                  {rideDetails.approver ? rideDetails.approver : 'N/A'}
+                  {rideDetails.approver
+                    ? rideDetails.approver.commonName
+                    : 'N/A'}
                 </div>
               </li>
               <li>

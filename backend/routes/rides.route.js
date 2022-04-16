@@ -58,6 +58,6 @@ router
   .put(RidesController.apiEditRideById);
 router.route('/getById').get(RidesController.apiGetRideById);
 router.route('/getStats').get(RidesController.apiGetStats);
-router.route('/setInProgress').post(RidesController.apiSetInProgress);
+router.route('/setInProgress').post(RidesController.apiSetRidesInProgress);
 
 export default router;

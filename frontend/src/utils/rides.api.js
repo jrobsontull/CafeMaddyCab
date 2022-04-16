@@ -71,6 +71,20 @@ export default class RidesAPI {
       return stats;
     }
   }
+
+  /* Set rides to in progress */
+  static async setInProgress(num, user) {
+    const url = 'api/v1/rides/setInProgress';
+    const body = {
+      ridesToApprove: num,
+      approver: { commonName: user.commonName, id: user._id },
+    };
+
+    const response = await postRequest(url, body);
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
 async function postRequestMulti(body, url, gResponse) {
@@ -94,6 +108,22 @@ async function postRequestMulti(body, url, gResponse) {
 async function getRequest(url) {
   try {
     const response = await http.get(url);
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error: ' + e.message);
+    return null;
+  }
+}
+
+async function postRequest(url, body) {
+  try {
+    const payload = body;
+    const response = await http.post(url, payload);
 
     if (response.status === 200) {
       return response;

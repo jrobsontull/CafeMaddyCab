@@ -1,13 +1,58 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
+import AuthContext from '../../utils/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 import Arrow from '../../assets/img/arrow_right.svg';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
 function ApprovalWindow({ onCancel }) {
-  const [newTotal, setNewTotal] = useState(0);
+  const { user } = useContext(AuthContext);
 
-  function submitHandler() {}
+  const [newTotal, setNewTotal] = useState(0);
+  const [ridesToApprove, setRidesToApprove] = useState('');
+
+  const [errorOnSubmit, setErrorOnSubmit] = useState({
+    state: false,
+    message: null,
+  });
+
+  const navigate = useNavigate();
+
+  function submitHandler() {
+    if (ridesToApprove > 0 && newTotal > 0) {
+      if (ridesToApprove <= newTotal) {
+        setErrorOnSubmit({
+          state: false,
+          message: '',
+        });
+
+        RidesAPI.setInProgress(ridesToApprove, user.user).then((response) => {
+          if (response.status === 'success') {
+            /* Everything was all good */
+            navigate('/dashboard/approve-rides/' + user.user._id);
+          } else {
+            setErrorOnSubmit({
+              state: true,
+              message: response.error,
+            });
+          }
+        });
+      } else {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            "To approve total can't be more than the total number of new ride requests.",
+        });
+      }
+    } else {
+      setErrorOnSubmit({
+        state: true,
+        message:
+          'Rides to approve and total number of new rides needs to be greater than 0.',
+      });
+    }
+  }
 
   useEffect(() => {
     RidesAPI.getStats('status=1').then((response) => {
@@ -27,12 +72,25 @@ function ApprovalWindow({ onCancel }) {
           </div>
         </div>
         <div className="entry-content">
+          {errorOnSubmit.state ? (
+            <div className="error">
+              {errorOnSubmit.message
+                ? errorOnSubmit.message
+                : 'An unknown error occurred.'}
+            </div>
+          ) : (
+            ''
+          )}
           <p>
             There are ({newTotal}) requests to be approved. How many would you
             like to approve now?
           </p>
           <div className="approve-input">
-            <input type="text" placeholder="Write number here"></input>
+            <input
+              type="text"
+              placeholder="Write number here"
+              onChange={(e) => setRidesToApprove(e.target.value)}
+            ></input>
             <div className="approve-btn" onClick={() => submitHandler()}>
               Approve now
             </div>

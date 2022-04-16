@@ -72,12 +72,14 @@ export default class RidesController {
         mimeType: selfieFile.mimetype,
         path: selfieFile.path.replace('uploads\\', ''),
         size: selfieFile.size,
+        exists: true,
       };
       const photoId = {
         fileName: photoIdFile.filename,
         mimeType: photoIdFile.mimetype,
         path: photoIdFile.path.replace('uploads\\', ''),
         size: photoIdFile.size,
+        exists: true,
       };
 
       const ridesResponse = await RidesDAO.requestRide(
@@ -222,5 +224,40 @@ export default class RidesController {
   }
 
   /* Set status of rides to in progress and get rides back */
-  static async apiSetInProgress(req, res, next) {}
+  static async apiSetRidesInProgress(req, res, next) {
+    try {
+      const newRides = await RidesDAO.getStats({ status: 1 });
+      const ridesToApprove = req.body.ridesToApprove;
+      const approver = req.body.approver;
+      if (ridesToApprove) {
+        const toApprove = parseInt(ridesToApprove, 10);
+        if (toApprove <= newRides.count) {
+          const response = await RidesDAO.setRidesInProgress(
+            toApprove,
+            approver
+          );
+
+          var { error } = response;
+          if (error) {
+            res.status(500).json({ error: error });
+          }
+
+          res.json(response);
+        } else {
+          res.status(400).json({
+            error: "Can't approve more rides than there are new ride requests.",
+          });
+        }
+      } else {
+        res
+          .status(400)
+          .json({ error: 'Number of rides to approve not specified.' });
+      }
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to set rides to in progress. ' + e.message
+      );
+      res.status(500).json({ error: e });
+    }
+  }
 }

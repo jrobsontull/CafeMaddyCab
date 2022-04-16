@@ -10,6 +10,7 @@ import Success from './components/front-facing/Success';
 import Login from './components/dashboard/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Feedback from './components/dashboard/Feedback';
+import ApproveRides from './components/dashboard/Approval';
 
 import ProtectedRoute from './components/general/ProtectedRoute';
 
@@ -41,6 +42,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Feedback />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={'/dashboard/approve-rides/:id'}
+              element={
+                <ProtectedRoute>
+                  <ApproveRides />
                 </ProtectedRoute>
               }
             />

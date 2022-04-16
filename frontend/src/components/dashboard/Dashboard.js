@@ -242,7 +242,7 @@ function Dashboard() {
                         {ride.verified ? 'Verified' : 'Unverified'}
                       </li>
                       <li id="col-10">
-                        {ride.approver ? ride.approver : 'N/A'}
+                        {ride.approver ? ride.approver.commonName : 'N/A'}
                       </li>
                       <li id="col-11">{ride.coupon ? ride.coupon : 'N/A'}</li>
                       <li id="col-12">{ride.status.text}</li>

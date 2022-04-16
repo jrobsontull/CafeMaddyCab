@@ -214,4 +214,52 @@ export default class RidesDAO {
       return { error: e };
     }
   }
+
+  static async setRidesInProgress(toApprove, approver) {
+    try {
+      const query = { 'status.value': 1 };
+
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.log('ridesDAO: Unable to issue find command. ' + e);
+        return { error: e };
+      }
+
+      /* Limit search to number of rides to apporove */
+      const ridesToSet = await cursor.limit(toApprove).toArray();
+
+      /* Set rides by ID to correct status and approver fields */
+      let responses = [];
+      for (const ride of ridesToSet) {
+        responses.push(
+          await rides.findOneAndUpdate(
+            { _id: ride._id },
+            {
+              $set: {
+                status: { value: 2, text: 'In progress' },
+                approver: approver,
+              },
+            }
+          )
+        );
+      }
+
+      if (responses.length === toApprove) {
+        return { status: 'success' };
+      } else {
+        console.log(
+          'ridesDAO: Failed to set all rides requested to in progress.'
+        );
+        return {
+          error: 'Not all rides requested could be set to in progress.',
+        };
+      }
+    } catch (e) {
+      console.log('ridesDAO: Unable to set in progress state on rides. ' + e);
+      return { error: e };
+    }
+  }
 }
