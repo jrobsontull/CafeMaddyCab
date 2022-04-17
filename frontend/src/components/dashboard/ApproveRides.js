@@ -240,7 +240,13 @@ function ApproveRides() {
                             name={ride._id}
                             placeholder="
                           Write notes here..."
-                            defaultValue={ride.notes ? ride.notes : ''}
+                            defaultValue={
+                              notes[ride._id]
+                                ? notes[ride._id].notes
+                                : ride.notes
+                                ? ride.notes
+                                : ''
+                            }
                             onChange={(e) => updateNotes(e.target)}
                           ></textarea>
                         </div>
