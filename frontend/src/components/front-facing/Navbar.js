@@ -5,7 +5,7 @@ function Header() {
   const [hamOpen, setHamOpen] = useState(false);
 
   const pageArray = [
-    { name: 'How to Ride', path: '/how-to-ride' },
+    { name: 'How it Works', path: '/how-to-ride' },
     { name: 'Request a Ride', path: '/request-ride' },
     { name: 'Press', path: '/press' },
     { name: 'Contact Us', path: '/contact-us' },
@@ -13,7 +13,7 @@ function Header() {
 
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
-      <Link to={link.path}>{link.name}</Link>
+      <a href={link.path}>{link.name}</a>
     </li>
   ));
 
@@ -26,7 +26,7 @@ function Header() {
     <div className="navbar frontend">
       <div className="header">
         <div className="branding">
-          <p className="cmc">CAFE MADDY CAB</p>
+          <Link to={"/"} className="cmc">Cafe Maddy Cab</Link>
         </div>
 
         <div

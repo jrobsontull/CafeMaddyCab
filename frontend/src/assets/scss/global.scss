@@ -80,6 +80,16 @@ body {
   a {
     width: inherit;
   }
+
+  h1 {
+    font-size: $heading-font-size;
+    font-weight: 400; // confirm font weight later
+  }
+
+  p {
+    font-size: $smaller-font-size;
+    font-weight: 300;
+  }
 }
 
 html,
@@ -88,6 +98,94 @@ body,
 .container,
 .react-container {
   height: 100%;
+}
+
+.info-box-title {
+  width: $content-width;
+  background-color: $light-blue;
+  padding: 8px 18px;
+  border-radius: $border-radius $border-radius 0 0;
+  border: 1px solid $dark-blue;
+  margin-top: 20px;
+  max-width: $max-width;
+
+  h3 {
+    color: $lightest-pink;
+    font-size: 20px;
+  }
+}
+
+.info-box {
+  width: $content-width;
+  background-color: $light-form;
+  padding: 18px;
+  border: 1px solid $dark-blue;
+  border-radius: 0 0 $border-radius $border-radius;
+  border-top-width: 0;
+  max-width: $max-width;
+
+  p {
+    margin-top: 12px;
+    text-align: left;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  a {
+    color: inherit;
+    font-weight: bold;
+    transition: color 0.25s ease;
+  }
+
+  a:hover {
+    color: $blue-btn-hover;
+    cursor: pointer;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  ul {
+    margin-top: 12px;
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ol {
+    padding-left: 18px;
+    text-align: left;
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.info-box#no-title {
+  margin-top: 20px;
+  border-width: 1px;
+  border-radius: $border-radius;
+}
+
+.btn-link.donate {
+  margin-top: 20px;
 }
 
 .btn {
@@ -106,29 +204,24 @@ body,
   width: calc(#{$content-width} + 36px);
   max-width: calc(#{$max-width} + 36px);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin: 10px 0;
   background-color: $dark-blue;
   border-radius: $border-radius;
   color: $lightest-pink;
   transition: all 0.25s ease;
+  padding: 12px 0 12px 0;
 
   .icon {
-    background-color: $dark-pink;
-    border: 1px solid $dark-blue;
-    border-radius: $border-radius;
-    margin: 0 auto;
-    padding: 11px 13px;
-    transition: padding 0.3s ease;
-
+    display: inline-flex;
     img {
-      width: 20px;
+      width: 16px;
+      margin-right: 5px;
       height: auto;
-      display: inline-block;
       vertical-align: middle;
+      transition: padding 0.3s ease;
     }
-  }
+   }
 
   a {
     font-size: $heading-font-size;
@@ -141,12 +234,6 @@ body,
   a:active {
     color: inherit;
   }
-
-  img.nav-arrow {
-    height: 15px;
-    width: auto;
-    margin-right: 20px;
-  }
 }
 
 .btn-link:hover {
@@ -155,7 +242,7 @@ body,
   cursor: pointer;
 
   .icon {
-    padding: 11px 22px;
+    padding: 10px 10px;
   }
 }
 

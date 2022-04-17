@@ -1,20 +1,96 @@
 .navbar.frontend {
   background-color: $dark-blue;
+  width: 100%;
+  color: $lightest-pink;
+  font-size: 20px;
 
   .header {
     width: calc(#{$content-width} + 32px);
     max-width: calc(#{$max-width} + 32px);
     padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: $dark-blue;
+    margin: auto;
+    padding: 12px 5%;
+
+    .branding {
+      display: flex;
+      font-size: 20px;
+
+      .cmc {
+        color: #F7F5FE;
+      }
+    }
+
+    .nav-ham {
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid $lightest-pink;
+      border-radius: 8px;
+      padding: 0 6px;
+      transition: background-color 0.4s ease;
+
+      .ham1,
+      .ham2,
+      .ham3 {
+        width: 22px;
+        height: 1px;
+        background-color: $lightest-pink;
+        margin: 6px 0;
+        transition: 0.4s;
+      }
+    }
+
+    .change-state.nav-ham {
+      background-color: $lightest-pink;
+    }
+
+    .change-state .ham1,
+    .change-state .ham2,
+    .change-state .ham3 {
+      background-color: $dark-blue;
+    }
   }
 
   .nav {
     border: 1px solid $lightest-pink;
     border-width: 1px 0 0 0;
+    transform: translateY(-100vh);
+    background-color: $dark-blue;
+    position: absolute;
+    width: 100%;
+    
     ul {
       border: none;
-      width: calc(#{$content-width} + 32px);
-      max-width: calc(#{$max-width} + 32px);
+      width: 100%;
+      list-style-type: none;
+      padding-left: 0;
+      
+      li {
+        padding: 10px 0;
+        border: 1px solid $lightest-pink;
+        border-width: 0 0 1px 0;
+      }
+
+      a {
+        display: block;
+        width: calc(#{$content-width} + 32px);
+        max-width: calc(#{$max-width} + 32px);
+        margin: auto;
+        color: inherit;
+        font-weight: 300;
+      }
+
+      a:hover {
+        cursor: pointer;
+        font-weight: 400;
+      }
     }
+  }
+  
+  .nav.active {
+    transform: translateY((0vh));
   }
 
   @media screen and (min-width: 800px) {
@@ -24,7 +100,7 @@
     }
 
     .nav {
-      ul {
+      ul a {
         width: 90%;
         max-width: 90%;
       }

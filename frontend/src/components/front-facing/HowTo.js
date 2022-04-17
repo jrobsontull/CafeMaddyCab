@@ -12,7 +12,6 @@ import HowTo3 from '../../assets/img/how_to_3.svg';
 import HowTo4 from '../../assets/img/how_to_4.svg';
 
 import Taxi from '../../assets/img/taxi_icon.svg';
-import Arrow from '../../assets/img/arrow_right.svg';
 
 function HowToPage() {
   // Scroll to top on component load/refresh
@@ -22,8 +21,8 @@ function HowToPage() {
 
   return (
     <div className="react-container">
-      <div className="content frontend">
-        <Navbar />
+      <div className="content frontend how-to">
+      <Navbar />
 
         <div className="logo">
           <Link to={'/'}>
@@ -80,6 +79,14 @@ function HowToPage() {
             </li>
           </ul>
         </div>
+        <div className="btn-link ride" id="how-to-page">
+          <a href="/request-ride">
+            <div className="icon">
+              <img src={Taxi} alt="Taxi" />
+            </div>
+            Request a Ride
+          </a>
+        </div>
         <div className="info-box-title">
           <h3>Some important notes</h3>
         </div>
@@ -98,13 +105,6 @@ function HowToPage() {
               ride (see Terms and Conditions on the next page).
             </li>
           </ol>
-        </div>
-        <div className="btn-link ride" id="landing-page">
-          <div className="icon">
-            <img src={Taxi} alt="Taxi" />
-          </div>
-          <Link to={'/request-ride'}>Request a ride</Link>
-          <img className="nav-arrow" src={Arrow} alt="arrow" />
         </div>
 
         <Footer />

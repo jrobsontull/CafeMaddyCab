@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -7,6 +6,8 @@ import Footer from './Footer';
 import Logo from '../../assets/img/logo.svg';
 import Donate from '../../assets/img/donate_icon.svg';
 import Taxi from '../../assets/img/taxi_icon.svg';
+import Info from '../../assets/img/info_icon.svg';
+import PressPhoto from '../../assets/img/press_entry_img.jpg';
 import Arrow from '../../assets/img/arrow_right.svg';
 
 function LandingPage() {
@@ -20,15 +21,59 @@ function LandingPage() {
       <div className="content frontend">
         <Navbar />
 
-        <div className="logo">
-          <Link to={'/'}>
+        <div className="title-logo">
+          <div className="logo">
             <img src={Logo} alt="Cafe Maddy Cab" />
-          </Link>
+          </div>
+          <div className="cmc-title">
+            <h1>Cafe Maddy Cab</h1>
+            <p>NYC cab rides for Asian women, LGBTQ+ and elderly in need</p>
+          </div>
         </div>
-        <div className="info-box-title">
-          <h3>What is Cafe Maddy Cab?</h3>
+        <hr />
+        <div className="btn-link donate" id="landing-page">
+          <a
+            href="https://www.gofundme.com/f/cafemaddycab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="icon">
+              <img src={Donate} alt="Donate" />
+            </div>
+              Donate
+          </a>
         </div>
-        <div className="info-box" id="child-1">
+        <div className="btn-link" id="landing-page">
+          <a href="/request-ride">
+            <div className="icon">
+              <img src={Taxi} alt="Taxi" />
+            </div>
+            Request a Ride
+          </a>
+        </div>
+        <div className="btn-link" id="landing-page">
+          <a href="/how-to-ride" >
+            <div className="icon">
+              <img src={Info} alt="Info" />
+            </div>
+            How it Works
+          </a>
+        </div>
+
+        <div className="mission">
+          <img src={PressPhoto} alt="PressPhoto" />
+          <div className="text">
+            <p>Our Mission</p>
+            <h1>Help our AAPI community feel safe with their NYC commute</h1>
+            <div className="mission-donate">
+              <img src={Donate} alt="Donate" />
+              <p>Donate</p>
+              <img src={Arrow} alt="Arrow" />
+            </div>
+          </div>
+        </div>
+        <h1 className="landing-heading">What is Cafe Maddy Cab?</h1>
+        <div className="info-box" id="no-title">
           <p>
             Cafe Maddy Cab is an initiative that provides cab rides for the
             vulnerable Asian population in the NYC area, specifically at risk of
@@ -38,10 +83,8 @@ function LandingPage() {
             possible.
           </p>
         </div>
-        <div className="info-box-title">
-          <h3>Why we&apos;re here</h3>
-        </div>
-        <div className="info-box" id="child-2">
+        <h1 className="landing-heading">Why we&apos;re here</h1>
+        <div className="info-box" id="no-title">
           <p>
             &quot;It&apos;s really terrifying. Every time I see it, I can&apos;t
             help but think that, that could&apos;ve been me&quot; says Madeline
@@ -65,20 +108,8 @@ function LandingPage() {
             in 2022, we felt the need to relaunch Cafe Maddy Cab.
           </p>
         </div>
-        <div className="btn-link donate" id="landing-page">
-          <div className="icon">
-            <img src={Donate} alt="Donate" />
-          </div>
-          <a href="https://www.donate.com">Donate to the cause</a>
-          <img className="nav-arrow" src={Arrow} alt="arrow" />
-        </div>
-        <div className="btn-link learn" id="landing-page">
-          <div className="icon">
-            <img src={Taxi} alt="Taxi" />
-          </div>
-          <Link to={'/how-to-ride'}>Learn how to get a ride</Link>
-          <img className="nav-arrow" src={Arrow} alt="arrow" />
-        </div>
+        <h1 className="landing-heading">Press</h1>
+        <p>lalallala</p>
 
         <Footer />
       </div>

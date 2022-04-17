@@ -1,192 +1,60 @@
-.logo {
-  margin: 0 auto;
+.title-logo {
+  display: flex;
+  width: 250px;
+  margin: 30px 0 30px 0;
 
+  .logo {
+    margin: 0 auto;
+  
+    img {
+      height: auto;
+      width: 80px;
+      vertical-align: middle;
+    }
+  }
+  .cmc-title {
+    padding-left: 10px;
+  }
+}
+
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: calc(#{$content-width} + 36px);
+  max-width: calc(#{$max-width} + 36px);              
+  background-color: $dark-blue;
+  height: 1px;
+}
+
+.mission {
+  display: flex;
+  margin-top: 20px;
+  max-width: 300px;
   img {
-    height: auto;
-    width: 120px;
-    padding: 32px 0 6px 0;
-  }
-}
-
-.info-box-title {
-  width: $content-width;
-  background-color: $light-blue;
-  padding: 8px 18px;
-  border-radius: $border-radius $border-radius 0 0;
-  border: 1px solid $dark-blue;
-  margin-top: 20px;
-  max-width: $max-width;
-
-  h3 {
-    color: $lightest-pink;
-    font-size: 20px;
-  }
-}
-
-.info-box {
-  width: $content-width;
-  background-color: $light-form;
-  padding: 18px;
-  border: 1px solid $dark-blue;
-  border-radius: 0 0 $border-radius $border-radius;
-  border-top-width: 0;
-  max-width: $max-width;
-
-  p {
-    margin-top: 12px;
-    text-align: justify;
+    width: 125px;
+    margin-right: 5px;
   }
 
-  span {
-    font-weight: bold;
-  }
-
-  a {
-    color: inherit;
-    font-weight: bold;
-    transition: color 0.25s ease;
-  }
-
-  a:hover {
-    color: $blue-btn-hover;
-    cursor: pointer;
-  }
-
-  a:visited {
-    color: inherit;
-  }
-
-  p:first-child {
-    margin-top: 0;
-  }
-
-  ul {
-    margin-top: 12px;
-
-    li {
-      margin-bottom: 4px;
-    }
-
-    li:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  ol {
-    padding-left: 18px;
-    text-align: justify;
-
-    li {
-      margin-bottom: 4px;
-    }
-
-    li:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-.info-box#no-title {
-  margin-top: 20px;
-  border-width: 1px;
-  border-radius: $border-radius;
-}
-
-.btn-link.donate {
-  margin-top: 20px;
-}
-
-.frontend .navbar {
-  width: 100%;
-  color: $lightest-pink;
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    background-color: $dark-blue;
+  .text {
     margin: auto;
-    padding: 12px 5%;
-    align-items: center;
+    img {
+      border: 1px solid $dark-blue;
+      width: 16px;
+    }
 
-    .branding {
+    p {
+      margin-right: 5px;
+    }
+
+    .mission-donate {
       display: flex;
-      font-size: 18px;
-
-      .cmc {
-        margin-right: 10px;
-      }
-
-      .page-name {
-        margin-left: 10px;
-        font-weight: 300;
-      }
-    }
-
-    .nav-ham {
-      display: inline-block;
-      cursor: pointer;
-      border: 1px solid $lightest-pink;
-      border-radius: 8px;
-      padding: 0 6px;
-      transition: background-color 0.4s ease;
-
-      .ham1,
-      .ham2,
-      .ham3 {
-        width: 22px;
-        height: 1px;
-        background-color: $lightest-pink;
-        margin: 6px 0;
-        transition: 0.4s;
-      }
-    }
-
-    .change-state.nav-ham {
-      background-color: $lightest-pink;
-    }
-
-    .change-state .ham1,
-    .change-state .ham2,
-    .change-state .ham3 {
-      background-color: $dark-blue;
     }
   }
+}
 
-  .nav {
-    transform: translateY(-100vh);
-    background-color: $dark-blue;
-    position: absolute;
-    width: 100%;
-
-    ul {
-      width: 90%;
-      margin: auto;
-      list-style-type: none;
-      padding-left: 0;
-      margin-bottom: 10px;
-      border: 1px solid $lightest-pink;
-      padding-top: 10px;
-      border-width: 1px 0 0 0;
-
-      li {
-        padding: 2px 0;
-      }
-
-      li a,
-      li p {
-        color: inherit;
-        font-weight: 300;
-      }
-
-      li a:hover,
-      li p:hover {
-        cursor: pointer;
-        font-weight: 400;
-      }
-    }
-  }
-
-  .nav.active {
-    transform: translateY((0vh));
-  }
+.landing-heading {
+  width: $content-width;
+  margin-top: 20px;
+  max-width: $max-width;
 }
