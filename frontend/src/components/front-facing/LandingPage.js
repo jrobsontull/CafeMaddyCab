@@ -65,11 +65,16 @@ function LandingPage() {
           <div className="text">
             <p>Our Mission</p>
             <h1>Help our AAPI community feel safe with their NYC commute</h1>
-            <div className="mission-donate">
+            <a 
+              className="mission-donate"             
+              href="https://www.gofundme.com/f/cafemaddycab"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={Donate} alt="Donate" />
               <p>Donate</p>
               <img src={Arrow} alt="Arrow" />
-            </div>
+            </a>
           </div>
         </div>
         <h1 className="landing-heading">What is Cafe Maddy Cab?</h1>

@@ -68,13 +68,13 @@
       padding-left: 0;
       
       li {
-        padding: 10px 0;
         border: 1px solid $lightest-pink;
         border-width: 0 0 1px 0;
       }
 
       a {
         display: block;
+        padding: 10px 0; // see what's a good size of the navbar list
         width: calc(#{$content-width} + 32px);
         max-width: calc(#{$max-width} + 32px);
         margin: auto;
