@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../utils/auth.context';
 import RidesAPI from '../../utils/rides.api';
 
@@ -6,6 +7,7 @@ import Navbar from './Navbar';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
 function ApproveRides() {
+  // Global variables
   const { user } = useContext(AuthContext);
   const [rides, setRides] = useState([]);
   const [ridesData, setRidesData] = useState({
@@ -20,6 +22,9 @@ function ApproveRides() {
     baseImgUrl = 'https://localhost:8080/api/v1/image/';
   }
 
+  const navigate = useNavigate();
+
+  // For keeping track with page nav functions
   function calculateTotalPageNums(numPerPage, totalEntries) {
     let count = 1;
     let tracker = totalEntries;
@@ -30,6 +35,7 @@ function ApproveRides() {
     return count;
   }
 
+  // Go forward a page in the table
   function nextPage() {
     if (
       ridesData.totalPages > 1 &&
@@ -48,6 +54,7 @@ function ApproveRides() {
     }
   }
 
+  // Go backward a page in the table
   function prevPage() {
     if (ridesData.currentPage > 0) {
       const pageToScrollTo = ridesData.currentPage - 1;
@@ -63,6 +70,18 @@ function ApproveRides() {
     }
   }
 
+  // Cancel button handler - unset in progress state on rides
+  function cancelHandler() {
+    RidesAPI.unsetInProgress(user.user._id).then((response) => {
+      if (response.status === 'success') {
+        navigate('/dashboard');
+      } else {
+        alert(response.error);
+      }
+    });
+  }
+
+  // Run once when render complete - populate table
   useEffect(() => {
     RidesAPI.getRides('status=2&approverId=' + user.user._id).then(
       (response) => {
@@ -163,7 +182,9 @@ function ApproveRides() {
             </div>
 
             <div className="table-footer">
-              <div className="cancel-btn">Cancel</div>
+              <div className="cancel-btn" onClick={() => cancelHandler()}>
+                Cancel
+              </div>
 
               {ridesData.totalPages > 1 ? (
                 <div className="nav">

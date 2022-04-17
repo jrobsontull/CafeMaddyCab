@@ -85,6 +85,19 @@ export default class RidesAPI {
       return response.data;
     }
   }
+
+  /* Set in progress rides to new (cancel action in ApproveRides) */
+  static async unsetInProgress(userId) {
+    const url = 'api/v1/rides/unsetInProgress';
+    const body = {
+      approverId: userId,
+    };
+
+    const response = await postRequest(url, body);
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
 async function postRequestMulti(body, url, gResponse) {

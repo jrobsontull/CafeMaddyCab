@@ -36,8 +36,8 @@ app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 // Generate HTTPS server with temp dev SSL certificate if production
 let server;
 if (process.env.NODE_ENV === 'production') {
-  console.log('Starting HTTPS server.');
-  const server = https.createServer(
+  console.log('Starting HTTPS production server.');
+  server = https.createServer(
     {
       key: fs.readFileSync('ssl/key.pem'),
       cert: fs.readFileSync('ssl/cert.pem'),
@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
     app
   );
 } else {
-  console.log('Starting HTTP server.');
+  console.log('Starting HTTP development server.');
   server = app;
 }
 

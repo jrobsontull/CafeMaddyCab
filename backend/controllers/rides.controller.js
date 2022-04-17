@@ -263,4 +263,25 @@ export default class RidesController {
       res.status(500).json({ error: e });
     }
   }
+
+  static async apiUnsetRidesInProgress(req, res, next) {
+    try {
+      const approverId = req.body.approverId;
+
+      const response = await RidesDAO.unsetRidesInProgress(approverId);
+
+      var { error } = response;
+      if (error) {
+        res.status(500).json({ error: error });
+      }
+
+      res.json(response);
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to unset rides in progress status. ' +
+          e.message
+      );
+      res.status(500).json({ error: e });
+    }
+  }
 }

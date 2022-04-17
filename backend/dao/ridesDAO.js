@@ -270,4 +270,49 @@ export default class RidesDAO {
       return { error: e };
     }
   }
+
+  static async unsetRidesInProgress(approverId) {
+    try {
+      const query = { 'approver.id': approverId };
+
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.log('ridesDAO: Unable to issue find command. ' + e);
+        return { error: e };
+      }
+
+      const ridesToUpdate = await cursor.toArray();
+
+      /* Set rides by ID to new status and null approver field */
+      let responses = [];
+      for (const ride of ridesToUpdate) {
+        responses.push(
+          await rides.findOneAndUpdate(
+            { _id: ride._id },
+            {
+              $set: {
+                status: { value: 1, text: 'New' },
+                approver: null,
+              },
+            }
+          )
+        );
+      }
+
+      if (responses.length === ridesToUpdate.length) {
+        return { status: 'success' };
+      } else {
+        console.log('ridesDAO: Failed to revert all in progress rides to new.');
+        return {
+          error: 'Not all rides requested could be set to new.',
+        };
+      }
+    } catch (e) {
+      console.log('ridesDAO: Unable to unset in progress state on rides. ' + e);
+      return { error: e };
+    }
+  }
 }
