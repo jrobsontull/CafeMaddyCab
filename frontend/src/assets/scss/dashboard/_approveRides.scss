@@ -1,4 +1,6 @@
 .dashboard.approve-rides {
+  margin-bottom: 36px;
+
   .table-content {
     width: 100%;
 
@@ -42,6 +44,7 @@
 
         li#col-9 {
           width: 13%;
+          border-width: 0;
         }
       }
     }
@@ -177,6 +180,64 @@
 
             .approve-btn.disabled {
               background-color: rgb(184, 184, 184);
+            }
+
+            input[type='radio'] {
+              display: none;
+            }
+
+            input[type='radio'] + label:after {
+              display: inline-block;
+              padding: 10px 16px;
+              border: 1px solid $dark-blue;
+              background-color: $light-form;
+              color: $lightest-pink;
+              transition: all 0.25s ease;
+              background-color: rgb(184, 184, 184);
+            }
+
+            input[type='radio'].accept + label:after {
+              content: 'Y';
+            }
+
+            input[type='radio'].deny + label:after {
+              content: 'N';
+            }
+
+            input[type='radio'].unsure + label:after {
+              content: '?';
+            }
+
+            input[type='radio']:hover + label:after {
+              cursor: pointer;
+            }
+
+            input[type='radio'].accept:hover + label:after {
+              background-color: #4fb83e;
+            }
+
+            input[type='radio'].deny:hover + label:after {
+              background-color: #de3a62;
+            }
+
+            input[type='radio'].unsure:hover + label:after {
+              background-color: #dab32c;
+            }
+
+            input[type='radio']:checked + label:after {
+              transform: translateY(-10px);
+            }
+
+            input[type='radio'].accept:checked + label:after {
+              background-color: #6cca5d;
+            }
+
+            input[type='radio'].deny:checked + label:after {
+              background-color: #eb587c;
+            }
+
+            input[type='radio'].unsure:checked + label:after {
+              background-color: #e4c142;
             }
           }
 

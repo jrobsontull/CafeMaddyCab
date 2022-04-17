@@ -24,6 +24,10 @@ function ApproveRides() {
 
   const navigate = useNavigate();
 
+  // States for keeping track of approval state and notes
+  const [approvalStates, setApprovalStates] = useState({});
+  const [notes, setNotes] = useState({});
+
   // For keeping track with page nav functions
   function calculateTotalPageNums(numPerPage, totalEntries) {
     let count = 1;
@@ -70,6 +74,28 @@ function ApproveRides() {
     }
   }
 
+  // Function for updating approval states
+  function setApproval(target) {
+    const id = target.name;
+    if (target.checked && target.value) {
+      setApprovalStates((prevStates) => ({
+        ...prevStates,
+        [id]: { ride_id: id, stateToSet: target.value },
+      }));
+    }
+  }
+
+  // Function for appending notes to approval states
+  function updateNotes(target) {
+    const id = target.name;
+    const notesToSet = target.value;
+
+    setNotes((prevState) => ({
+      ...prevState,
+      [id]: { id: id, notes: notesToSet },
+    }));
+  }
+
   // Cancel button handler - unset in progress state on rides
   function cancelHandler() {
     RidesAPI.unsetInProgress(user.user._id).then((response) => {
@@ -96,6 +122,7 @@ function ApproveRides() {
         });
       }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -121,7 +148,7 @@ function ApproveRides() {
 
             <div className="table-entries">
               {rides
-                ? rides.map((ride) => (
+                ? rides.map((ride, index) => (
                     <ul key={ride._id}>
                       <li id="col-1">
                         {new Date(ride.dateRequested).toLocaleDateString(
@@ -163,16 +190,58 @@ function ApproveRides() {
                         </div>
                       </li>
                       <li id="col-9">
-                        <div className="approve-btns">
-                          <div className="approve-btn accept">Y</div>
-                          <div className="approve-btn deny">N</div>
-                          <div className="approve-btn unsure">?</div>
+                        <div
+                          className="approve-btns"
+                          onChange={(e) => setApproval(e.target)}
+                        >
+                          <input
+                            type="radio"
+                            id={(index + 1) * 3 - 2}
+                            value="3"
+                            name={ride._id}
+                            className="accept"
+                            defaultChecked={
+                              approvalStates[ride._id]
+                                ? approvalStates[ride._id].stateToSet === '3'
+                                : false
+                            }
+                          ></input>
+                          <label htmlFor={(index + 1) * 3 - 2}></label>
+                          <input
+                            type="radio"
+                            id={(index + 1) * 3 - 1}
+                            value="4"
+                            name={ride._id}
+                            className="deny"
+                            defaultChecked={
+                              approvalStates[ride._id]
+                                ? approvalStates[ride._id].stateToSet === '4'
+                                : false
+                            }
+                          ></input>
+                          <label htmlFor={(index + 1) * 3 - 1}></label>
+                          <input
+                            type="radio"
+                            id={(index + 1) * 3}
+                            value="5"
+                            name={ride._id}
+                            className="unsure"
+                            defaultChecked={
+                              approvalStates[ride._id]
+                                ? approvalStates[ride._id].stateToSet === '5'
+                                : false
+                            }
+                          ></input>
+                          <label htmlFor={(index + 1) * 3}></label>
                         </div>
                         <div className="notes">
                           <p>Notes:</p>
                           <textarea
+                            name={ride._id}
                             placeholder="
                           Write notes here..."
+                            defaultValue={ride.notes ? ride.notes : ''}
+                            onChange={(e) => updateNotes(e.target)}
                           ></textarea>
                         </div>
                       </li>
