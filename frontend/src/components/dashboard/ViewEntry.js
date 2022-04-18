@@ -49,33 +49,48 @@ function ViewEntry({ rideId, onClose }) {
 
   function updateStatus(target) {
     let newStatus = {};
+    let setApprover = false;
 
     switch (parseInt(target.value)) {
       case 1:
         newStatus = { value: 1, text: 'New' };
+        setApprover = false;
         break;
       case 2:
         newStatus = { value: 2, text: 'In progress' };
+        setApprover = true;
         break;
       case 3:
         newStatus = { value: 3, text: 'Approved' };
+        setApprover = false;
         break;
       case 4:
         newStatus = { value: 4, text: 'Rejected' };
+        setApprover = false;
         break;
       case 5:
         newStatus = { value: 5, text: 'Unsure' };
+        setApprover = false;
         break;
       case 6:
         newStatus = { value: 6, text: 'Done' };
+        setApprover = false;
         break;
       // no default
     }
 
-    setRideDetails((prevDetails) => ({
-      ...prevDetails,
-      status: newStatus,
-    }));
+    if (setApprover) {
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        status: newStatus,
+        approver: { commonName: user.user.commonName, id: user.user._id },
+      }));
+    } else {
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        status: newStatus,
+      }));
+    }
   }
 
   function saveChanges() {

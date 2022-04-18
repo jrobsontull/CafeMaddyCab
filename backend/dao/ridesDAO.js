@@ -200,6 +200,7 @@ export default class RidesDAO {
     email,
     identity,
     status,
+    approver,
     coupon,
     notes
   ) {
@@ -215,6 +216,7 @@ export default class RidesDAO {
             email: email,
             identity: identity,
             status: status,
+            approver: approver,
             lastEditedBy: lastEditedBy,
             coupon: coupon,
             notes: notes,
@@ -299,7 +301,7 @@ export default class RidesDAO {
       for (const ride of ridesToUpdate) {
         responses.push(
           await rides.findOneAndUpdate(
-            { _id: ride._id },
+            { _id: ride._id, 'status.value': 2 },
             {
               $set: {
                 status: { value: 1, text: 'New' },

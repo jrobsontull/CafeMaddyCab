@@ -192,6 +192,7 @@ export default class RidesController {
       const email = req.body.email;
       const identity = req.body.identity;
       const status = req.body.status;
+      const approver = req.body.approver;
       const coupon = req.body.coupon || null;
       const notes = req.body.notes || null;
 
@@ -203,6 +204,7 @@ export default class RidesController {
         email,
         identity,
         status,
+        approver,
         coupon,
         notes
       );
