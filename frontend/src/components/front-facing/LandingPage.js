@@ -5,10 +5,11 @@ import Footer from './Footer';
 
 import Logo from '../../assets/img/logo.svg';
 import Donate from '../../assets/img/donate_icon.svg';
+import DonateBlue from '../../assets/img/donate_icon_blue.svg';
 import Taxi from '../../assets/img/taxi_icon.svg';
 import Info from '../../assets/img/info_icon.svg';
 import PressPhoto from '../../assets/img/press_entry_img.jpg';
-import Arrow from '../../assets/img/arrow_right.svg';
+import Arrow from '../../assets/img/arrow_right_blue.svg';
 
 function LandingPage() {
   // Scroll to top on component load/refresh
@@ -71,7 +72,7 @@ function LandingPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={Donate} alt="Donate" />
+              <img src={DonateBlue} alt="DonateBlue" />
               <p>Donate</p>
               <img src={Arrow} alt="Arrow" />
             </a>
@@ -113,9 +114,19 @@ function LandingPage() {
             in 2022, we felt the need to relaunch Cafe Maddy Cab.
           </p>
         </div>
-        <h1 className="landing-heading">Press</h1>
-        <p>lalallala</p>
-
+        <h1 className="landing-heading"><a href="/press-page">Press</a></h1>
+        <div className="press-entry-landing" id="first-child">
+          <div className="info-box" id="press">This is an example press title 1</div>
+          <div className="info-box" id="press-pic"></div>
+        </div>
+        <div className="press-entry-landing">
+          <div className="info-box" id="press">This is an example press title 2</div>
+          <div className="info-box" id="press-pic"></div>
+        </div>
+        <div className="press-entry-landing">
+          <div className="info-box" id="press">This is an example press title 3</div>
+          <div className="info-box" id="press-pic"></div>
+        </div>
         <Footer />
       </div>
     </div>

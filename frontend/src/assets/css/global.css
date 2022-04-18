@@ -61,17 +61,29 @@ hr {
   .mission .text {
     margin: auto; }
     .mission .text img {
-      border: 1px solid #3b3b96;
       width: 16px; }
     .mission .text p {
       margin-right: 5px; }
     .mission .text .mission-donate {
-      display: flex; }
+      display: flex;
+      transition: all 0.25s ease; }
+    .mission .text .mission-donate:hover p {
+      padding: 0 10px 0 10px; }
 
 .landing-heading {
   width: 75%;
   margin-top: 20px;
   max-width: 600px; }
+
+.press-entry-landing {
+  display: flex;
+  margin: 10px 0 10px 0;
+  height: 150px;
+  width: calc(75% + 36px);
+  max-width: calc(600px + 36px); }
+
+.press-entry-landing#first-child {
+  margin-top: 20px; }
 
 .how-to .logo {
   margin: 0 auto; }
@@ -1307,6 +1319,24 @@ body,
       margin-bottom: 4px; }
     .info-box ol li:last-child {
       margin-bottom: 0; }
+
+.info-box#press {
+  border-width: 1px 0 1px 1px;
+  border-radius: 12px 0 0 12px;
+  font-size: 22px;
+  font-weight: 400; }
+
+.info-box#press-pic {
+  width: 40%;
+  text-align: right;
+  border-width: 1px;
+  border-radius: 0 12px 12px 0;
+  padding: 0;
+  /*img {
+    max-width: 160px;
+    border-width: 1px;
+    border-radius: 0 $border-radius $border-radius 0;
+  }*/ }
 
 .info-box#no-title {
   margin-top: 20px;

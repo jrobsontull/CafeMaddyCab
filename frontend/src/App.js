@@ -5,6 +5,8 @@ import './assets/css/global.css';
 import LandingPage from './components/front-facing/LandingPage';
 import HowToPage from './components/front-facing/HowTo';
 import RequestRide from './components/front-facing/RequestRide';
+import PressPage from './components/front-facing/PressPage';
+import PressEntry from './components/front-facing/PressEntry';
 import TermsAndConditions from './components/front-facing/TermsAndConditions';
 import Success from './components/front-facing/Success';
 import Login from './components/dashboard/Login';
@@ -23,6 +25,8 @@ function App() {
             <Route path={'/'} element={<LandingPage />} />
             <Route path={'/how-to-ride'} element={<HowToPage />} />
             <Route path={'/request-ride'} element={<RequestRide />} />
+            <Route path={'/press'} element={<PressPage />} />
+            <Route path={'/press/:id'} element={<PressEntry />} />
             <Route
               path={'/terms-and-conditions'}
               element={<TermsAndConditions />}

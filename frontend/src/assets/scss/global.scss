@@ -178,6 +178,26 @@ body,
   }
 }
 
+.info-box#press {
+  border-width: 1px 0 1px 1px;
+  border-radius: $border-radius 0 0 $border-radius;
+  font-size: $heading-font-size;
+  font-weight: 400; // confirm font weight later
+}
+
+.info-box#press-pic {
+  width: 40%;
+  text-align: right;
+  border-width: 1px;
+  border-radius: 0 $border-radius $border-radius 0;
+  padding: 0;
+  /*img {
+    max-width: 160px;
+    border-width: 1px;
+    border-radius: 0 $border-radius $border-radius 0;
+  }*/
+}
+
 .info-box#no-title {
   margin-top: 20px;
   border-width: 1px;

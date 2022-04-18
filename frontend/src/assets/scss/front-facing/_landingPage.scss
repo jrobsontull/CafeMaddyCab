@@ -39,7 +39,6 @@ hr {
   .text {
     margin: auto;
     img {
-      border: 1px solid $dark-blue;
       width: 16px;
     }
 
@@ -49,6 +48,13 @@ hr {
 
     .mission-donate {
       display: flex;
+      transition: all 0.25s ease;
+    }
+
+    .mission-donate:hover {
+      p {
+        padding: 0 10px 0 10px;
+      }
     }
   }
 }
@@ -57,4 +63,16 @@ hr {
   width: $content-width;
   margin-top: 20px;
   max-width: $max-width;
+}
+
+.press-entry-landing {
+  display: flex;
+  margin: 10px 0 10px 0;
+  height: 150px;
+  width: calc(#{$content-width} + 36px);
+  max-width: calc(#{$max-width} + 36px);
+}
+
+.press-entry-landing#first-child {
+  margin-top: 20px;
 }
