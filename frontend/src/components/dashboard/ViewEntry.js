@@ -82,16 +82,28 @@ function ViewEntry({ rideId, onClose }) {
     const updatedRide = rideDetails;
     updatedRide.lastEditedBy = user.user.commonName;
 
-    RidesAPI.editRideById(updatedRide).then(() => {
-      onClose();
+    RidesAPI.editRideById(updatedRide).then((response) => {
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // Everything was all good
+        onClose();
+      }
     });
   }
 
   useEffect(() => {
     RidesAPI.getRideById(rideId).then((response) => {
-      setRideDetails(response.ride);
-      setSelfieUrl(baseImgUrl + response.ride.selfie.path);
-      setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // Everything was all good
+        setRideDetails(response.ride);
+        setSelfieUrl(baseImgUrl + response.ride.selfie.path);
+        setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -201,7 +213,7 @@ function ViewEntry({ rideId, onClose }) {
                 >
                   <option value="1">New</option>
                   <option value="2">In progress</option>
-                  <option value="3">Accepted</option>
+                  <option value="3">Approved</option>
                   <option value="4">Rejected</option>
                   <option value="5">Unsure</option>
                   <option value="6">Done</option>

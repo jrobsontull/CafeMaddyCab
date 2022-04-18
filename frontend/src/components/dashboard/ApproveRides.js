@@ -101,10 +101,11 @@ function ApproveRides() {
   // Cancel button handler - unset in progress state on rides
   function cancelHandler() {
     RidesAPI.unsetInProgress(user.user._id).then((response) => {
-      if (response.status === 'success') {
-        navigate('/dashboard');
+      var { error } = response;
+      if (error) {
+        alert(error);
       } else {
-        alert(response.error);
+        navigate('/dashboard');
       }
     });
   }
@@ -112,14 +113,11 @@ function ApproveRides() {
   // Submit/save changes handler - push approvalState and notes to DB
   function submitHandler() {
     RidesAPI.approveRides(approvalStates, notes).then((response) => {
-      console.log(response);
-
-      if (response.error) {
-        alert(response.error);
-      } else if (response.status === 'success') {
-        navigate('/dashboard');
+      var { error } = response;
+      if (error) {
+        alert(error);
       } else {
-        alert('Got bad response: \n' + response);
+        navigate('/dashboard');
       }
     });
   }

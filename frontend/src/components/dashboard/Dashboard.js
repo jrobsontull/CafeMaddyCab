@@ -132,20 +132,32 @@ function Dashboard() {
   useEffect(() => {
     /* Populate table with all rides */
     RidesAPI.getRides().then((response) => {
-      setRides(response.rides);
-      setRidesData({
-        totalRides: response.totalResults,
-        currentPage: 0,
-        totalPages: calculateTotalPageNums(
-          entiresPerPage,
-          response.totalResults
-        ),
-      });
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // Everything was all good
+        setRides(response.rides);
+        setRidesData({
+          totalRides: response.totalResults,
+          currentPage: 0,
+          totalPages: calculateTotalPageNums(
+            entiresPerPage,
+            response.totalResults
+          ),
+        });
+      }
     });
 
     /* Set status quantities in left menu - might be a CPU intensive process so be WARNED */
     RidesAPI.getStats().then((response) => {
-      setStatusCount(response.count);
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // Everything was all good
+        setStatusCount(response.count);
+      }
     });
   }, []);
 

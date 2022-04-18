@@ -47,8 +47,7 @@ export default class RidesAPI {
 
     const response = await getRequest(url);
     if (response) {
-      const ride = response.data;
-      return ride;
+      return response.data;
     }
   }
 
@@ -113,6 +112,7 @@ export default class RidesAPI {
     };
 
     const response = await postRequest(url, body);
+
     if (response) {
       return response.data;
     }
@@ -150,7 +150,7 @@ async function getRequest(url) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }
 
@@ -167,7 +167,7 @@ async function postRequest(url, body) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }
 
@@ -184,6 +184,6 @@ async function putRequest(body, url) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }

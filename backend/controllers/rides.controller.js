@@ -304,34 +304,33 @@ export default class RidesController {
       }
 
       if (ridesArr === null && notesArr === null) {
+        // Return error
         res.status(400).json({
-          error: 'No status changes or new notes were provided to update.',
+          error: 'No rides set for approval or notes to update.',
         });
-        return;
+      } else {
+        // Parse data into arrays for easier handling
+        for (var key in ridesObj) {
+          ridesArr.push({ _id: key, stateToSet: ridesObj[key].stateToSet });
+        }
+
+        for (var key in notesObj) {
+          notesArr.push({ _id: key, notes: notesObj[key].notes });
+        }
+
+        const response = await RidesDAO.approveRides(
+          ridesArr,
+          notesArr,
+          approver
+        );
+
+        var { error } = response;
+        if (error) {
+          res.status(500).json({ error: error });
+        }
+
+        res.json(response);
       }
-
-      // Parse data into arrays for easier handling
-      for (var key in ridesObj) {
-        ridesArr.push({ _id: key, stateToSet: ridesObj[key].stateToSet });
-      }
-
-      for (var key in notesObj) {
-        notesArr.push({ _id: key, notes: notesObj[key].notes });
-      }
-
-      const response = await RidesDAO.approveRides(
-        ridesArr,
-        notesArr,
-        approver
-      );
-
-      var { error } = response;
-      if (error) {
-        res.status(500).json({ error: error });
-        return;
-      }
-
-      res.json(response);
     } catch (e) {
       console.log('RidesController: Failed to approve rides. ' + e.message);
       res.status(500).json({ error: e });
