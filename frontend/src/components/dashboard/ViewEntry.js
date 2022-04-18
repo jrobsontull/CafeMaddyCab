@@ -49,49 +49,76 @@ function ViewEntry({ rideId, onClose }) {
 
   function updateStatus(target) {
     let newStatus = {};
+    let setApprover = false;
 
     switch (parseInt(target.value)) {
       case 1:
         newStatus = { value: 1, text: 'New' };
+        setApprover = false;
         break;
       case 2:
         newStatus = { value: 2, text: 'In progress' };
+        setApprover = true;
         break;
       case 3:
         newStatus = { value: 3, text: 'Approved' };
+        setApprover = false;
         break;
       case 4:
         newStatus = { value: 4, text: 'Rejected' };
+        setApprover = false;
         break;
       case 5:
         newStatus = { value: 5, text: 'Unsure' };
+        setApprover = false;
         break;
       case 6:
         newStatus = { value: 6, text: 'Done' };
+        setApprover = false;
         break;
       // no default
     }
 
-    setRideDetails((prevDetails) => ({
-      ...prevDetails,
-      status: newStatus,
-    }));
+    if (setApprover) {
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        status: newStatus,
+        approver: { commonName: user.user.commonName, id: user.user._id },
+      }));
+    } else {
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        status: newStatus,
+      }));
+    }
   }
 
   function saveChanges() {
     const updatedRide = rideDetails;
     updatedRide.lastEditedBy = user.user.commonName;
 
-    RidesAPI.editRideById(updatedRide).then(() => {
-      onClose();
+    RidesAPI.editRideById(updatedRide).then((response) => {
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // Everything was all good
+        onClose();
+      }
     });
   }
 
   useEffect(() => {
     RidesAPI.getRideById(rideId).then((response) => {
-      setRideDetails(response.ride);
-      setSelfieUrl(baseImgUrl + response.ride.selfie.path);
-      setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // Everything was all good
+        setRideDetails(response.ride);
+        setSelfieUrl(baseImgUrl + response.ride.selfie.path);
+        setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -201,7 +228,7 @@ function ViewEntry({ rideId, onClose }) {
                 >
                   <option value="1">New</option>
                   <option value="2">In progress</option>
-                  <option value="3">Accepted</option>
+                  <option value="3">Approved</option>
                   <option value="4">Rejected</option>
                   <option value="5">Unsure</option>
                   <option value="6">Done</option>

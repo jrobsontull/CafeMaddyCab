@@ -5,6 +5,7 @@ const ObjectId = mongodb.ObjectId;
 let rides;
 
 export default class RidesDAO {
+  // Establish DB connection
   static async injectRidesDB(conn) {
     if (rides) {
       return;
@@ -25,6 +26,7 @@ export default class RidesDAO {
     }
   }
 
+  // Request a ride by POSTing to DB
   static async requestRide(
     shortId,
     dateRequested,
@@ -63,6 +65,7 @@ export default class RidesDAO {
     }
   }
 
+  // Get all rides based on filters
   static async getRides(filters = null, page = 0, ridesPerPage = 15) {
     let query = {};
 
@@ -106,6 +109,7 @@ export default class RidesDAO {
     }
   }
 
+  // Get details about specific ride by ID
   static async getRideById(id) {
     try {
       const query = { _id: ObjectId(id) };
@@ -131,6 +135,7 @@ export default class RidesDAO {
     }
   }
 
+  // Get stats about all rides - this might take time to request and count
   static async getStats(filters) {
     try {
       if ('status' in filters) {
@@ -186,6 +191,7 @@ export default class RidesDAO {
     }
   }
 
+  // Edit rides by specific ID
   static async editRideById(
     id,
     lastEditedBy,
@@ -194,6 +200,7 @@ export default class RidesDAO {
     email,
     identity,
     status,
+    approver,
     coupon,
     notes
   ) {
@@ -209,6 +216,7 @@ export default class RidesDAO {
             email: email,
             identity: identity,
             status: status,
+            approver: approver,
             lastEditedBy: lastEditedBy,
             coupon: coupon,
             notes: notes,
@@ -223,6 +231,7 @@ export default class RidesDAO {
     }
   }
 
+  // Set new rides to in progress, ready for approving
   static async setRidesInProgress(toApprove, approver) {
     try {
       const query = { 'status.value': 1 };
@@ -271,6 +280,7 @@ export default class RidesDAO {
     }
   }
 
+  // Set in progress rides back to new
   static async unsetRidesInProgress(approverId) {
     try {
       const query = { 'approver.id': approverId };
@@ -291,7 +301,7 @@ export default class RidesDAO {
       for (const ride of ridesToUpdate) {
         responses.push(
           await rides.findOneAndUpdate(
-            { _id: ride._id },
+            { _id: ride._id, 'status.value': 2 },
             {
               $set: {
                 status: { value: 1, text: 'New' },
@@ -312,6 +322,104 @@ export default class RidesDAO {
       }
     } catch (e) {
       console.log('ridesDAO: Unable to unset in progress state on rides. ' + e);
+      return { error: e };
+    }
+  }
+
+  // Set status of rides from in progress to either approved, rejected or unsure
+  static async approveRides(ridesToUpdate, notesToUpdate) {
+    try {
+      let rideResponses = [];
+      let notesResponses = [];
+
+      // Update the status of rides
+      if (ridesToUpdate) {
+        for (const ride of ridesToUpdate) {
+          let newStatusText;
+          const newStatus = parseInt(ride.stateToSet, 10);
+          switch (newStatus) {
+            case 3:
+              newStatusText = 'Approved';
+              break;
+            case 4:
+              newStatusText = 'Rejected';
+              break;
+            case 5:
+              newStatusText = 'Unsure';
+              break;
+          }
+
+          rideResponses.push(
+            await rides.findOneAndUpdate(
+              { _id: ObjectId(ride._id) },
+              {
+                $set: {
+                  status: { value: newStatus, text: newStatusText },
+                },
+              }
+            )
+          );
+        }
+      }
+
+      // Update the notes fields separately
+      if (notesToUpdate) {
+        for (const ride of notesToUpdate) {
+          notesResponses.push(
+            await rides.findOneAndUpdate(
+              { _id: ObjectId(ride._id) },
+              {
+                $set: {
+                  notes: ride.notes,
+                },
+              }
+            )
+          );
+        }
+      }
+
+      // Error checking
+      if (ridesToUpdate && notesToUpdate) {
+        if (
+          rideResponses.length === ridesToUpdate.length &&
+          notesResponses.length === notesToUpdate.length
+        ) {
+          // All good
+          return { status: 'success' };
+        } else if (rideResponses.length !== ridesToUpdate.length) {
+          // Rides not all updated
+          console.log('ridesDAO: Failed to set approval status of all rides.');
+          return {
+            error:
+              'Not all rides requested could be set to their approval states.',
+          };
+        } else if (notesResponses.length !== notesToUpdate.length) {
+          // Notes not all updated
+          console.log(
+            'ridesDAO: Failed to update approval notes on all rides.'
+          );
+          return {
+            error: 'Not all rides could be updated with approval notes.',
+          };
+        }
+      } else if (
+        ridesToUpdate &&
+        rideResponses.length === ridesToUpdate.length
+      ) {
+        // All good
+        return { status: 'success' };
+      } else if (
+        notesToUpdate &&
+        notesResponses.length === notesToUpdate.length
+      ) {
+        // All good
+        return { status: 'success' };
+      } else {
+        // Else return error as no info provided
+        return { error: 'No information provided to update.' };
+      }
+    } catch (e) {
+      console.log('ridesDAO: Failed to approve rides. ' + e);
       return { error: e };
     }
   }

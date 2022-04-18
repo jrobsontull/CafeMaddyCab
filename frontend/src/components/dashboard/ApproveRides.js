@@ -54,6 +54,7 @@ function ApproveRides() {
           ...prevData,
           currentPage: pageToScrollTo,
         }));
+        window.scrollTo(0, 0);
       });
     }
   }
@@ -70,6 +71,7 @@ function ApproveRides() {
           ...prevData,
           currentPage: pageToScrollTo,
         }));
+        window.scrollTo(0, 0);
       });
     }
   }
@@ -80,7 +82,7 @@ function ApproveRides() {
     if (target.checked && target.value) {
       setApprovalStates((prevStates) => ({
         ...prevStates,
-        [id]: { ride_id: id, stateToSet: target.value },
+        [id]: { rideId: id, stateToSet: target.value },
       }));
     }
   }
@@ -99,10 +101,23 @@ function ApproveRides() {
   // Cancel button handler - unset in progress state on rides
   function cancelHandler() {
     RidesAPI.unsetInProgress(user.user._id).then((response) => {
-      if (response.status === 'success') {
-        navigate('/dashboard');
+      var { error } = response;
+      if (error) {
+        alert(error);
       } else {
-        alert(response.error);
+        navigate('/dashboard');
+      }
+    });
+  }
+
+  // Submit/save changes handler - push approvalState and notes to DB
+  function submitHandler() {
+    RidesAPI.approveRides(approvalStates, notes).then((response) => {
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        navigate('/dashboard');
       }
     });
   }
@@ -307,7 +322,9 @@ function ApproveRides() {
                 </div>
               )}
 
-              <div className="save-changes-btn">Save changes</div>
+              <div className="save-changes-btn" onClick={() => submitHandler()}>
+                Save changes
+              </div>
             </div>
           </div>
         </div>

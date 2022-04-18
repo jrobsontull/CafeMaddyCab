@@ -2,6 +2,7 @@ import http from './http.common';
 import httpMulti from './http.upload.common';
 
 export default class RidesAPI {
+  // Request a ride
   static async requestRide(rideDetails, selfie, photoId) {
     var formData = new FormData();
     formData.append('selfie', selfie);
@@ -25,6 +26,7 @@ export default class RidesAPI {
     }
   }
 
+  // Get many rides, ability to search by param
   static async getRides(urlParams = null) {
     let url = 'api/v1/rides';
 
@@ -39,16 +41,17 @@ export default class RidesAPI {
     }
   }
 
+  // Get ride details by ObjectID
   static async getRideById(id) {
     const url = 'api/v1/rides/getById?id=' + id;
 
     const response = await getRequest(url);
     if (response) {
-      const ride = response.data;
-      return ride;
+      return response.data;
     }
   }
 
+  // Edit ride details
   static async editRideById(ride) {
     const url = 'api/v1/rides';
 
@@ -58,6 +61,7 @@ export default class RidesAPI {
     }
   }
 
+  // Get general stats about rides e.g. by status
   static async getStats(urlParams = null) {
     let url = 'api/v1/rides/getStats';
 
@@ -72,7 +76,7 @@ export default class RidesAPI {
     }
   }
 
-  /* Set rides to in progress */
+  // Set rides to in progress
   static async setInProgress(num, user) {
     const url = 'api/v1/rides/setInProgress';
     const body = {
@@ -86,7 +90,7 @@ export default class RidesAPI {
     }
   }
 
-  /* Set in progress rides to new (cancel action in ApproveRides) */
+  // Set in progress rides to new (cancel action in ApproveRides)
   static async unsetInProgress(userId) {
     const url = 'api/v1/rides/unsetInProgress';
     const body = {
@@ -98,8 +102,24 @@ export default class RidesAPI {
       return response.data;
     }
   }
+
+  // Approve rides by ID and append notes
+  static async approveRides(toApprove, notesToAppend) {
+    const url = 'api/v1/rides/approve';
+    const body = {
+      rides: toApprove,
+      notes: notesToAppend,
+    };
+
+    const response = await postRequest(url, body);
+
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
+// POST request for multipart content - used for requesting rides
 async function postRequestMulti(body, url, gResponse) {
   try {
     const payload = body;
@@ -118,6 +138,7 @@ async function postRequestMulti(body, url, gResponse) {
   }
 }
 
+// General GET request
 async function getRequest(url) {
   try {
     const response = await http.get(url);
@@ -129,10 +150,11 @@ async function getRequest(url) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }
 
+// General POST request
 async function postRequest(url, body) {
   try {
     const payload = body;
@@ -145,10 +167,11 @@ async function postRequest(url, body) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }
 
+// General PUT request
 async function putRequest(body, url) {
   try {
     const payload = body;
@@ -161,6 +184,6 @@ async function putRequest(body, url) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }

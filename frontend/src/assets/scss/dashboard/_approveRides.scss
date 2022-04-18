@@ -1,6 +1,4 @@
 .dashboard.approve-rides {
-  margin-bottom: 36px;
-
   .table-content {
     width: 100%;
 
@@ -59,6 +57,7 @@
         li {
           text-align: center;
           padding: 14px 4px;
+          word-break: break-all;
         }
 
         li#col-1 {
@@ -79,6 +78,7 @@
 
         li#col-5 {
           width: 10%;
+          word-break: normal;
         }
 
         li#col-6 {
@@ -87,6 +87,7 @@
 
         li#col-7 {
           width: 11%;
+          word-break: normal;
         }
 
         li#col-8 {
@@ -121,7 +122,7 @@
               text-align: center;
 
               img {
-                max-width: 150px;
+                max-width: 130px;
                 max-height: 240px;
                 padding: 10px 0;
                 vertical-align: middle;

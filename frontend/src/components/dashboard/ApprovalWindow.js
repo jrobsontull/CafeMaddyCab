@@ -28,14 +28,15 @@ function ApprovalWindow({ onCancel }) {
         });
 
         RidesAPI.setInProgress(ridesToApprove, user.user).then((response) => {
-          if (response.status === 'success') {
-            /* Everything was all good */
-            navigate('/dashboard/approve-rides/' + user.user._id);
-          } else {
+          var { error } = response;
+          if (error) {
             setErrorOnSubmit({
               state: true,
-              message: response.error,
+              message: error,
             });
+          } else {
+            // Everything was all good
+            navigate('/dashboard/approve-rides/' + user.user._id);
           }
         });
       } else {
