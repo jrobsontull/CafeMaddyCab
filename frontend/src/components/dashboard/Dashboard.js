@@ -72,6 +72,7 @@ function Dashboard() {
   }
 
   function viewRideEntry(rideId) {
+    window.scrollTo(0, 0);
     setSelectedRideId(rideId);
     setOpenRideEntryView(true);
   }
@@ -89,6 +90,11 @@ function Dashboard() {
         ),
       });
     });
+  }
+
+  function openApprovalWindow() {
+    window.scrollTo(0, 0);
+    setOpenApprovalWindow(true);
   }
 
   function closeApprovalWindow() {
@@ -189,10 +195,7 @@ function Dashboard() {
               </ul>
             </div>
             <div className="action-btns">
-              <div
-                className="action"
-                onClick={() => setOpenApprovalWindow(true)}
-              >
+              <div className="action" onClick={() => openApprovalWindow()}>
                 Approve requests
               </div>
               <div className="action">Edit request</div>

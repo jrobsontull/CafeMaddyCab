@@ -284,4 +284,63 @@ export default class RidesController {
       res.status(500).json({ error: e });
     }
   }
+
+  static async apiApproveRides(req, res, next) {
+    try {
+      const ridesObj = req.body.rides;
+      const notesObj = req.body.notes;
+      const approver = req.body.approver;
+
+      let ridesArr = [];
+      let notesArr = [];
+
+      // Catching errors and bad input
+      if (isObjEmpty(ridesObj)) {
+        ridesArr = null;
+      }
+
+      if (isObjEmpty(notesObj)) {
+        notesArr = null;
+      }
+
+      if (ridesArr === null && notesArr === null) {
+        res.status(400).json({
+          error: 'No status changes or new notes were provided to update.',
+        });
+        return;
+      }
+
+      // Parse data into arrays for easier handling
+      for (var key in ridesObj) {
+        ridesArr.push({ _id: key, stateToSet: ridesObj[key].stateToSet });
+      }
+
+      for (var key in notesObj) {
+        notesArr.push({ _id: key, notes: notesObj[key].notes });
+      }
+
+      const response = await RidesDAO.approveRides(
+        ridesArr,
+        notesArr,
+        approver
+      );
+
+      var { error } = response;
+      if (error) {
+        res.status(500).json({ error: error });
+        return;
+      }
+
+      res.json(response);
+    } catch (e) {
+      console.log('RidesController: Failed to approve rides. ' + e.message);
+      res.status(500).json({ error: e });
+    }
+  }
+}
+
+// Check if obj is empty and return bool
+function isObjEmpty(obj) {
+  for (var key in obj) return false;
+  return true;
 }

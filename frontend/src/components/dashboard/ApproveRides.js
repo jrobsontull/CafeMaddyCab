@@ -54,6 +54,7 @@ function ApproveRides() {
           ...prevData,
           currentPage: pageToScrollTo,
         }));
+        window.scrollTo(0, 0);
       });
     }
   }
@@ -70,6 +71,7 @@ function ApproveRides() {
           ...prevData,
           currentPage: pageToScrollTo,
         }));
+        window.scrollTo(0, 0);
       });
     }
   }
@@ -80,7 +82,7 @@ function ApproveRides() {
     if (target.checked && target.value) {
       setApprovalStates((prevStates) => ({
         ...prevStates,
-        [id]: { ride_id: id, stateToSet: target.value },
+        [id]: { rideId: id, stateToSet: target.value },
       }));
     }
   }
@@ -103,6 +105,21 @@ function ApproveRides() {
         navigate('/dashboard');
       } else {
         alert(response.error);
+      }
+    });
+  }
+
+  // Submit/save changes handler - push approvalState and notes to DB
+  function submitHandler() {
+    RidesAPI.approveRides(approvalStates, notes).then((response) => {
+      console.log(response);
+
+      if (response.error) {
+        alert(response.error);
+      } else if (response.status === 'success') {
+        navigate('/dashboard');
+      } else {
+        alert('Got bad response: \n' + response);
       }
     });
   }
@@ -307,7 +324,9 @@ function ApproveRides() {
                 </div>
               )}
 
-              <div className="save-changes-btn">Save changes</div>
+              <div className="save-changes-btn" onClick={() => submitHandler()}>
+                Save changes
+              </div>
             </div>
           </div>
         </div>
