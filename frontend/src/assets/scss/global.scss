@@ -83,12 +83,12 @@ body {
 
   h1 {
     font-size: $heading-font-size;
-    font-weight: 400; // confirm font weight later
+    font-weight: 500; // confirm font weight later
   }
 
   p {
     font-size: $smaller-font-size;
-    font-weight: 300;
+    font-weight: 400;
   }
 }
 
@@ -241,7 +241,7 @@ body,
       vertical-align: middle;
       transition: padding 0.3s ease;
     }
-   }
+  }
 
   a {
     font-size: $heading-font-size;

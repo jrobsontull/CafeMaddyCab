@@ -41,7 +41,7 @@ function LandingPage() {
             <div className="icon">
               <img src={Donate} alt="Donate" />
             </div>
-              Donate
+            Donate
           </a>
         </div>
         <div className="btn-link" id="landing-page">
@@ -53,7 +53,7 @@ function LandingPage() {
           </a>
         </div>
         <div className="btn-link" id="landing-page">
-          <a href="/how-to-ride" >
+          <a href="/how-to-ride">
             <div className="icon">
               <img src={Info} alt="Info" />
             </div>
@@ -66,8 +66,8 @@ function LandingPage() {
           <div className="text">
             <p>Our Mission</p>
             <h1>Help our AAPI community feel safe with their NYC commute</h1>
-            <a 
-              className="mission-donate"             
+            <a
+              className="mission-donate"
               href="https://www.gofundme.com/f/cafemaddycab"
               target="_blank"
               rel="noopener noreferrer"
@@ -114,17 +114,25 @@ function LandingPage() {
             in 2022, we felt the need to relaunch Cafe Maddy Cab.
           </p>
         </div>
-        <h1 className="landing-heading"><a href="/press-page">Press</a></h1>
+        <h1 className="landing-heading">
+          <a href="/press-page">Press</a>
+        </h1>
         <div className="press-entry-landing" id="first-child">
-          <div className="info-box" id="press">This is an example press title 1</div>
+          <div className="info-box" id="press">
+            This is an example press title 1
+          </div>
           <div className="info-box" id="press-pic"></div>
         </div>
         <div className="press-entry-landing">
-          <div className="info-box" id="press">This is an example press title 2</div>
+          <div className="info-box" id="press">
+            This is an example press title 2
+          </div>
           <div className="info-box" id="press-pic"></div>
         </div>
         <div className="press-entry-landing">
-          <div className="info-box" id="press">This is an example press title 3</div>
+          <div className="info-box" id="press">
+            This is an example press title 3
+          </div>
           <div className="info-box" id="press-pic"></div>
         </div>
         <Footer />
