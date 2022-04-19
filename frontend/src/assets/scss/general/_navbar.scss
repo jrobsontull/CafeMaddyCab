@@ -1,28 +1,29 @@
-.navbar.frontend {
-  background-color: $dark-blue;
+.backend .navbar,
+.frontend .navbar {
   width: 100%;
   color: $lightest-pink;
-  font-size: 20px;
 
   .header {
-    width: calc(#{$content-width} + 32px);
-    max-width: calc(#{$max-width} + 32px);
-    padding: 12px 0;
     display: flex;
     justify-content: space-between;
     background-color: $dark-blue;
     margin: auto;
     padding: 12px 5%;
+    align-items: center;
     position: relative;
     z-index: 2;
 
     .branding {
       display: flex;
-      font-size: 20px;
+      font-size: 18px;
 
       .cmc {
-        color: #f7f5fe;
-        margin: auto;
+        margin-right: 10px;
+      }
+
+      .page-name {
+        margin-left: 10px;
+        font-weight: 300;
       }
     }
 
@@ -57,8 +58,6 @@
   }
 
   .nav {
-    border: 1px solid $lightest-pink;
-    border-width: 1px 0 0 0;
     transform: translateY(-100vh);
     background-color: $dark-blue;
     position: absolute;
@@ -67,35 +66,68 @@
     z-index: 1;
 
     ul {
-      border: none;
-      width: 100%;
+      width: 90%;
+      margin: auto;
       list-style-type: none;
       padding-left: 0;
+      margin-bottom: 10px;
+      padding-top: 2px;
 
       li {
-        border: 1px solid $lightest-pink;
-        border-width: 0 0 1px 0;
+        padding: 8px 0;
+        border: 1px solid $light-blue;
+        border-width: 1px 0 0 0;
+        font-size: 18px;
       }
 
-      a {
-        display: block;
-        padding: 10px 0; // see what's a good size of the navbar list
-        width: calc(#{$content-width} + 32px);
-        max-width: calc(#{$max-width} + 32px);
-        margin: auto;
+      li a,
+      li p {
         color: inherit;
         font-weight: 300;
+        transition: all 0.25s ease;
+        width: 100%;
       }
 
-      a:hover {
+      li a:hover,
+      li p:hover {
         cursor: pointer;
-        font-weight: 400;
+        margin-left: 10px;
       }
     }
   }
 
   .nav.active {
     transform: translateY((0vh));
+  }
+}
+
+.frontend .navbar {
+  background-color: $dark-blue;
+
+  .branding .cmc {
+    font-size: 20px;
+  }
+
+  .header {
+    width: calc(#{$content-width} + 32px);
+    max-width: calc(#{$max-width} + 32px);
+  }
+
+  .nav {
+    ul {
+      width: calc(#{$content-width} + 32px);
+      max-width: calc(#{$max-width} + 32px);
+
+      li {
+        font-size: 20px;
+
+        img.ride-icon {
+          height: 16px;
+          width: auto;
+          margin-left: 8px;
+        }
+      }
+    }
   }
 
   @media screen and (min-width: 800px) {

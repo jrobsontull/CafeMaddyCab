@@ -1,0 +1,58 @@
+.content .footer {
+  width: $content-width;
+  margin-top: 30px;
+  padding: 18px 18px 20px 18px;
+  max-width: $max-width;
+  border: 1px solid $light-blue;
+  border-width: 1px 0 0 0;
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    color: $lightest-pink;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      img {
+        width: 20px;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      p {
+        font-size: $smaller-font-size;
+        margin: 0 0 0 8px;
+      }
+
+      a,
+      a:visited,
+      a:link,
+      a:active {
+        color: inherit;
+      }
+
+      a {
+        display: flex;
+        flex-direction: row;
+        transition: transform 0.25s ease;
+      }
+
+      a:hover {
+        transform: scale(1.04);
+      }
+    }
+  }
+
+  p {
+    color: $light-blue;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+}

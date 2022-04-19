@@ -1,33 +1,9 @@
-.title-logo {
+.big-btns {
+  width: 100%;
   display: flex;
-  width: 255px;
-  margin: 30px 0 30px 0;
-
-  .logo {
-    margin: 0 auto;
-
-    img {
-      height: auto;
-      width: 85px;
-      vertical-align: middle;
-    }
-  }
-  .cmc-title {
-    padding-left: 10px;
-    p {
-      font-size: 16px;
-    }
-  }
-}
-
-hr {
-  border: 0;
-  clear: both;
-  display: block;
-  width: calc(#{$content-width} + 36px);
-  max-width: calc(#{$max-width} + 36px);
-  background-color: $dark-blue;
-  height: 1px;
+  flex-direction: column;
+  align-items: center;
+  margin: 4px 0 10px 0;
 }
 
 .mission {

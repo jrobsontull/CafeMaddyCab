@@ -1,7 +1,3 @@
-.btn-link.donate {
-  margin-top: 20px;
-}
-
 .btn {
   width: 100%;
   width: $content-width;
@@ -17,84 +13,60 @@
 .btn-link {
   width: calc(#{$content-width} + 36px);
   max-width: calc(#{$max-width} + 36px);
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
+  margin: 8px 0;
   background-color: $dark-blue;
   border-radius: $border-radius;
   color: $lightest-pink;
+  padding: 10px 0;
   transition: all 0.25s ease;
-  padding: 12px 0 12px 0;
-
-  .icon {
-    display: inline-flex;
-    img {
-      width: 16px;
-      margin-right: 5px;
-      height: auto;
-      vertical-align: middle;
-      transition: padding 0.3s ease;
-    }
-  }
 
   a {
-    font-size: $heading-font-size;
-    width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 22px;
+    transition: transform 0.25s ease;
+
+    img.icon {
+      width: 16px;
+      height: auto;
+      margin-right: 8px;
+    }
   }
 
   a:visited,
   a:link,
   a:active {
-    color: inherit;
-  }
-}
-
-.btn-link-invert {
-  width: calc(#{$content-width} + 36px);
-  max-width: calc(#{$max-width} + 36px);
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  background-color: #fefff3;
-  border-radius: $border-radius;
-  border: 1px solid $dark-blue;
-  color: $dark-blue;
-  transition: all 0.25s ease;
-  padding: 12px 0 12px 0;
-
-  .icon {
-    display: inline-flex;
-    img {
-      width: 16px;
-      margin-right: 5px;
-      height: auto;
-      vertical-align: middle;
-      transition: padding 0.3s ease;
-    }
-  }
-
-  a {
-    font-size: $heading-font-size;
-    width: 100%;
-    text-align: center;
-  }
-
-  a:visited,
-  a:link,
-  a:active {
-    color: inherit;
+    color: $lightest-pink;
   }
 }
 
 .btn-link:hover {
+  cursor: pointer;
   background-color: $blue-btn-hover;
   box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
-  cursor: pointer;
 
-  .icon {
-    padding: 10px 10px;
+  a {
+    transform: scale(1.04);
   }
+}
+
+.btn-link.inverted {
+  background-color: $light-form;
+  border: 1px solid $dark-blue;
+
+  a {
+    color: $dark-blue;
+  }
+
+  a:visited,
+  a:link,
+  a:active {
+    color: $dark-blue;
+  }
+}
+
+.btn-link.inverted:hover {
+  background-color: $light-form;
 }
 
 .btn-link.submit {

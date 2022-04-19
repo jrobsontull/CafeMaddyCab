@@ -1,13 +1,17 @@
+// Module imports
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
+// Component imports
 import Navbar from './Navbar';
+import Logo from './Logo';
 import Footer from './Footer';
 
-import Logo from '../../assets/img/logo.svg';
+// Photo imports
 import Donate from '../../assets/img/donate_icon.svg';
 import DonateBlue from '../../assets/img/donate_icon_blue.svg';
 import Taxi from '../../assets/img/taxi_icon.svg';
-import InfoBlue from '../../assets/img/info_icon_blue.svg';
+import Info from '../../assets/img/info_icon.svg';
 import MissionPhoto from '../../assets/img/landing-page-thumb-1.png';
 import QuotePhoto from '../../assets/img/landing-page-thumb-2.png';
 import Arrow from '../../assets/img/arrow_right_blue.svg';
@@ -23,43 +27,33 @@ function LandingPage() {
       <div className="content frontend">
         <Navbar />
 
-        <div className="title-logo">
-          <div className="logo">
-            <img src={Logo} alt="Cafe Maddy Cab" />
+        <Logo />
+
+        <div className="line-break"></div>
+
+        <div className="big-btns">
+          <div className="btn-link" id="landing-page">
+            <a
+              href="https://www.gofundme.com/f/cafemaddycab"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={Donate} alt="Donate" className="icon" />
+              <div className="text">Donate</div>
+            </a>
           </div>
-          <div className="cmc-title">
-            <h1>Cafe Maddy Cab</h1>
-            <p>NYC cab rides for Asian women, LGBTQ+ and elderly in need</p>
+          <div className="btn-link" id="landing-page">
+            <Link to={'/request-ride'}>
+              <img src={Taxi} alt="Taxi" className="icon" />
+              <div className="text">Request a Ride</div>
+            </Link>
           </div>
-        </div>
-        <hr />
-        <div className="btn-link donate" id="landing-page">
-          <a
-            href="https://www.gofundme.com/f/cafemaddycab"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="icon">
-              <img src={Donate} alt="Donate" />
-            </div>
-            Donate
-          </a>
-        </div>
-        <div className="btn-link" id="landing-page">
-          <a href="/request-ride">
-            <div className="icon">
-              <img src={Taxi} alt="Taxi" />
-            </div>
-            Request a Ride
-          </a>
-        </div>
-        <div className="btn-link-invert" id="landing-page">
-          <a href="/how-to-ride">
-            <div className="icon">
-              <img src={InfoBlue} alt="InfoBlue" />
-            </div>
-            How it Works
-          </a>
+          <div className="btn-link inverted" id="landing-page">
+            <a href="/how-to-ride">
+              <img src={Info} alt="Info" className="icon" />
+              <div className="text">How it works</div>
+            </a>
+          </div>
         </div>
 
         <div className="mission">

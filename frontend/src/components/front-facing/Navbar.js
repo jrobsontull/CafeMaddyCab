@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import TaxiIcon from '../../assets/img/taxi_icon.svg';
+
 function Header() {
   const [hamOpen, setHamOpen] = useState(false);
 
@@ -14,7 +16,14 @@ function Header() {
 
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
-      <a href={link.path}>{link.name}</a>
+      {link.path === '/request-ride' ? (
+        <Link to={link.path}>
+          {link.name}
+          <img src={TaxiIcon} alt="Taxi" className="ride-icon"></img>
+        </Link>
+      ) : (
+        <Link to={link.path}>{link.name}</Link>
+      )}
     </li>
   ));
 
