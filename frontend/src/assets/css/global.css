@@ -33,6 +33,11 @@
 
 @font-face {
   font-family: 'Roboto Condensed';
+  src: url("../fonts/RobotoCondensed-Medium.ttf") format("truetype");
+  font-weight: 500; }
+
+@font-face {
+  font-family: 'Roboto Condensed';
   src: url("../fonts/RobotoCondensed-Light.ttf") format("truetype");
   font-weight: 300; }
 
@@ -299,69 +304,69 @@
       margin-top: 6px;
       font-size: 18px; }
 
-.big-btns {
+.landing-page .big-btns {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 4px 0 10px 0; }
 
-.mission {
+.landing-page .mission {
   display: flex;
   margin-top: 10px;
   max-width: 300px; }
-  .mission .photo img {
+  .landing-page .mission .photo img {
     object-fit: cover;
     height: 170px;
     width: 140px;
     margin-right: 10px; }
-  .mission .text {
+  .landing-page .mission .text {
     margin: auto; }
-    .mission .text img {
+    .landing-page .mission .text img {
       height: 16px;
       padding-right: 5px; }
-    .mission .text p {
+    .landing-page .mission .text p {
       margin-right: 5px; }
-    .mission .text .mission-donate {
+    .landing-page .mission .text .mission-donate {
       display: flex;
       padding-top: 5px;
       transform: scale(1);
       transition: 0.25s all ease; }
-    .mission .text .mission-donate:hover {
+    .landing-page .mission .text .mission-donate:hover {
       cursor: pointer;
       transform: scale(1.1); }
 
-.landing-heading {
+.landing-page .landing-heading {
   width: 75%;
   margin-top: 20px;
   max-width: 600px; }
 
-.quote {
+.landing-page .quote {
   display: flex;
   margin-top: 20px;
   max-width: 300px; }
-  .quote .photo img {
+  .landing-page .quote .photo img {
     object-fit: cover;
     height: 163px;
     width: 150px; }
-  .quote .text {
+  .landing-page .quote .text {
     margin: auto;
     padding-right: 10px;
     text-align: right; }
-    .quote .text h1 {
+    .landing-page .quote .text h1 {
       font-size: 18px; }
 
-.press-entry-landing {
+.landing-page .press-entry-landing {
   display: flex;
   margin: 10px 0 10px 0;
   height: 150px;
   width: calc(75% + 36px);
   max-width: calc(600px + 36px); }
 
-.press-entry-landing#first-child {
+.landing-page .press-entry-landing#first-child {
   margin-top: 20px; }
 
-.info-box-title {
+.landing-page .info-box-title {
   width: 75%;
   background-color: #9696db;
   padding: 8px 18px;
@@ -369,11 +374,11 @@
   border: 1px solid #3b3b96;
   margin-top: 20px;
   max-width: 600px; }
-  .info-box-title h3 {
+  .landing-page .info-box-title h3 {
     color: #f7f5fe;
     font-size: 20px; }
 
-.info-box {
+.landing-page .info-box {
   width: 75%;
   background-color: #fefff3;
   padding: 18px;
@@ -381,37 +386,37 @@
   border-radius: 0 0 12px 12px;
   border-top-width: 0;
   max-width: 600px; }
-  .info-box p {
+  .landing-page .info-box p {
     margin-top: 12px;
     text-align: left; }
-  .info-box span {
+  .landing-page .info-box span {
     font-weight: bold; }
-  .info-box a {
+  .landing-page .info-box a {
     color: inherit;
     font-weight: bold;
     transition: color 0.25s ease; }
-  .info-box a:hover {
+  .landing-page .info-box a:hover {
     color: #5c5cb3;
     cursor: pointer; }
-  .info-box a:visited {
+  .landing-page .info-box a:visited {
     color: inherit; }
-  .info-box p:first-child {
+  .landing-page .info-box p:first-child {
     margin-top: 0; }
-  .info-box ul {
+  .landing-page .info-box ul {
     margin-top: 12px; }
-    .info-box ul li {
+    .landing-page .info-box ul li {
       margin-bottom: 4px; }
-    .info-box ul li:last-child {
+    .landing-page .info-box ul li:last-child {
       margin-bottom: 0; }
-  .info-box ol {
+  .landing-page .info-box ol {
     padding-left: 18px;
     text-align: left; }
-    .info-box ol li {
+    .landing-page .info-box ol li {
       margin-bottom: 4px; }
-    .info-box ol li:last-child {
+    .landing-page .info-box ol li:last-child {
       margin-bottom: 0; }
 
-.info-box#no-title {
+.landing-page .info-box#no-title {
   margin-top: 20px;
   border-width: 1px;
   border-radius: 12px; }
@@ -1596,7 +1601,7 @@ body {
     color: inherit; }
   .content h1 {
     font-size: 24px;
-    font-weight: 600; }
+    font-weight: 500; }
   .content p {
     font-size: 18px;
     font-weight: 400; }

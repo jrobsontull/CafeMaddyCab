@@ -24,7 +24,7 @@ function LandingPage() {
 
   return (
     <div className="react-container">
-      <div className="content frontend">
+      <div className="content frontend landing-page">
         <Navbar />
 
         <Logo />

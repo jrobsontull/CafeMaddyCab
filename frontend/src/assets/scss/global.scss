@@ -57,6 +57,12 @@ $heading-font-size: 24px; // originally 22px
 
 @font-face {
   font-family: 'Roboto Condensed';
+  src: url('../fonts/RobotoCondensed-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
   font-weight: 300;
 }
@@ -112,7 +118,7 @@ body {
 
   h1 {
     font-size: $heading-font-size;
-    font-weight: 600; // confirm font weight later
+    font-weight: 500;
   }
 
   p {
