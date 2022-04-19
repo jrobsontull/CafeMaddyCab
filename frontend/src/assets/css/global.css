@@ -31,16 +31,18 @@
 /* Imports */
 .title-logo {
   display: flex;
-  width: 250px;
+  width: 255px;
   margin: 30px 0 30px 0; }
   .title-logo .logo {
     margin: 0 auto; }
     .title-logo .logo img {
       height: auto;
-      width: 80px;
+      width: 85px;
       vertical-align: middle; }
   .title-logo .cmc-title {
     padding-left: 10px; }
+    .title-logo .cmc-title p {
+      font-size: 16px; }
 
 hr {
   border: 0;
@@ -57,7 +59,7 @@ hr {
   max-width: 300px; }
   .mission .photo img {
     object-fit: cover;
-    height: 150px;
+    height: 170px;
     width: 140px;
     margin-right: 10px; }
   .mission .text {
@@ -80,6 +82,21 @@ hr {
   width: 75%;
   margin-top: 20px;
   max-width: 600px; }
+
+.quote {
+  display: flex;
+  margin-top: 20px;
+  max-width: 300px; }
+  .quote .photo img {
+    object-fit: cover;
+    height: 163px;
+    width: 150px; }
+  .quote .text {
+    margin: auto;
+    padding-right: 10px;
+    text-align: right; }
+    .quote .text h1 {
+      font-size: 18px; }
 
 .press-entry-landing {
   display: flex;
@@ -194,7 +211,7 @@ hr {
   .titles h2 {
     font-size: 34px; }
   .titles h3 {
-    font-size: 22px; }
+    font-size: 24px; }
 
 .content .error {
   background-color: #fa7575;
@@ -343,7 +360,7 @@ hr {
 .info-box#press {
   border-width: 1px 0 1px 1px;
   border-radius: 12px 0 0 12px;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 400; }
 
 .info-box#press-pic {
@@ -556,7 +573,7 @@ hr {
   color: #f7f5fe;
   padding: 8px 18px;
   text-align: center;
-  font-size: 22px;
+  font-size: 24px;
   border-radius: 12px;
   max-width: calc(600px - 32px);
   transition: all 0.25s ease; }
@@ -581,12 +598,41 @@ hr {
       vertical-align: middle;
       transition: padding 0.3s ease; }
   .btn-link a {
-    font-size: 22px;
+    font-size: 24px;
     width: 100%;
     text-align: center; }
   .btn-link a:visited,
   .btn-link a:link,
   .btn-link a:active {
+    color: inherit; }
+
+.btn-link-invert {
+  width: calc(75% + 36px);
+  max-width: calc(600px + 36px);
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #fefff3;
+  border-radius: 12px;
+  border: 1px solid #3b3b96;
+  color: #3b3b96;
+  transition: all 0.25s ease;
+  padding: 12px 0 12px 0; }
+  .btn-link-invert .icon {
+    display: inline-flex; }
+    .btn-link-invert .icon img {
+      width: 16px;
+      margin-right: 5px;
+      height: auto;
+      vertical-align: middle;
+      transition: padding 0.3s ease; }
+  .btn-link-invert a {
+    font-size: 24px;
+    width: 100%;
+    text-align: center; }
+  .btn-link-invert a:visited,
+  .btn-link-invert a:link,
+  .btn-link-invert a:active {
     color: inherit; }
 
 .btn-link:hover {
@@ -616,7 +662,7 @@ hr {
   width: 75%;
   padding: 8px 18px;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 12px;
   max-width: 600px;
   transition: all 0.25s ease;
@@ -639,7 +685,7 @@ hr {
     max-width: 266px;
     padding: 8px 18px;
     text-align: center;
-    font-size: 22px;
+    font-size: 24px;
     border-radius: 12px;
     transition: all 0.25s ease;
     color: #f7f5fe;
@@ -1418,7 +1464,7 @@ hr {
 body {
   background-color: #f7f5fe;
   font-family: 'Roboto Condensed', 'sans-serif';
-  font-size: 16px;
+  font-size: 18px;
   color: #3b3b96; }
 
 .content {
@@ -1426,10 +1472,10 @@ body {
   flex-direction: column;
   align-items: center; }
   .content h1 {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 600; }
   .content p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400; }
 
 html,
@@ -1462,7 +1508,7 @@ body,
         display: inline-block;
         vertical-align: middle; }
       .content .footer ul li p {
-        font-size: 16px;
+        font-size: 18px;
         margin: 0 0 0 8px; }
       .content .footer ul li a,
       .content .footer ul li a:visited,

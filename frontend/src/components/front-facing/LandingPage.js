@@ -7,8 +7,9 @@ import Logo from '../../assets/img/logo.svg';
 import Donate from '../../assets/img/donate_icon.svg';
 import DonateBlue from '../../assets/img/donate_icon_blue.svg';
 import Taxi from '../../assets/img/taxi_icon.svg';
-import Info from '../../assets/img/info_icon.svg';
-import PressPhoto from '../../assets/img/press_entry_img.jpg';
+import InfoBlue from '../../assets/img/info_icon_blue.svg';
+import MissionPhoto from '../../assets/img/landing-page-thumb-1.png';
+import QuotePhoto from '../../assets/img/landing-page-thumb-2.png';
 import Arrow from '../../assets/img/arrow_right_blue.svg';
 
 function LandingPage() {
@@ -52,10 +53,10 @@ function LandingPage() {
             Request a Ride
           </a>
         </div>
-        <div className="btn-link" id="landing-page">
+        <div className="btn-link-invert" id="landing-page">
           <a href="/how-to-ride">
             <div className="icon">
-              <img src={Info} alt="Info" />
+              <img src={InfoBlue} alt="InfoBlue" />
             </div>
             How it Works
           </a>
@@ -63,7 +64,7 @@ function LandingPage() {
 
         <div className="mission">
           <div className="photo">
-            <img src={PressPhoto} alt="PressPhoto" />
+            <img src={MissionPhoto} alt="MissionPhoto" />
           </div>
           <div className="text">
             <p>Our Mission</p>
@@ -90,6 +91,18 @@ function LandingPage() {
             hoping that soon we can close this initiative out as soon as
             possible.
           </p>
+        </div>
+        <div className="quote">
+          <div className="text">
+            <h1>
+              Every time I see it, I can't help but think that "that could've
+              been me"
+            </h1>
+            <p>Madeline Park, Founder</p>
+          </div>
+          <div className="photo">
+            <img src={QuotePhoto} alt="QuotePhoto" />
+          </div>
         </div>
         <h1 className="landing-heading">Why we&apos;re here</h1>
         <div className="info-box" id="no-title">
