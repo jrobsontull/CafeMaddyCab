@@ -357,13 +357,36 @@ hr {
 .btn.submit.ride {
   margin-top: 8px; }
 
-.info-box#press {
+.press-heading {
+  width: 75%;
+  margin: 20px 0 20px 0;
+  max-width: 600px; }
+
+.press-page-entry {
+  margin: 0 auto 20px auto;
+  width: 338px; }
+  .press-page-entry img {
+    object-fit: cover;
+    vertical-align: bottom;
+    width: 338px;
+    height: 100%;
+    border-radius: 12px 12px 0 0;
+    border: 1px solid #3b3b96;
+    border-bottom: 0; }
+  .press-page-entry .info-box#press-page-title {
+    border-width: 1px;
+    border-radius: 0 0 12px 12px;
+    font-size: 24px;
+    font-weight: 600;
+    width: 302px; }
+
+.info-box#landing-press {
   border-width: 1px 0 1px 1px;
   border-radius: 12px 0 0 12px;
   font-size: 24px;
-  font-weight: 400; }
+  font-weight: 600; }
 
-.info-box#press-pic {
+.info-box#landing-press-pic {
   width: 40%;
   text-align: right;
   border-width: 1px;
@@ -1471,6 +1494,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; }
+  .content a,
+  .content a:visited,
+  .content a:link,
+  .content a:active {
+    color: inherit; }
   .content h1 {
     font-size: 24px;
     font-weight: 600; }

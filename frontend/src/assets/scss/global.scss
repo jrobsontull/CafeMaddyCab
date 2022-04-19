@@ -79,6 +79,13 @@ body {
   flex-direction: column;
   align-items: center;
 
+  a,
+  a:visited,
+  a:link,
+  a:active {
+    color: inherit;
+  }
+
   h1 {
     font-size: $heading-font-size;
     font-weight: 600; // confirm font weight later

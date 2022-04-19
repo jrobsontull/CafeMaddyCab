@@ -133,22 +133,22 @@ function LandingPage() {
           <a href="/press">Press</a>
         </h1>
         <div className="press-entry-landing" id="first-child">
-          <div className="info-box" id="press">
+          <div className="info-box" id="landing-press">
             This is an example press title 1
           </div>
-          <div className="info-box" id="press-pic"></div>
+          <div className="info-box" id="landing-press-pic"></div>
         </div>
         <div className="press-entry-landing">
-          <div className="info-box" id="press">
+          <div className="info-box" id="landing-press">
             This is an example press title 2
           </div>
-          <div className="info-box" id="press-pic"></div>
+          <div className="info-box" id="landing-press-pic"></div>
         </div>
         <div className="press-entry-landing">
-          <div className="info-box" id="press">
+          <div className="info-box" id="landing-press">
             This is an example press title 3
           </div>
-          <div className="info-box" id="press-pic"></div>
+          <div className="info-box" id="landing-press-pic"></div>
         </div>
         <Footer />
       </div>

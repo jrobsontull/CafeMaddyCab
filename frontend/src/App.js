@@ -6,7 +6,12 @@ import LandingPage from './components/front-facing/LandingPage';
 import HowToPage from './components/front-facing/HowTo';
 import RequestRide from './components/front-facing/RequestRide';
 import PressPage from './components/front-facing/PressPage';
-import PressEntry from './components/front-facing/press-entries/PressEntry';
+import PressEntry1 from './components/front-facing/press-entries/PressEntry1';
+import PressEntry2 from './components/front-facing/press-entries/PressEntry2';
+import PressEntry3 from './components/front-facing/press-entries/PressEntry3';
+import PressEntry4 from './components/front-facing/press-entries/PressEntry4';
+import PressEntry5 from './components/front-facing/press-entries/PressEntry5';
+import PressEntry6 from './components/front-facing/press-entries/PressEntry6';
 import TermsAndConditions from './components/front-facing/TermsAndConditions';
 import Success from './components/front-facing/Success';
 import Login from './components/dashboard/Login';
@@ -26,7 +31,12 @@ function App() {
             <Route path={'/how-to-ride'} element={<HowToPage />} />
             <Route path={'/request-ride'} element={<RequestRide />} />
             <Route path={'/press'} element={<PressPage />} />
-            <Route path={'/press/:id'} element={<PressEntry />} />
+            <Route path={'/press/1'} element={<PressEntry1 />} />
+            <Route path={'/press/2'} element={<PressEntry2 />} />
+            <Route path={'/press/3'} element={<PressEntry3 />} />
+            <Route path={'/press/4'} element={<PressEntry4 />} />
+            <Route path={'/press/5'} element={<PressEntry5 />} />
+            <Route path={'/press/6'} element={<PressEntry6 />} />
             <Route
               path={'/terms-and-conditions'}
               element={<TermsAndConditions />}
