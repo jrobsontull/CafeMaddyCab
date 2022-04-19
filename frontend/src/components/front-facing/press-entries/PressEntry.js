@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
-import Logo from '../../assets/img/logo.svg';
+import Logo from '../../../assets/img/logo.svg';
 
 function PressEntry() {
   // Scroll to top on component load/refresh

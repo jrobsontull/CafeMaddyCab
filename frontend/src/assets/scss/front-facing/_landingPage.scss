@@ -82,3 +82,87 @@ hr {
 .press-entry-landing#first-child {
   margin-top: 20px;
 }
+
+.info-box-title {
+  width: $content-width;
+  background-color: $light-blue;
+  padding: 8px 18px;
+  border-radius: $border-radius $border-radius 0 0;
+  border: 1px solid $dark-blue;
+  margin-top: 20px;
+  max-width: $max-width;
+
+  h3 {
+    color: $lightest-pink;
+    font-size: 20px;
+  }
+}
+
+.info-box {
+  width: $content-width;
+  background-color: $light-form;
+  padding: 18px;
+  border: 1px solid $dark-blue;
+  border-radius: 0 0 $border-radius $border-radius;
+  border-top-width: 0;
+  max-width: $max-width;
+
+  p {
+    margin-top: 12px;
+    text-align: left;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  a {
+    color: inherit;
+    font-weight: bold;
+    transition: color 0.25s ease;
+  }
+
+  a:hover {
+    color: $blue-btn-hover;
+    cursor: pointer;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  ul {
+    margin-top: 12px;
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ol {
+    padding-left: 18px;
+    text-align: left;
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.info-box#no-title {
+  margin-top: 20px;
+  border-width: 1px;
+  border-radius: $border-radius;
+}

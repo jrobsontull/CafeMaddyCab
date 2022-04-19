@@ -1,0 +1,99 @@
+.btn-link.donate {
+  margin-top: 20px;
+}
+
+.btn {
+  width: 100%;
+  width: $content-width;
+  color: $lightest-pink;
+  padding: 8px 18px;
+  text-align: center;
+  font-size: $heading-font-size;
+  border-radius: $border-radius;
+  max-width: calc(#{$max-width} - 32px);
+  transition: all 0.25s ease;
+}
+
+.btn-link {
+  width: calc(#{$content-width} + 36px);
+  max-width: calc(#{$max-width} + 36px);
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  background-color: $dark-blue;
+  border-radius: $border-radius;
+  color: $lightest-pink;
+  transition: all 0.25s ease;
+  padding: 12px 0 12px 0;
+
+  .icon {
+    display: inline-flex;
+    img {
+      width: 16px;
+      margin-right: 5px;
+      height: auto;
+      vertical-align: middle;
+      transition: padding 0.3s ease;
+    }
+  }
+
+  a {
+    font-size: $heading-font-size;
+    width: 100%;
+    text-align: center;
+  }
+
+  a:visited,
+  a:link,
+  a:active {
+    color: inherit;
+  }
+}
+
+.btn-link:hover {
+  background-color: $blue-btn-hover;
+  box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+  cursor: pointer;
+
+  .icon {
+    padding: 10px 10px;
+  }
+}
+
+.btn-link.submit {
+  a {
+    background-color: $yellow-btn;
+  }
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-link.submit a:hover {
+  background-color: $yellow-btn-hover;
+}
+
+.btn.submit {
+  background-color: $dark-blue;
+}
+
+.btn.submit:hover {
+  background-color: $blue-btn-hover;
+}
+
+.btn.upload {
+  background-color: $dark-blue;
+  width: $content-width;
+  padding: 8px 18px;
+  text-align: center;
+  font-size: $smaller-font-size;
+  border-radius: $border-radius;
+  max-width: $max-width;
+  transition: all 0.25s ease;
+  color: $lightest-pink;
+}
+
+.btn.upload:hover {
+  background-color: $blue-btn-hover;
+}

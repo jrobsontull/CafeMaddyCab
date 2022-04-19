@@ -31,9 +31,7 @@ function PressPage() {
           </div>
         </div>
         <hr />
-        <h1 className="landing-heading">
-          <a href="/press-page">Press</a>
-        </h1>
+        <h1 className="landing-heading">Press</h1>
         <div className="press-entry-landing" id="first-child">
           <div className="info-box" id="press">
             This is an example press title 1

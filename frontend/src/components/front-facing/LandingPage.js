@@ -117,7 +117,7 @@ function LandingPage() {
           </p>
         </div>
         <h1 className="landing-heading">
-          <a href="/press-page">Press</a>
+          <a href="/press">Press</a>
         </h1>
         <div className="press-entry-landing" id="first-child">
           <div className="info-box" id="press">
