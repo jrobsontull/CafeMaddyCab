@@ -6,8 +6,6 @@
 
 .press-page-entry {
   margin: 0 auto 20px auto;
-  // width: calc(#{$content-width} + 36px);
-  // max-width: calc(#{$max-width} + 36px);
   width: 338px;
 
   img {
@@ -47,4 +45,42 @@
     border-width: 1px;
     border-radius: 0 $border-radius $border-radius 0;
   }*/
+}
+
+.press-entry {
+  margin: 20px auto;
+
+  .info-box#press-entry-title {
+    border-width: 1px;
+    border-radius: $border-radius $border-radius 0 0;
+    font-size: $heading-font-size;
+    font-weight: 600;
+    width: 302px;
+  }
+
+  img {
+    object-fit: cover;
+    vertical-align: bottom;
+    width: 338px;
+    height: 100%;
+    border: 1px solid $dark-blue;
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .info-box#press-entry-content {
+    border-width: 1px;
+    border-radius: 0 0 $border-radius $border-radius;
+    font-size: $smaller-font-size;
+    width: 302px;
+
+    .entry-details {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      p {
+        margin: 0;
+      }
+    }
+  }
 }

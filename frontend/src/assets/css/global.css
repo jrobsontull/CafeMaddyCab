@@ -398,6 +398,34 @@ hr {
     border-radius: 0 $border-radius $border-radius 0;
   }*/ }
 
+.press-entry {
+  margin: 20px auto; }
+  .press-entry .info-box#press-entry-title {
+    border-width: 1px;
+    border-radius: 12px 12px 0 0;
+    font-size: 24px;
+    font-weight: 600;
+    width: 302px; }
+  .press-entry img {
+    object-fit: cover;
+    vertical-align: bottom;
+    width: 338px;
+    height: 100%;
+    border: 1px solid #3b3b96;
+    border-top: 0;
+    border-bottom: 0; }
+  .press-entry .info-box#press-entry-content {
+    border-width: 1px;
+    border-radius: 0 0 12px 12px;
+    font-size: 18px;
+    width: 302px; }
+    .press-entry .info-box#press-entry-content .entry-details {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 18px; }
+      .press-entry .info-box#press-entry-content .entry-details p {
+        margin: 0; }
+
 .loading {
   display: flex;
   flex-direction: column;
