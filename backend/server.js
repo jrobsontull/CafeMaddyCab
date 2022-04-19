@@ -1,9 +1,14 @@
 import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import https from 'https';
 import fs from 'fs';
 
+// Middleware imports
+import cors from 'cors';
+import helmet from 'helmet';
+import mongoSanitize from './middleware/mongoSanitize.js';
+
+// Route imports
 import rides from './routes/rides.route.js';
 import auth from './routes/auth.route.js';
 import image from './routes/image.route.js';
@@ -14,6 +19,26 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Secure HTTP headers
+app.use(helmet());
+
+// Sanitise all $ and . from req.body, req.params, req.headers, req.query
+app.use(
+  mongoSanitize({
+    onSanitize: ({ req, key }) => {
+      console.warn(
+        'Bad key found [' + key + '] in request and will be sanitized.'
+      );
+      console.log(
+        'Request headers:\n',
+        req.headers,
+        '\nRequest URL:\n',
+        req.url
+      );
+    },
+  })
+);
 
 app.use('/api/v1/rides', rides);
 app.use('/api/v1/user', auth);

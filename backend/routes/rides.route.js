@@ -1,8 +1,12 @@
 import express from 'express';
+
+// Middleware
 import multer from 'multer';
 import multiUpload from '../middleware/upload.js';
 import verifyCaptcha from '../middleware/validateCaptcha.js';
+import apiLimitRequestRides from '../middleware/rateLimitter.js';
 
+// Controller
 import RidesController from '../controllers/rides.controller.js';
 
 const router = express.Router();
@@ -12,6 +16,7 @@ router
   .get(RidesController.apiGetRides)
 
   .post(
+    apiLimitRequestRides,
     verifyCaptcha,
     function (req, res, next) {
       multiUpload(

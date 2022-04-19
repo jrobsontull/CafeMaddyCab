@@ -249,7 +249,13 @@ function RequestRide() {
 
       RidesAPI.requestRide(rideDetails, selfie.file, photoId.file).then(
         (response) => {
-          if (response && response.data.acknowledged === true) {
+          var { error } = response;
+          if (error) {
+            setIsRequesting(false);
+            setErrorOnSubmit({ state: true, message: error });
+            window.scrollTo(0, 0);
+          } else if (response && response.data.acknowledged === true) {
+            // All good
             const id = response.data.insertedId;
             setIsRequesting(false);
             navigate('/success/' + id, {

@@ -134,7 +134,7 @@ async function postRequestMulti(body, url, gResponse) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response.data;
   }
 }
 
