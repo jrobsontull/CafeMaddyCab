@@ -10,7 +10,7 @@ function PressPage() {
   const navigate = useNavigate();
 
   // set API call to retrieve all Press entries
-    // entry fields: id, title, text, image, author, date
+  // entry fields: id, title, text, image, author, date
   // Scroll to top on component load/refresh
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,9 +19,9 @@ function PressPage() {
   return (
     <div className="react-container">
       <div className="content frontend">
-      <Navbar />
+        <Navbar />
 
-      <div className="title-logo">
+        <div className="title-logo">
           <div className="logo">
             <img src={Logo} alt="Cafe Maddy Cab" />
           </div>
@@ -31,17 +31,25 @@ function PressPage() {
           </div>
         </div>
         <hr />
-        <h1 className="landing-heading"><a href="/press-page">Press</a></h1>
+        <h1 className="landing-heading">
+          <a href="/press-page">Press</a>
+        </h1>
         <div className="press-entry-landing" id="first-child">
-          <div className="info-box" id="press">This is an example press title 1</div>
+          <div className="info-box" id="press">
+            This is an example press title 1
+          </div>
           <div className="info-box" id="press-pic"></div>
         </div>
         <div className="press-entry-landing">
-          <div className="info-box" id="press">This is an example press title 2</div>
+          <div className="info-box" id="press">
+            This is an example press title 2
+          </div>
           <div className="info-box" id="press-pic"></div>
         </div>
         <div className="press-entry-landing">
-          <div className="info-box" id="press">This is an example press title 3</div>
+          <div className="info-box" id="press">
+            This is an example press title 3
+          </div>
           <div className="info-box" id="press-pic"></div>
         </div>
 

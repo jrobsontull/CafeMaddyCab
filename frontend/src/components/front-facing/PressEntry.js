@@ -14,9 +14,9 @@ function PressEntry() {
   return (
     <div className="react-container">
       <div className="content frontend">
-      <Navbar />
+        <Navbar />
 
-      <div className="title-logo">
+        <div className="title-logo">
           <div className="logo">
             <img src={Logo} alt="Cafe Maddy Cab" />
           </div>

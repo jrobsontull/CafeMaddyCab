@@ -62,7 +62,9 @@ function LandingPage() {
         </div>
 
         <div className="mission">
-          <img src={PressPhoto} alt="PressPhoto" />
+          <div className="photo">
+            <img src={PressPhoto} alt="PressPhoto" />
+          </div>
           <div className="text">
             <p>Our Mission</p>
             <h1>Help our AAPI community feel safe with their NYC commute</h1>

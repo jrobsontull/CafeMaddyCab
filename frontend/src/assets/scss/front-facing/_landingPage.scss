@@ -5,7 +5,7 @@
 
   .logo {
     margin: 0 auto;
-  
+
     img {
       height: auto;
       width: 80px;
@@ -22,7 +22,7 @@ hr {
   clear: both;
   display: block;
   width: calc(#{$content-width} + 36px);
-  max-width: calc(#{$max-width} + 36px);              
+  max-width: calc(#{$max-width} + 36px);
   background-color: $dark-blue;
   height: 1px;
 }
@@ -31,15 +31,20 @@ hr {
   display: flex;
   margin-top: 10px;
   max-width: 300px;
-  img {
-    width: 125px;
-    margin-right: 5px;
+  .photo {
+    img {
+      object-fit: cover;
+      height: 150px;
+      width: 140px;
+      margin-right: 10px;
+    }
   }
 
   .text {
     margin: auto;
     img {
-      width: 16px;
+      height: 16px;
+      padding-right: 5px;
     }
 
     p {
@@ -48,13 +53,14 @@ hr {
 
     .mission-donate {
       display: flex;
-      transition: all 0.25s ease;
+      padding-top: 5px;
+      transform: scale(1);
+      transition: 0.25s all ease;
     }
 
     .mission-donate:hover {
-      p {
-        padding: 0 10px 0 10px;
-      }
+      cursor: pointer;
+      transform: scale(1.1);
     }
   }
 }

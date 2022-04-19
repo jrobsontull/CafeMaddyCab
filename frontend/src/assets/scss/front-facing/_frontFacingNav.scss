@@ -13,13 +13,16 @@
     background-color: $dark-blue;
     margin: auto;
     padding: 12px 5%;
+    position: relative;
+    z-index: 2;
 
     .branding {
       display: flex;
       font-size: 20px;
 
       .cmc {
-        color: #F7F5FE;
+        color: #f7f5fe;
+        margin: auto;
       }
     }
 
@@ -60,13 +63,15 @@
     background-color: $dark-blue;
     position: absolute;
     width: 100%;
-    
+    transition: transform 0.5s ease;
+    z-index: 1;
+
     ul {
       border: none;
       width: 100%;
       list-style-type: none;
       padding-left: 0;
-      
+
       li {
         border: 1px solid $lightest-pink;
         border-width: 0 0 1px 0;
@@ -88,7 +93,7 @@
       }
     }
   }
-  
+
   .nav.active {
     transform: translateY((0vh));
   }
