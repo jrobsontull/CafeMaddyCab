@@ -2,24 +2,27 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './utils/auth.context';
 
 import './assets/css/global.css';
+
 import LandingPage from './components/front-facing/LandingPage';
 import HowToPage from './components/front-facing/HowTo';
 import RequestRide from './components/front-facing/RequestRide';
-import PressPage from './components/front-facing/PressPage';
+import Press from './components/front-facing/Press';
+import Success from './components/front-facing/Success';
+import Login from './components/dashboard/Login';
+import Dashboard from './components/dashboard/Dashboard';
+import Feedback from './components/dashboard/Feedback';
+import ApproveRides from './components/dashboard/ApproveRides';
+import TermsAndConditions from './components/front-facing/TermsAndConditions';
+
+import ProtectedRoute from './components/general/ProtectedRoute';
+
+// Press entries
 import PressEntry1 from './components/front-facing/press-entries/PressEntry1';
 import PressEntry2 from './components/front-facing/press-entries/PressEntry2';
 import PressEntry3 from './components/front-facing/press-entries/PressEntry3';
 import PressEntry4 from './components/front-facing/press-entries/PressEntry4';
 import PressEntry5 from './components/front-facing/press-entries/PressEntry5';
 import PressEntry6 from './components/front-facing/press-entries/PressEntry6';
-import TermsAndConditions from './components/front-facing/TermsAndConditions';
-import Success from './components/front-facing/Success';
-import Login from './components/dashboard/Login';
-import Dashboard from './components/dashboard/Dashboard';
-import Feedback from './components/dashboard/Feedback';
-import ApproveRides from './components/dashboard/ApproveRides';
-
-import ProtectedRoute from './components/general/ProtectedRoute';
 
 function App() {
   return (
@@ -30,7 +33,7 @@ function App() {
             <Route path={'/'} element={<LandingPage />} />
             <Route path={'/how-to-ride'} element={<HowToPage />} />
             <Route path={'/request-ride'} element={<RequestRide />} />
-            <Route path={'/press'} element={<PressPage />} />
+            <Route path={'/press'} element={<Press />} />
             <Route path={'/press/1'} element={<PressEntry1 />} />
             <Route path={'/press/2'} element={<PressEntry2 />} />
             <Route path={'/press/3'} element={<PressEntry3 />} />

@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
+import Logo from './Logo';
 import Footer from './Footer';
-
-import Logo from '../../assets/img/logo.svg';
 
 import HowTo1 from '../../assets/img/how_to_1.svg';
 import HowTo2 from '../../assets/img/how_to_2.svg';
@@ -23,12 +22,9 @@ function HowToPage() {
     <div className="react-container">
       <div className="content frontend how-to">
         <Navbar />
+        <Logo />
+        <div className="line-break"></div>
 
-        <div className="logo">
-          <Link to={'/'}>
-            <img src={Logo} alt="Cafe Maddy Cab" />
-          </Link>
-        </div>
         <div className="info-box how-to" id="no-title">
           <p>
             Thank you for choosing to stay safe. Cafe Maddy Cab is providing cab

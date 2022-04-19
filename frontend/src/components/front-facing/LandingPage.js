@@ -26,7 +26,6 @@ function LandingPage() {
     <div className="react-container">
       <div className="content frontend landing-page">
         <Navbar />
-
         <Logo />
 
         <div className="line-break"></div>
@@ -56,26 +55,24 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="mission">
-          <div className="photo">
-            <img src={MissionPhoto} alt="MissionPhoto" />
-          </div>
-          <div className="text">
+        <div className="picture-block">
+          <img src={MissionPhoto} alt="MissionPhoto" />
+          <div className="info">
             <p>Our Mission</p>
             <h1>Help our AAPI community feel safe with their NYC commute</h1>
             <a
-              className="mission-donate"
               href="https://www.gofundme.com/f/cafemaddycab"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={DonateBlue} alt="DonateBlue" />
+              <img src={DonateBlue} alt="Donate" className="donate" />
               <p>Donate</p>
-              <img src={Arrow} alt="Arrow" />
+              <img src={Arrow} alt="Arrow" className="link-arrow" />
             </a>
           </div>
         </div>
-        <h1 className="landing-heading">What is Cafe Maddy Cab?</h1>
+
+        <h1 className="info-box-heading">What is Cafe Maddy Cab?</h1>
         <div className="info-box" id="no-title">
           <p>
             Cafe Maddy Cab is an initiative that provides cab rides for the
@@ -98,7 +95,7 @@ function LandingPage() {
             <img src={QuotePhoto} alt="QuotePhoto" />
           </div>
         </div>
-        <h1 className="landing-heading">Why we&apos;re here</h1>
+        <h1 className="info-box-heading">Why we&apos;re here</h1>
         <div className="info-box" id="no-title">
           <p>
             &quot;It&apos;s really terrifying. Every time I see it, I can&apos;t
@@ -123,8 +120,8 @@ function LandingPage() {
             in 2022, we felt the need to relaunch Cafe Maddy Cab.
           </p>
         </div>
-        <h1 className="landing-heading">
-          <a href="/press">Press</a>
+        <h1 className="info-box-heading">
+          <Link to={'/press'}>Press</Link>
         </h1>
         <div className="press-entry-landing" id="first-child">
           <div className="info-box" id="landing-press">

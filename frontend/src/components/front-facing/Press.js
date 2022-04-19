@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 
 import Navbar from './Navbar';
+import Logo from './Logo';
 import Footer from './Footer';
 
-import Logo from '../../assets/img/logo.svg';
 import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
 import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
 import Entry4 from '../../assets/img/pressphotos/entry-4.jpeg';
 import Entry6 from '../../assets/img/pressphotos/entry-6.jpeg';
 
-function PressPage() {
+function Press() {
   // Scroll to top on component load/refresh
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,17 +19,9 @@ function PressPage() {
     <div className="react-container">
       <div className="content frontend">
         <Navbar />
+        <Logo />
+        <div className="line-break"></div>
 
-        <div className="title-logo">
-          <div className="logo">
-            <img src={Logo} alt="Cafe Maddy Cab" />
-          </div>
-          <div className="cmc-title">
-            <h1>Cafe Maddy Cab</h1>
-            <p>NYC cab rides for Asian women, LGBTQ+ and elderly in need</p>
-          </div>
-        </div>
-        <hr />
         <h1 className="press-heading">Press</h1>
         <a className="press-page-entry" href="/press/1">
           <div className="press-page-pic">
@@ -90,4 +82,4 @@ function PressPage() {
   );
 }
 
-export default PressPage;
+export default Press;
