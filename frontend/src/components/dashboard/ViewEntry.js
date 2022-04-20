@@ -12,7 +12,7 @@ function ViewEntry({ rideId, onClose }) {
 
   let baseImgUrl = 'http://localhost:8080/api/v1/image/';
   if (process.env.NODE_ENV === 'production') {
-    baseImgUrl = 'https://cafemaddycab.org:8080/api/v1/image/';
+    baseImgUrl = 'https://cafemaddycab.org:443/api/v1/image/';
   }
 
   function updateGenericField(target, prop) {
