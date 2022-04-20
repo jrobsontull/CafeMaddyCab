@@ -1,7 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import https from 'https';
-import fs from 'fs';
 
 // Middleware imports
 import cors from 'cors';
@@ -22,24 +20,24 @@ app.use(express.json());
 
 // Secure HTTP headers
 // if in dev use cross-origin, otherwise might be fine!
-app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-    contentSecurityPolicy: {
-      useDefaults: true,
-      directives: {
-        'default-src': ["'self'", 'https://localhost:8080/'],
-        'script-src': [
-          "'self'",
-          'https://www.google.com',
-          'https://www.gstatic.com',
-        ],
-        'frame-src': ["'self'", 'https://www.google.com'],
-        'img-src': ["'self'", 'https://localhost:8080/'],
-      },
-    },
-  })
-);
+// app.use(
+//   helmet({
+//     crossOriginResourcePolicy: { policy: 'cross-origin' },
+//     contentSecurityPolicy: {
+//       useDefaults: true,
+//       directives: {
+//         'default-src': ["'self'", 'https://localhost:8080/'],
+//         'script-src': [
+//           "'self'",
+//           'https://www.google.com',
+//           'https://www.gstatic.com',
+//         ],
+//         'frame-src': ["'self'", 'https://www.google.com'],
+//         'img-src': ["'self'", 'https://localhost:8080/'],
+//       },
+//     },
+//   })
+// );
 
 // Sanitise all $ and . from req.body, req.params, req.headers, req.query
 app.use(
@@ -75,22 +73,5 @@ if (process.env.NODE_ENV === 'production') {
 
 // If page doesn't exist
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
-
-// Generate HTTPS server with temp dev SSL certificate if production
-// let server;
-
-// if (process.env.NODE_ENV === 'production') {
-//   console.log('Starting HTTPS production server.');
-//   server = https.createServer(
-//     {
-//       key: fs.readFileSync('ssl/key.pem'),
-//       cert: fs.readFileSync('ssl/cert.pem'),
-//     },
-//     app
-//   );
-// } else {
-//   console.log('Starting HTTP development server.');
-//   server = app;
-// }
 
 export default app;
