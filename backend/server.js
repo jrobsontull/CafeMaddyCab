@@ -77,23 +77,23 @@ if (process.env.NODE_ENV === 'production') {
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
 // Generate HTTPS server with temp dev SSL certificate if production
-let server;
+// let server;
 
-if (process.env.NODE_ENV === 'production') {
-  console.log('Starting HTTPS production server.');
+// if (process.env.NODE_ENV === 'production') {
+//   console.log('Starting HTTPS production server.');
 
-  const credentials = {
-    key: fs.readFileSync(
-      '/etc/letsencrypt/live/cafemaddycab.org/fullchain.pem'
-    ),
-    cert: fs.readFileSync('/etc/letsencrypt/live/cafemaddycab.org/privkey.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/cafemaddycab.org/chain.pem'),
-  };
+//   const credentials = {
+//     key: fs.readFileSync(
+//       '/etc/letsencrypt/live/cafemaddycab.org/fullchain.pem'
+//     ),
+//     cert: fs.readFileSync('/etc/letsencrypt/live/cafemaddycab.org/privkey.pem'),
+//     ca: fs.readFileSync('/etc/letsencrypt/live/cafemaddycab.org/chain.pem'),
+//   };
 
-  server = https.createServer(credentials, app);
-} else {
-  console.log('Starting HTTP development server.');
-  server = app;
-}
+//   server = https.createServer(credentials, app);
+// } else {
+//   console.log('Starting HTTP development server.');
+//   server = app;
+// }
 
-export default server;
+export default app;
