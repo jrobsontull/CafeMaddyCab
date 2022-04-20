@@ -21,7 +21,24 @@ app.use(cors());
 app.use(express.json());
 
 // Secure HTTP headers
-app.use(helmet());
+// if in dev use cross-origin, otherwise might be fine!
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'default-src': ["'self'", 'https://localhost:8080/'],
+        'script-src': [
+          "'self'",
+          'https://www.google.com',
+          'https://www.gstatic.com',
+        ],
+        'frame-src': ["'self'", 'https://www.google.com'],
+      },
+    },
+  })
+);
 
 // Sanitise all $ and . from req.body, req.params, req.headers, req.query
 app.use(
@@ -60,7 +77,9 @@ app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
 // Generate HTTPS server with temp dev SSL certificate if production
 let server;
-if (process.env.NODE_ENV === 'production') {
+
+//if (process.env.NODE_ENV === 'production') {
+if (false) {
   console.log('Starting HTTPS production server.');
   server = https.createServer(
     {
