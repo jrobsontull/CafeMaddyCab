@@ -19,7 +19,7 @@ function ApproveRides() {
 
   let baseImgUrl = 'http://localhost:8080/api/v1/image/';
   if (process.env.NODE_ENV === 'production') {
-    baseImgUrl = 'https://localhost:8080/api/v1/image/';
+    baseImgUrl = 'https://cafemaddycab.org:443/api/v1/image/';
   }
 
   const navigate = useNavigate();
