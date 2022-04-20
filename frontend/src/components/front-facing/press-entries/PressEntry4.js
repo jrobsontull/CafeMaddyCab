@@ -38,7 +38,7 @@ function PressEntry() {
               <p>By Rose Minutaglio</p>
               <p>04/05/2021</p>
             </div>
-            fter her grandmother passed away in January, Ivana Xie has been
+            After her grandmother passed away in January, Ivana Xie has been
             keeping her 96-year-old grandfather company on weekends. She picks
             up dim sum, and they spend hours playing very competitive games of
             mahjong. Xie used to feel full—both in heart and stomach—after

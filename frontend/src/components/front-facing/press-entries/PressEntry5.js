@@ -4,7 +4,7 @@ import Navbar from '../Navbar';
 import Footer from '../Footer';
 
 import Logo from '../../../assets/img/logo.svg';
-import EntryPhoto from '../../../assets/img/pressphotos/entry-1.jpeg';
+import EntryPhoto from '../../../assets/img/pressphotos/entry-5.jpeg';
 
 function PressEntry() {
   // Scroll to top on component load/refresh
