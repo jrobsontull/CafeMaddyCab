@@ -15,6 +15,9 @@ import Info from '../../assets/img/info_icon.svg';
 import MissionPhoto from '../../assets/img/landing-page-thumb-1.png';
 import QuotePhoto from '../../assets/img/landing-page-thumb-2.png';
 import Arrow from '../../assets/img/arrow_right_blue.svg';
+import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
+import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
+import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
 
 function LandingPage() {
   // Scroll to top on component load/refresh
@@ -123,24 +126,33 @@ function LandingPage() {
         <h1 className="info-box-heading">
           <Link to={'/press'}>Press</Link>
         </h1>
-        <div className="press-entry-landing" id="first-child">
-          <div className="info-box" id="landing-press">
-            This is an example press title 1
+        <a className="press-page-entry" href="/press/1">
+          <div className="press-page-pic">
+            <img src={Entry1} alt="Entry 1" />
           </div>
-          <div className="info-box" id="landing-press-pic"></div>
-        </div>
-        <div className="press-entry-landing">
-          <div className="info-box" id="landing-press">
-            This is an example press title 2
+          <div className="info-box" id="press-page-title">
+            Woman raises over $100k in 2 days to pay for Asian Americans' taxi
+            rides amid rise in hate crimes
           </div>
-          <div className="info-box" id="landing-press-pic"></div>
-        </div>
-        <div className="press-entry-landing">
-          <div className="info-box" id="landing-press">
-            This is an example press title 3
+        </a>
+        <a className="press-page-entry" href="/press/2">
+          <div className="press-page-pic">
+            <img src={Entry2} alt="Entry 2" />
           </div>
-          <div className="info-box" id="landing-press-pic"></div>
-        </div>
+          <div className="info-box" id="press-page-title">
+            'A Sigh Of Relief': Crowdfunded Cab Rides Aim To Get Asian Americans
+            Home Safe
+          </div>
+        </a>
+        <a className="press-page-entry" href="/press/3">
+          <div className="press-page-pic">
+            <img src={Entry3} alt="Entry 3" />
+          </div>
+          <div className="info-box" id="press-page-title">
+            Brooklyn Woman Raises Over $100,000 to Provide Free Cab Rides for
+            Asian Americans
+          </div>
+        </a>
         <Footer />
       </div>
     </div>

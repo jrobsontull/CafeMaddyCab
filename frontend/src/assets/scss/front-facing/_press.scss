@@ -7,11 +7,17 @@
 .press-page-entry {
   margin: 0 auto 20px auto;
   width: 338px;
+  // for responsive design
+  // width: calc(#{$content-width} + 36px);
+  // max-width: calc(#{$max-width} + 36px);
 
   img {
     object-fit: cover;
     vertical-align: bottom;
     width: 338px;
+    // for responsive design
+    // width: calc(#{$content-width} + 36px);
+    // max-width: calc(#{$max-width} + 36px);
     height: 100%;
     border-radius: $border-radius $border-radius 0 0;
     border: 1px solid $dark-blue;
@@ -24,27 +30,14 @@
     font-size: $heading-font-size;
     font-weight: 600;
     width: 302px;
+    // for responsive design
+    // width: calc(#{$content-width});
+    // max-width: calc(#{$max-width});
   }
 }
 
-.info-box#landing-press {
-  border-width: 1px 0 1px 1px;
-  border-radius: $border-radius 0 0 $border-radius;
-  font-size: $heading-font-size;
-  font-weight: 600;
-}
-
-.info-box#landing-press-pic {
-  width: 40%;
-  text-align: right;
-  border-width: 1px;
-  border-radius: 0 $border-radius $border-radius 0;
-  padding: 0;
-  /*img {
-    max-width: 160px;
-    border-width: 1px;
-    border-radius: 0 $border-radius $border-radius 0;
-  }*/
+.press-page-entry#landing-first-child {
+  margin-top: 10px;
 }
 
 .press-entry {

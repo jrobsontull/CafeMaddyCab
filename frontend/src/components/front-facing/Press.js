@@ -5,8 +5,10 @@ import Logo from './Logo';
 import Footer from './Footer';
 
 import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
+import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
 import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
 import Entry4 from '../../assets/img/pressphotos/entry-4.jpeg';
+import Entry5 from '../../assets/img/pressphotos/entry-5.jpeg';
 import Entry6 from '../../assets/img/pressphotos/entry-6.jpeg';
 
 function Press() {
@@ -34,7 +36,7 @@ function Press() {
         </a>
         <a className="press-page-entry" href="/press/2">
           <div className="press-page-pic">
-            <img src={Entry1} alt="Entry 1" />
+            <img src={Entry2} alt="Entry 2" />
           </div>
           <div className="info-box" id="press-page-title">
             'A Sigh Of Relief': Crowdfunded Cab Rides Aim To Get Asian Americans
@@ -61,7 +63,7 @@ function Press() {
         </a>
         <a className="press-page-entry" href="/press/5">
           <div className="press-page-pic">
-            <img src={Entry1} alt="Entry 1" />
+            <img src={Entry5} alt="Entry 5" />
           </div>
           <div className="info-box" id="press-page-title">
             Brooklyn woman pays for cab rides for Asian New Yorkers
