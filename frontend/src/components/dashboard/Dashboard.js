@@ -4,8 +4,10 @@ import RidesAPI from '../../utils/rides.api';
 import Navbar from './Navbar';
 import ViewEntry from './ViewEntry';
 import ApprovalWindow from './ApprovalWindow';
+import SendCodes from './SendCodes';
 
 function Dashboard() {
+  // Global vars
   const [rides, setRides] = useState([]);
   const [ridesData, setRidesData] = useState({
     totalRides: 0,
@@ -14,14 +16,15 @@ function Dashboard() {
   });
   const entiresPerPage = 15;
 
-  /* Edit ride window states */
+  // Edit ride window states
   const [selectedRideId, setSelectedRideId] = useState();
-  const [openRideEntryView, setOpenRideEntryView] = useState(false);
+  const [openRideEntryView, isOpenRideEntryView] = useState(false);
 
-  /* Approval window states */
-  const [openAporovalWindow, setOpenApprovalWindow] = useState(false);
+  // Other window states
+  const [openApporovalWindow, isOpenApprovalWindow] = useState(false);
+  const [openSendCodesWindow, isOpenSendCodesWindow] = useState(false);
 
-  /* Counts for status types */
+  // Counts for status types
   const [statusCount, setStatusCount] = useState({
     all: 0,
     new: 0,
@@ -74,11 +77,11 @@ function Dashboard() {
   function viewRideEntry(rideId) {
     window.scrollTo(0, 0);
     setSelectedRideId(rideId);
-    setOpenRideEntryView(true);
+    isOpenRideEntryView(true);
   }
 
   function closeRideEntryView() {
-    setOpenRideEntryView(false);
+    isOpenRideEntryView(false);
     RidesAPI.getRides().then((response) => {
       setRides(response.rides);
       setRidesData({
@@ -92,13 +95,22 @@ function Dashboard() {
     });
   }
 
-  function openApprovalWindow() {
+  function openApproval() {
     window.scrollTo(0, 0);
-    setOpenApprovalWindow(true);
+    isOpenApprovalWindow(true);
   }
 
-  function closeApprovalWindow() {
-    setOpenApprovalWindow(false);
+  function closeApproval() {
+    isOpenApprovalWindow(false);
+  }
+
+  function openSendCodes() {
+    window.scrollTo(0, 0);
+    isOpenSendCodesWindow(true);
+  }
+
+  function closeSendCodes() {
+    isOpenSendCodesWindow(false);
   }
 
   function searchRides(status = null) {
@@ -172,11 +184,9 @@ function Dashboard() {
           ''
         )}
 
-        {openAporovalWindow ? (
-          <ApprovalWindow onCancel={closeApprovalWindow} />
-        ) : (
-          ''
-        )}
+        {openApporovalWindow ? <ApprovalWindow onClose={closeApproval} /> : ''}
+
+        {openSendCodesWindow ? <SendCodes onClose={closeSendCodes} /> : ''}
 
         <div className="dashboard">
           <div className="menu">
@@ -207,11 +217,13 @@ function Dashboard() {
               </ul>
             </div>
             <div className="action-btns">
-              <div className="action" onClick={() => openApprovalWindow()}>
+              <div className="action" onClick={() => openApproval()}>
                 Approve requests
               </div>
               <div className="action">Edit request</div>
-              <div className="action">Send codes</div>
+              <div className="action" onClick={() => openSendCodes()}>
+                Send codes
+              </div>
               <div className="action" id="last-child">
                 Mark as done
               </div>

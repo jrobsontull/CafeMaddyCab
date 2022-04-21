@@ -17,6 +17,7 @@ function Header() {
     },
     { name: 'View Feedback', path: '/dashboard/view-feedback' },
     { name: 'How to Use', path: '/dashboard/how-to-use' },
+    { name: 'Settings', path: '/dashboard/settings' },
   ];
 
   const pageName = pageArray.find(

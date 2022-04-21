@@ -3,17 +3,22 @@ import { AuthProvider } from './utils/auth.context';
 
 import './assets/css/global.css';
 
+// Front-facing component imports
 import LandingPage from './components/front-facing/LandingPage';
 import HowToPage from './components/front-facing/HowTo';
 import RequestRide from './components/front-facing/RequestRide';
 import Press from './components/front-facing/Press';
 import Success from './components/front-facing/Success';
+import TermsAndConditions from './components/front-facing/TermsAndConditions';
+
+// Backend component imports
 import Login from './components/dashboard/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Feedback from './components/dashboard/Feedback';
 import ApproveRides from './components/dashboard/ApproveRides';
-import TermsAndConditions from './components/front-facing/TermsAndConditions';
+import Settings from './components/dashboard/Settings';
 
+// Protected routing
 import ProtectedRoute from './components/general/ProtectedRoute';
 
 // Press entries
@@ -67,6 +72,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ApproveRides />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={'/dashboard/settings'}
+              element={
+                <ProtectedRoute>
+                  <Settings />
                 </ProtectedRoute>
               }
             />

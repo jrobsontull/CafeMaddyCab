@@ -1147,29 +1147,36 @@
     .react-container.view-entry .view-entry-window .feedback-text::-webkit-scrollbar-thumb {
       background-color: #9696db;
       border-radius: 0 12px 12px 0; }
-  .react-container.view-entry .view-entry-window.approve-window {
+  .react-container.view-entry .view-entry-window.approve-window,
+  .react-container.view-entry .view-entry-window.send-codes {
     width: 25%;
     min-width: 400px; }
-    .react-container.view-entry .view-entry-window.approve-window .entry-content {
+    .react-container.view-entry .view-entry-window.approve-window .entry-content,
+    .react-container.view-entry .view-entry-window.send-codes .entry-content {
       padding: 22px 0;
       display: flex;
       justify-content: center; }
-      .react-container.view-entry .view-entry-window.approve-window .entry-content p {
+      .react-container.view-entry .view-entry-window.approve-window .entry-content p,
+      .react-container.view-entry .view-entry-window.send-codes .entry-content p {
         width: 90%;
         text-align: justify; }
-      .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input {
+      .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input,
+      .react-container.view-entry .view-entry-window.send-codes .entry-content .approve-input {
         display: flex;
         width: 90%;
         margin: 10px 0; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input input {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input input,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .approve-input input {
           width: 65%;
           padding: 8px 12px;
           border: 1px solid #3b3b96;
           background-color: #f7f5fe;
           color: #3b3b96; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input input::placeholder {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input input::placeholder,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .approve-input input::placeholder {
           color: #9696db; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input .approve-btn {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input .approve-btn,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .approve-input .approve-btn {
           width: 35%;
           text-align: center;
           padding: 8px 0;
@@ -1178,39 +1185,88 @@
           border: 1px solid #3b3b96;
           border-width: 1px 1px 1px 0;
           transition: background-color 0.25s ease; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input .approve-btn:hover {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .approve-input .approve-btn:hover,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .approve-input .approve-btn:hover {
           cursor: pointer;
           background-color: #e99fdc; }
-      .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container {
+      .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container,
+      .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container {
         background-color: #f7f5fe;
         display: flex;
         flex-direction: column;
         width: 60%;
         margin: 20px 0 6px; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .titles {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .titles,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .titles {
           display: flex;
           margin: 0; }
-          .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .titles p {
+          .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .titles p,
+          .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .titles p {
             border: 1px solid #3b3b96;
             border-width: 1px 1px 0 1px;
             text-align: center;
             padding: 4px 0; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .titles p:last-child {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .titles p:last-child,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .titles p:last-child {
           border-width: 1px 1px 0 0; }
-        .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes {
+        .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes,
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .photo-boxes {
           display: flex; }
-          .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box {
+          .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box,
+          .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .photo-boxes .photo-box {
             border: 1px solid #3b3b96;
             width: 50%;
             text-align: center; }
-            .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box img {
+            .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box img,
+            .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .photo-boxes .photo-box img {
               width: 30px;
               padding: 60px 0;
               vertical-align: middle; }
-          .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box#last-child {
+          .react-container.view-entry .view-entry-window.approve-window .entry-content .photo-container .photo-boxes .photo-box#last-child,
+          .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .photo-boxes .photo-box#last-child {
             border-width: 1px 1px 1px 0; }
-      .react-container.view-entry .view-entry-window.approve-window .entry-content .error {
+      .react-container.view-entry .view-entry-window.approve-window .entry-content .error,
+      .react-container.view-entry .view-entry-window.send-codes .entry-content .error {
         width: 82%; }
+  .react-container.view-entry .view-entry-window.send-codes .entry-content p {
+    margin-bottom: 12px; }
+  .react-container.view-entry .view-entry-window.send-codes .entry-content p strong {
+    font-weight: 500; }
+  .react-container.view-entry .view-entry-window.send-codes .entry-content .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%; }
+    .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .options {
+      width: 80%; }
+      .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .options .use-date-check {
+        margin-bottom: 8px; }
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .options .use-date-check label {
+          margin-left: 8px; }
+      .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .options .date .picker {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        align-items: center; }
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .options .date .picker input {
+          margin-right: 22px;
+          color: #3b3b96;
+          background-color: #f7f5fe;
+          padding: 2px 4px;
+          border: 1px solid #3b3b96; }
+    .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .download-btn {
+      width: 20%;
+      background-color: #dc87cb;
+      color: #f7f5fe;
+      padding: 26px 16px;
+      border-radius: 12px;
+      border: 1px solid #3b3b96;
+      text-align: center;
+      transition: all 0.25s ease; }
+    .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .download-btn:hover {
+      cursor: pointer;
+      background-color: #e99fdc;
+      box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
 
 /* Styling of table */
 .feedback {

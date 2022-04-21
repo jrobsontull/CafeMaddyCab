@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/img/arrow_right.svg';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
-function ApprovalWindow({ onCancel }) {
+function ApprovalWindow({ onClose }) {
   const { user } = useContext(AuthContext);
 
   const [newTotal, setNewTotal] = useState(0);
@@ -66,7 +66,7 @@ function ApprovalWindow({ onCancel }) {
       <div className="view-entry-window approve-window">
         <div className="header">
           <div className="title">
-            <div className="back-btn" onClick={onCancel}>
+            <div className="back-btn" onClick={onClose}>
               <img className="nav-arrow" src={Arrow} alt="arrow" />
             </div>
             <p>Approve Requests</p>
