@@ -1,7 +1,6 @@
+// Module imports
 import express from 'express';
 import dotenv from 'dotenv';
-import https from 'https';
-import fs from 'fs';
 
 // Middleware imports
 import cors from 'cors';
@@ -14,6 +13,7 @@ import auth from './routes/auth.route.js';
 import image from './routes/image.route.js';
 import feedback from './routes/feedback.route.js';
 
+// Configure server
 dotenv.config();
 const app = express();
 
@@ -21,25 +21,37 @@ app.use(cors());
 app.use(express.json());
 
 // Secure HTTP headers
-// if in dev use cross-origin, otherwise might be fine!
-// app.use(
-//   helmet({
-//     crossOriginResourcePolicy: { policy: 'cross-origin' },
-//     contentSecurityPolicy: {
-//       useDefaults: true,
-//       directives: {
-//         'default-src': ["'self'", 'https://localhost:8080/'],
-//         'script-src': [
-//           "'self'",
-//           'https://www.google.com',
-//           'https://www.gstatic.com',
-//         ],
-//         'frame-src': ["'self'", 'https://www.google.com'],
-//         'img-src': ["'self'", 'https://localhost:8080/'],
-//       },
-//     },
-//   })
-// );
+let crossOriPolicy = { policy: 'cross-origin' };
+if (process.env.NODE_ENV === 'production') {
+  crossOriPolicy = { policy: 'same-site' };
+}
+
+app.use(
+  helmet({
+    crossOriginResourcePolicy: crossOriPolicy,
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'default-src': [
+          "'self'",
+          'https://cafemaddycab.org:8080/',
+          'https://localhost:8080',
+        ],
+        'script-src': [
+          "'self'",
+          'https://www.google.com',
+          'https://www.gstatic.com',
+        ],
+        'frame-src': ["'self'", 'https://www.google.com'],
+        'img-src': [
+          "'self'",
+          'https://cafemaddycab.org:8080/',
+          'https://localhost:8080',
+        ],
+      },
+    },
+  })
+);
 
 // Sanitise all $ and . from req.body, req.params, req.headers, req.query
 app.use(
@@ -58,6 +70,7 @@ app.use(
   })
 );
 
+// Set up routing
 app.use('/api/v1/rides', rides);
 app.use('/api/v1/user', auth);
 app.use('/api/v1/image', image);
@@ -76,24 +89,5 @@ if (process.env.NODE_ENV === 'production') {
 // If page doesn't exist
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
-// Generate HTTPS server with temp dev SSL certificate if production
-// let server;
-
-// if (process.env.NODE_ENV === 'production') {
-//   console.log('Starting HTTPS production server.');
-
-//   const credentials = {
-//     key: fs.readFileSync(
-//       '/etc/letsencrypt/live/cafemaddycab.org/fullchain.pem'
-//     ),
-//     cert: fs.readFileSync('/etc/letsencrypt/live/cafemaddycab.org/privkey.pem'),
-//     ca: fs.readFileSync('/etc/letsencrypt/live/cafemaddycab.org/chain.pem'),
-//   };
-
-//   server = https.createServer(credentials, app);
-// } else {
-//   console.log('Starting HTTP development server.');
-//   server = app;
-// }
-
+console.log('Starting HTTP server.');
 export default app;
