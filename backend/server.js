@@ -61,7 +61,8 @@ app.use(
         'Bad key found [' + key + '] in request and will be sanitized.\n',
         '\nRequest headers:\n',
         req.headers,
-        '\nRequest URL:\n'
+        '\nRequest URL:\n',
+        req.url
       );
     },
   })
