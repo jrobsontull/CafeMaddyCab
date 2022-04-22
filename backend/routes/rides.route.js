@@ -66,5 +66,6 @@ router.route('/getStats').get(RidesController.apiGetStats);
 router.route('/setInProgress').post(RidesController.apiSetRidesInProgress);
 router.route('/unsetInProgress').post(RidesController.apiUnsetRidesInProgress);
 router.route('/approve').post(RidesController.apiApproveRides);
+router.route('/sendCodes').get(RidesController.apiSendCodes);
 
 export default router;

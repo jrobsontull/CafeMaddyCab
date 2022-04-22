@@ -1,5 +1,6 @@
 import RidesDAO from '../dao/ridesDAO.js';
 import { nanoid } from 'nanoid/async';
+import { parseAsync } from 'json2csv';
 
 export default class RidesController {
   /* POST request for single ride request */
@@ -8,7 +9,9 @@ export default class RidesController {
       // Async generate short ID for reference
       const shortId = await nanoid(10);
 
+      // Get NYC current date/time
       const dateRequested = new Date();
+
       const firstName = req.body.firstName;
       const lastName = req.body.lastName;
       const email = req.body.email;
@@ -335,6 +338,67 @@ export default class RidesController {
       }
     } catch (e) {
       console.log('RidesController: Failed to approve rides. ' + e.message);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  // API controller for getting a rides OBJ containing rides with approved status
+  static async apiSendCodes(req, res, next) {
+    try {
+      let fromDate;
+      let toDate;
+      let response;
+
+      if (req.query.fromDate && req.query.toDate) {
+        fromDate = new Date(req.query.fromDate);
+        toDate = new Date(req.query.toDate);
+        // Increment toDate by 24 hours and UTC time difference
+        toDate.setHours(toDate.getHours() + 24 + 5);
+        response = await RidesDAO.sendCodes(fromDate, toDate);
+      } else {
+        response = await RidesDAO.sendCodes();
+      }
+
+      var { error } = response;
+      if (error) {
+        res.status(500).json({ error: error });
+      }
+
+      // Format dates in response to NYC date
+      let ridesObj = [];
+      for (var ride in response) {
+        const currentNycLocale = response[ride].dateRequested.toLocaleString(
+          'en-US',
+          {
+            timeZone: 'America/New_York',
+          }
+        );
+
+        let formatedLocale = currentNycLocale.split(',')[0];
+        response[ride].dateRequested = formatedLocale;
+        ridesObj.push(response[ride]);
+      }
+
+      // Convert JSON array to CSV
+      const fields = [
+        '_id',
+        'dateRequested',
+        'firstName',
+        'lastName',
+        'email',
+        'coupon',
+      ];
+      const opts = { fields };
+      const csv = await parseAsync(response, opts);
+
+      // Send response
+      res.attachment('rides.csv');
+      res.send(csv);
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to get rides for sending codes to. ' +
+          e.message
+      );
       res.status(500).json({ error: e });
     }
   }

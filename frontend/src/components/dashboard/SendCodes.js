@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 
@@ -6,11 +6,14 @@ import Arrow from '../../assets/img/arrow_right.svg';
 
 function SendCodes({ onClose }) {
   const { user } = useContext(AuthContext);
-
   const [errorOnSubmit, setErrorOnSubmit] = useState({
     state: false,
     message: null,
   });
+
+  const [useDates, setUseDates] = useState(false);
+  const [fromDate, setFromDate] = useState(getClosestMon());
+  const [toDate, setToDate] = useState(getTodayDate());
 
   // Calculate closest Monday from current date
   function getClosestMon() {
@@ -34,6 +37,54 @@ function SendCodes({ onClose }) {
     let dateArr = nowDate.toLocaleDateString('en-UK').split('/');
     dateArr = dateArr.reverse();
     return dateArr.join('-');
+  }
+
+  // Download CSV btn handler
+  function downloadCSV() {
+    if (useDates) {
+      RidesAPI.sendCodes(fromDate, toDate).then((response) => {
+        var { error } = response;
+        if (error) {
+          setErrorOnSubmit({
+            state: true,
+            message: error,
+          });
+        } else {
+          // All good
+          const url = window.URL.createObjectURL(new Blob([response]));
+          const link = document.createElement('a');
+          link.href = url;
+
+          const downloadFileName =
+            fromDate.split('-').join('') +
+            '-' +
+            toDate.split('-').join('') +
+            '_rides.csv';
+
+          link.setAttribute('download', downloadFileName); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+        }
+      });
+    } else {
+      RidesAPI.sendCodes().then((response) => {
+        var { error } = response;
+        if (error) {
+          setErrorOnSubmit({
+            state: true,
+            message: error,
+          });
+        } else {
+          // All good
+          const url = window.URL.createObjectURL(new Blob([response]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'all_approved_rides.csv'); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+        }
+      });
+    }
   }
 
   return (
@@ -75,7 +126,11 @@ function SendCodes({ onClose }) {
           <div className="actions">
             <div className="options">
               <div className="use-date-check">
-                <input type="checkbox" id="check-date"></input>
+                <input
+                  type="checkbox"
+                  id="check-date"
+                  onChange={() => setUseDates(!useDates)}
+                ></input>
                 <label htmlFor="check-date">Specify date for download</label>
               </div>
               <div className="date">
@@ -85,6 +140,7 @@ function SendCodes({ onClose }) {
                     type="date"
                     id="from-date"
                     defaultValue={getClosestMon()}
+                    onChange={(e) => setFromDate(e.target.value)}
                   />
                 </div>
                 <div className="picker">
@@ -93,11 +149,14 @@ function SendCodes({ onClose }) {
                     type="date"
                     id="to-date"
                     defaultValue={getTodayDate()}
+                    onChange={(e) => setToDate(e.target.value)}
                   />
                 </div>
               </div>
             </div>
-            <div className="download-btn">Download CSV</div>
+            <div className="download-btn" onClick={() => downloadCSV()}>
+              Download CSV
+            </div>
           </div>
         </div>
       </div>

@@ -117,6 +117,25 @@ export default class RidesAPI {
       return response.data;
     }
   }
+
+  // Get rides OBJ to send codes to
+  static async sendCodes(fromDate = null, toDate = null) {
+    const url = 'api/v1/rides/sendCodes';
+    let params;
+    let response;
+
+    if (fromDate && toDate) {
+      params = '?fromDate=' + fromDate + '&toDate=' + toDate;
+      response = await getRequest(url + params);
+    } else {
+      // No dates specified
+      response = await getRequest(url);
+    }
+
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
 // POST request for multipart content - used for requesting rides

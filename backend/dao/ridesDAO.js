@@ -423,4 +423,36 @@ export default class RidesDAO {
       return { error: e };
     }
   }
+
+  // Get rides OBJ with approved status to then send codes to
+  static async sendCodes(fromDate = null, toDate = null) {
+    try {
+      let query = { 'status.value': 3 };
+
+      if (fromDate && toDate) {
+        // Date specified
+        query = {
+          'status.value': 3,
+          dateRequested: { $gt: fromDate, $lt: toDate },
+        };
+      }
+
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.log('ridesDAO: Unable to issue find command. ' + e);
+        return { error: e };
+      }
+
+      const displayCursor = cursor.toArray();
+      return displayCursor;
+    } catch (e) {
+      console.log(
+        'ridesDAO: Failed to find approved rides for sending codes to. ' + e
+      );
+      return { error: e };
+    }
+  }
 }
