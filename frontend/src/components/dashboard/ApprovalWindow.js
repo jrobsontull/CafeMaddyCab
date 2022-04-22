@@ -56,7 +56,7 @@ function ApprovalWindow({ onClose }) {
   }
 
   useEffect(() => {
-    RidesAPI.getStats('status=1').then((response) => {
+    RidesAPI.getStats('status=1', user.user.token).then((response) => {
       setNewTotal(response.count);
     });
   }, []);

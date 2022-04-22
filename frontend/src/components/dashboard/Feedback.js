@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import FeedbackAPI from '../../utils/feedback.api';
+import AuthContext from '../../utils/auth.context';
 
 import Navbar from './Navbar';
 import ViewFeedback from './ViewFeedback';
 
 function Feedback() {
+  const { user } = useContext(AuthContext);
   const [entries, setEntries] = useState([]);
   const [feedbackData, setFeedbackData] = useState({
     totalEntries: 0,
@@ -33,26 +35,30 @@ function Feedback() {
       feedbackData.totalPages - 1 !== feedbackData.currentPage
     ) {
       const pageToScrollTo = feedbackData.currentPage + 1;
-      FeedbackAPI.getFeedback('page=' + pageToScrollTo).then((response) => {
-        setEntries(response.entries);
-        setFeedbackData((prevData) => ({
-          ...prevData,
-          currentPage: pageToScrollTo,
-        }));
-      });
+      FeedbackAPI.getFeedback('page=' + pageToScrollTo, user.user.token).then(
+        (response) => {
+          setEntries(response.entries);
+          setFeedbackData((prevData) => ({
+            ...prevData,
+            currentPage: pageToScrollTo,
+          }));
+        }
+      );
     }
   }
 
   function prevPage() {
     if (feedbackData.currentPage > 0) {
       const pageToScrollTo = feedbackData.currentPage - 1;
-      FeedbackAPI.getFeedback('page=' + pageToScrollTo).then((response) => {
-        setEntries(response.entries);
-        setFeedbackData((prevData) => ({
-          ...prevData,
-          currentPage: pageToScrollTo,
-        }));
-      });
+      FeedbackAPI.getFeedback('page=' + pageToScrollTo, user.user.token).then(
+        (response) => {
+          setEntries(response.entries);
+          setFeedbackData((prevData) => ({
+            ...prevData,
+            currentPage: pageToScrollTo,
+          }));
+        }
+      );
     }
   }
 
@@ -67,7 +73,7 @@ function Feedback() {
   }
 
   useEffect(() => {
-    FeedbackAPI.getFeedback().then((response) => {
+    FeedbackAPI.getFeedback(null, user.user.token).then((response) => {
       setEntries(response.entries);
       setFeedbackData({
         totalEntries: response.totalResults,

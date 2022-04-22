@@ -42,7 +42,7 @@ function SendCodes({ onClose }) {
   // Download CSV btn handler
   function downloadCSV() {
     if (useDates) {
-      RidesAPI.sendCodes(fromDate, toDate).then((response) => {
+      RidesAPI.sendCodes(fromDate, toDate, user.user.token).then((response) => {
         var { error } = response;
         if (error) {
           setErrorOnSubmit({
@@ -67,7 +67,7 @@ function SendCodes({ onClose }) {
         }
       });
     } else {
-      RidesAPI.sendCodes().then((response) => {
+      RidesAPI.sendCodes(null, null, user.user.token).then((response) => {
         var { error } = response;
         if (error) {
           setErrorOnSubmit({

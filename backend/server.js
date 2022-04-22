@@ -58,13 +58,10 @@ app.use(
   mongoSanitize({
     onSanitize: ({ req, key }) => {
       console.warn(
-        'Bad key found [' + key + '] in request and will be sanitized.'
-      );
-      console.log(
-        'Request headers:\n',
+        'Bad key found [' + key + '] in request and will be sanitized.\n',
+        '\nRequest headers:\n',
         req.headers,
-        '\nRequest URL:\n',
-        req.url
+        '\nRequest URL:\n'
       );
     },
   })

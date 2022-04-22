@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
+import AuthContext from '../../utils/auth.context';
+
 import Arrow from '../../assets/img/arrow_right.svg';
 
 function ViewFeedback({ rideId, onClose, feedbackText }) {
+  const { user } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
-    RidesAPI.getRideById(rideId).then((response) => {
+    RidesAPI.getRideById(rideId, user.user.token).then((response) => {
       if (response) {
         setUserDetails(response.ride);
       } else {

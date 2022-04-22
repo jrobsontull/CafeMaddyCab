@@ -5,6 +5,7 @@ import multer from 'multer';
 import multiUpload from '../middleware/upload.js';
 import verifyCaptcha from '../middleware/validateCaptcha.js';
 import apiLimitRequestRides from '../middleware/rateLimitter.js';
+import validateHeader from '../middleware/validateHeader.js';
 
 // Controller
 import RidesController from '../controllers/rides.controller.js';
@@ -13,8 +14,6 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(RidesController.apiGetRides)
-
   .post(
     apiLimitRequestRides,
     verifyCaptcha,
@@ -59,13 +58,17 @@ router
     },
     RidesController.apiRequestRide
   )
-
-  .put(RidesController.apiEditRideById);
-router.route('/getById').get(RidesController.apiGetRideById);
-router.route('/getStats').get(RidesController.apiGetStats);
-router.route('/setInProgress').post(RidesController.apiSetRidesInProgress);
-router.route('/unsetInProgress').post(RidesController.apiUnsetRidesInProgress);
-router.route('/approve').post(RidesController.apiApproveRides);
-router.route('/sendCodes').get(RidesController.apiSendCodes);
+  .get(validateHeader, RidesController.apiGetRides)
+  .put(validateHeader, RidesController.apiEditRideById);
+router.route('/getById').get(validateHeader, RidesController.apiGetRideById);
+router.route('/getStats').get(validateHeader, RidesController.apiGetStats);
+router
+  .route('/setInProgress')
+  .post(validateHeader, RidesController.apiSetRidesInProgress);
+router
+  .route('/unsetInProgress')
+  .post(validateHeader, RidesController.apiUnsetRidesInProgress);
+router.route('/approve').post(validateHeader, RidesController.apiApproveRides);
+router.route('/sendCodes').get(validateHeader, RidesController.apiSendCodes);
 
 export default router;

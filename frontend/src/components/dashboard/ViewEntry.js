@@ -97,7 +97,7 @@ function ViewEntry({ rideId, onClose }) {
     const updatedRide = rideDetails;
     updatedRide.lastEditedBy = user.user.commonName;
 
-    RidesAPI.editRideById(updatedRide).then((response) => {
+    RidesAPI.editRideById(updatedRide, user.user.token).then((response) => {
       var { error } = response;
       if (error) {
         alert(error);
@@ -109,7 +109,7 @@ function ViewEntry({ rideId, onClose }) {
   }
 
   useEffect(() => {
-    RidesAPI.getRideById(rideId).then((response) => {
+    RidesAPI.getRideById(rideId, user.user.token).then((response) => {
       var { error } = response;
       if (error) {
         alert(error);

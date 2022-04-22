@@ -27,14 +27,14 @@ export default class RidesAPI {
   }
 
   // Get many rides, ability to search by param
-  static async getRides(urlParams = null) {
+  static async getRides(urlParams = null, token) {
     let url = 'api/v1/rides';
 
     if (urlParams) {
       url += '?' + urlParams;
     }
 
-    const response = await getRequest(url);
+    const response = await getRequest(url, token);
     if (response) {
       const rides = response.data;
       return rides;
@@ -42,34 +42,34 @@ export default class RidesAPI {
   }
 
   // Get ride details by ObjectID
-  static async getRideById(id) {
+  static async getRideById(id, token) {
     const url = 'api/v1/rides/getById?id=' + id;
 
-    const response = await getRequest(url);
+    const response = await getRequest(url, token);
     if (response) {
       return response.data;
     }
   }
 
   // Edit ride details
-  static async editRideById(ride) {
+  static async editRideById(ride, token) {
     const url = 'api/v1/rides';
 
-    const response = await putRequest(ride, url);
+    const response = await putRequest(ride, url, token);
     if (response) {
       return response;
     }
   }
 
   // Get general stats about rides e.g. by status
-  static async getStats(urlParams = null) {
+  static async getStats(urlParams = null, token) {
     let url = 'api/v1/rides/getStats';
 
     if (urlParams) {
       url += '?' + urlParams;
     }
 
-    const response = await getRequest(url);
+    const response = await getRequest(url, token);
     if (response) {
       const stats = response.data;
       return stats;
@@ -84,34 +84,34 @@ export default class RidesAPI {
       approver: { commonName: user.commonName, id: user._id },
     };
 
-    const response = await postRequest(url, body);
+    const response = await postRequest(url, body, user.token);
     if (response) {
       return response.data;
     }
   }
 
   // Set in progress rides to new (cancel action in ApproveRides)
-  static async unsetInProgress(userId) {
+  static async unsetInProgress(userId, token) {
     const url = 'api/v1/rides/unsetInProgress';
     const body = {
       approverId: userId,
     };
 
-    const response = await postRequest(url, body);
+    const response = await postRequest(url, body, token);
     if (response) {
       return response.data;
     }
   }
 
   // Approve rides by ID and append notes
-  static async approveRides(toApprove, notesToAppend) {
+  static async approveRides(toApprove, notesToAppend, token) {
     const url = 'api/v1/rides/approve';
     const body = {
       rides: toApprove,
       notes: notesToAppend,
     };
 
-    const response = await postRequest(url, body);
+    const response = await postRequest(url, body, token);
 
     if (response) {
       return response.data;
@@ -119,17 +119,17 @@ export default class RidesAPI {
   }
 
   // Get rides OBJ to send codes to
-  static async sendCodes(fromDate = null, toDate = null) {
+  static async sendCodes(fromDate = null, toDate = null, token) {
     const url = 'api/v1/rides/sendCodes';
     let params;
     let response;
 
     if (fromDate && toDate) {
       params = '?fromDate=' + fromDate + '&toDate=' + toDate;
-      response = await getRequest(url + params);
+      response = await getRequest(url + params, token);
     } else {
       // No dates specified
-      response = await getRequest(url);
+      response = await getRequest(url, token);
     }
 
     if (response) {
@@ -158,9 +158,9 @@ async function postRequestMulti(body, url, gResponse) {
 }
 
 // General GET request
-async function getRequest(url) {
+async function getRequest(url, token) {
   try {
-    const response = await http.get(url);
+    const response = await http.get(url, { headers: { token: token } });
 
     if (response.status === 200) {
       return response;
@@ -174,10 +174,12 @@ async function getRequest(url) {
 }
 
 // General POST request
-async function postRequest(url, body) {
+async function postRequest(url, body, token) {
   try {
     const payload = body;
-    const response = await http.post(url, payload);
+    const response = await http.post(url, payload, {
+      headers: { token: token },
+    });
 
     if (response.status === 200) {
       return response;
@@ -191,10 +193,12 @@ async function postRequest(url, body) {
 }
 
 // General PUT request
-async function putRequest(body, url) {
+async function putRequest(body, url, token) {
   try {
     const payload = body;
-    const response = await http.put(url, payload);
+    const response = await http.put(url, payload, {
+      headers: { token: token },
+    });
 
     if (response.status === 200) {
       return response;

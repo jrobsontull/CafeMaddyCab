@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
+import AuthContext from '../../utils/auth.context';
 
 import Navbar from './Navbar';
 import ViewEntry from './ViewEntry';
@@ -8,6 +9,7 @@ import SendCodes from './SendCodes';
 
 function Dashboard() {
   // Global vars
+  const { user } = useContext(AuthContext);
   const [rides, setRides] = useState([]);
   const [ridesData, setRidesData] = useState({
     totalRides: 0,
@@ -51,26 +53,30 @@ function Dashboard() {
       ridesData.totalPages - 1 !== ridesData.currentPage
     ) {
       const pageToScrollTo = ridesData.currentPage + 1;
-      RidesAPI.getRides('page=' + pageToScrollTo).then((response) => {
-        setRides(response.rides);
-        setRidesData((prevData) => ({
-          ...prevData,
-          currentPage: pageToScrollTo,
-        }));
-      });
+      RidesAPI.getRides('page=' + pageToScrollTo, user.user.token).then(
+        (response) => {
+          setRides(response.rides);
+          setRidesData((prevData) => ({
+            ...prevData,
+            currentPage: pageToScrollTo,
+          }));
+        }
+      );
     }
   }
 
   function prevPage() {
     if (ridesData.currentPage > 0) {
       const pageToScrollTo = ridesData.currentPage - 1;
-      RidesAPI.getRides('page=' + pageToScrollTo).then((response) => {
-        setRides(response.rides);
-        setRidesData((prevData) => ({
-          ...prevData,
-          currentPage: pageToScrollTo,
-        }));
-      });
+      RidesAPI.getRides('page=' + pageToScrollTo, user.user.token).then(
+        (response) => {
+          setRides(response.rides);
+          setRidesData((prevData) => ({
+            ...prevData,
+            currentPage: pageToScrollTo,
+          }));
+        }
+      );
     }
   }
 
@@ -82,7 +88,7 @@ function Dashboard() {
 
   function closeRideEntryView() {
     isOpenRideEntryView(false);
-    RidesAPI.getRides().then((response) => {
+    RidesAPI.getRides(null, user.user.token).then((response) => {
       setRides(response.rides);
       setRidesData({
         totalRides: response.totalResults,
@@ -115,19 +121,21 @@ function Dashboard() {
 
   function searchRides(status = null) {
     if (status) {
-      RidesAPI.getRides('status=' + status).then((response) => {
-        setRides(response.rides);
-        setRidesData({
-          totalRides: response.totalResults,
-          currentPage: 0,
-          totalPages: calculateTotalPageNums(
-            entiresPerPage,
-            response.totalResults
-          ),
-        });
-      });
+      RidesAPI.getRides('status=' + status, user.user.token).then(
+        (response) => {
+          setRides(response.rides);
+          setRidesData({
+            totalRides: response.totalResults,
+            currentPage: 0,
+            totalPages: calculateTotalPageNums(
+              entiresPerPage,
+              response.totalResults
+            ),
+          });
+        }
+      );
     } else {
-      RidesAPI.getRides().then((response) => {
+      RidesAPI.getRides(null, user.user.token).then((response) => {
         setRides(response.rides);
         setRidesData({
           totalRides: response.totalResults,
@@ -143,7 +151,7 @@ function Dashboard() {
 
   useEffect(() => {
     /* Populate table with all rides */
-    RidesAPI.getRides().then((response) => {
+    RidesAPI.getRides(null, user.user.token).then((response) => {
       var { error } = response;
       if (error) {
         alert(error);
@@ -162,7 +170,7 @@ function Dashboard() {
     });
 
     /* Set status quantities in left menu - might be a CPU intensive process so be WARNED */
-    RidesAPI.getStats().then((response) => {
+    RidesAPI.getStats(null, user.user.token).then((response) => {
       var { error } = response;
       if (error) {
         alert(error);

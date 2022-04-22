@@ -47,7 +47,8 @@ function ApproveRides() {
     ) {
       const pageToScrollTo = ridesData.currentPage + 1;
       RidesAPI.getRides(
-        'status=2&approverId=' + user.user._id + '&page=' + pageToScrollTo
+        'status=2&approverId=' + user.user._id + '&page=' + pageToScrollTo,
+        user.user.token
       ).then((response) => {
         setRides(response.rides);
         setRidesData((prevData) => ({
@@ -64,7 +65,8 @@ function ApproveRides() {
     if (ridesData.currentPage > 0) {
       const pageToScrollTo = ridesData.currentPage - 1;
       RidesAPI.getRides(
-        'status=2&approverId=' + user.user._id + '&page=' + pageToScrollTo
+        'status=2&approverId=' + user.user._id + '&page=' + pageToScrollTo,
+        user.user.token
       ).then((response) => {
         setRides(response.rides);
         setRidesData((prevData) => ({
@@ -100,43 +102,48 @@ function ApproveRides() {
 
   // Cancel button handler - unset in progress state on rides
   function cancelHandler() {
-    RidesAPI.unsetInProgress(user.user._id).then((response) => {
-      var { error } = response;
-      if (error) {
-        alert(error);
-      } else {
-        navigate('/dashboard');
+    RidesAPI.unsetInProgress(user.user._id, user.user.token).then(
+      (response) => {
+        var { error } = response;
+        if (error) {
+          alert(error);
+        } else {
+          navigate('/dashboard');
+        }
       }
-    });
+    );
   }
 
   // Submit/save changes handler - push approvalState and notes to DB
   function submitHandler() {
-    RidesAPI.approveRides(approvalStates, notes).then((response) => {
-      var { error } = response;
-      if (error) {
-        alert(error);
-      } else {
-        navigate('/dashboard');
+    RidesAPI.approveRides(approvalStates, notes, user.user.token).then(
+      (response) => {
+        var { error } = response;
+        if (error) {
+          alert(error);
+        } else {
+          navigate('/dashboard');
+        }
       }
-    });
+    );
   }
 
   // Run once when render complete - populate table
   useEffect(() => {
-    RidesAPI.getRides('status=2&approverId=' + user.user._id).then(
-      (response) => {
-        setRides(response.rides);
-        setRidesData({
-          totalRides: response.totalResults,
-          currentPage: 0,
-          totalPages: calculateTotalPageNums(
-            entiresPerPage,
-            response.totalResults
-          ),
-        });
-      }
-    );
+    RidesAPI.getRides(
+      'status=2&approverId=' + user.user._id,
+      user.user.token
+    ).then((response) => {
+      setRides(response.rides);
+      setRidesData({
+        totalRides: response.totalResults,
+        currentPage: 0,
+        totalPages: calculateTotalPageNums(
+          entiresPerPage,
+          response.totalResults
+        ),
+      });
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
