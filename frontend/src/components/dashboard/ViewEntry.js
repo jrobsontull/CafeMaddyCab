@@ -151,6 +151,7 @@ function ViewEntry({ rideId, onClose }) {
                   className="value"
                   defaultValue={rideDetails.firstName}
                   onChange={(e) => updateGenericField(e.target, 'firstName')}
+                  placeholder="First name"
                 ></input>
               </li>
               <li>
@@ -159,6 +160,7 @@ function ViewEntry({ rideId, onClose }) {
                   className="value"
                   defaultValue={rideDetails.lastName}
                   onChange={(e) => updateGenericField(e.target, 'lastName')}
+                  placeholder="Last name"
                 ></input>
               </li>
               <li>
@@ -175,6 +177,7 @@ function ViewEntry({ rideId, onClose }) {
                   className="value"
                   defaultValue={rideDetails.email}
                   onChange={(e) => updateGenericField(e.target, 'email')}
+                  placeholder="Email"
                 ></input>
               </li>
               <li>
@@ -252,8 +255,9 @@ function ViewEntry({ rideId, onClose }) {
                 <div className="description">Ride coupon:</div>
                 <input
                   className="value"
-                  defaultValue={rideDetails.coupon ? rideDetails.coupon : 'N/A'}
+                  defaultValue={rideDetails.coupon}
                   onChange={(e) => updateGenericField(e.target, 'coupon')}
+                  placeholder="N/A"
                 ></input>
               </li>
               <li className="photo-comparison">
@@ -273,9 +277,7 @@ function ViewEntry({ rideId, onClose }) {
           </div>
           <textarea
             className="notes"
-            placeholder={
-              rideDetails.notes ? rideDetails.notes : 'Write notes here...'
-            }
+            placeholder="Write notes here..."
             defaultValue={rideDetails.notes ? rideDetails.notes : ''}
             onChange={(e) => updateGenericField(e.target, 'notes')}
             rows="3"

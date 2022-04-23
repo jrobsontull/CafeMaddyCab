@@ -1,6 +1,7 @@
 import RidesDAO from '../dao/ridesDAO.js';
 import { nanoid } from 'nanoid/async';
 import { parseAsync } from 'json2csv';
+import { parse } from 'csv-parse';
 
 export default class RidesController {
   /* POST request for single ride request */
@@ -402,10 +403,48 @@ export default class RidesController {
       res.status(500).json({ error: e });
     }
   }
+
+  // API controller for marking rides as done and appending coupons
+  static async apiMarkAsDone(req, res, next) {
+    try {
+      const csvString = await req.file.buffer.toString();
+      let parsedCsv = await parseCsvString(csvString);
+      parsedCsv.shift(); // remove headers
+
+      const response = await RidesDAO.markAsDone(parsedCsv);
+
+      var { error } = response;
+      if (error) {
+        res.status(500).json({ error: error });
+      } else {
+        res.json(response);
+      }
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to mark rides as done and append ride coupons. ' +
+          e.message
+      );
+      res.status(500).json({ error: e });
+    }
+  }
 }
 
 // Check if obj is empty and return bool
 function isObjEmpty(obj) {
   for (var key in obj) return false;
   return true;
+}
+
+// Parse UTF-8 string to CSV asynchronously
+function parseCsvString(input) {
+  return new Promise((resolve, reject) => {
+    function callback(err, output) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(output);
+      }
+    }
+    parse(input, callback);
+  });
 }

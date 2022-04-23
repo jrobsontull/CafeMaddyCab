@@ -2,23 +2,25 @@ import express from 'express';
 
 // Middleware
 import multer from 'multer';
-import multiUpload from '../middleware/upload.js';
+import multiImageUpload from '../middleware/imageUpload.js';
 import verifyCaptcha from '../middleware/validateCaptcha.js';
 import apiLimitRequestRides from '../middleware/rateLimitter.js';
 import validateHeader from '../middleware/validateHeader.js';
+import csvUpload from '../middleware/csvUpload.js';
 
 // Controller
 import RidesController from '../controllers/rides.controller.js';
 
 const router = express.Router();
 
+// Handle ride requests with image uploads
 router
   .route('/')
   .post(
     apiLimitRequestRides,
     verifyCaptcha,
     function (req, res, next) {
-      multiUpload(
+      multiImageUpload(
         req,
         res,
         function (err) {
@@ -46,7 +48,9 @@ router
               });
             }
           } else if (err) {
-            console.log('rides.route.js: Other Multer error occurred. ' + err);
+            console.log(
+              'rides.route.js: Other non-Multer error occurred. ' + err
+            );
             res.status(400).json({ error: { state: true, message: err } });
           }
 
@@ -60,15 +64,58 @@ router
   )
   .get(validateHeader, RidesController.apiGetRides)
   .put(validateHeader, RidesController.apiEditRideById);
+
+// Get ride details by ID
 router.route('/getById').get(validateHeader, RidesController.apiGetRideById);
+
+// Get stats on all rides
 router.route('/getStats').get(validateHeader, RidesController.apiGetStats);
+
+// Set rides to in progress for approval
 router
   .route('/setInProgress')
   .post(validateHeader, RidesController.apiSetRidesInProgress);
+
+// Cancel in progress state of rides
 router
   .route('/unsetInProgress')
   .post(validateHeader, RidesController.apiUnsetRidesInProgress);
+
+// Approve rides after approval screen
 router.route('/approve').post(validateHeader, RidesController.apiApproveRides);
+
+// Download CSV of rides for needing codes
 router.route('/sendCodes').get(validateHeader, RidesController.apiSendCodes);
+
+// Mark rides as done and append coupon codes
+router.route('/markAsDone').post(
+  validateHeader,
+  function (req, res, next) {
+    csvUpload(
+      req,
+      res,
+      function (err) {
+        // Handle middleware errors
+        if (err instanceof multer.MulterError) {
+          console.log(
+            'rides.route.js: A Multer error occurred. ' + err.message
+          );
+          res.status(500).json({
+            error: 'Internal server error.' + err.message,
+          });
+        } else if (err) {
+          // Handle other errors
+          console.log(
+            'rides.route.js: Other non-Multer error occurred. ' + err
+          );
+          res.status(400).json({ error: err });
+        }
+        next();
+      },
+      next
+    );
+  },
+  RidesController.apiMarkAsDone
+);
 
 export default router;

@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import ViewEntry from './ViewEntry';
 import ApprovalWindow from './ApprovalWindow';
 import SendCodes from './SendCodes';
+import MarkAsDone from './MarkAsDone';
 
 function Dashboard() {
   // Global vars
@@ -25,6 +26,7 @@ function Dashboard() {
   // Other window states
   const [openApporovalWindow, isOpenApprovalWindow] = useState(false);
   const [openSendCodesWindow, isOpenSendCodesWindow] = useState(false);
+  const [openDoneWindow, isOpenDoneWindow] = useState(false);
 
   // Counts for status types
   const [statusCount, setStatusCount] = useState({
@@ -80,6 +82,7 @@ function Dashboard() {
     }
   }
 
+  // Window open and close functions
   function viewRideEntry(rideId) {
     window.scrollTo(0, 0);
     setSelectedRideId(rideId);
@@ -117,6 +120,15 @@ function Dashboard() {
 
   function closeSendCodes() {
     isOpenSendCodesWindow(false);
+  }
+
+  function openMarkAsDone() {
+    window.scrollTo(0, 0);
+    isOpenDoneWindow(true);
+  }
+
+  function closeMarkAsDone() {
+    isOpenDoneWindow(false);
   }
 
   function searchRides(status = null) {
@@ -196,6 +208,8 @@ function Dashboard() {
 
         {openSendCodesWindow ? <SendCodes onClose={closeSendCodes} /> : ''}
 
+        {openDoneWindow ? <MarkAsDone onClose={closeMarkAsDone} /> : ''}
+
         <div className="dashboard">
           <div className="menu">
             <div className="search-options">
@@ -232,7 +246,11 @@ function Dashboard() {
               <div className="action" onClick={() => openSendCodes()}>
                 Send codes
               </div>
-              <div className="action" id="last-child">
+              <div
+                className="action"
+                id="last-child"
+                onClick={() => openMarkAsDone()}
+              >
                 Mark as done
               </div>
             </div>

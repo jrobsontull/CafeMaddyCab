@@ -15,7 +15,7 @@ export default class RidesAPI {
     formData.append('purpose', rideDetails.purpose.value);
     formData.append('purposeText', rideDetails.purpose.text);
 
-    const response = postRequestMulti(
+    const response = await postRequestMulti(
       formData,
       '/api/v1/rides/',
       rideDetails.gResponse
@@ -136,13 +136,29 @@ export default class RidesAPI {
       return response.data;
     }
   }
+
+  // Upload CSV for marking rides as done
+  static async markAsDone(csvFile, token) {
+    var formData = new FormData();
+    formData.append('csvFile', csvFile);
+
+    const response = await postCSVMulti(
+      formData,
+      'api/v1/rides/markAsDone',
+      token
+    );
+
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
 // POST request for multipart content - used for requesting rides
 async function postRequestMulti(body, url, gResponse) {
   try {
     const payload = body;
-    /* Set reCAPTCHA response to header for validation */
+    // Set reCAPTCHA response to header for validation
     const config = { headers: { 'g-response': gResponse } };
     const response = await httpMulti.post(url, payload, config);
 
@@ -154,6 +170,25 @@ async function postRequestMulti(body, url, gResponse) {
   } catch (e) {
     console.log('Error: ' + e.message);
     return e.response.data;
+  }
+}
+
+// POST request for CSV file uploads
+async function postCSVMulti(body, url, token) {
+  try {
+    const payload = body;
+    const response = await httpMulti.post(url, payload, {
+      headers: { token: token },
+    });
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error: ' + e.message);
+    return e.response;
   }
 }
 

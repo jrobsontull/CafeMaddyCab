@@ -245,10 +245,10 @@ export default class RidesDAO {
         return { error: e };
       }
 
-      /* Limit search to number of rides to apporove */
+      // Limit search to number of rides to apporove
       const ridesToSet = await cursor.limit(toApprove).toArray();
 
-      /* Set rides by ID to correct status and approver fields */
+      // Set rides by ID to correct status and approver fields
       let responses = [];
       for (const ride of ridesToSet) {
         responses.push(
@@ -451,6 +451,41 @@ export default class RidesDAO {
     } catch (e) {
       console.log(
         'ridesDAO: Failed to find approved rides for sending codes to. ' + e
+      );
+      return { error: e };
+    }
+  }
+
+  // Mark rides as done and attach coupon codes
+  static async markAsDone(ridesToUpdate) {
+    try {
+      let responses = [];
+      for (const ride of ridesToUpdate) {
+        const _id = ride[0];
+        const coupon = ride[5];
+
+        responses.push(
+          await rides.findOneAndUpdate(
+            { _id: ObjectId(_id) },
+            { $set: { status: { value: 6, text: 'Done' }, coupon: coupon } }
+          )
+        );
+      }
+
+      // Error checking
+      if (responses.length === ridesToUpdate.length) {
+        return { status: 'success' };
+      } else {
+        console.log(
+          'ridesDAO: Failed to mark all rides as done and attach coupons.'
+        );
+        return {
+          error: 'Failed to mark all rides as done and attach coupons.',
+        };
+      }
+    } catch (e) {
+      console.log(
+        'ridesDAO: Failed to mark rides as done and attach coupons. ' + e
       );
       return { error: e };
     }

@@ -10,9 +10,9 @@ const upload = multer({
   },
 });
 
-const multiUpload = upload.fields([
+const multiImageUpload = upload.fields([
   { name: 'selfie', maxCount: 1 },
   { name: 'photoId', maxCount: 1 },
 ]);
 
-export default multiUpload;
+export default multiImageUpload;

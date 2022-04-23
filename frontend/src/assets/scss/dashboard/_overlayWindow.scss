@@ -137,6 +137,10 @@
         transition: box-shadow 0.25s ease;
       }
 
+      li input.value::placeholder {
+        color: $light-blue;
+      }
+
       li select {
         width: 68%;
         padding: 4px 12px;
@@ -159,19 +163,6 @@
       li select:focus {
         box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
       }
-
-      // li textarea {
-      //   width: 100%;
-      //   padding: 8px 12px;
-      //   background-color: $lightest-pink;
-      //   color: $dark-blue;
-      //   border: 1px solid $dark-blue;
-      //   resize: none;
-      // }
-
-      // li textarea::placeholder {
-      //   color: $light-blue;
-      // }
 
       li.photo-comparison {
         flex-direction: column;
@@ -241,7 +232,8 @@
 
   /* Approval window styling */
   .view-entry-window.approve-window,
-  .view-entry-window.send-codes {
+  .view-entry-window.send-codes,
+  .view-entry-window.done {
     width: 25%;
     min-width: 400px;
 
@@ -400,6 +392,72 @@
           background-color: $dark-pink-hover;
           box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
         }
+      }
+    }
+  }
+
+  .view-entry-window.done {
+    .entry-content {
+      p {
+        margin-bottom: 20px;
+      }
+
+      p strong {
+        font-weight: 500;
+      }
+
+      .upload {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin-bottom: 20px;
+
+        input.input-file {
+          display: none;
+        }
+
+        input.upload-location {
+          width: 70%;
+          background-color: $lightest-pink;
+          padding: 12px 18px;
+          border-radius: $border-radius 0 0 $border-radius;
+          border: 1px solid $dark-blue;
+          border-width: 1px 0 1px 1px;
+          color: $light-blue;
+        }
+
+        .input-file + label {
+          display: inline-block;
+          text-align: center;
+          border-radius: 0 $border-radius $border-radius 0;
+          padding: 12px 4px;
+          font-size: 18px;
+          background-color: $dark-blue;
+          color: $lightest-pink;
+          width: 30%;
+          border: 1px solid $dark-blue;
+          border-width: 1px 1px 1px 0;
+          transition: background-color 0.25s ease;
+        }
+
+        .input-file + label:hover {
+          cursor: pointer;
+          background-color: $blue-btn-hover;
+        }
+      }
+
+      .submit-btn {
+        background-color: $dark-pink;
+        color: $lightest-pink;
+        padding: 16px 22px;
+        border-radius: $border-radius;
+        border: 1px solid $dark-blue;
+        transition: background-color 0.25s ease;
+      }
+
+      .submit-btn:hover {
+        cursor: pointer;
+        background-color: $dark-pink-hover;
       }
     }
   }
