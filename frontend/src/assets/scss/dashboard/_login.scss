@@ -3,18 +3,22 @@
   display: flex;
   justify-content: center;
 
+  .error {
+    max-width: calc(464px);
+  }
+
   .titles {
     margin-bottom: 14px;
   }
 
   .request-form.login {
-    max-width: 300px;
+    max-width: 500px;
   }
 
   .btn.login {
     background-color: $dark-blue;
     width: calc(#{$content-width} - 8px);
-    max-width: 266px;
+    max-width: calc(464px);
     padding: 8px 18px;
     text-align: center;
     font-size: $heading-font-size;

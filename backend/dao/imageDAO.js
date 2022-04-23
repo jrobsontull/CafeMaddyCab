@@ -10,7 +10,7 @@ export default class ImageDAO {
         return null;
       }
     } catch (e) {
-      console.log(
+      console.error(
         'ImageDAO: Failed to get filestream (' + path + '). ' + e.message
       );
       return { error: e.message };

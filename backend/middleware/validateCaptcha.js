@@ -17,33 +17,23 @@ async function verifyCaptcha(req, res, next) {
               next();
             } else {
               res.status(500).json({
-                error: {
-                  state: true,
-                  message: 'Error validating reCAPTCHA response.',
-                },
+                error: 'Error validating reCAPTCHA response.',
               });
             }
           } else {
             res.status(400).json({
-              error: {
-                state: true,
-                message: 'Invalid reCAPTCHA response.',
-              },
+              error: 'Invalid reCAPTCHA response.',
             });
           }
         });
       return requestRes;
     } else {
       res.status(400).json({
-        error: {
-          state: true,
-          message:
-            'You need to complete reCAPTCHA before submitting a request.',
-        },
+        error: 'You need to complete reCAPTCHA before submitting a request.',
       });
     }
   } catch (e) {
-    console.log('verifyCaptcha: Error verifying reCAPTCHA. ' + e.message);
+    console.warn('verifyCaptcha: Error verifying reCAPTCHA. ' + e.message);
     res.status(500).json({
       error: {
         state: true,

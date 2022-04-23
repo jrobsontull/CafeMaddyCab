@@ -28,7 +28,7 @@ router
           if (err instanceof multer.MulterError) {
             /* Handle specific file size error */
             if (err.code === 'LIMIT_FILE_SIZE') {
-              console.log(
+              console.error(
                 'rides.route.js: File uploaded to Multer too large. ' +
                   err.message
               );
@@ -40,7 +40,7 @@ router
               });
             } else {
               /* Handle all other Multer errors */
-              console.log(
+              console.error(
                 'rides.route.js: A Multer error occurred. ' + err.message
               );
               res.status(500).json({
@@ -48,7 +48,7 @@ router
               });
             }
           } else if (err) {
-            console.log(
+            console.error(
               'rides.route.js: Other non-Multer error occurred. ' + err
             );
             res.status(400).json({ error: { state: true, message: err } });
@@ -97,7 +97,7 @@ router.route('/markAsDone').post(
       function (err) {
         // Handle middleware errors
         if (err instanceof multer.MulterError) {
-          console.log(
+          console.error(
             'rides.route.js: A Multer error occurred. ' + err.message
           );
           res.status(500).json({
@@ -105,7 +105,7 @@ router.route('/markAsDone').post(
           });
         } else if (err) {
           // Handle other errors
-          console.log(
+          console.error(
             'rides.route.js: Other non-Multer error occurred. ' + err
           );
           res.status(400).json({ error: err });

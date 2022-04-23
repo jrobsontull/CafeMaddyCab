@@ -30,18 +30,20 @@ export default class FeedbackDAO {
     try {
       cursor = await feedback.find(query);
     } catch (e) {
-      console.log('Unable to find command: ' + e);
+      console.error('Unable to find command: ' + e);
       return { feedbackList: [], totalNumEntries: 0 };
     }
 
-    const displayCursor = cursor.limit(entriesPerPage).skip(entriesPerPage * page);
+    const displayCursor = cursor
+      .limit(entriesPerPage)
+      .skip(entriesPerPage * page);
     try {
       const feedbackList = await displayCursor.toArray();
       const totalNumEntries = await feedback.countDocuments(query);
 
-      return { feedbackList, totalNumEntries};
+      return { feedbackList, totalNumEntries };
     } catch (e) {
-      console.log(        
+      console.error(
         'Unable to convert cursor to array or problem counting documents.\n' + e
       );
       return { feedbackList: [], totalNumEntries: 0 };
@@ -57,8 +59,8 @@ export default class FeedbackDAO {
 
       return feedback.insertOne(feedbackResponse);
     } catch (e) {
-      console.log('Unable to post feedback: ' + e);
-      return {error: e};
+      console.error('Unable to post feedback: ' + e);
+      return { error: e };
     }
   }
 }

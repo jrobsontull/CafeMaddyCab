@@ -733,14 +733,16 @@
   height: 100%;
   display: flex;
   justify-content: center; }
+  .content.login .error {
+    max-width: calc(464px); }
   .content.login .titles {
     margin-bottom: 14px; }
   .content.login .request-form.login {
-    max-width: 300px; }
+    max-width: 500px; }
   .content.login .btn.login {
     background-color: #3b3b96;
     width: calc(75% - 8px);
-    max-width: 266px;
+    max-width: calc(464px);
     padding: 8px 18px;
     text-align: center;
     font-size: 24px;

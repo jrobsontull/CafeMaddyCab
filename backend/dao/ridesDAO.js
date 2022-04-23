@@ -60,7 +60,7 @@ export default class RidesDAO {
 
       return await rides.insertOne(rideDoc);
     } catch (e) {
-      console.log('ridesDAO: Unable to post ride. ' + e);
+      console.error('ridesDAO: Unable to post ride. ' + e);
       return { error: e };
     }
   }
@@ -89,7 +89,7 @@ export default class RidesDAO {
     try {
       cursor = await rides.find(query);
     } catch (e) {
-      console.log('ridesDAO: Unable to issue find command. ' + e);
+      console.error('ridesDAO: Unable to issue find command. ' + e);
       return { ridesList: [], totalNumRides: 0 };
     }
 
@@ -101,7 +101,7 @@ export default class RidesDAO {
 
       return { ridesList, totalNumRides };
     } catch (e) {
-      console.log(
+      console.error(
         'ridesDAO: Unable to convert cursor to array or problem counting documents.\n' +
           e
       );
@@ -118,7 +118,7 @@ export default class RidesDAO {
       try {
         cursor = await rides.find(query);
       } catch (e) {
-        console.log(
+        console.error(
           'ridesDAO: Unable to issue find command with query ' +
             query +
             '\n' +
@@ -130,7 +130,7 @@ export default class RidesDAO {
       const rideList = await cursor.toArray();
       return { ride: rideList[0] };
     } catch (e) {
-      console.log('ridesDAO: Error getting recipe by ID. ' + e.message);
+      console.error('ridesDAO: Error getting recipe by ID. ' + e.message);
       return { error: e };
     }
   }
@@ -147,7 +147,7 @@ export default class RidesDAO {
         try {
           count = await rides.count(query);
         } catch (e) {
-          console.log('ridesDAO: Unable to issue count in getStats. ' + e);
+          console.error('ridesDAO: Unable to issue count in getStats. ' + e);
           return { error: e };
         }
 
@@ -180,13 +180,13 @@ export default class RidesDAO {
         count = await rides.count({ 'status.value': 6 });
         result.done = count;
       } catch (e) {
-        console.log('ridesDAO: Unable to issue count in getStats. ' + e);
+        console.error('ridesDAO: Unable to issue count in getStats. ' + e);
         return { error: e };
       }
 
       return { filters: {}, count: result };
     } catch (e) {
-      console.log('ridesDAO: Error getting stats. ' + e.message);
+      console.error('ridesDAO: Error getting stats. ' + e.message);
       return { error: e };
     }
   }
@@ -226,7 +226,7 @@ export default class RidesDAO {
 
       return updateResponse;
     } catch (e) {
-      console.log('ridesDAO: Unable to update ride (' + id + '). ' + e);
+      console.error('ridesDAO: Unable to update ride (' + id + '). ' + e);
       return { error: e };
     }
   }
@@ -241,7 +241,7 @@ export default class RidesDAO {
       try {
         cursor = await rides.find(query);
       } catch (e) {
-        console.log('ridesDAO: Unable to issue find command. ' + e);
+        console.error('ridesDAO: Unable to issue find command. ' + e);
         return { error: e };
       }
 
@@ -267,7 +267,7 @@ export default class RidesDAO {
       if (responses.length === toApprove) {
         return { status: 'success' };
       } else {
-        console.log(
+        console.warn(
           'ridesDAO: Failed to set all rides requested to in progress.'
         );
         return {
@@ -275,7 +275,7 @@ export default class RidesDAO {
         };
       }
     } catch (e) {
-      console.log('ridesDAO: Unable to set in progress state on rides. ' + e);
+      console.error('ridesDAO: Unable to set in progress state on rides. ' + e);
       return { error: e };
     }
   }
@@ -290,7 +290,7 @@ export default class RidesDAO {
       try {
         cursor = await rides.find(query);
       } catch (e) {
-        console.log('ridesDAO: Unable to issue find command. ' + e);
+        console.error('ridesDAO: Unable to issue find command. ' + e);
         return { error: e };
       }
 
@@ -315,13 +315,17 @@ export default class RidesDAO {
       if (responses.length === ridesToUpdate.length) {
         return { status: 'success' };
       } else {
-        console.log('ridesDAO: Failed to revert all in progress rides to new.');
+        console.warn(
+          'ridesDAO: Failed to revert all in progress rides to new.'
+        );
         return {
           error: 'Not all rides requested could be set to new.',
         };
       }
     } catch (e) {
-      console.log('ridesDAO: Unable to unset in progress state on rides. ' + e);
+      console.error(
+        'ridesDAO: Unable to unset in progress state on rides. ' + e
+      );
       return { error: e };
     }
   }
@@ -388,14 +392,14 @@ export default class RidesDAO {
           return { status: 'success' };
         } else if (rideResponses.length !== ridesToUpdate.length) {
           // Rides not all updated
-          console.log('ridesDAO: Failed to set approval status of all rides.');
+          console.warn('ridesDAO: Failed to set approval status of all rides.');
           return {
             error:
               'Not all rides requested could be set to their approval states.',
           };
         } else if (notesResponses.length !== notesToUpdate.length) {
           // Notes not all updated
-          console.log(
+          console.warn(
             'ridesDAO: Failed to update approval notes on all rides.'
           );
           return {
@@ -419,7 +423,7 @@ export default class RidesDAO {
         return { error: 'No information provided to update.' };
       }
     } catch (e) {
-      console.log('ridesDAO: Failed to approve rides. ' + e);
+      console.error('ridesDAO: Failed to approve rides. ' + e);
       return { error: e };
     }
   }
@@ -442,14 +446,14 @@ export default class RidesDAO {
       try {
         cursor = await rides.find(query);
       } catch (e) {
-        console.log('ridesDAO: Unable to issue find command. ' + e);
+        console.error('ridesDAO: Unable to issue find command. ' + e);
         return { error: e };
       }
 
       const displayCursor = cursor.toArray();
       return displayCursor;
     } catch (e) {
-      console.log(
+      console.error(
         'ridesDAO: Failed to find approved rides for sending codes to. ' + e
       );
       return { error: e };
@@ -476,7 +480,7 @@ export default class RidesDAO {
       if (responses.length === ridesToUpdate.length) {
         return { status: 'success' };
       } else {
-        console.log(
+        console.warn(
           'ridesDAO: Failed to mark all rides as done and attach coupons.'
         );
         return {
@@ -484,7 +488,7 @@ export default class RidesDAO {
         };
       }
     } catch (e) {
-      console.log(
+      console.error(
         'ridesDAO: Failed to mark rides as done and attach coupons. ' + e
       );
       return { error: e };

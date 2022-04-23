@@ -124,7 +124,7 @@ function Login() {
         setIsLoading(false);
         navigate('/dashboard');
       } catch (e) {
-        setErrorStateMessage({ state: true, message: e.message + '.' });
+        setErrorStateMessage({ state: true, message: e.response.data.error });
         setIsLoading(false);
       }
     }
