@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import Navbar from './Navbar';
+
 function Loading() {
   const location = useLocation();
   const [message, setMessage] = useState('');
@@ -17,27 +19,31 @@ function Loading() {
   }, []);
 
   return (
-    <div className="content">
-      <div className="titles">
-        <h2>CAFE MADDY CAB</h2>
-        <h3>Ride Reimbursment</h3>
-      </div>
-      <div className="loading">
-        <div className="lds-default">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+    <div className="react-container">
+      <div className="content frontend">
+        <Navbar />
+
+        <h1 className="page-title-no-logo">
+          Ride Request & Reimbursement Form
+        </h1>
+
+        <div className="loading">
+          <div className="lds-default">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div className="message">{message}</div>
         </div>
-        <div className="info-box">{message}</div>
       </div>
     </div>
   );

@@ -7,6 +7,8 @@ import Loading from './Loading';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+import Taxi from '../../assets/img/taxi_icon_white.svg';
+
 function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
   const [selfie, setSelfie] = useState({ file: null });
@@ -280,10 +282,9 @@ function RequestRide() {
         <div className="content frontend">
           <Navbar />
 
-          <div className="titles">
-            <h2>CAFE MADDY CAB</h2>
-            <h3>Ride Reimburesment</h3>
-          </div>
+          <h1 className="page-title-no-logo" id="request-ride">
+            Ride Request & Reimbursement Form
+          </h1>
 
           {errorOnSubmit.state ? (
             <div className="error">
@@ -516,7 +517,10 @@ function RequestRide() {
           </div>
 
           <div className="btn submit ride" onClick={() => submitHandler()}>
-            Submit Request
+            <div className="content">
+              <img src={Taxi} alt="Taxi" className="icon" />
+              <p>Submit Request</p>
+            </div>
           </div>
 
           <Footer />

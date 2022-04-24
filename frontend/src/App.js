@@ -39,18 +39,20 @@ function App() {
             <Route path={'/how-to-ride'} element={<HowToPage />} />
             <Route path={'/request-ride'} element={<RequestRide />} />
             <Route path={'/press'} element={<Press />} />
-            <Route path={'/press/1'} element={<PressEntry1 />} />
-            <Route path={'/press/2'} element={<PressEntry2 />} />
-            <Route path={'/press/3'} element={<PressEntry3 />} />
-            <Route path={'/press/4'} element={<PressEntry4 />} />
-            <Route path={'/press/5'} element={<PressEntry5 />} />
-            <Route path={'/press/6'} element={<PressEntry6 />} />
             <Route
               path={'/terms-and-conditions'}
               element={<TermsAndConditions />}
             />
             <Route path={'/success/:id'} element={<Success />} />
             <Route path={'/login'} element={<Login />} />
+
+            <Route path={'/press/1'} element={<PressEntry1 />} />
+            <Route path={'/press/2'} element={<PressEntry2 />} />
+            <Route path={'/press/3'} element={<PressEntry3 />} />
+            <Route path={'/press/4'} element={<PressEntry4 />} />
+            <Route path={'/press/5'} element={<PressEntry5 />} />
+            <Route path={'/press/6'} element={<PressEntry6 />} />
+
             <Route
               path={'/dashboard'}
               element={

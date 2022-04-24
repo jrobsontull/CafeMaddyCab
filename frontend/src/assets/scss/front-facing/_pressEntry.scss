@@ -1,0 +1,46 @@
+.press-entry {
+  width: $content-width;
+  max-width: $max-width;
+  background-color: $light-form;
+  border-radius: $border-radius;
+  border: 1px solid $dark-blue;
+  margin-bottom: 10px;
+
+  h2.title {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 16px;
+  }
+
+  img.entry-img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+  }
+
+  .entry-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px 16px 16px;
+  }
+
+  .press-text {
+    padding: 0 16px 16px 16px;
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    .read-more {
+      a {
+        color: $dark-pink;
+        transition: color 0.25s ease;
+      }
+
+      a:hover {
+        color: $dark-pink-hover;
+        cursor: pointer;
+      }
+    }
+  }
+}

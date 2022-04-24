@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import TaxiIcon from '../../assets/img/taxi_icon.svg';
+import CMCLogo from '../../assets/img/logo.svg';
+import TaxiWhite from '../../assets/img/taxi_icon_white.svg';
 
 function Header() {
   const [hamOpen, setHamOpen] = useState(false);
@@ -19,7 +20,7 @@ function Header() {
       {link.path === '/request-ride' ? (
         <Link to={link.path}>
           {link.name}
-          <img src={TaxiIcon} alt="Taxi" className="ride-icon"></img>
+          <img src={TaxiWhite} alt="Taxi" className="ride-icon"></img>
         </Link>
       ) : (
         <Link to={link.path}>{link.name}</Link>
@@ -36,7 +37,8 @@ function Header() {
     <div className="navbar frontend">
       <div className="header">
         <div className="branding">
-          <Link to={'/'} className="cmc">
+          <img className="logo" src={CMCLogo} alt="CMC" />
+          <Link to={'/'} className="text">
             Cafe Maddy Cab
           </Link>
         </div>

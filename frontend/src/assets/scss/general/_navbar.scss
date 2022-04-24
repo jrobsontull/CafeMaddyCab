@@ -8,16 +8,22 @@
     justify-content: space-between;
     background-color: $dark-blue;
     margin: auto;
-    padding: 12px 5%;
+    padding: 14px 5%;
     align-items: center;
     position: relative;
     z-index: 2;
 
     .branding {
       display: flex;
-      font-size: 18px;
+      font-size: 20px;
+      align-items: center;
 
-      .cmc {
+      img.logo {
+        height: 24px;
+        margin-right: 8px;
+      }
+
+      .text {
         margin-right: 10px;
       }
 
@@ -30,7 +36,6 @@
     .nav-ham {
       display: inline-block;
       cursor: pointer;
-      border: 1px solid $lightest-pink;
       border-radius: 8px;
       padding: 0 6px;
       transition: background-color 0.4s ease;
@@ -46,14 +51,16 @@
       }
     }
 
-    .change-state.nav-ham {
-      background-color: $lightest-pink;
+    .change-state .ham1 {
+      transform: rotate(-45deg) translate(-4.7px, 5.5px) scale(0.8, 1);
     }
 
-    .change-state .ham1,
-    .change-state .ham2,
+    .change-state .ham2 {
+      opacity: 0;
+    }
+
     .change-state .ham3 {
-      background-color: $dark-blue;
+      transform: rotate(45deg) translate(-4.5px, -5.5px) scale(0.8, 1);
     }
   }
 

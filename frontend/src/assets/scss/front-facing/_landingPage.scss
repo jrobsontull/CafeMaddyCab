@@ -7,94 +7,48 @@
     margin: 4px 0 10px 0;
   }
 
-  .picture-block {
+  .picture-block#landing-1 {
+    margin: 12px 0 10px 0;
+  }
+
+  .picture-block#landing-2 {
+    margin: 22px 0 10px 0;
+  }
+
+  .quote-block {
+    width: $content-width;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 10px 0;
-    width: calc(#{$content-width} + 36px);
-    max-width: calc(#{$max-width} + 36px);
+    margin: 22px 0 6px 0;
 
-    img {
-      object-fit: cover;
+    img.quote-img {
+      width: 40%;
+      max-width: 200px;
       height: auto;
-      width: 140px;
+      object-fit: cover;
+      border-radius: 100%;
+      margin-bottom: 16px;
     }
 
-    .info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 190px;
-      margin-left: 14px;
+    h3.quote-text {
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+    }
 
-      img {
-        height: 16px;
-        padding-right: 5px;
-      }
-
-      h1 {
-        margin: 2px 0;
-      }
-
-      a {
-        display: flex;
-        align-items: center;
-
-        img.donate {
-          height: 14px;
-          width: auto;
-          transition: transform 0.25s ease;
-        }
-
-        img.link-arrow {
-          margin-left: 6px;
-          height: 12px;
-          width: auto;
-        }
-      }
-
-      a:hover {
-        img.donate {
-          transform: scale(1.1);
-        }
-      }
+    p.author {
+      text-align: center;
+      color: $light-blue;
+      margin-top: 8px;
     }
   }
 
-  .quote {
-    display: flex;
-    margin-top: 20px;
-    max-width: 300px;
-
-    .photo {
-      img {
-        object-fit: cover;
-        height: 163px;
-        width: 150px;
-        vertical-align: bottom;
-      }
-    }
-
-    .text {
-      margin: auto;
-      padding-right: 10px;
-      text-align: right;
-      h1 {
-        font-size: 18px;
-      }
-    }
+  .info-box#why {
+    margin-bottom: 10px;
   }
 
-  .press-entry-landing {
-    display: flex;
-    margin: 10px 0 10px 0;
-    height: 150px;
-    width: calc(#{$content-width} + 36px);
-    max-width: calc(#{$max-width} + 36px);
-  }
-
-  .press-entry-landing#first-child {
-    margin-top: 20px;
+  .info-box-heading-link#press-title {
+    margin-bottom: 10px;
   }
 }

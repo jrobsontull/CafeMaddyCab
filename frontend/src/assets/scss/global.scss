@@ -18,9 +18,9 @@ $error-shadow: rgba(233, 58, 58, 0.15);
 * Other variables
 */
 
-$border-radius: 12px;
+$border-radius: 8px;
 $max-width: 600px;
-$content-width: 75%;
+$content-width: 80%;
 $smaller-font-size: 18px; // originally 16px
 $heading-font-size: 24px; // originally 22px
 
@@ -72,16 +72,17 @@ $heading-font-size: 24px; // originally 22px
 */
 
 // General
-@import './general/_navbar.scss';
-@import './general/_footer.scss';
-@import './general/_btns.scss';
-@import './general/_logo.scss';
+@import './general/_navbar';
+@import './general/_footer';
+@import './general/_btns';
+@import './general/_logo';
+@import './general/_pressThumb';
 
 // Front facing content
 @import './front-facing/_landingPage';
 @import './front-facing/_howToPage';
 @import './front-facing/_requestRide';
-@import './front-facing/_press';
+@import './front-facing/_pressEntry';
 @import './front-facing/_loading';
 @import './front-facing/_success';
 
@@ -136,17 +137,17 @@ body,
 }
 
 .info-box {
-  width: $content-width;
+  width: calc(#{$content-width} - 36px);
   background-color: $light-form;
   padding: 18px;
   border: 1px solid $dark-blue;
   border-radius: 0 0 $border-radius $border-radius;
   border-top-width: 0;
-  max-width: $max-width;
+  max-width: calc(#{$max-width} - 36px);
 
   p {
     margin-top: 12px;
-    text-align: justify;
+    text-align: left;
   }
 
   span {
@@ -198,20 +199,59 @@ body,
   }
 }
 
-.info-box-heading {
+h2.info-box-heading {
   width: $content-width;
   max-width: $max-width;
-  margin: 18px 0 16px 0;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 16px 0;
+}
+
+.info-box-heading-link {
+  width: $content-width;
+  max-width: $max-width;
+  margin: 16px 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    transition: all 0.25s ease;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-right: 4px;
+    }
+
+    div.arrow-point-right {
+      border: solid $dark-blue;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(-45deg);
+      transition: border-color 0.25s ease;
+      margin-top: 4px;
+    }
+  }
+
+  a:hover {
+    cursor: pointer;
+    color: $blue-btn-hover;
+
+    div.arrow-point-right {
+      border-color: $blue-btn-hover;
+    }
+  }
 }
 
 .info-box-title {
-  width: $content-width;
+  width: calc(#{$content-width} - 36px);
   background-color: $light-blue;
   padding: 8px 18px;
   border-radius: $border-radius $border-radius 0 0;
   border: 1px solid $dark-blue;
   margin-top: 20px;
-  max-width: $max-width;
+  max-width: calc(#{$max-width} - 36px);
 
   h3 {
     color: $lightest-pink;
@@ -219,9 +259,45 @@ body,
   }
 }
 
-.info-box#no-title {
+.info-box.no-title {
   border-width: 1px;
   border-radius: $border-radius;
+}
+
+.picture-block {
+  width: $content-width;
+  max-width: $max-width;
+  background-color: $light-form;
+  border-radius: $border-radius;
+  border: 1px solid $dark-blue;
+  margin: 12px 0;
+
+  img.picture-head {
+    width: 100%;
+    display: block;
+    border-radius: $border-radius $border-radius 0 0;
+    max-height: 180px;
+    object-fit: cover;
+  }
+
+  h2.title {
+    width: calc(100% - 32px);
+    font-size: 20px;
+    background-color: $light-blue;
+    color: $lightest-pink;
+    padding: 12px 16px;
+  }
+
+  p.description {
+    padding: 14px 16px;
+  }
+}
+
+h1.page-title-no-logo {
+  font-size: 28px;
+  margin: 28px 0;
+  width: 70%;
+  text-align: center;
 }
 
 .arrow {
@@ -270,13 +346,4 @@ body,
   cursor: default;
   transform: scale(1);
   border-right-color: $light-blue;
-}
-
-div.line-break {
-  width: $content-width;
-  padding: 0 18px;
-  max-width: $max-width;
-  background-color: $light-blue;
-  height: 1px;
-  margin: 10px 0;
 }

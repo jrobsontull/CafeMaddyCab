@@ -17,6 +17,7 @@ const router = express.Router();
 router
   .route('/')
   .post(
+    //apiLimitRequestRides,
     verifyCaptcha,
     function (req, res, next) {
       multiImageUpload(

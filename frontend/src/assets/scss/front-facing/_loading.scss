@@ -2,26 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
-
-  .info-box {
-    border-width: 1px;
-    border-radius: $border-radius;
-  }
 
   .lds-default {
     display: inline-block;
     position: relative;
     width: 80px;
     height: 80px;
-    margin-bottom: 12px;
+    margin-bottom: 28px;
   }
 
   .lds-default div {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    background: $dark-blue;
+    width: 7px;
+    height: 7px;
+    background: $dark-pink;
     border-radius: 50%;
     animation: lds-default 1.2s linear infinite;
   }
@@ -110,7 +104,8 @@
     }
   }
 
-  .info-box {
-    width: calc(80% - 36px);
+  .message {
+    width: $content-width;
+    text-align: center;
   }
 }

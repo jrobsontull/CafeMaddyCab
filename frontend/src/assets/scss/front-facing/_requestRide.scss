@@ -22,8 +22,12 @@
   margin-bottom: 14px;
 }
 
+h1.page-title-no-logo#request-ride {
+  margin-bottom: 22px;
+}
+
 .request-form {
-  width: 80%;
+  width: $content-width;
   display: flex;
   flex-direction: column;
   font-size: 18px;

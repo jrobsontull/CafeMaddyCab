@@ -1,29 +1,47 @@
 .btn {
-  width: 100%;
   width: $content-width;
-  color: $lightest-pink;
-  padding: 8px 18px;
-  text-align: center;
-  font-size: $heading-font-size;
-  border-radius: $border-radius;
-  max-width: calc(#{$max-width} - 32px);
-  transition: all 0.25s ease;
-}
-
-.btn-link {
-  width: calc(#{$content-width} + 36px);
-  max-width: calc(#{$max-width} + 36px);
-  margin: 8px 0;
+  max-width: $max-width;
+  margin: 6px 0;
   background-color: $dark-blue;
   border-radius: $border-radius;
   color: $lightest-pink;
-  padding: 10px 0;
+  padding: 14px 0;
+  max-width: calc(#{$max-width} - 28px);
+  transition: all 0.25s ease;
+
+  .content {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    transition: all 0.25s ease;
+
+    img.icon {
+      width: 16px;
+      height: auto;
+      margin-right: 8px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+}
+
+.btn-link {
+  width: $content-width;
+  max-width: $max-width;
+  margin: 6px 0;
+  background-color: $dark-blue;
+  border-radius: $border-radius;
+  color: $lightest-pink;
+  padding: 14px 0;
   transition: all 0.25s ease;
 
   a {
     display: flex;
     justify-content: center;
-    font-size: 22px;
+    font-size: 20px;
     transition: transform 0.25s ease;
 
     img.icon {
@@ -51,11 +69,12 @@
 }
 
 .btn-link.inverted {
-  background-color: $light-form;
+  background-color: white;
   border: 1px solid $dark-blue;
 
   a {
     color: $dark-blue;
+    font-weight: 500;
   }
 
   a:visited,
@@ -66,7 +85,7 @@
 }
 
 .btn-link.inverted:hover {
-  background-color: $light-form;
+  background-color: white;
 }
 
 .btn-link.submit {
@@ -89,6 +108,11 @@
 
 .btn.submit:hover {
   background-color: $blue-btn-hover;
+  box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+
+  .content {
+    transform: scale(1.04);
+  }
 }
 
 .btn.upload {

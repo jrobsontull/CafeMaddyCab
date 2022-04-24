@@ -1,23 +1,20 @@
 .title-logo {
   width: $content-width;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   margin: 32px 0 20px 0;
 
   img {
-    width: 100px;
+    width: 130px;
     height: auto;
   }
 
   .title {
-    width: 50%;
-    margin-left: 16px;
-    max-width: 260px;
-
-    p {
-      margin-top: 6px;
-      font-size: $smaller-font-size;
-    }
+    font-size: 28px;
+    text-align: center;
+    margin-top: 16px;
+    width: 85%;
+    max-width: $max-width;
   }
 }

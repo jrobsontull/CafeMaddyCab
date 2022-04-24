@@ -1,0 +1,35 @@
+.press-thumb {
+  width: $content-width;
+  background-color: $light-form;
+  border-radius: $border-radius;
+  border: 1px solid $dark-blue;
+  transition: all 0.25s ease;
+  margin: 6px 0;
+
+  img.thumb {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  p.author {
+    color: $dark-pink;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 16px;
+    margin-top: 6px;
+  }
+
+  h3.title {
+    padding: 8px 16px 16px 16px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.press-thumb:hover {
+  box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+  margin-left: 12px;
+  cursor: pointer;
+}

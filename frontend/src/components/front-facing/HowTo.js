@@ -2,15 +2,15 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
-import Logo from './Logo';
 import Footer from './Footer';
 
+import CMCLogo from '../../assets/img/logo.svg';
 import HowTo1 from '../../assets/img/how_to_1.svg';
 import HowTo2 from '../../assets/img/how_to_2.svg';
 import HowTo3 from '../../assets/img/how_to_3.svg';
 import HowTo4 from '../../assets/img/how_to_4.svg';
 
-import Taxi from '../../assets/img/taxi_icon.svg';
+import TaxiWhite from '../../assets/img/taxi_icon_white.svg';
 
 function HowToPage() {
   // Scroll to top on component load/refresh
@@ -22,23 +22,29 @@ function HowToPage() {
     <div className="react-container">
       <div className="content frontend how-to">
         <Navbar />
-        <Logo />
-        <div className="line-break"></div>
 
-        <div className="info-box how-to" id="no-title">
+        <div className="title-logo">
+          <img src={CMCLogo} alt="Cafe Maddy Cab" />
+        </div>
+
+        <div className="info-box no-title">
           <p>
             Thank you for choosing to stay safe. Cafe Maddy Cab is providing cab
             rides for eligible recipients. Uber codes will be emailed every{' '}
             <span>Monday at 8AM</span> for submissions made{' '}
             <span>Monday to Wednesday</span> each week, until codes are
-            depleted. Uber has generously donated ride codes to help protect the
-            AAPI Community. These voucher codes are reserved for our low-income
-            Asian elderly, women, and LGBTQ+ population in NYC, who may not be
-            able to afford to take a ride to their essential trips. Once the
-            codes are depleted, the form will be closed. Codes will be sent
-            while supplies last.
+            depleted.
+          </p>
+          <p>
+            Uber has generously donated ride codes to help protect the AAPI
+            Community. These voucher codes are reserved for our low-income Asian
+            elderly, women, and LGBTQ+ population in NYC, who may not be able to
+            afford to take a ride to their essential trips. Once the codes are
+            depleted, the form will be closed. Codes will be sent while supplies
+            last.
           </p>
         </div>
+
         <div className="info-box-title">
           <h3>How it works</h3>
         </div>
@@ -75,14 +81,14 @@ function HowToPage() {
             </li>
           </ul>
         </div>
-        <div className="btn-link ride" id="how-to-page">
-          <a href="/request-ride">
-            <div className="icon">
-              <img src={Taxi} alt="Taxi" />
-            </div>
-            Request a Ride
-          </a>
+
+        <div className="btn-link" id="landing-page">
+          <Link to={'/request-ride'}>
+            <img src={TaxiWhite} alt="Taxi" className="icon" />
+            <div className="text">Request a Ride</div>
+          </Link>
         </div>
+
         <div className="info-box-title">
           <h3>Some important notes</h3>
         </div>

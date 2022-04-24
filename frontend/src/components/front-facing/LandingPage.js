@@ -7,14 +7,17 @@ import Navbar from './Navbar';
 import Logo from './Logo';
 import Footer from './Footer';
 
-// Photo imports
-import Donate from '../../assets/img/donate_icon.svg';
+// Icon imports
+import DonateWhite from '../../assets/img/donate_icon_white.svg';
 import DonateBlue from '../../assets/img/donate_icon_blue.svg';
-import Taxi from '../../assets/img/taxi_icon.svg';
-import Info from '../../assets/img/info_icon.svg';
-import MissionPhoto from '../../assets/img/landing-page-thumb-1.png';
-import QuotePhoto from '../../assets/img/landing-page-thumb-2.png';
-import Arrow from '../../assets/img/arrow_right_blue.svg';
+import TaxiWhite from '../../assets/img/taxi_icon_white.svg';
+import TaxiBlue from '../../assets/img/taxi_icon_blue.svg';
+import InfoWhite from '../../assets/img/info_icon_white.svg';
+
+// Img imports
+import Landing1 from '../../assets/img/landing-page-1.png';
+import Landing2 from '../../assets/img/landing-page-2.jpg';
+import LandingQuote from '../../assets/img/landing-quote.png';
 import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
 import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
 import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
@@ -31,75 +34,74 @@ function LandingPage() {
         <Navbar />
         <Logo />
 
-        <div className="line-break"></div>
-
         <div className="big-btns">
           <div className="btn-link" id="landing-page">
-            <a
-              href="https://www.gofundme.com/f/cafemaddycab"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={Donate} alt="Donate" className="icon" />
-              <div className="text">Donate</div>
-            </a>
-          </div>
-          <div className="btn-link" id="landing-page">
             <Link to={'/request-ride'}>
-              <img src={Taxi} alt="Taxi" className="icon" />
+              <img src={TaxiWhite} alt="Taxi" className="icon" />
               <div className="text">Request a Ride</div>
             </Link>
           </div>
-          <div className="btn-link inverted" id="landing-page">
-            <a href="/how-to-ride">
-              <img src={Info} alt="Info" className="icon" />
-              <div className="text">How it works</div>
-            </a>
-          </div>
-        </div>
-
-        <div className="picture-block">
-          <img src={MissionPhoto} alt="MissionPhoto" />
-          <div className="info">
-            <p>Our Mission</p>
-            <h1>Help our AAPI community feel safe with their NYC commute</h1>
+          <div className="btn-link" id="landing-page">
             <a
               href="https://www.gofundme.com/f/cafemaddycab"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={DonateBlue} alt="Donate" className="donate" />
-              <p>Donate</p>
-              <img src={Arrow} alt="Arrow" className="link-arrow" />
+              <img src={DonateWhite} alt="Donate" className="icon" />
+              <div className="text">Donate</div>
             </a>
           </div>
         </div>
 
-        <h1 className="info-box-heading">What is Cafe Maddy Cab?</h1>
-        <div className="info-box" id="no-title">
-          <p>
-            Cafe Maddy Cab is an initiative that provides cab rides for the
-            vulnerable Asian population in the NYC area, specifically at risk of
-            Asian hate crimes. Our mission is to help our AAPI community feel
-            safe in their commute in NYC. We are here for as long as we need
-            hoping that soon we can close this initiative out as soon as
-            possible.
+        <div className="picture-block" id="landing-1">
+          <img src={Landing1} className="picture-head" />
+          <h2 className="title">Introducing Cafe Maddy Cab</h2>
+          <p className="description">
+            We provide cab rides for the vulnerable Asian minority population in
+            NYC, specifically those at risk of hate crimes.
           </p>
         </div>
-        <div className="quote">
-          <div className="text">
-            <h1>
-              Every time I see it, I can't help but think that "that could've
-              been me"
-            </h1>
-            <p>Madeline Park, Founder</p>
-          </div>
-          <div className="photo">
-            <img src={QuotePhoto} alt="QuotePhoto" />
-          </div>
+
+        <div className="btn-link" id="landing-page">
+          <Link to={'/how-to-ride'}>
+            <img src={InfoWhite} alt="Info" className="icon" />
+            <div className="text">How it works</div>
+          </Link>
         </div>
-        <h1 className="info-box-heading">Why we&apos;re here</h1>
-        <div className="info-box" id="no-title">
+
+        <div className="picture-block" id="landing-2">
+          <img src={Landing2} className="picture-head" />
+          <h2 className="title">Our mission</h2>
+          <p className="description">
+            At Cafe Maddy Cab, our mission is to help the AAPI community feel
+            safe in their commute. We hope to instill a strength and kindness
+            that echoes louder than the fear and violence that&apos;s taken over
+            NYC.
+          </p>
+        </div>
+
+        <div className="btn-link inverted" id="landing-page">
+          <a
+            href="https://www.gofundme.com/f/cafemaddycab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={DonateBlue} alt="Donate" className="icon" />
+            <div className="text">Donate</div>
+          </a>
+        </div>
+
+        <div className="quote-block">
+          <img className="quote-img" src={LandingQuote} alt="Madeline Park" />
+          <h3 className="quote-text">
+            &quot;Every time I see it, I can&apos;t help but think, that could
+            have been me.&quot;
+          </h3>
+          <p className="author">Madeline Park, Founder</p>
+        </div>
+
+        <h2 className="info-box-heading">Why we&apos;re here</h2>
+        <div className="info-box no-title" id="why">
           <p>
             &quot;It&apos;s really terrifying. Every time I see it, I can&apos;t
             help but think that, that could&apos;ve been me&quot; says Madeline
@@ -123,36 +125,48 @@ function LandingPage() {
             in 2022, we felt the need to relaunch Cafe Maddy Cab.
           </p>
         </div>
-        <h1 className="info-box-heading">
-          <Link to={'/press'}>Press</Link>
-        </h1>
-        <a className="press-page-entry" href="/press/1">
-          <div className="press-page-pic">
-            <img src={Entry1} alt="Entry 1" />
-          </div>
-          <div className="info-box" id="press-page-title">
+
+        <div className="btn-link inverted" id="landing-page">
+          <Link to={'/request-ride'}>
+            <img src={TaxiBlue} alt="Taxi" className="icon" />
+            <div className="text">Request a Ride</div>
+          </Link>
+        </div>
+
+        <div className="info-box-heading-link" id="press-title">
+          <Link to={'/press'}>
+            <h2>Press</h2>
+            <div className="arrow-point-right"></div>
+          </Link>
+        </div>
+
+        <Link to={'/press/1'} className="press-thumb">
+          <img className="thumb" src={Entry1} alt="Entry 1" />
+          <p className="author">ABCNEWS</p>
+          <h3 className="title">
             Woman raises over $100k in 2 days to pay for Asian Americans' taxi
             rides amid rise in hate crimes
-          </div>
-        </a>
-        <a className="press-page-entry" href="/press/2">
-          <div className="press-page-pic">
-            <img src={Entry2} alt="Entry 2" />
-          </div>
-          <div className="info-box" id="press-page-title">
-            'A Sigh Of Relief': Crowdfunded Cab Rides Aim To Get Asian Americans
-            Home Safe
-          </div>
-        </a>
-        <a className="press-page-entry" href="/press/3">
-          <div className="press-page-pic">
-            <img src={Entry3} alt="Entry 3" />
-          </div>
-          <div className="info-box" id="press-page-title">
+          </h3>
+        </Link>
+
+        <Link to={'/press/2'} className="press-thumb">
+          <img className="thumb" src={Entry2} alt="Entry 2" />
+          <p className="author">NPR</p>
+          <h3 className="title">
+            '&apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
+            Asian Americans Home Safe
+          </h3>
+        </Link>
+
+        <Link to={'/press/3'} className="press-thumb">
+          <img className="thumb" src={Entry3} alt="Entry 3" />
+          <p className="author">COMPLEX</p>
+          <h3 className="title">
             Brooklyn Woman Raises Over $100,000 to Provide Free Cab Rides for
             Asian Americans
-          </div>
-        </a>
+          </h3>
+        </Link>
+
         <Footer />
       </div>
     </div>
