@@ -203,7 +203,7 @@
       }
     }
 
-    /* Styling for ViewFeedback component */
+    // Styling for ViewFeedback component
 
     .feedback-text {
       min-height: 180px;
@@ -230,7 +230,7 @@
     }
   }
 
-  /* Approval window styling */
+  // Approval window styling
   .view-entry-window.approve-window,
   .view-entry-window.send-codes,
   .view-entry-window.done {
@@ -458,6 +458,44 @@
       .submit-btn:hover {
         cursor: pointer;
         background-color: $dark-pink-hover;
+      }
+    }
+  }
+
+  .view-entry-window.verification {
+    min-width: 1200px;
+    z-index: 100; // needed because of transform on li#col-8
+
+    .header .title p span {
+      font-weight: 500;
+    }
+
+    .photo-boxes {
+      display: flex;
+      background-color: $lightest-pink;
+      border: 1px solid $dark-blue;
+      margin: 12px;
+      border-radius: $border-radius;
+
+      .photo-box {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+
+        img {
+          max-width: 500px;
+          max-height: 600px;
+        }
+
+        img.missing {
+          width: 40px;
+          padding: 200px;
+        }
+      }
+
+      .photo-box#selfie {
+        border: 1px solid $dark-blue;
+        border-width: 0 1px 0 0;
       }
     }
   }

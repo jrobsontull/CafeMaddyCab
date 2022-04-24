@@ -235,14 +235,15 @@ function Dashboard() {
                 <li onClick={() => searchRides('6')}>
                   Done ({statusCount.done})
                 </li>
-                <li>Search for request</li>
               </ul>
             </div>
             <div className="action-btns">
+              <div className="action">Search requests</div>
+              <div className="action">Edit request</div>
               <div className="action" onClick={() => openApproval()}>
                 Approve requests
               </div>
-              <div className="action">Edit request</div>
+
               <div className="action" onClick={() => openSendCodes()}>
                 Send codes
               </div>

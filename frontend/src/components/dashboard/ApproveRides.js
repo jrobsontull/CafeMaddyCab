@@ -4,6 +4,8 @@ import AuthContext from '../../utils/auth.context';
 import RidesAPI from '../../utils/rides.api';
 
 import Navbar from './Navbar';
+import PhotoView from './PhotoView';
+
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
 function ApproveRides() {
@@ -21,6 +23,14 @@ function ApproveRides() {
   if (process.env.NODE_ENV === 'production') {
     baseImgUrl = 'https://cafemaddycab.org:443/api/v1/image/';
   }
+
+  const [openPhotoView, isOpenPhotoView] = useState(false);
+  const [photoView, setPhotoView] = useState({
+    firstName: null,
+    lastName: null,
+    selfie: null,
+    photoId: null,
+  });
 
   const navigate = useNavigate();
 
@@ -78,7 +88,7 @@ function ApproveRides() {
     }
   }
 
-  // Function for updating approval states
+  // For updating approval states
   function setApproval(target) {
     const id = target.name;
     if (target.checked && target.value) {
@@ -89,7 +99,7 @@ function ApproveRides() {
     }
   }
 
-  // Function for appending notes to approval states
+  // For appending notes to approval states
   function updateNotes(target) {
     const id = target.name;
     const notesToSet = target.value;
@@ -98,6 +108,17 @@ function ApproveRides() {
       ...prevState,
       [id]: { id: id, notes: notesToSet },
     }));
+  }
+
+  // Open handler for PhotoView
+  function openVerificationView(firstName, lastName, selfie, photoId) {
+    setPhotoView({
+      firstName: firstName,
+      lastName: lastName,
+      selfie: selfie,
+      photoId: photoId,
+    });
+    isOpenPhotoView(true);
   }
 
   // Cancel button handler - unset in progress state on rides
@@ -152,6 +173,18 @@ function ApproveRides() {
       <div className="content backend">
         <Navbar />
 
+        {openPhotoView ? (
+          <PhotoView
+            onClose={() => isOpenPhotoView(false)}
+            firstName={photoView.firstName}
+            lastName={photoView.lastName}
+            selfie={photoView.selfie}
+            photoId={photoView.photoId}
+          />
+        ) : (
+          ''
+        )}
+
         <div className="dashboard approve-rides">
           <div className="table-content">
             <div className="table-headings">
@@ -183,31 +216,49 @@ function ApproveRides() {
                       <li id="col-5">{ride.identity.text}</li>
                       <li id="col-6">{ride.income ? 'yes' : 'no'}</li>
                       <li id="col-7">{ride.purpose.text}</li>
-                      <li id="col-8">
+                      <li
+                        id="col-8"
+                        onClick={() =>
+                          openVerificationView(
+                            ride.firstName,
+                            ride.lastName,
+                            ride.selfie,
+                            ride.photoId
+                          )
+                        }
+                      >
                         <div className="titles">
                           <p>Selfie</p>
                           <p id="last-child">Photo ID</p>
                         </div>
                         <div className="photo-boxes">
                           <div className="photo-box">
-                            <img
-                              src={
-                                ride.selfie.exists
-                                  ? baseImgUrl + ride.selfie.path
-                                  : MissingPhoto
-                              }
-                              alt="Loading..."
-                            ></img>
+                            {ride.selfie.exists ? (
+                              <img
+                                src={baseImgUrl + ride.selfie.path}
+                                alt="Loading..."
+                              />
+                            ) : (
+                              <img
+                                src={MissingPhoto}
+                                alt="Missing"
+                                className="missing"
+                              />
+                            )}
                           </div>
                           <div className="photo-box" id="last-child">
-                            <img
-                              src={
-                                ride.photoId.exists
-                                  ? baseImgUrl + ride.photoId.path
-                                  : MissingPhoto
-                              }
-                              alt="Loading..."
-                            ></img>
+                            {ride.photoId.exists ? (
+                              <img
+                                src={baseImgUrl + ride.photoId.path}
+                                alt="Loading..."
+                              />
+                            ) : (
+                              <img
+                                src={MissingPhoto}
+                                alt="Missing"
+                                className="missing"
+                              />
+                            )}
                           </div>
                         </div>
                       </li>
