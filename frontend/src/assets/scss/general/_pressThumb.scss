@@ -1,5 +1,6 @@
 .press-thumb {
   width: $content-width;
+  max-width: $max-width;
   background-color: $light-form;
   border-radius: $border-radius;
   border: 1px solid $dark-blue;
