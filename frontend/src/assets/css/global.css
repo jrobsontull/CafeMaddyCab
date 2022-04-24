@@ -776,18 +776,19 @@ h1.page-title-no-logo#request-ride {
     justify-content: space-between;
     background-color: #3b3b96;
     margin: auto;
-    padding: 12px 5%;
+    padding: 14px 5%;
     align-items: center;
     position: relative;
     z-index: 2; }
     .backend .navbar .header .branding {
-      display: flex;
-      font-size: 18px; }
+      display: flex; }
       .backend .navbar .header .branding .cmc {
-        margin-right: 10px; }
+        margin-right: 10px;
+        font-size: 20px; }
       .backend .navbar .header .branding .page-name {
         margin-left: 10px;
-        font-weight: 300; }
+        font-weight: 300;
+        font-size: 20px; }
     .backend .navbar .header .nav-ham {
       display: inline-block;
       cursor: pointer;
@@ -827,7 +828,7 @@ h1.page-title-no-logo#request-ride {
         padding: 8px 0;
         border: 1px solid #9696db;
         border-width: 1px 0 0 0;
-        font-size: 18px; }
+        font-size: 20px; }
       .backend .navbar .nav ul li a,
       .backend .navbar .nav ul li p {
         color: inherit;

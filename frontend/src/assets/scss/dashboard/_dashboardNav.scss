@@ -7,22 +7,23 @@
     justify-content: space-between;
     background-color: $dark-blue;
     margin: auto;
-    padding: 12px 5%;
+    padding: 14px 5%;
     align-items: center;
     position: relative;
     z-index: 2;
 
     .branding {
       display: flex;
-      font-size: 18px;
 
       .cmc {
         margin-right: 10px;
+        font-size: 20px;
       }
 
       .page-name {
         margin-left: 10px;
         font-weight: 300;
+        font-size: 20px;
       }
     }
 
@@ -76,7 +77,7 @@
         padding: 8px 0;
         border: 1px solid $light-blue;
         border-width: 1px 0 0 0;
-        font-size: 18px;
+        font-size: 20px;
       }
 
       li a,
