@@ -324,6 +324,7 @@
 
 .press-thumb {
   width: 80%;
+  max-width: 600px;
   background-color: #fefff3;
   border-radius: 8px;
   border: 1px solid #3b3b96;
