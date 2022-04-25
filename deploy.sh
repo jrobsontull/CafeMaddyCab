@@ -8,7 +8,7 @@ git pull
 
 read -p "Do you need to install node.js modules (y/n)? " runInstall
 
-if [$runInstall == "y"]; then
+if [$runInstall -eq "y"]; then
 echo "Installing frontend modules"
 cd frontend/
 npm install
