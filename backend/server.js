@@ -34,15 +34,15 @@ app.use(
       directives: {
         'default-src': [
           "'self'",
+          'https://www.google-analytics.com',
           'https://cafemaddycab.org:8080/',
           'https://localhost:8080',
-          'https://www.google-analytics.com',
         ],
         'script-src': [
           "'self'",
+          'https://www.google-analytics.com',
           'https://www.google.com',
           'https://www.gstatic.com',
-          'https://www.google-analytics.com',
         ],
         'frame-src': ["'self'", 'https://www.google.com'],
         'img-src': [
@@ -51,6 +51,7 @@ app.use(
           'https://localhost:8080',
         ],
         'connect-src': ["'self'", 'https://www.google-analytics.com'],
+        'script-src-elem': ["'self'", 'https://www.google-analytics.com'],
       },
     },
   })
