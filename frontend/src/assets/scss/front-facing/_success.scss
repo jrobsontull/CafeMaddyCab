@@ -1,5 +1,6 @@
 .success-message {
   width: $content-width;
+  max-width: $max-width;
   margin: 0 0 8px 0;
   display: flex;
   flex-direction: column;
@@ -39,7 +40,7 @@
   text-align: justify;
 
   .error {
-    width: 100%;
+    width: calc(100% - 36px);
   }
 
   .info-box.feedback-form {
@@ -72,7 +73,9 @@
 
   .btn.send-feedback {
     border-radius: 0 0 $border-radius $border-radius;
-    font-size: 16px;
+    padding: 10px 18px;
+    margin: 0;
+    text-align: center;
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;

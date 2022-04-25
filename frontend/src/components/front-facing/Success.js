@@ -105,6 +105,7 @@ function Success() {
               className="info-box feedback-form"
               placeholder="Write feedback here..."
               onChange={(e) => setFeedbackText(e.target.value)}
+              rows="3"
             ></textarea>
             <div
               className="btn submit send-feedback"

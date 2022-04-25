@@ -42,6 +42,7 @@ function RequestRide() {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
   }
 
+  // Validate the names input on change and update
   function validateNames(target, prop) {
     const re =
       /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
@@ -55,6 +56,7 @@ function RequestRide() {
     }
   }
 
+  // Validate the email input on change and update
   function validateEmail(target) {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -69,6 +71,7 @@ function RequestRide() {
     }
   }
 
+  // Validate the identity input on change and update
   function validateIdentity(target) {
     if (target.checked && target.value) {
       setRideDetails((prevDetails) => ({
@@ -79,6 +82,7 @@ function RequestRide() {
     }
   }
 
+  // Validate the income input on change and update
   function validateIncome(target) {
     if (target.checked && target.value) {
       if (target.value === '1') {
@@ -97,6 +101,7 @@ function RequestRide() {
     }
   }
 
+  // Validate the purpose input on change and update
   function validatePurpose(target) {
     if (target.checked && target.value) {
       let purpose = {};
@@ -114,6 +119,27 @@ function RequestRide() {
     }
   }
 
+  // Update purpose field in rideDetails on change of input
+  function otherPurposeUpdate(target) {
+    // Check if length too long
+    const newPurpose = target.value;
+    if (newPurpose.length > 300) {
+      // Reject
+      setErrors((prevErrors) => ({ ...prevErrors, purpose: true }));
+      target.classList.add('invalid');
+    } else {
+      // Update purpose state and option in rideDetails
+      setOtherPurpose(newPurpose);
+      setRideDetails((prevDetails) => ({
+        ...prevDetails,
+        purpose: { value: 6, text: newPurpose },
+      }));
+      setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
+      target.classList.remove('invalid');
+    }
+  }
+
+  // Update understand errors on input
   function validateUnderstand(target, prop) {
     if (target.checked) {
       setErrors((prevErrors) => ({ ...prevErrors, [prop]: false }));
@@ -122,6 +148,7 @@ function RequestRide() {
     }
   }
 
+  // File handling and validation
   function selectFile(target, type) {
     const file = target.files[0];
 
@@ -393,7 +420,7 @@ function RequestRide() {
                 <label htmlFor="12" className="other-input">
                   <input
                     placeholder="Other"
-                    onChange={(e) => setOtherPurpose(e.target.value)}
+                    onChange={(e) => otherPurposeUpdate(e.target)}
                   ></input>
                 </label>
               </div>

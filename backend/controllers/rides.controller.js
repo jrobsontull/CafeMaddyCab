@@ -13,9 +13,9 @@ export default class RidesController {
       // Get NYC current date/time
       const dateRequested = new Date();
 
-      const firstName = req.body.firstName;
-      const lastName = req.body.lastName;
-      const email = req.body.email;
+      const firstName = req.body.firstName.trim();
+      const lastName = req.body.lastName.trim();
+      const email = req.body.email.trim().toLowerCase();
 
       const identityOption = parseInt(req.body.identity, 10);
       let identity;
@@ -64,7 +64,10 @@ export default class RidesController {
           };
           break;
         case 6:
-          purpose = { value: 6, text: req.body.purposeText };
+          purpose = {
+            value: 6,
+            text: req.body.purposeText.trim().toLowerCase(),
+          };
           break;
       }
 
