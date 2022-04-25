@@ -140,32 +140,32 @@ function LandingPage() {
           </Link>
         </div>
 
-        <Link to={'/press/1'} className="press-thumb">
-          <img className="thumb" src={Entry1} alt="Entry 1" />
-          <p className="author">ABCNEWS</p>
-          <h3 className="title">
-            Woman raises over $100k in 2 days to pay for Asian Americans' taxi
-            rides amid rise in hate crimes
-          </h3>
-        </Link>
-
-        <Link to={'/press/2'} className="press-thumb">
-          <img className="thumb" src={Entry2} alt="Entry 2" />
-          <p className="author">NPR</p>
-          <h3 className="title">
-            '&apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
-            Asian Americans Home Safe
-          </h3>
-        </Link>
-
-        <Link to={'/press/3'} className="press-thumb">
-          <img className="thumb" src={Entry3} alt="Entry 3" />
-          <p className="author">COMPLEX</p>
-          <h3 className="title">
-            Brooklyn Woman Raises Over $100,000 to Provide Free Cab Rides for
-            Asian Americans
-          </h3>
-        </Link>
+        <div className="entries">
+          <Link to={'/press/1'} className="press-thumb">
+            <img className="thumb" src={Entry1} alt="Entry 1" />
+            <p className="author">ABCNEWS</p>
+            <h3 className="title">
+              Woman raises over $100k in 2 days to pay for Asian Americans' taxi
+              rides amid rise in hate crimes
+            </h3>
+          </Link>
+          <Link to={'/press/2'} className="press-thumb">
+            <img className="thumb" src={Entry2} alt="Entry 2" />
+            <p className="author">NPR</p>
+            <h3 className="title">
+              '&apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
+              Asian Americans Home Safe
+            </h3>
+          </Link>
+          <Link to={'/press/3'} className="press-thumb">
+            <img className="thumb" src={Entry3} alt="Entry 3" />
+            <p className="author">COMPLEX</p>
+            <h3 className="title">
+              Brooklyn Woman Raises Over $100,000 to Provide Free Cab Rides for
+              Asian Americans
+            </h3>
+          </Link>
+        </div>
 
         <Footer />
       </div>

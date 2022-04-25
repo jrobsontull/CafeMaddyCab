@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
   });
 
   async function authUser() {
-    console.log('authUser() called');
+    // console.log('authUser() called');
     setUser((currentState) => {
       let result = currentState;
       result.isVerifying = true;
@@ -38,7 +38,7 @@ function AuthProvider({ children }) {
         isVerifying: false,
       });
     }
-    console.log('authUser() finished');
+    // console.log('authUser() finished');
   }
 
   async function verifyToken(userJSON) {
@@ -57,9 +57,9 @@ function AuthProvider({ children }) {
       const response = await http.post('api/v1/user/verify', payload, header);
 
       if (response.status === 200) {
-        console.log(
-          'Identity confirmed. Server response: ' + response.data.identity
-        );
+        // console.log(
+        //   'Identity confirmed. Server response: ' + response.data.identity
+        // );
         return true;
       } else {
         return false;
