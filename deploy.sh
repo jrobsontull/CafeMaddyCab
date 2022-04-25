@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Killing PM2 daemon processes"
+echo -e "\e[33mKilling PM2 daemon processes\e[0m"
 pm2 kill
 
 echo "Pulling latest repo updates"
@@ -17,7 +17,7 @@ npm run build
 cd ..
 cd backend/
 echo "Installing backend modules"
-npm run install
+npm install
 cd ..
 else
 cd frontend/
@@ -26,6 +26,6 @@ npm run build
 cd ..
 fi
 
-echo "Starting daemon process"
+echo -e "\e[33mStarting daemon process\e[0m"
 pm2 start npm --name cafemaddycab -- start
-echo "Deploy successful"
+echo -e "\e[32mDeploy successful\e[0m"
