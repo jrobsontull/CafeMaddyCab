@@ -35,14 +35,14 @@ app.use(
         'default-src': [
           "'self'",
           'https://www.google-analytics.com',
-          'https://www.googletagmanager.com/gtag/js?id=G-XYPP7PV18B',
+          'https://www.googletagmanager.com',
           'https://cafemaddycab.org:8080/',
           'https://localhost:8080',
         ],
         'script-src': [
           "'self'",
           'https://www.google-analytics.com',
-          'https://www.googletagmanager.com/gtag/js?id=G-XYPP7PV18B',
+          'https://www.googletagmanager.com',
           'https://www.google.com',
           'https://www.gstatic.com',
         ],
@@ -55,7 +55,7 @@ app.use(
         'connect-src': ["'self'", 'https://www.google-analytics.com'],
         'script-src-elem': [
           "'self'",
-          'https://www.googletagmanager.com/gtag/js?id=G-XYPP7PV18B',
+          'https://www.googletagmanager.com',
           'https://www.google-analytics.com',
         ],
       },
