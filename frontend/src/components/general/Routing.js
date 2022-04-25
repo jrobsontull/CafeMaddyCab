@@ -29,9 +29,7 @@ import PressEntry6 from '../front-facing/press-entries/PressEntry6';
 
 function Routing() {
   // Enable Google Analytics in production
-  if (process.env.NODE_ENV === 'production') {
-    useGA();
-  }
+  useGA();
 
   return (
     <Routes>
