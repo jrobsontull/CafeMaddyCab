@@ -41,6 +41,7 @@ app.use(
           "'self'",
           'https://www.google.com',
           'https://www.gstatic.com',
+          'https://www.google-analytics.com',
         ],
         'frame-src': ["'self'", 'https://www.google.com'],
         'img-src': [
