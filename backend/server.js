@@ -50,6 +50,7 @@ app.use(
           'https://cafemaddycab.org:8080/',
           'https://localhost:8080',
         ],
+        'connect-src': ["'self'", 'https://www.google-analytics.com'],
       },
     },
   })
