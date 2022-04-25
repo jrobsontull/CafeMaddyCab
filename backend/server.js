@@ -36,6 +36,7 @@ app.use(
           "'self'",
           'https://cafemaddycab.org:8080/',
           'https://localhost:8080',
+          'https://www.google-analytics.com',
         ],
         'script-src': [
           "'self'",
