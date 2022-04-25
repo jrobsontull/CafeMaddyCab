@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './utils/auth.context';
+import ReactGA from 'react-ga';
 
 import './assets/css/global.css';
 
@@ -30,6 +32,12 @@ import PressEntry5 from './components/front-facing/press-entries/PressEntry5';
 import PressEntry6 from './components/front-facing/press-entries/PressEntry6';
 
 function App() {
+  // Initialise analytics
+  useEffect(() => {
+    ReactGA.initialize('G-XYPP7PV18B');
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
   return (
     <div className="container">
       <AuthProvider>
