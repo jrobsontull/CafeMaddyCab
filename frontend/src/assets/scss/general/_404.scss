@@ -1,0 +1,27 @@
+.content.not-found {
+  .message {
+    width: $content-width;
+    max-width: $max-width;
+
+    h1 {
+      font-size: 48px;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      margin: 10px 0 30px 0;
+
+      a {
+        color: $dark-pink;
+        font-weight: 500;
+        transition: color 0.25s ease;
+      }
+
+      a:hover {
+        cursor: pointer;
+        color: $dark-pink-hover;
+      }
+    }
+  }
+}
