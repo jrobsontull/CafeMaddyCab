@@ -73,7 +73,7 @@ function Press() {
 
           <Link to={'/press/6'} className="press-thumb">
             <img className="thumb" src={Entry6} alt="Entry 6" />
-            <p className="author">繼續閱讀世界日報</p>
+            <p className="author">世界日報</p>
             <h3 className="title">
               快看世界／害怕坐紐約地鐵？亞裔搭出租車 她幫您報銷
             </h3>

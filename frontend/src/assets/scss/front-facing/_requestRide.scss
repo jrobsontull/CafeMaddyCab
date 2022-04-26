@@ -26,6 +26,12 @@ h1.page-title-no-logo#request-ride {
   margin-bottom: 22px;
 }
 
+.terms-and-conditions {
+  width: calc(80% - 36px);
+  max-width: calc(#{$max-width} - 36px);
+  margin-bottom: 28px;
+}
+
 .request-form {
   width: $content-width;
   display: flex;

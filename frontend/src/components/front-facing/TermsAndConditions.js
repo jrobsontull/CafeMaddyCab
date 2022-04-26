@@ -1,13 +1,13 @@
+import Navbar from './Navbar';
+
 function TermsAndConditions() {
   return (
     <div className="react-container">
-      <div className="content">
-        <div className="titles">
-          <h2>CAFE MADDY CAB</h2>
-          <h3>Terms and Conditions</h3>
-        </div>
+      <div className="content frontend">
+        <Navbar />
+        <h1 className="page-title-no-logo">Terms and Conditions</h1>
 
-        <div className="info-box success" id="no-title">
+        <p className="content frontend terms-and-conditions">
           You, as recipient of financial aid from @cafemaddyCAB account,
           represent, warrant, and covenant that (i) all information you provide
           in connection to Cafemaddy CAB is accurate, complete, and note likely
@@ -26,7 +26,7 @@ function TermsAndConditions() {
           identity and purposed use of funds (vii) you understand that
           submissions may cease to be approved once the number of codes have
           been depleted.
-        </div>
+        </p>
       </div>
     </div>
   );

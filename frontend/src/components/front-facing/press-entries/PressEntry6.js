@@ -47,7 +47,7 @@ function PressEntry() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                繼續閱讀世界日報...
+                世界日報...
               </a>
             </div>
           </div>
