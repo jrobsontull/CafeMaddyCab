@@ -604,7 +604,7 @@ function RequestRide() {
                 </div>
 
                 <h3>
-                  Thank you for choosing to stay safe! codes will be emailed
+                  Thank you for choosing to stay safe! Codes will be emailed
                   every Monday morning at 8AM.
                 </h3>
               </div>

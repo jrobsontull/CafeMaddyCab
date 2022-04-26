@@ -496,6 +496,8 @@ h1.page-title-no-logo#request-ride {
     .request-container .request-form h3 {
       font-size: 20px;
       margin: 14px 0 12px 0; }
+    .request-container .request-form h3 a {
+      text-decoration: underline; }
     .request-container .request-form input {
       background-color: #fefff3;
       padding: 8px 18px;

@@ -47,6 +47,10 @@ h1.page-title-no-logo#request-ride {
       margin: 14px 0 12px 0;
     }
 
+    h3 a {
+      text-decoration: underline;
+    }
+
     input {
       background-color: $light-form;
       padding: 8px 18px;
