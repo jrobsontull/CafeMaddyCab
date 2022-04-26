@@ -29,4 +29,9 @@ fi
 
 echo -e "\e[32m[DEPLOY]\e[0m Starting daemon process"
 pm2 start npm --name cafemaddycab -- start
+
+echo -e "\e[32m[DEPLOY]\e[0m Started successfully. Setting up server restart daemonisation."
+pm2 save
+pm2 startup
+
 echo -e "\e[32m[DEPLOY]\e[0m Deploy successful"
