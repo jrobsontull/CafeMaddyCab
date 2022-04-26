@@ -1,31 +1,32 @@
 #!/bin/bash
 
-echo -e "\e[33mKilling PM2 daemon processes\e[0m"
+echo -e "\e[33m[DEPLOY]\e[0m Killing PM2 daemon processes"
 pm2 kill
 
-echo "Pulling latest repo updates"
+echo -e "\e[32m[DEPLOY]\e[0m Pulling latest repo updates"
 git pull
 
-read -p "Do you need to install node.js modules (y/n)? " runInstall
+echo -e -n "\e[32m[DEPLOY]\e[0m Do you need to install node.js modules (y/n)? "
+read runInstall
 
 if [ $runInstall == "y" ]; then
-echo "Installing frontend modules"
+echo -e "\e[32m[DEPLOY]\e[0m Installing frontend modules"
 cd frontend/
 npm install
-echo "Building frontend"
+echo -e "\e[32m[DEPLOY]\e[0m Building frontend"
 npm run build
 cd ..
 cd backend/
-echo "Installing backend modules"
+echo -e "\e[32m[DEPLOY]\e[0m Installing backend modules"
 npm install
 cd ..
 else
 cd frontend/
-echo "Building frontend"
+echo -e "\e[32m[DEPLOY]\e[0m Building frontend"
 npm run build
 cd ..
 fi
 
-echo -e "\e[33mStarting daemon process\e[0m"
+echo -e "\e[32m[DEPLOY]\e[0m Starting daemon process"
 pm2 start npm --name cafemaddycab -- start
-echo -e "\e[32mDeploy successful\e[0m"
+echo -e "\e[32m[DEPLOY]\e[0m Deploy successful"
