@@ -27,215 +27,221 @@ h1.page-title-no-logo#request-ride {
 }
 
 .terms-and-conditions {
-  width: calc(80% - 36px);
-  max-width: calc(#{$max-width} - 36px);
+  width: $content-width;
+  max-width: $max-width;
   margin-bottom: 28px;
 }
 
-.request-form {
+.request-container {
   width: $content-width;
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
   max-width: $max-width;
 
-  h3 {
-    font-size: 20px;
-    margin: 14px 0 12px 0;
-  }
-
-  input {
-    background-color: $light-form;
-    padding: 8px 18px;
-    border-radius: $border-radius;
-    border: 1px solid $dark-blue;
-    color: $dark-blue;
-    margin: 6px 0;
-    transition: box-shadow 0.25s ease;
-  }
-
-  input::placeholder {
-    color: $light-blue;
-  }
-
-  input:hover {
-    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
-  }
-
-  input:focus {
-    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
-  }
-
-  input.invalid {
-    border-color: $error;
-    color: $error;
-  }
-
-  input.invalid:hover {
-    box-shadow: 0px 0px 5px 1px $error-shadow;
-  }
-
-  input.invalid:focus {
-    box-shadow: 0px 0px 5px 1px $error-shadow;
-  }
-
-  .radio-check,
-  .check {
-    background-color: $light-form;
-    color: $dark-blue;
-    border: 1px solid $dark-blue;
-    padding: 12px 18px;
-    border-radius: $border-radius;
-    transition: box-shadow 0.25s ease;
-  }
-
-  .radio-check {
-    .check-item {
-      margin-bottom: 4px;
-
-      label.other-input input {
-        width: 80%;
-      }
-    }
-
-    .check-item.last-child {
-      margin-bottom: 0;
-    }
-
-    input[type='radio'] {
-      display: none;
-    }
-
-    input[type='radio'] + label:before {
-      content: '';
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border: 2px solid $dark-blue;
-      background-color: $light-form;
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-
-    input[type='radio']:hover + label:before {
-      cursor: pointer;
-    }
-
-    input[type='radio'] + label:hover {
-      cursor: pointer;
-    }
-
-    input[type='radio']:checked + label:before {
-      background-color: $light-blue;
-    }
-  }
-
-  .radio-check:hover,
-  .check:hover {
-    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
-  }
-
-  .check {
-    input[type='checkbox'] {
-      display: none;
-    }
-
-    input[type='checkbox'] + label:before {
-      content: '\00a0✓\00a0';
-      text-align: center;
-      font-weight: bold;
-      font-size: 10px;
-      padding: 0 1px;
-      color: $light-form;
-      font-weight: bold;
-      display: inline-block;
-      border: 2px solid $dark-blue;
-      background-color: $light-form;
-      margin-right: 8px;
-      vertical-align: middle;
-      margin-bottom: 3px;
-    }
-
-    input[type='checkbox']:hover + label:before {
-      cursor: pointer;
-    }
-
-    input[type='checkbox'] + label:hover {
-      cursor: pointer;
-    }
-
-    input[type='checkbox']:checked + label:before {
-      background-color: $light-blue;
-      color: $light-form;
-    }
-  }
-
-  .upload {
+  .request-form {
+    width: 100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    font-size: 18px;
 
-    input.input-file {
-      display: none;
+    h3 {
+      font-size: 20px;
+      margin: 14px 0 12px 0;
     }
 
-    input.upload-location {
-      width: 70%;
+    input {
       background-color: $light-form;
-      padding: 12px 18px;
-      border-radius: $border-radius 0 0 $border-radius;
+      padding: 8px 18px;
+      border-radius: $border-radius;
       border: 1px solid $dark-blue;
-      border-width: 1px 0 1px 1px;
+      color: $dark-blue;
+      margin: 6px 0;
+      transition: box-shadow 0.25s ease;
+    }
+
+    input::placeholder {
       color: $light-blue;
     }
 
-    .input-file + label {
-      display: inline-block;
-      text-align: center;
-      border-radius: 0 $border-radius $border-radius 0;
-      padding: 12px 4px;
-      font-size: 18px;
-      background-color: $dark-blue;
-      color: $lightest-pink;
-      width: 30%;
-      border: 1px solid $dark-blue;
-      border-width: 1px 1px 1px 0;
-      transition: background-color 0.25s ease;
+    input:hover {
+      box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
     }
 
-    .input-file + label:hover {
-      cursor: pointer;
-      background-color: $blue-btn-hover;
+    input:focus {
+      box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+    }
+
+    input.invalid {
+      border-color: $error;
+      color: $error;
+    }
+
+    input.invalid:hover {
+      box-shadow: 0px 0px 5px 1px $error-shadow;
+    }
+
+    input.invalid:focus {
+      box-shadow: 0px 0px 5px 1px $error-shadow;
+    }
+
+    .radio-check,
+    .check {
+      background-color: $light-form;
+      color: $dark-blue;
+      border: 1px solid $dark-blue;
+      padding: 12px 18px;
+      border-radius: $border-radius;
+      transition: box-shadow 0.25s ease;
+    }
+
+    .radio-check {
+      .check-item {
+        margin-bottom: 4px;
+
+        label.other-input input {
+          width: 80%;
+        }
+      }
+
+      .check-item.last-child {
+        margin-bottom: 0;
+      }
+
+      input[type='radio'] {
+        display: none;
+      }
+
+      input[type='radio'] + label:before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid $dark-blue;
+        background-color: $light-form;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      input[type='radio']:hover + label:before {
+        cursor: pointer;
+      }
+
+      input[type='radio'] + label:hover {
+        cursor: pointer;
+      }
+
+      input[type='radio']:checked + label:before {
+        background-color: $light-blue;
+      }
+    }
+
+    .radio-check:hover,
+    .check:hover {
+      box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+    }
+
+    .check {
+      input[type='checkbox'] {
+        display: none;
+      }
+
+      input[type='checkbox'] + label:before {
+        content: '\00a0✓\00a0';
+        text-align: center;
+        font-weight: bold;
+        font-size: 10px;
+        padding: 0 1px;
+        color: $light-form;
+        font-weight: bold;
+        display: inline-block;
+        border: 2px solid $dark-blue;
+        background-color: $light-form;
+        margin-right: 8px;
+        vertical-align: middle;
+        margin-bottom: 3px;
+      }
+
+      input[type='checkbox']:hover + label:before {
+        cursor: pointer;
+      }
+
+      input[type='checkbox'] + label:hover {
+        cursor: pointer;
+      }
+
+      input[type='checkbox']:checked + label:before {
+        background-color: $light-blue;
+        color: $light-form;
+      }
+    }
+
+    .upload {
+      display: flex;
+      align-items: center;
+
+      input.input-file {
+        display: none;
+      }
+
+      input.upload-location {
+        width: 70%;
+        background-color: $light-form;
+        padding: 12px 18px;
+        border-radius: $border-radius 0 0 $border-radius;
+        border: 1px solid $dark-blue;
+        border-width: 1px 0 1px 1px;
+        color: $light-blue;
+      }
+
+      .input-file + label {
+        display: inline-block;
+        text-align: center;
+        border-radius: 0 $border-radius $border-radius 0;
+        padding: 12px 4px;
+        font-size: 18px;
+        background-color: $dark-blue;
+        color: $lightest-pink;
+        width: 30%;
+        border: 1px solid $dark-blue;
+        border-width: 1px 1px 1px 0;
+        transition: background-color 0.25s ease;
+      }
+
+      .input-file + label:hover {
+        cursor: pointer;
+        background-color: $blue-btn-hover;
+      }
+    }
+
+    @media screen and (max-width: 456px) {
+      .upload {
+        input.upload-location {
+          padding: 23px 18px;
+        }
+      }
+    }
+
+    .btn.upload {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 18px;
     }
   }
 
-  @media screen and (max-width: 456px) {
-    .upload {
-      input.upload-location {
-        padding: 23px 18px;
+  .recaptcha-react {
+    margin: 12px 0 14px 0;
+    width: 100%;
+
+    div div div {
+      margin: 0 auto;
+
+      div iframe {
+        transform: scale(1);
       }
     }
   }
 
-  .btn.upload {
+  .btn.submit.ride {
+    margin-top: 8px;
     width: 100%;
-    padding: 12px 0;
-    font-size: 18px;
+    max-width: 100%;
   }
-}
-
-.recaptcha-react {
-  margin: 12px 0 14px 0;
-  width: 100%;
-
-  div div div {
-    margin: 0 auto;
-
-    div iframe {
-      transform: scale(1);
-    }
-  }
-}
-
-.btn.submit.ride {
-  margin-top: 8px;
 }

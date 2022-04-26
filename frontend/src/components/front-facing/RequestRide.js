@@ -297,10 +297,12 @@ function RequestRide() {
     }
   }
 
-  // Scroll to top on component load/refresh
   useEffect(() => {
+    // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
-    setFormOpen(false);
+
+    // Open and close the form
+    setFormOpen(true);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Please contact us if you have any questions" */
@@ -340,7 +342,7 @@ function RequestRide() {
           )}
 
           {formOpen ? (
-            <div className="content frontend">
+            <div className="request-container">
               <div className="request-form">
                 <input
                   type="text"

@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { saveAs } from 'file-saver';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 
@@ -51,9 +52,7 @@ function SendCodes({ onClose }) {
           });
         } else {
           // All good
-          const url = window.URL.createObjectURL(new Blob([response]));
-          const link = document.createElement('a');
-          link.href = url;
+          var blob = new Blob([response], { type: 'text/csv;charset=utf-8;' });
 
           const downloadFileName =
             fromDate.split('-').join('') +
@@ -61,9 +60,7 @@ function SendCodes({ onClose }) {
             toDate.split('-').join('') +
             '_rides.csv';
 
-          link.setAttribute('download', downloadFileName); //or any other extension
-          document.body.appendChild(link);
-          link.click();
+          saveAs(blob, downloadFileName);
         }
       });
     } else {
@@ -76,12 +73,8 @@ function SendCodes({ onClose }) {
           });
         } else {
           // All good
-          const url = window.URL.createObjectURL(new Blob([response]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'all_approved_rides.csv'); //or any other extension
-          document.body.appendChild(link);
-          link.click();
+          var blob = new Blob([response], { type: 'text/csv;charset=utf-8;' });
+          saveAs(blob, 'all_approved_rides.csv');
         }
       });
     }

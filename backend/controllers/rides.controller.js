@@ -356,8 +356,9 @@ export default class RidesController {
       if (req.query.fromDate && req.query.toDate) {
         fromDate = new Date(req.query.fromDate);
         toDate = new Date(req.query.toDate);
-        // Increment toDate by 24 hours and UTC time difference
+        // Increment toDate by 24 hours and account for UTC time difference
         toDate.setHours(toDate.getHours() + 24 + 5);
+
         response = await RidesDAO.sendCodes(fromDate, toDate);
       } else {
         response = await RidesDAO.sendCodes();

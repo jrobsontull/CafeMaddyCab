@@ -126,10 +126,10 @@ export default class RidesAPI {
 
     if (fromDate && toDate) {
       params = '?fromDate=' + fromDate + '&toDate=' + toDate;
-      response = await getRequest(url + params, token);
+      response = await getCsvRequest(url + params, token);
     } else {
       // No dates specified
-      response = await getRequest(url, token);
+      response = await getCsvRequest(url, token);
     }
 
     if (response) {
@@ -179,6 +179,25 @@ async function postCSVMulti(body, url, token) {
     const payload = body;
     const response = await httpMulti.post(url, payload, {
       headers: { token: token },
+    });
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error: ' + e.message);
+    return e.response;
+  }
+}
+
+// GET request for downloading CSV files
+async function getCsvRequest(url, token) {
+  try {
+    const response = await http.get(url, {
+      headers: { token: token },
+      responseType: 'blob',
     });
 
     if (response.status === 200) {
