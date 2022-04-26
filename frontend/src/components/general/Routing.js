@@ -19,6 +19,9 @@ import Settings from '../dashboard/Settings';
 // Protected routing
 import ProtectedRoute from './ProtectedRoute';
 
+// Others
+import NotFound from './NotFound';
+
 // Press entries
 import PressEntry1 from '../front-facing/press-entries/PressEntry1';
 import PressEntry2 from '../front-facing/press-entries/PressEntry2';
@@ -80,6 +83,8 @@ function Routing() {
           </ProtectedRoute>
         }
       />
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

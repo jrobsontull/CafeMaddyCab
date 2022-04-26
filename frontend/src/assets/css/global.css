@@ -365,6 +365,23 @@
       transform: translateX(0);
       transform: translateY(-8px); } }
 
+.content.not-found .message {
+  width: 80%;
+  max-width: 600px; }
+  .content.not-found .message h1 {
+    font-size: 48px;
+    text-align: center; }
+  .content.not-found .message p {
+    text-align: center;
+    margin: 10px 0 30px 0; }
+    .content.not-found .message p a {
+      color: #dc87cb;
+      font-weight: 500;
+      transition: color 0.25s ease; }
+    .content.not-found .message p a:hover {
+      cursor: pointer;
+      color: #e99fdc; }
+
 .landing-page .big-btns {
   width: 100%;
   display: flex;

@@ -18,8 +18,8 @@ function Footer() {
       </ul>
       <p>
         All donations are a tax-deductible contribution to Cafe Maddy Cab. Cafe
-        Maddy Cab is a 501(c)(3) tax-exempt organisation for both federal and
-        state purposes. Federal tax ID: XX-XXXXXXX.
+        Maddy Cab is fiscally sponsored by APCF, a tax-exempt 501(c)(3) public
+        charity; EIN: 95-4257997
       </p>
     </div>
   );
