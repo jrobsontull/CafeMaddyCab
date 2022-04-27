@@ -18,12 +18,12 @@ function Header() {
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
       {link.path === '/request-ride' ? (
-        <a href={link.path}>
+        <Link to={link.path}>
           {link.name}
           <img src={TaxiWhite} alt="Taxi" className="ride-icon"></img>
-        </a>
+        </Link>
       ) : (
-        <a href={link.path}>{link.name}</a>
+        <Link to={link.path}>{link.name}</Link>
       )}
     </li>
   ));

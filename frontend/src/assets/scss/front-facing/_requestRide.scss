@@ -45,10 +45,16 @@ h1.page-title-no-logo#request-ride {
     h3 {
       font-size: 20px;
       margin: 14px 0 12px 0;
-    }
 
-    h3 a {
-      text-decoration: underline;
+      a {
+        color: $dark-pink;
+        font-weight: 500;
+        transition: color 0.25s ease;
+      }
+
+      a:hover {
+        color: $dark-pink-hover;
+      }
     }
 
     input {

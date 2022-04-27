@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -74,9 +74,9 @@ function Success() {
           </p>
           <p id="last-child">
             If you have any questions, please refer to the{' '}
-            <a className="contact" href="/faq">
+            <Link className="contact" to={'/faq'}>
               FAQ page
-            </a>{' '}
+            </Link>{' '}
             on our website.
           </p>
         </div>

@@ -497,8 +497,12 @@ h1.page-title-no-logo#request-ride {
     .request-container .request-form h3 {
       font-size: 20px;
       margin: 14px 0 12px 0; }
-    .request-container .request-form h3 a {
-      text-decoration: underline; }
+      .request-container .request-form h3 a {
+        color: #dc87cb;
+        font-weight: 500;
+        transition: color 0.25s ease; }
+      .request-container .request-form h3 a:hover {
+        color: #e99fdc; }
     .request-container .request-form input {
       background-color: #fefff3;
       padding: 8px 18px;
@@ -875,6 +879,7 @@ h1.page-title-no-logo#request-ride {
         font-size: 20px; }
       .backend .navbar .nav ul li a,
       .backend .navbar .nav ul li p {
+        display: block;
         color: inherit;
         font-weight: 300;
         transition: all 0.25s ease;

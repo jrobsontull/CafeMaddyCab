@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
 
@@ -302,7 +302,7 @@ function RequestRide() {
     window.scrollTo(0, 0);
 
     // Open and close the form
-    setFormOpen(true);
+    setFormOpen(false);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
@@ -491,7 +491,7 @@ function RequestRide() {
                   </div>
                 </div>
 
-                <h3>Please submit your selfie / photo</h3>
+                <h3>Please submit a selfie / photo of the elderly person</h3>
 
                 <div className="upload">
                   <input
@@ -577,13 +577,9 @@ function RequestRide() {
 
                 <h3>
                   Do you agree to our{' '}
-                  <a
-                    href="/terms-and-conditions"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <Link to={'/terms-and-conditions'} target="_blank">
                     Terms and Conditions
-                  </a>
+                  </Link>
                   ?
                 </h3>
 
