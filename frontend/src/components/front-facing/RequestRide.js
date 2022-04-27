@@ -491,7 +491,7 @@ function RequestRide() {
                   </div>
                 </div>
 
-                <h3>Please submit a selfie / photo of the elderly person</h3>
+                <h3>Please submit your selfie / photo</h3>
 
                 <div className="upload">
                   <input
