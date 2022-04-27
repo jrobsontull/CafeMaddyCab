@@ -127,6 +127,7 @@
       .backend .navbar .nav ul li p,
       .frontend .navbar .nav ul li a,
       .frontend .navbar .nav ul li p {
+        display: block;
         color: inherit;
         font-weight: 300;
         transition: all 0.25s ease;

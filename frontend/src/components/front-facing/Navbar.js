@@ -12,18 +12,18 @@ function Header() {
     { name: 'How it Works', path: '/how-to-ride' },
     { name: 'Request a Ride', path: '/request-ride' },
     { name: 'Press', path: '/press' },
-    { name: 'Contact Us', path: '/contact-us' },
+    { name: 'FAQ', path: '/faq' },
   ];
 
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
       {link.path === '/request-ride' ? (
-        <Link to={link.path}>
+        <a href={link.path}>
           {link.name}
           <img src={TaxiWhite} alt="Taxi" className="ride-icon"></img>
-        </Link>
+        </a>
       ) : (
-        <Link to={link.path}>{link.name}</Link>
+        <a href={link.path}>{link.name}</a>
       )}
     </li>
   ));

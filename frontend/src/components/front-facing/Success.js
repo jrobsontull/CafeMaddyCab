@@ -73,12 +73,11 @@ function Success() {
             request is approved.
           </p>
           <p id="last-child">
-            If you have any questions or technical difficulties, please get in
-            touch with us{' '}
-            <a className="contact" href="mailto:example@domain.com">
-              here
-            </a>
-            .
+            If you have any questions, please refer to the{' '}
+            <a className="contact" href="/faq">
+              FAQ page
+            </a>{' '}
+            on our website.
           </p>
         </div>
 

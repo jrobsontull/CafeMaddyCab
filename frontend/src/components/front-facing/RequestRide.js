@@ -305,7 +305,7 @@ function RequestRide() {
     setFormOpen(true);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
-      Please contact us if you have any questions" */
+      Refer to this FAQ if you have any questions" */
     /* COMMENTED OUT BEFORE LAUNCH
     var today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
