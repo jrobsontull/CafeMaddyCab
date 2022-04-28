@@ -57,6 +57,8 @@ app.use(
           "'self'",
           'https://www.googletagmanager.com',
           'https://www.google-analytics.com',
+          'https://www.google.com',
+          'https://www.gstatic.com',
         ],
       },
     },

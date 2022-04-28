@@ -203,7 +203,6 @@ function RequestRide() {
   }
 
   function submitHandler() {
-    console.log('Validating form...');
     let errorPresent = false;
     for (const error in errors) {
       if (errors[error] === true) {
