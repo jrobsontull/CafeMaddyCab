@@ -302,7 +302,7 @@ function RequestRide() {
     window.scrollTo(0, 0);
 
     // Open and close the form
-    setFormOpen(false);
+    setFormOpen(true);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
@@ -491,7 +491,11 @@ function RequestRide() {
                   </div>
                 </div>
 
-                <h3>Please submit a selfie / photo of the elderly person</h3>
+                <h3>
+                  Please submit a selfie/photo of yourself. If you are
+                  submitting on behalf of someone else, please submit their
+                  selfie/photo.
+                </h3>
 
                 <div className="upload">
                   <input
@@ -511,7 +515,11 @@ function RequestRide() {
                   <label htmlFor="selfie">Upload Photo</label>
                 </div>
 
-                <h3>Please submit a copy/ photo of your photo ID</h3>
+                <h3>
+                  Please submit a photo of your photo ID. If you are submitting
+                  on behalf of someone else, please submit a photo of their
+                  photo ID.
+                </h3>
 
                 <div className="upload">
                   <input

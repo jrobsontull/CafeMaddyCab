@@ -15,9 +15,9 @@ import TaxiBlue from '../../assets/img/taxi_icon_blue.svg';
 import InfoWhite from '../../assets/img/info_icon_white.svg';
 
 // Img imports
-import Landing1 from '../../assets/img/landing-page-1.png';
-import Landing2 from '../../assets/img/landing-page-2.jpg';
-import LandingQuote from '../../assets/img/landing-quote.png';
+import Landing1 from '../../assets/img/landing-page-1.webp';
+import Landing2 from '../../assets/img/landing-page-2.webp';
+import LandingQuote from '../../assets/img/landing-quote.webp';
 import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
 import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
 import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
@@ -54,7 +54,7 @@ function LandingPage() {
         </div>
 
         <div className="picture-block" id="landing-1">
-          <img src={Landing1} className="picture-head" />
+          <img src={Landing1} className="picture-head" alt="landing-1" />
           <h2 className="title">Introducing Cafe Maddy Cab</h2>
           <p className="description">
             We provide cab rides for the vulnerable Asian minority population in
@@ -70,7 +70,7 @@ function LandingPage() {
         </div>
 
         <div className="picture-block" id="landing-2">
-          <img src={Landing2} className="picture-head" />
+          <img src={Landing2} className="picture-head" alt="landing-2" />
           <h2 className="title">Our mission</h2>
           <p className="description">
             At Cafe Maddy Cab, our mission is to help the AAPI community feel
