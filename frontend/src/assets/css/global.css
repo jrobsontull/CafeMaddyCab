@@ -24,22 +24,26 @@
 */
 @font-face {
   font-family: 'Roboto Condensed';
-  src: url("../fonts/RobotoCondensed-Regular.ttf") format("truetype"); }
+  src: url("../fonts/RobotoCondensed-Regular.ttf") format("truetype");
+  font-display: swap; }
 
 @font-face {
   font-family: 'Roboto Condensed';
   src: url("../fonts/RobotoCondensed-Bold.ttf") format("truetype");
-  font-weight: bold; }
+  font-weight: bold;
+  font-display: swap; }
 
 @font-face {
   font-family: 'Roboto Condensed';
   src: url("../fonts/RobotoCondensed-Medium.ttf") format("truetype");
-  font-weight: 500; }
+  font-weight: 500;
+  font-display: swap; }
 
 @font-face {
   font-family: 'Roboto Condensed';
   src: url("../fonts/RobotoCondensed-Light.ttf") format("truetype");
-  font-weight: 300; }
+  font-weight: 300;
+  font-display: swap; }
 
 /*  
 * Imports
