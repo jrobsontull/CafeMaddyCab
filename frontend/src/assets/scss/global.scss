@@ -47,24 +47,28 @@ $heading-font-size: 24px; // originally 22px
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-Regular.ttf') format('truetype');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-Bold.ttf') format('truetype');
   font-weight: bold;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-Medium.ttf') format('truetype');
   font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
   font-weight: 300;
+  font-display: swap;
 }
 
 /*  

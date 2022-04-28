@@ -1,34 +1,56 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import useGA from '../../utils/analytics';
+
+/*
+ * Non-lazy component imports for immediately served or small files
+ */
 
 // Front-facing component imports
 import LandingPage from '../front-facing/LandingPage';
 import HowToPage from '../front-facing/HowTo';
-import RequestRide from '../front-facing/RequestRide';
-import Press from '../front-facing/Press';
 import Success from '../front-facing/Success';
 import TermsAndConditions from '../front-facing/TermsAndConditions';
 
-// Backend component imports
-import Login from '../dashboard/Login';
-import Dashboard from '../dashboard/Dashboard';
-import Feedback from '../dashboard/Feedback';
-import ApproveRides from '../dashboard/ApproveRides';
-import Settings from '../dashboard/Settings';
-
-// Protected routing
-import ProtectedRoute from './ProtectedRoute';
-
 // Others
+import ProtectedRoute from './ProtectedRoute';
 import NotFound from './NotFound';
 
+/*
+ * Lazy load components with larger file sizes for faster web load speeds
+ */
+import Loading from './Loading';
+
+// Larger frontend imports
+const RequestRide = lazy(() => import('../front-facing/RequestRide'));
+const Press = lazy(() => import('../front-facing/Press'));
+
+// Backend component imports
+const Login = lazy(() => import('../dashboard/Login'));
+const Dashboard = lazy(() => import('../dashboard/Dashboard'));
+const Feedback = lazy(() => import('../dashboard/Feedback'));
+const ApproveRides = lazy(() => import('../dashboard/ApproveRides'));
+const Settings = lazy(() => import('../dashboard/Settings'));
+
 // Press entries
-import PressEntry1 from '../front-facing/press-entries/PressEntry1';
-import PressEntry2 from '../front-facing/press-entries/PressEntry2';
-import PressEntry3 from '../front-facing/press-entries/PressEntry3';
-import PressEntry4 from '../front-facing/press-entries/PressEntry4';
-import PressEntry5 from '../front-facing/press-entries/PressEntry5';
-import PressEntry6 from '../front-facing/press-entries/PressEntry6';
+const PressEntry1 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry1')
+);
+const PressEntry2 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry2')
+);
+const PressEntry3 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry3')
+);
+const PressEntry4 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry4')
+);
+const PressEntry5 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry5')
+);
+const PressEntry6 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry6')
+);
 
 function Routing() {
   // Enable Google Analytics in production
@@ -38,24 +60,89 @@ function Routing() {
     <Routes>
       <Route path={'/'} element={<LandingPage />} />
       <Route path={'/how-to-ride'} element={<HowToPage />} />
-      <Route path={'/request-ride'} element={<RequestRide />} />
-      <Route path={'/press'} element={<Press />} />
+      <Route
+        path={'/request-ride'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <RequestRide />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <Press />
+          </Suspense>
+        }
+      />
       <Route path={'/terms-and-conditions'} element={<TermsAndConditions />} />
       <Route path={'/success/:id'} element={<Success />} />
-      <Route path={'/login'} element={<Login />} />
+      <Route
+        path={'/login'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <Login />
+          </Suspense>
+        }
+      />
 
-      <Route path={'/press/1'} element={<PressEntry1 />} />
-      <Route path={'/press/2'} element={<PressEntry2 />} />
-      <Route path={'/press/3'} element={<PressEntry3 />} />
-      <Route path={'/press/4'} element={<PressEntry4 />} />
-      <Route path={'/press/5'} element={<PressEntry5 />} />
-      <Route path={'/press/6'} element={<PressEntry6 />} />
+      <Route
+        path={'/press/1'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry1 />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press/2'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry2 />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press/3'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry3 />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press/4'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry4 />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press/5'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry5 />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press/6'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry6 />
+          </Suspense>
+        }
+      />
 
       <Route
         path={'/dashboard'}
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
           </ProtectedRoute>
         }
       />
@@ -63,7 +150,9 @@ function Routing() {
         path={'/dashboard/view-feedback'}
         element={
           <ProtectedRoute>
-            <Feedback />
+            <Suspense fallback={<Loading />}>
+              <Feedback />
+            </Suspense>
           </ProtectedRoute>
         }
       />
@@ -71,7 +160,9 @@ function Routing() {
         path={'/dashboard/approve-rides/:id'}
         element={
           <ProtectedRoute>
-            <ApproveRides />
+            <Suspense fallback={<Loading />}>
+              <ApproveRides />
+            </Suspense>
           </ProtectedRoute>
         }
       />
@@ -79,7 +170,9 @@ function Routing() {
         path={'/dashboard/settings'}
         element={
           <ProtectedRoute>
-            <Settings />
+            <Suspense fallback={<Loading />}>
+              <Settings />
+            </Suspense>
           </ProtectedRoute>
         }
       />

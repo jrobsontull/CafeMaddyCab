@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import Navbar from '../front-facing/Navbar';
 
-import Navbar from './Navbar';
-
-function Loading() {
-  const location = useLocation();
+function Loading({ loadMessage }) {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (location.state) {
-      setMessage(location.state.message);
+    if (loadMessage) {
+      setMessage(loadMessage);
     } else {
       setMessage(
-        "We're sending your request right now! This page will automatically refresh when your request has sent."
+        "We're loading this page right now. This page will automatically refresh when we're ready for you."
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

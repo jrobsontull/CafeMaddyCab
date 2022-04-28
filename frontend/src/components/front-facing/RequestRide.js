@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
 
-import Loading from './Loading';
+import Loading from '../general/Loading';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -321,7 +321,11 @@ function RequestRide() {
   return (
     <div className="react-container">
       {isRequesting ? (
-        <Loading />
+        <Loading
+          loadMessage={
+            "We're sending your request right now! This page will automatically refresh when your request has sent."
+          }
+        />
       ) : (
         <div className="content frontend">
           <Navbar />

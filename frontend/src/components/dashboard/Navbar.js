@@ -20,9 +20,14 @@ function Header() {
     { name: 'Settings', path: '/dashboard/settings' },
   ];
 
-  const pageName = pageArray.find(
-    ({ path }) => path === location.pathname
-  ).name;
+  const pageName = pageArray.find((elem) => {
+    if (
+      elem.path === location.pathname ||
+      elem.path + '/' === location.pathname
+    ) {
+      return elem;
+    }
+  }).name;
 
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
