@@ -301,7 +301,7 @@ function RequestRide() {
     window.scrollTo(0, 0);
 
     // Open and close the form
-    setFormOpen(true);
+    setFormOpen(false);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
