@@ -9,6 +9,7 @@ import useGA from '../../utils/analytics';
 // Front-facing component imports
 import LandingPage from '../front-facing/LandingPage';
 import HowToPage from '../front-facing/HowTo';
+import FAQ from '../front-facing/Faq';
 import Success from '../front-facing/Success';
 import TermsAndConditions from '../front-facing/TermsAndConditions';
 
@@ -60,6 +61,7 @@ function Routing() {
     <Routes>
       <Route path={'/'} element={<LandingPage />} />
       <Route path={'/how-to-ride'} element={<HowToPage />} />
+      <Route path={'/faq'} element={<FAQ />} />
       <Route
         path={'/request-ride'}
         element={

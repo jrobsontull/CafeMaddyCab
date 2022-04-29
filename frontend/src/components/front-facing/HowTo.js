@@ -104,7 +104,11 @@ function HowToPage() {
             </li>
             <li>
               We are not responsible for any incidents that may occur on the
-              ride (see Terms and Conditions on the next page).
+              ride (see{' '}
+              <Link to={'/terms-and-conditions'} target="_blank">
+                Terms and Conditions
+              </Link>
+              ).
             </li>
           </ol>
         </div>

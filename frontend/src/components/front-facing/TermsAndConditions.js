@@ -7,7 +7,7 @@ function TermsAndConditions() {
         <Navbar />
         <h1 className="page-title-no-logo">Terms and Conditions</h1>
 
-        <p className="content frontend terms-and-conditions">
+        <p className="terms-and-conditions">
           You, as recipient of financial aid from @cafemaddyCAB account,
           represent, warrant, and covenant that (i) all information you provide
           in connection to Cafemaddy CAB is accurate, complete, and note likely
