@@ -13,7 +13,9 @@ function FAQ() {
           <img src={CMCLogo} alt="Cafe Maddy Cab" />
         </div>
 
-        <h1 className="page-title-no-logo">Frequently Asked Questions</h1>
+        <h1 className="page-title-no-logo" id="faq">
+          Frequently Asked Questions
+        </h1>
         <div className="info-box-title">
           <h3>Who is Eligible?</h3>
         </div>

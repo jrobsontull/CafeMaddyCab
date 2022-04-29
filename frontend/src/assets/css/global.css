@@ -485,6 +485,10 @@
 h1.page-title-no-logo#request-ride {
   margin-bottom: 22px; }
 
+h1.page-title-no-logo#faq {
+  margin-top: 10px;
+  margin-bottom: 4px; }
+
 .terms-and-conditions {
   width: 80%;
   max-width: 600px;
