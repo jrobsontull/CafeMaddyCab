@@ -55,7 +55,7 @@ function AuthProvider({ children }) {
         token: userJSON.token,
       };
 
-      const response = await http.post('api/v1/user/verify', payload, header);
+      const response = await http.post('api/v1/auth/verify', payload, header);
 
       if (response.status === 200) {
         // console.log(
