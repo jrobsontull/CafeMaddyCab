@@ -2,10 +2,14 @@ import http from './http.common';
 
 export default class UserAPI {
   static async getName(user) {
-    const response = await getRequest('/api/v1/user/getName');
+    const url = '/api/v1/user/getName?_id=' + user._id;
+    console.log(url);
+    const response = await getRequest(url, user.token);
 
     if (response) {
       return response;
+    } else {
+      return null;
     }
   }
 }
