@@ -16,7 +16,7 @@ function Feedback() {
   const entiresPerPage = 15;
 
   const [selectedRideId, setSelectedRideId] = useState('');
-  const [selectedFeedbackText, setSelectedFeedback] = useState('');
+  const [selectedFeedbackText, setSelectedFeedbackText] = useState('');
   const [openFeedbackEntryView, setOpenFeedbackEntryView] = useState(false);
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
@@ -64,7 +64,7 @@ function Feedback() {
 
   function viewFeedbackEntry(rideId, text) {
     setSelectedRideId(rideId);
-    setSelectedFeedback(text);
+    setSelectedFeedbackText(text);
     setOpenFeedbackEntryView(true);
   }
 
@@ -84,7 +84,7 @@ function Feedback() {
         ),
       });
     });
-  }, []);
+  }, [user.user.token]);
 
   return (
     <div className="react-container">

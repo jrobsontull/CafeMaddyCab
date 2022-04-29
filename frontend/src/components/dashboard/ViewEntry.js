@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
+import PropTypes from 'prop-types';
 
 import Arrow from '../../assets/img/arrow_right.svg';
 
@@ -120,8 +121,7 @@ function ViewEntry({ rideId, onClose }) {
         setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [rideId, user.user.token, baseImgUrl]);
 
   return (
     <div className="react-container view-entry">
@@ -287,5 +287,10 @@ function ViewEntry({ rideId, onClose }) {
     </div>
   );
 }
+
+ViewEntry.propTypes = {
+  rideId: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ViewEntry;

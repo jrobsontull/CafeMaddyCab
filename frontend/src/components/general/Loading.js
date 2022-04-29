@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../front-facing/Navbar';
+import PropTypes from 'prop-types';
 
 function Loading({ loadMessage }) {
   const [message, setMessage] = useState('');
@@ -45,5 +46,9 @@ function Loading({ loadMessage }) {
     </div>
   );
 }
+
+Loading.propTypes = {
+  loadMessage: PropTypes.string,
+};
 
 export default Loading;

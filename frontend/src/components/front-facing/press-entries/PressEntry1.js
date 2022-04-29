@@ -21,8 +21,8 @@ function PressEntry() {
 
         <div className="press-entry">
           <h2 className="title">
-            Woman raises over $100k in 2 days to pay for Asian Americans' taxi
-            rides amid rise in hate crimes
+            Woman raises over $100k in 2 days to pay for Asian Americans&apos;
+            taxi rides amid rise in hate crimes
           </h2>
           <img src={EntryPhoto} alt="Entry Header" className="entry-img" />
           <div className="entry-details">

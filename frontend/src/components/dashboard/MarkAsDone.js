@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 
@@ -104,5 +105,9 @@ function MarkAsDone({ onClose }) {
     </div>
   );
 }
+
+MarkAsDone.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 export default MarkAsDone;

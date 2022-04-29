@@ -485,15 +485,6 @@
 h1.page-title-no-logo#request-ride {
   margin-bottom: 22px; }
 
-h1.page-title-no-logo#faq {
-  margin-top: 10px;
-  margin-bottom: 4px; }
-
-.terms-and-conditions {
-  width: 80%;
-  max-width: 600px;
-  margin-bottom: 28px; }
-
 .request-container {
   width: 80%;
   max-width: 600px; }
@@ -1891,6 +1882,10 @@ h1.page-title-no-logo {
   width: 70%;
   text-align: center; }
 
+h1.page-title-no-logo#faq {
+  margin-top: 10px;
+  margin-bottom: 4px; }
+
 .arrow {
   width: 0;
   height: 0;
@@ -1929,3 +1924,8 @@ h1.page-title-no-logo {
   cursor: default;
   transform: scale(1);
   border-right-color: #9696db; }
+
+.terms-and-conditions {
+  width: 80%;
+  max-width: 600px;
+  margin-bottom: 28px; }

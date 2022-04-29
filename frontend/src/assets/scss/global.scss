@@ -98,6 +98,7 @@ $heading-font-size: 24px; // originally 22px
 @import './dashboard/_overlayWindow';
 @import './dashboard/_feedback';
 @import './dashboard/_approveRides';
+@import './dashboard/_settings';
 
 /*  
 * Styling
@@ -305,6 +306,11 @@ h1.page-title-no-logo {
   text-align: center;
 }
 
+h1.page-title-no-logo#faq {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
 .arrow {
   width: 0;
   height: 0;
@@ -351,4 +357,10 @@ h1.page-title-no-logo {
   cursor: default;
   transform: scale(1);
   border-right-color: $light-blue;
+}
+
+.terms-and-conditions {
+  width: $content-width;
+  max-width: $max-width;
+  margin-bottom: 28px;
 }

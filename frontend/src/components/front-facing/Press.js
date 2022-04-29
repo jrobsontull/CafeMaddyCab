@@ -31,8 +31,8 @@ function Press() {
             <img className="thumb" src={Entry1} alt="Entry 1" />
             <p className="author">ABCNEWS</p>
             <h3 className="title">
-              Woman raises over $100k in 2 days to pay for Asian Americans' taxi
-              rides amid rise in hate crimes
+              Woman raises over $100k in 2 days to pay for Asian Americans&apos;
+              taxi rides amid rise in hate crimes
             </h3>
           </Link>
 
@@ -40,7 +40,7 @@ function Press() {
             <img className="thumb" src={Entry2} alt="Entry 2" />
             <p className="author">NPR</p>
             <h3 className="title">
-              '&apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
+              &apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
               Asian Americans Home Safe
             </h3>
           </Link>

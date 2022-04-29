@@ -41,9 +41,9 @@ function PressEntry() {
             <p>
               Two months ago, an Asian man was stabbed by a stranger two blocks
               from where Xie&apos;s grandfather has lived since coming to the
-              U.S. from China 30 years ago.&quot;I hate that I'm scared,&quot;
-              Xie, 21, tells ELLE.com. &quot;But it's true, I&apos;m
-              terrified.&quot;
+              U.S. from China 30 years ago.&quot;I hate that I&apos;m
+              scared,&quot; Xie, 21, tells ELLE.com. &quot;But it&apos;s true,
+              I&apos;m terrified.&quot;
             </p>
 
             <div className="read-more">

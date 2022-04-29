@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
+import PropTypes from 'prop-types';
 
 import Arrow from '../../assets/img/arrow_right.svg';
 
@@ -17,8 +18,7 @@ function ViewFeedback({ rideId, onClose, feedbackText }) {
         setUserDetails(null);
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [rideId, user.user.token]);
 
   return (
     <div className="react-container view-entry">
@@ -69,5 +69,11 @@ function ViewFeedback({ rideId, onClose, feedbackText }) {
     </div>
   );
 }
+
+ViewFeedback.propTypes = {
+  rideId: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
+  feedbackText: PropTypes.string.isRequired,
+};
 
 export default ViewFeedback;

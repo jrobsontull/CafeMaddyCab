@@ -21,12 +21,12 @@ function Dashboard() {
 
   // Edit ride window states
   const [selectedRideId, setSelectedRideId] = useState();
-  const [openRideEntryView, isOpenRideEntryView] = useState(false);
+  const [openRideEntryView, setOpenRideEntryView] = useState(false);
 
   // Other window states
-  const [openApporovalWindow, isOpenApprovalWindow] = useState(false);
-  const [openSendCodesWindow, isOpenSendCodesWindow] = useState(false);
-  const [openDoneWindow, isOpenDoneWindow] = useState(false);
+  const [openApprovalWindow, setOpenApprovalWindow] = useState(false);
+  const [openSendCodesWindow, setOpenSendCodesWindow] = useState(false);
+  const [openDoneWindow, setOpenDoneWindow] = useState(false);
 
   // Counts for status types
   const [statusCount, setStatusCount] = useState({
@@ -86,11 +86,11 @@ function Dashboard() {
   function viewRideEntry(rideId) {
     window.scrollTo(0, 0);
     setSelectedRideId(rideId);
-    isOpenRideEntryView(true);
+    setOpenRideEntryView(true);
   }
 
   function closeRideEntryView() {
-    isOpenRideEntryView(false);
+    setOpenRideEntryView(false);
     RidesAPI.getRides(null, user.user.token).then((response) => {
       setRides(response.rides);
       setRidesData({
@@ -106,29 +106,29 @@ function Dashboard() {
 
   function openApproval() {
     window.scrollTo(0, 0);
-    isOpenApprovalWindow(true);
+    setOpenApprovalWindow(true);
   }
 
   function closeApproval() {
-    isOpenApprovalWindow(false);
+    setOpenApprovalWindow(false);
   }
 
   function openSendCodes() {
     window.scrollTo(0, 0);
-    isOpenSendCodesWindow(true);
+    setOpenSendCodesWindow(true);
   }
 
   function closeSendCodes() {
-    isOpenSendCodesWindow(false);
+    setOpenSendCodesWindow(false);
   }
 
   function openMarkAsDone() {
     window.scrollTo(0, 0);
-    isOpenDoneWindow(true);
+    setOpenDoneWindow(true);
   }
 
   function closeMarkAsDone() {
-    isOpenDoneWindow(false);
+    setOpenDoneWindow(false);
   }
 
   function searchRides(status = null) {
@@ -191,7 +191,7 @@ function Dashboard() {
         setStatusCount(response.count);
       }
     });
-  }, []);
+  }, [user.user.token]);
 
   return (
     <div className="react-container">
@@ -204,7 +204,7 @@ function Dashboard() {
           ''
         )}
 
-        {openApporovalWindow ? <ApprovalWindow onClose={closeApproval} /> : ''}
+        {openApprovalWindow ? <ApprovalWindow onClose={closeApproval} /> : ''}
 
         {openSendCodesWindow ? <SendCodes onClose={closeSendCodes} /> : ''}
 

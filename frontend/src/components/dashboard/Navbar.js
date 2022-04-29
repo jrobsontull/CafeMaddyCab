@@ -26,6 +26,8 @@ function Header() {
       elem.path + '/' === location.pathname
     ) {
       return elem;
+    } else {
+      return null;
     }
   }).name;
 
@@ -53,7 +55,7 @@ function Header() {
         <div className="branding">
           <p className="cmc">CAFE MADDY CAB</p>
           <p>&#124;</p>
-          <p className="page-name">{pageName}</p>
+          <p className="page-name">{pageName ? pageName : 'Unknown Page'}</p>
         </div>
 
         <div

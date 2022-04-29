@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { saveAs } from 'file-saver';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
+import PropTypes from 'prop-types';
 
 import Arrow from '../../assets/img/arrow_right.svg';
 
@@ -156,5 +157,9 @@ function SendCodes({ onClose }) {
     </div>
   );
 }
+
+SendCodes.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 export default SendCodes;

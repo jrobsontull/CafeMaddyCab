@@ -24,7 +24,7 @@ function ApproveRides() {
     baseImgUrl = 'https://cafemaddycab.org:443/api/v1/image/';
   }
 
-  const [openPhotoView, isOpenPhotoView] = useState(false);
+  const [openPhotoView, setOpenPhotoView] = useState(false);
   const [photoView, setPhotoView] = useState({
     firstName: null,
     lastName: null,
@@ -118,7 +118,7 @@ function ApproveRides() {
       selfie: selfie,
       photoId: photoId,
     });
-    isOpenPhotoView(true);
+    setOpenPhotoView(true);
   }
 
   // Cancel button handler - unset in progress state on rides
@@ -165,8 +165,7 @@ function ApproveRides() {
         ),
       });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user.user]);
 
   return (
     <div className="react-container">
@@ -175,7 +174,7 @@ function ApproveRides() {
 
         {openPhotoView ? (
           <PhotoView
-            onClose={() => isOpenPhotoView(false)}
+            onClose={() => setOpenPhotoView(false)}
             firstName={photoView.firstName}
             lastName={photoView.lastName}
             selfie={photoView.selfie}

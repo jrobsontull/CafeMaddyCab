@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import http from './http.common';
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext();
 
@@ -81,6 +82,10 @@ function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.object.isRequired,
+};
 
 export default AuthContext;
 export { AuthProvider };

@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Arrow from '../../assets/img/arrow_right.svg';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
@@ -59,7 +60,7 @@ function ApprovalWindow({ onClose }) {
     RidesAPI.getStats('status=1', user.user.token).then((response) => {
       setNewTotal(response.count);
     });
-  }, []);
+  }, [user.user.token]);
 
   return (
     <div className="react-container view-entry">
@@ -121,5 +122,9 @@ function ApprovalWindow({ onClose }) {
     </div>
   );
 }
+
+ApprovalWindow.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ApprovalWindow;
