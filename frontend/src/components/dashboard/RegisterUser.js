@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../dashboard/Navbar';
 import AuthContext from '../../utils/auth.context';
 import { useContext } from 'react';
@@ -11,6 +12,7 @@ function RegisterUser() {
   const [role, setRole] = useState('approver');
 
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [errorOnSubmit, setErrorOnSubmit] = useState({
     state: false,
@@ -123,6 +125,13 @@ function RegisterUser() {
       });
     }
   }
+
+  // Navigate away if not admin
+  useEffect(() => {
+    if (user.user.role !== 'admin') {
+      navigate('/dashboard');
+    }
+  }, [user.user]);
 
   return (
     <div className="react-container">

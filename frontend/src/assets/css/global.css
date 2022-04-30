@@ -933,6 +933,8 @@ h1.page-title-no-logo#request-ride {
     .dashboard .menu .action-btns div:hover {
       cursor: pointer;
       background-color: #5c5cb3; }
+    .dashboard .menu .action-btns div.approver-end {
+      border-radius: 0 0 0 8px; }
   .dashboard .table-content {
     width: 90%;
     display: flex;

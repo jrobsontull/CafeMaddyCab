@@ -60,6 +60,10 @@
       cursor: pointer;
       background-color: $blue-btn-hover;
     }
+
+    .action-btns div.approver-end {
+      border-radius: 0 0 0 $border-radius;
+    }
   }
 
   .table-content {

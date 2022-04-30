@@ -39,6 +39,8 @@ function Dashboard() {
     done: 0,
   });
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
   function calculateTotalPageNums(numPerPage, totalEntries) {
     let count = 1;
     let tracker = totalEntries;
@@ -162,7 +164,7 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    /* Populate table with all rides */
+    // Populate table with all rides
     RidesAPI.getRides(null, user.user.token).then((response) => {
       var { error } = response;
       if (error) {
@@ -181,7 +183,7 @@ function Dashboard() {
       }
     });
 
-    /* Set status quantities in left menu - might be a CPU intensive process so be WARNED */
+    // Set status quantities in left menu - might be a CPU intensive process so be WARNED
     RidesAPI.getStats(null, user.user.token).then((response) => {
       var { error } = response;
       if (error) {
@@ -191,7 +193,12 @@ function Dashboard() {
         setStatusCount(response.count);
       }
     });
-  }, [user.user.token]);
+
+    // Check if admin for displaying elements
+    if (user.user.role === 'admin') {
+      setIsAdmin(true);
+    }
+  }, [user.user]);
 
   return (
     <div className="react-container">
@@ -240,20 +247,39 @@ function Dashboard() {
             <div className="action-btns">
               <div className="action">Search requests</div>
               <div className="action">Edit request</div>
-              <div className="action" onClick={() => openApproval()}>
-                Approve requests
-              </div>
 
-              <div className="action" onClick={() => openSendCodes()}>
-                Send codes
-              </div>
-              <div
-                className="action"
-                id="last-child"
-                onClick={() => openMarkAsDone()}
-              >
-                Mark as done
-              </div>
+              {isAdmin ? (
+                <div className="action" onClick={() => openApproval()}>
+                  Approve requests
+                </div>
+              ) : (
+                <div
+                  className="action approver-end"
+                  onClick={() => openApproval()}
+                >
+                  Approve requests
+                </div>
+              )}
+
+              {isAdmin ? (
+                <div className="action" onClick={() => openSendCodes()}>
+                  Send codes
+                </div>
+              ) : (
+                ''
+              )}
+
+              {isAdmin ? (
+                <div
+                  className="action"
+                  id="last-child"
+                  onClick={() => openMarkAsDone()}
+                >
+                  Mark as done
+                </div>
+              ) : (
+                ''
+              )}
             </div>
           </div>
 
@@ -359,7 +385,7 @@ function Dashboard() {
                 </div>
               )}
 
-              <div className="download-btn">Download CSV</div>
+              {isAdmin ? <div className="download-btn">Download CSV</div> : ''}
             </div>
           </div>
         </div>
