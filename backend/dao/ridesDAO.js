@@ -359,6 +359,7 @@ export default class RidesDAO {
               {
                 $set: {
                   status: { value: newStatus, text: newStatusText },
+                  verified: true,
                 },
               }
             )

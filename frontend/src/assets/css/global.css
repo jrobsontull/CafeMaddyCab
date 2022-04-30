@@ -1333,6 +1333,10 @@ h1.page-title-no-logo#request-ride {
           background-color: #f7f5fe;
           padding: 2px 4px;
           border: 1px solid #3b3b96; }
+        .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .options .date .picker input:disabled {
+          background-color: #dfdfdf;
+          color: #8b8b8b;
+          border-color: #5d5d5d; }
     .react-container.view-entry .view-entry-window.send-codes .entry-content .actions .download-btn {
       width: 20%;
       background-color: #dc87cb;
