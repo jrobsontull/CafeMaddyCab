@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '../front-facing/Navbar';
 import PropTypes from 'prop-types';
 
-function Loading({ loadMessage }) {
+function Loading({ loadMessage, pageTitle = 'Loading...' }) {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -21,9 +21,7 @@ function Loading({ loadMessage }) {
       <div className="content frontend">
         <Navbar />
 
-        <h1 className="page-title-no-logo">
-          Ride Request & Reimbursement Form
-        </h1>
+        <h1 className="page-title-no-logo">{pageTitle}</h1>
 
         <div className="loading">
           <div className="lds-default">

@@ -437,6 +437,17 @@ export default class RidesController {
       res.status(500).json({ error: e });
     }
   }
+
+  // API controller for getting all rides and converting to CSV for download
+  static async apiDownloadRides(req, res, next) {
+    try {
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to get rides to download. ' + e.message
+      );
+      res.status(500).json({ error: e });
+    }
+  }
 }
 
 // Check if obj is empty and return bool

@@ -118,4 +118,7 @@ router.route('/markAsDone').post(
   RidesController.apiMarkAsDone
 );
 
+// Download all rides
+router.route('/download').get(validateHeader, RidesController.apiDownloadRides);
+
 export default router;

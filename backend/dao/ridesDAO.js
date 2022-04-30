@@ -495,4 +495,13 @@ export default class RidesDAO {
       return { error: e };
     }
   }
+
+  // General function for downloading all rides from DB
+  static async downloadRides() {
+    try {
+    } catch (e) {
+      console.error('ridesDAO: Failed to get rides for downloading. ' + e);
+      return { error: e };
+    }
+  }
 }

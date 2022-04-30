@@ -322,6 +322,7 @@ function RequestRide() {
     <div className="react-container">
       {isRequesting ? (
         <Loading
+          pageTitle="Ride Request & Reimbursement Form"
           loadMessage={
             "We're sending your request right now! This page will automatically refresh when your request has sent."
           }
