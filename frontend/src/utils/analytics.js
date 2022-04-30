@@ -5,7 +5,7 @@ import ReactGA from 'react-ga4';
 export default function useGA() {
   // Initialise analytics
   useEffect(() => {
-    ReactGA.initialize('G-XYPP7PV18B');
+    ReactGA.initialize('G-WDWLN3S2WB');
   }, []);
 
   const location = useLocation();
