@@ -2,12 +2,27 @@ import http from './http.common';
 
 export default class UserAPI {
   static async getName(user) {
-    const url = '/api/v1/user/getName?_id=' + user._id;
-    console.log(url);
+    const url = 'api/v1/auth/getName?id=' + user._id;
     const response = await getRequest(url, user.token);
 
     if (response) {
-      return response;
+      return response.data;
+    } else {
+      return null;
+    }
+  }
+
+  static async changePassword(currentPass, newPass, user) {
+    const url = 'api/v1/auth/changePassword';
+    const body = {
+      currentPass: currentPass,
+      newPass: newPass,
+      _id: user._id,
+    };
+    const response = await putRequest(body, url, user.token);
+
+    if (response) {
+      return response.data;
     } else {
       return null;
     }

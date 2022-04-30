@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../utils/auth.context';
 import UserAPI from '../../utils/user.api';
+import { useNavigate } from 'react-router-dom';
 
 import Navbar from './Navbar';
 
 function Settings() {
-  const { user } = useContext(AuthContext);
+  const { user, authUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [errorOnSubmit, setErrorOnSubmit] = useState({
     state: false,
@@ -17,6 +19,7 @@ function Settings() {
     confirmNewPass: true,
   });
 
+  const [username, setUsername] = useState(null);
   const [currentPass, setCurrentPass] = useState(null);
   const [newPass, setNewPass] = useState(null);
   const [confirmNewPass, setConfirmNewPass] = useState(null);
@@ -38,6 +41,7 @@ function Settings() {
           setConfirmNewPass(target.value);
           setErrors((prevErrors) => ({ ...prevErrors, confirmNewPass: false }));
           break;
+        // no default
       }
       target.classList.remove('invalid');
     } else {
@@ -54,6 +58,7 @@ function Settings() {
           setConfirmNewPass(null);
           setErrors((prevErrors) => ({ ...prevErrors, confirmNewPass: true }));
           break;
+        // no default
       }
       target.classList.add('invalid');
     }
@@ -92,7 +97,17 @@ function Settings() {
         // Save changes
         setErrorOnSubmit({ state: false, message: null });
 
-        // api call here
+        UserAPI.changePassword(currentPass, newPass, user.user).then(
+          (response) => {
+            var { error } = response;
+            if (error) {
+              setErrorOnSubmit({ state: true, message: error });
+            } else {
+              localStorage.removeItem('user');
+              authUser();
+            }
+          }
+        );
       } else {
         // Not a good match
         setErrorOnSubmit({
@@ -106,7 +121,7 @@ function Settings() {
   useEffect(() => {
     // Set username field
     UserAPI.getName(user.user).then((response) => {
-      console.log(response);
+      setUsername(response.username);
     });
   }, [user.user]);
 
@@ -139,7 +154,13 @@ function Settings() {
 
           <div className="input-row">
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" disabled></input>
+            <input
+              type="text"
+              id="username"
+              defaultValue={username ? username : ''}
+              key={username ? username : ''}
+              disabled
+            ></input>
           </div>
           <div className="input-row">
             <label htmlFor="common-name">Common name:</label>
@@ -152,7 +173,12 @@ function Settings() {
           </div>
           <div className="input-row">
             <label htmlFor="role">Role:</label>
-            <input type="text" id="role" disabled></input>
+            <input
+              type="text"
+              id="role"
+              defaultValue={user.user.role}
+              disabled
+            ></input>
           </div>
           <div className="input-row">
             <label htmlFor="currentPass">Current password:</label>
