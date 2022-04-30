@@ -17,7 +17,7 @@ export default class RidesAPI {
 
     const response = await postRequestMulti(
       formData,
-      '/api/v1/rides/',
+      'api/v1/rides/',
       rideDetails.gResponse
     );
 

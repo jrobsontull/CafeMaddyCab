@@ -40,6 +40,7 @@ function MarkAsDone({ onClose }) {
           setErrorOnSubmit({ state: true, message: error });
         } else {
           console.log(response);
+          // Do something else here
         }
       });
     } else {

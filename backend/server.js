@@ -82,7 +82,7 @@ app.use(
 
 // Set up routing
 app.use('/api/v1/rides', rides);
-app.use('/api/v1/user', auth);
+app.use('/api/v1/auth', auth);
 app.use('/api/v1/image', image);
 app.use('/api/v1/feedback', feedback);
 

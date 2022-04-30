@@ -116,7 +116,7 @@ function Login() {
 
         setIsLoading(true);
 
-        const response = await http.post('api/v1/user/login', payload, header);
+        const response = await http.post('api/v1/auth/login', payload, header);
 
         localStorage.setItem('user', JSON.stringify(response.data));
         authUser();
