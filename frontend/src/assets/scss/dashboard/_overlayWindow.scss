@@ -372,6 +372,12 @@
                 padding: 2px 4px;
                 border: 1px solid $dark-blue;
               }
+
+              input:disabled {
+                background-color: rgb(223, 223, 223);
+                color: rgb(139, 139, 139);
+                border-color: rgb(93, 93, 93);
+              }
             }
           }
         }

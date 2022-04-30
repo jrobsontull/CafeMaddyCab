@@ -1,0 +1,11 @@
+.settings-content {
+  .input-row select {
+    border: 1px solid $dark-blue;
+    background-color: $lightest-pink;
+    transition: box-shadow 0.25s ease;
+    flex: 65%;
+    padding: 6px 12px;
+    color: $dark-blue;
+    font-weight: 500;
+  }
+}

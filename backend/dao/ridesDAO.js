@@ -359,6 +359,7 @@ export default class RidesDAO {
               {
                 $set: {
                   status: { value: newStatus, text: newStatusText },
+                  verified: true,
                 },
               }
             )
@@ -491,6 +492,15 @@ export default class RidesDAO {
       console.error(
         'ridesDAO: Failed to mark rides as done and attach coupons. ' + e
       );
+      return { error: e };
+    }
+  }
+
+  // General function for downloading all rides from DB
+  static async downloadRides() {
+    try {
+    } catch (e) {
+      console.error('ridesDAO: Failed to get rides for downloading. ' + e);
       return { error: e };
     }
   }

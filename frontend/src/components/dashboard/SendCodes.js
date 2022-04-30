@@ -130,21 +130,41 @@ function SendCodes({ onClose }) {
               <div className="date">
                 <div className="picker">
                   <label htmlFor="from-date">From date:</label>
-                  <input
-                    type="date"
-                    id="from-date"
-                    defaultValue={getClosestMon()}
-                    onChange={(e) => setFromDate(e.target.value)}
-                  />
+                  {useDates ? (
+                    <input
+                      type="date"
+                      id="from-date"
+                      defaultValue={getClosestMon()}
+                      onChange={(e) => setFromDate(e.target.value)}
+                    />
+                  ) : (
+                    <input
+                      type="date"
+                      id="from-date"
+                      defaultValue={getClosestMon()}
+                      onChange={(e) => setFromDate(e.target.value)}
+                      disabled
+                    />
+                  )}
                 </div>
                 <div className="picker">
                   <label htmlFor="to-date">To date:</label>
-                  <input
-                    type="date"
-                    id="to-date"
-                    defaultValue={getTodayDate()}
-                    onChange={(e) => setToDate(e.target.value)}
-                  />
+                  {useDates ? (
+                    <input
+                      type="date"
+                      id="to-date"
+                      defaultValue={getTodayDate()}
+                      onChange={(e) => setToDate(e.target.value)}
+                    />
+                  ) : (
+                    <input
+                      type="date"
+                      id="to-date"
+                      defaultValue={getTodayDate()}
+                      onChange={(e) => setToDate(e.target.value)}
+                      disabled
+                    />
+                  )}
                 </div>
               </div>
             </div>
