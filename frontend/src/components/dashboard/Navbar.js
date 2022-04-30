@@ -20,7 +20,7 @@ function Header() {
     { name: 'Settings', path: '/dashboard/settings' },
   ];
 
-  const pageName = pageArray.find((elem) => {
+  const currentPageElem = pageArray.find((elem) => {
     if (
       elem.path === location.pathname ||
       elem.path + '/' === location.pathname
@@ -29,7 +29,18 @@ function Header() {
     } else {
       return null;
     }
-  }).name;
+  });
+
+  // Catch admin register user page
+  let pageName;
+  if (currentPageElem) {
+    pageName = currentPageElem.name;
+  } else if (
+    location.pathname === '/dashboard/register-user' ||
+    location.pathname === '/dashboard/register-user/'
+  ) {
+    pageName = 'Register User';
+  }
 
   const pageList = pageArray.map((link) => (
     <li key={link.name}>
@@ -72,6 +83,13 @@ function Header() {
       <div className={hamOpen ? 'nav active' : 'nav'}>
         <ul>
           {pageList}
+          {user.user.role === 'admin' ? (
+            <li>
+              <Link to={'/dashboard/register-user'}>Register User</Link>
+            </li>
+          ) : (
+            ''
+          )}
           <li onClick={(e) => logoutHandler(e.currentTarget)}>
             <p>Logout</p>
             <div className="logout-icon"></div>

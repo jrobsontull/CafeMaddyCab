@@ -180,6 +180,7 @@ export default class RidesController {
       var { error } = statsResponse;
       if (error) {
         res.status(400).json({ error: error.message });
+        return;
       }
 
       res.json(statsResponse);
@@ -219,6 +220,7 @@ export default class RidesController {
       var { error } = rideResponse;
       if (error) {
         res.status(400).json({ error: error.message });
+        return;
       }
 
       if (rideResponse.value === null) {
@@ -252,6 +254,7 @@ export default class RidesController {
           var { error } = response;
           if (error) {
             res.status(500).json({ error: error });
+            return;
           }
 
           res.json(response);
@@ -282,6 +285,7 @@ export default class RidesController {
       var { error } = response;
       if (error) {
         res.status(500).json({ error: error });
+        return;
       }
 
       res.json(response);
@@ -336,6 +340,7 @@ export default class RidesController {
         var { error } = response;
         if (error) {
           res.status(500).json({ error: error });
+          return;
         }
 
         res.json(response);
@@ -367,6 +372,7 @@ export default class RidesController {
       var { error } = response;
       if (error) {
         res.status(500).json({ error: error });
+        return;
       }
 
       // Format dates in response to NYC date

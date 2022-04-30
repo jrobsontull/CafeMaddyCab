@@ -9,7 +9,7 @@ import useGA from '../../utils/analytics';
 // Front-facing component imports
 import LandingPage from '../front-facing/LandingPage';
 import HowToPage from '../front-facing/HowTo';
-import FAQ from '../front-facing/Faq';
+import Faq from '../front-facing/Faq';
 import Success from '../front-facing/Success';
 import TermsAndConditions from '../front-facing/TermsAndConditions';
 
@@ -32,6 +32,7 @@ const Dashboard = lazy(() => import('../dashboard/Dashboard'));
 const Feedback = lazy(() => import('../dashboard/Feedback'));
 const ApproveRides = lazy(() => import('../dashboard/ApproveRides'));
 const Settings = lazy(() => import('../dashboard/Settings'));
+const RegisterUser = lazy(() => import('../dashboard/RegisterUser'));
 
 // Press entries
 const PressEntry1 = lazy(() =>
@@ -61,7 +62,7 @@ function Routing() {
     <Routes>
       <Route path={'/'} element={<LandingPage />} />
       <Route path={'/how-to-ride'} element={<HowToPage />} />
-      <Route path={'/faq'} element={<FAQ />} />
+      <Route path={'/faq'} element={<Faq />} />
       <Route
         path={'/request-ride'}
         element={
@@ -174,6 +175,16 @@ function Routing() {
           <ProtectedRoute>
             <Suspense fallback={<Loading />}>
               <Settings />
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/dashboard/register-user'}
+        element={
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <RegisterUser />
             </Suspense>
           </ProtectedRoute>
         }

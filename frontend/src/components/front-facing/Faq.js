@@ -3,7 +3,7 @@ import Footer from './Footer';
 
 import CMCLogo from '../../assets/img/logo.svg';
 
-function FAQ() {
+function Faq() {
   return (
     <div className="react-container">
       <div className="content frontend">
@@ -69,4 +69,4 @@ function FAQ() {
   );
 }
 
-export default FAQ;
+export default Faq;

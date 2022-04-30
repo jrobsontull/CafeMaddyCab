@@ -11,17 +11,6 @@
   margin-bottom: 20px;
 }
 
-.content .error {
-  background-color: #fa7575;
-  color: $lightest-pink;
-  width: calc(80% - 36px);
-  max-width: calc(#{$max-width} - 36px);
-  padding: 8px 18px;
-  border-radius: $border-radius;
-  border: 1px solid $error;
-  margin-bottom: 14px;
-}
-
 h1.page-title-no-logo#request-ride {
   margin-bottom: 22px;
 }

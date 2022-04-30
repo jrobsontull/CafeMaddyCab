@@ -56,8 +56,8 @@ export default class AuthDAO {
 
   static async registerUser(username, pass, commonName, role = 'approver') {
     try {
-      const emailExists = await users.findOne({ username: username });
-      if (emailExists)
+      const usernameExists = await users.findOne({ username: username });
+      if (usernameExists)
         return { error: 'User with this username already exists.' };
 
       // Hashing

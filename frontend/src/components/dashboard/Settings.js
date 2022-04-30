@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../utils/auth.context';
 import UserAPI from '../../utils/user.api';
-import { useNavigate } from 'react-router-dom';
 
 import Navbar from './Navbar';
 
 function Settings() {
-  const { user, authUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const [errorOnSubmit, setErrorOnSubmit] = useState({
     state: false,
@@ -23,6 +21,8 @@ function Settings() {
   const [currentPass, setCurrentPass] = useState(null);
   const [newPass, setNewPass] = useState(null);
   const [confirmNewPass, setConfirmNewPass] = useState(null);
+
+  const [successMessage, setSuccessMessage] = useState(false);
 
   function validatePass(target, type) {
     // Check for password that contains 8 characters, 1 number, 1 upper and 1 lower
@@ -103,8 +103,7 @@ function Settings() {
             if (error) {
               setErrorOnSubmit({ state: true, message: error });
             } else {
-              localStorage.removeItem('user');
-              authUser();
+              setSuccessMessage(true);
             }
           }
         );
@@ -141,6 +140,14 @@ function Settings() {
             modifications to your username or common name (name visible in ride
             edits), get in touch with Jake, Virginia or Hikari.
           </p>
+
+          {successMessage ? (
+            <div className="success">
+              Your password has been changed successfully.
+            </div>
+          ) : (
+            ''
+          )}
 
           {errorOnSubmit.state ? (
             <div className="error">

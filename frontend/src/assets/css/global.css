@@ -472,16 +472,6 @@
   .titles h3 {
     font-size: 24px; }
 
-.content .error {
-  background-color: #fa7575;
-  color: #f7f5fe;
-  width: calc(80% - 36px);
-  max-width: calc(600px - 36px);
-  padding: 8px 18px;
-  border-radius: 8px;
-  border: 1px solid #e93a3a;
-  margin-bottom: 14px; }
-
 h1.page-title-no-logo#request-ride {
   margin-bottom: 22px; }
 
@@ -885,6 +875,7 @@ h1.page-title-no-logo#request-ride {
         color: inherit;
         font-weight: 300;
         transition: all 0.25s ease;
+        font-size: 20px;
         width: 100%; }
       .backend .navbar .nav ul li a:hover,
       .backend .navbar .nav ul li p:hover {
@@ -1802,6 +1793,15 @@ h1.page-title-no-logo#request-ride {
     cursor: pointer;
     background-color: #e99fdc; }
 
+.settings-content .input-row select {
+  border: 1px solid #3b3b96;
+  background-color: #f7f5fe;
+  transition: box-shadow 0.25s ease;
+  flex: 65%;
+  padding: 6px 12px;
+  color: #3b3b96;
+  font-weight: 500; }
+
 /*  
 * Styling
 */
@@ -1996,3 +1996,23 @@ h1.page-title-no-logo#faq {
   width: 80%;
   max-width: 600px;
   margin-bottom: 28px; }
+
+.content .error {
+  background-color: #fa7575;
+  color: #f7f5fe;
+  width: calc(80% - 36px);
+  max-width: calc(600px - 36px);
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid #e93a3a;
+  margin-bottom: 14px; }
+
+.content .success {
+  background-color: #48bb61;
+  color: #f7f5fe;
+  width: calc(80% - 36px);
+  max-width: calc(600px - 36px);
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid #16852e;
+  margin-bottom: 14px; }

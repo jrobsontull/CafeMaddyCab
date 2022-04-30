@@ -32,10 +32,21 @@ export default class AuthController {
 
   static async apiRegisterUser(req, res, next) {
     try {
+      const username = req.body.username;
+      const password = req.body.password;
+      const commonName = req.body.commonName;
+      const role = req.body.role || null;
+
+      if (!username || !password || !commonName) {
+        res.status(400).json({ error: 'Incomplete request body.' });
+        return;
+      }
+
       const registerResponse = await AuthDAO.registerUser(
-        req.body.username,
-        req.body.password,
-        req.body.commonName
+        username,
+        password,
+        commonName,
+        role
       );
 
       // Error handling
@@ -45,7 +56,7 @@ export default class AuthController {
       } else {
         const user = registerResponse;
         user.token = generateToken(registerResponse._id);
-        res.status(201).json(user);
+        res.json(user);
       }
     } catch (e) {
       console.error('AuthController: Failed to register user. ' + e.message);
@@ -80,9 +91,9 @@ export default class AuthController {
       var { error } = nameResponse;
       if (error) {
         res.status(400).json({ error: error.message });
+      } else {
+        res.json(nameResponse);
       }
-
-      res.json(nameResponse);
     } catch (e) {
       console.error(
         'AuthController: Failed to retrieve username. ' + e.message

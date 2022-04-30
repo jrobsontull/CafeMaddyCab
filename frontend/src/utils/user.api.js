@@ -27,6 +27,22 @@ export default class UserAPI {
       return null;
     }
   }
+
+  static async registerUser(username, password, commonName, role, token) {
+    const url = 'api/v1/auth/register';
+    const body = {
+      username: username,
+      password: password,
+      commonName: commonName,
+      role: role,
+    };
+
+    const response = await postRequest(url, body, token);
+
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
 // General GET request
