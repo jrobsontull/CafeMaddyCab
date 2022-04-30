@@ -27,7 +27,9 @@ function FAQ() {
         <div className="info-box-title">
           <h3>Where can I take the ride?</h3>
         </div>
-        <div className="info-box">Anywhere within NYC.</div>
+        <div className="info-box">
+          Anywhere within the five boroughs of NYC.
+        </div>
 
         <div className="info-box-title">
           <h3>How do I get a ride?</h3>
@@ -60,7 +62,7 @@ function FAQ() {
           <h3>How soon can I get the ride after I submit a ride request?</h3>
         </div>
         <div className="info-box">
-          The ride codes will be sent via email every Monday Morning each week.
+          The ride codes will be sent via email every Monday mornings.
         </div>
 
         <Footer />
