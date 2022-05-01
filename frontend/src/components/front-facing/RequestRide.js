@@ -633,7 +633,7 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We will be taking ride submissions starting May 6th, 2022
+              We will be taking ride submissions starting May 6th, 2022.
             </div>
           )}
 
