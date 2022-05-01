@@ -15,8 +15,7 @@ export default class AuthController {
         req.body.password
       );
       // Error handling
-      var { error } = loginResponse;
-      if (error) {
+      if (loginResponse.hasOwnProperty("'error'")) {
         res.status(400).json({ error });
       } else {
         // Create and sign token
@@ -50,8 +49,7 @@ export default class AuthController {
       );
 
       // Error handling
-      var { error } = registerResponse;
-      if (error) {
+      if (registerResponse.hasOwnProperty("'error'")) {
         res.status(400).json({ error });
       } else {
         const user = registerResponse;
@@ -88,8 +86,7 @@ export default class AuthController {
 
       const nameResponse = await AuthDAO.getUsername(_id);
 
-      var { error } = nameResponse;
-      if (error) {
+      if (nameResponse.hasOwnProperty("'error'")) {
         res.status(400).json({ error: error.message });
       } else {
         res.json(nameResponse);
@@ -116,8 +113,7 @@ export default class AuthController {
           _id
         );
 
-        var { error } = passResponse;
-        if (error) {
+        if (passResponse.hasOwnProperty("'error'")) {
           res.status(400).json({ error: error });
         } else {
           res.json(passResponse);

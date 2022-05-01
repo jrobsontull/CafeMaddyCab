@@ -19,4 +19,20 @@ export default class ImageController {
       res.status(500).json({ error: e.message });
     }
   }
+
+  static async apiDeleteImage(req, res, next) {
+    try {
+      const fullPath = './uploads/' + req.params.folder + '/' + req.params.id;
+      const deleteResponse = await ImageDAO.deleteImage(fullPath);
+
+      if (deleteResponse.hasOwnProperty("'error'")) {
+        res.status(500).json({ error: error });
+      } else {
+        res.json(deleteResponse);
+      }
+    } catch (e) {
+      console.log('ImageController: ' + e.message);
+      res.status(500).json({ error: e.message });
+    }
+  }
 }

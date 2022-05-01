@@ -4,6 +4,9 @@ import validateHeader from '../middleware/validateHeader.js';
 
 const router = express.Router();
 
-router.route('/:folder/:id').get(ImageController.apiGetImageStream);
+router
+  .route('/:folder/:id')
+  .get(ImageController.apiGetImageStream)
+  .delete(ImageController.apiDeleteImage);
 
 export default router;

@@ -4,12 +4,13 @@ import AuthContext from '../../utils/auth.context';
 import PropTypes from 'prop-types';
 
 import Arrow from '../../assets/img/arrow_right.svg';
+import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
 function ViewEntry({ rideId, onClose }) {
   const { user } = useContext(AuthContext);
   const [rideDetails, setRideDetails] = useState({});
-  const [selfieUrl, setSelfieUrl] = useState('/');
-  const [photoIdUrl, setPhotoIdUrl] = useState('/');
+  const [selfie, setSelfie] = useState('/');
+  const [photoId, setPhotoId] = useState('/');
 
   let baseImgUrl = 'http://localhost:8080/api/v1/image/';
   if (process.env.NODE_ENV === 'production') {
@@ -117,8 +118,14 @@ function ViewEntry({ rideId, onClose }) {
       } else {
         // Everything was all good
         setRideDetails(response.ride);
-        setSelfieUrl(baseImgUrl + response.ride.selfie.path);
-        setPhotoIdUrl(baseImgUrl + response.ride.photoId.path);
+        setSelfie({
+          url: baseImgUrl + response.ride.selfie.path,
+          exists: response.ride.selfie.exists,
+        });
+        setPhotoId({
+          url: baseImgUrl + response.ride.photoId.path,
+          exists: response.ride.photoId.exists,
+        });
       }
     });
   }, [rideId, user.user.token, baseImgUrl]);
@@ -265,11 +272,27 @@ function ViewEntry({ rideId, onClose }) {
                 <div className="photo-container">
                   <div className="photo-box">
                     <div className="title">Selfie</div>
-                    <img src={selfieUrl} alt="loading..." />
+                    {selfie.exists ? (
+                      <img src={selfie.url} alt="loading..." />
+                    ) : (
+                      <img
+                        src={MissingPhoto}
+                        className="missing-photo"
+                        alt="N/A"
+                      />
+                    )}
                   </div>
                   <div className="photo-box" id="photo-id">
                     <div className="title">Photo ID</div>
-                    <img src={photoIdUrl} alt="loading..." />
+                    {photoId.exists ? (
+                      <img src={photoId.url} alt="loading..." />
+                    ) : (
+                      <img
+                        src={MissingPhoto}
+                        className="missing-photo"
+                        alt="N/A"
+                      />
+                    )}
                   </div>
                 </div>
               </li>

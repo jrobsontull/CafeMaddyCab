@@ -1189,6 +1189,9 @@ h1.page-title-no-logo#request-ride {
               max-width: 100px;
               max-height: 114px;
               padding: 6px; }
+            .react-container.view-entry .view-entry-window .entry-content-columns li.photo-comparison .photo-container .photo-box img.missing-photo {
+              width: 40px;
+              margin: auto; }
           .react-container.view-entry .view-entry-window .entry-content-columns li.photo-comparison .photo-container .photo-box#photo-id {
             border-left-width: 0; }
     .react-container.view-entry .view-entry-window .feedback-text {

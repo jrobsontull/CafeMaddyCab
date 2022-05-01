@@ -1,4 +1,5 @@
 import mongodb from 'mongodb';
+import ImageDAO from './imageDAO.js';
 
 const ObjectId = mongodb.ObjectId;
 
@@ -338,6 +339,8 @@ export default class RidesDAO {
 
       // Update the status of rides
       if (ridesToUpdate) {
+        let imagePaths = [];
+
         for (const ride of ridesToUpdate) {
           let newStatusText;
           const newStatus = parseInt(ride.stateToSet, 10);
@@ -360,10 +363,30 @@ export default class RidesDAO {
                 $set: {
                   status: { value: newStatus, text: newStatusText },
                   verified: true,
+                  'selfie.exists': false,
+                  'photoId.exists': false,
                 },
               }
             )
           );
+
+          const foundRide = await rides.findOne({ _id: ObjectId(ride._id) });
+          imagePaths.push('./uploads/' + foundRide.selfie.path);
+          imagePaths.push('./uploads/' + foundRide.photoId.path);
+        }
+
+        // Now delete images
+        const deleteResponse = await ImageDAO.bulkDelete(imagePaths);
+        // And log any errors
+        for (const response of deleteResponse) {
+          if (response[1].hasOwnProperty('error')) {
+            console.warn(
+              'RideDAO: Failed to delete image ' +
+                response[0] +
+                '. ' +
+                response[1].error
+            );
+          }
         }
       }
 
