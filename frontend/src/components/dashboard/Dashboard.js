@@ -329,8 +329,9 @@ function Dashboard() {
                           {ride.email}
                           <div className="tooltip">
                             <span className="tooltip-text">
-                              This email is a possible duplicate of a ride
-                              awaiting a code.
+                              This email is already used for another ride
+                              requesting a code. We only allow 2 rides a week so
+                              double check this!
                             </span>
                           </div>
                         </li>

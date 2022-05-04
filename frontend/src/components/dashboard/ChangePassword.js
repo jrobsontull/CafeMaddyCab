@@ -4,7 +4,7 @@ import UserAPI from '../../utils/user.api';
 
 import Navbar from './Navbar';
 
-function Settings() {
+function ChangePassword() {
   const { user } = useContext(AuthContext);
 
   const [errorOnSubmit, setErrorOnSubmit] = useState({
@@ -223,4 +223,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export default ChangePassword;

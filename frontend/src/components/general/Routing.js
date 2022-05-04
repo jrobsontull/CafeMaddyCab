@@ -31,7 +31,7 @@ const Login = lazy(() => import('../dashboard/Login'));
 const Dashboard = lazy(() => import('../dashboard/Dashboard'));
 const Feedback = lazy(() => import('../dashboard/Feedback'));
 const ApproveRides = lazy(() => import('../dashboard/ApproveRides'));
-const Settings = lazy(() => import('../dashboard/Settings'));
+const ChangePassword = lazy(() => import('../dashboard/ChangePassword'));
 const RegisterUser = lazy(() => import('../dashboard/RegisterUser'));
 
 // Press entries
@@ -170,11 +170,11 @@ function Routing() {
         }
       />
       <Route
-        path={'/dashboard/settings'}
+        path={'/dashboard/change-password'}
         element={
           <ProtectedRoute>
             <Suspense fallback={<Loading />}>
-              <Settings />
+              <ChangePassword />
             </Suspense>
           </ProtectedRoute>
         }

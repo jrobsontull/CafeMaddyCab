@@ -17,7 +17,7 @@ function Header() {
     },
     { name: 'View Feedback', path: '/dashboard/view-feedback' },
     { name: 'How to Use', path: '/dashboard/how-to-use' },
-    { name: 'Settings', path: '/dashboard/settings' },
+    { name: 'Change Password', path: '/dashboard/change-password' },
   ];
 
   const currentPageElem = pageArray.find((elem) => {

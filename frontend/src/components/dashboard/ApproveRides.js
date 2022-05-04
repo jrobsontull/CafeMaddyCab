@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../utils/auth.context';
 import RidesAPI from '../../utils/rides.api';
 
@@ -201,143 +201,152 @@ function ApproveRides() {
             </div>
 
             <div className="table-entries">
-              {rides
-                ? rides.map((ride, index) => (
-                    <ul key={ride._id}>
-                      <li id="col-1">
-                        {new Date(ride.dateRequested).toLocaleDateString(
-                          'en-us'
-                        )}
+              {rides === [] ? (
+                rides.map((ride, index) => (
+                  <ul key={ride._id}>
+                    <li id="col-1">
+                      {new Date(ride.dateRequested).toLocaleDateString('en-us')}
+                    </li>
+                    <li id="col-2">{ride.firstName}</li>
+                    <li id="col-3">{ride.lastName}</li>
+                    {ride.isDuplicate ? (
+                      <li id="col-4" className="is-duplicate">
+                        {ride.email}
+                        <div className="tooltip">
+                          <span className="tooltip-text">
+                            This email is already used for another ride
+                            requesting a code. We only allow 2 rides a week so
+                            double check this!
+                          </span>
+                        </div>
                       </li>
-                      <li id="col-2">{ride.firstName}</li>
-                      <li id="col-3">{ride.lastName}</li>
-                      {ride.isDuplicate ? (
-                        <li id="col-4" className="is-duplicate">
-                          {ride.email}
-                          <div className="tooltip">
-                            <span className="tooltip-text">
-                              This email is a possible duplicate of a ride
-                              awaiting a code.
-                            </span>
-                          </div>
-                        </li>
-                      ) : (
-                        <li id="col-4">{ride.email}</li>
-                      )}
-                      <li id="col-5">{ride.identity.text}</li>
-                      <li id="col-6">{ride.income ? 'yes' : 'no'}</li>
-                      <li id="col-7">{ride.purpose.text}</li>
-                      <li
-                        id="col-8"
-                        onClick={() =>
-                          openVerificationView(
-                            ride.firstName,
-                            ride.lastName,
-                            ride.selfie,
-                            ride.photoId
-                          )
-                        }
+                    ) : (
+                      <li id="col-4">{ride.email}</li>
+                    )}
+                    <li id="col-5">{ride.identity.text}</li>
+                    <li id="col-6">{ride.income ? 'yes' : 'no'}</li>
+                    <li id="col-7">{ride.purpose.text}</li>
+                    <li
+                      id="col-8"
+                      onClick={() =>
+                        openVerificationView(
+                          ride.firstName,
+                          ride.lastName,
+                          ride.selfie,
+                          ride.photoId
+                        )
+                      }
+                    >
+                      <div className="titles">
+                        <p>Selfie</p>
+                        <p id="last-child">Photo ID</p>
+                      </div>
+                      <div className="photo-boxes">
+                        <div className="photo-box">
+                          {ride.selfie.exists ? (
+                            <img
+                              src={baseImgUrl + ride.selfie.path}
+                              alt="Loading..."
+                            />
+                          ) : (
+                            <img
+                              src={MissingPhoto}
+                              alt="Missing"
+                              className="missing"
+                            />
+                          )}
+                        </div>
+                        <div className="photo-box" id="last-child">
+                          {ride.photoId.exists ? (
+                            <img
+                              src={baseImgUrl + ride.photoId.path}
+                              alt="Loading..."
+                            />
+                          ) : (
+                            <img
+                              src={MissingPhoto}
+                              alt="Missing"
+                              className="missing"
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                    <li id="col-9">
+                      <div
+                        className="approve-btns"
+                        onChange={(e) => setApproval(e.target)}
                       >
-                        <div className="titles">
-                          <p>Selfie</p>
-                          <p id="last-child">Photo ID</p>
-                        </div>
-                        <div className="photo-boxes">
-                          <div className="photo-box">
-                            {ride.selfie.exists ? (
-                              <img
-                                src={baseImgUrl + ride.selfie.path}
-                                alt="Loading..."
-                              />
-                            ) : (
-                              <img
-                                src={MissingPhoto}
-                                alt="Missing"
-                                className="missing"
-                              />
-                            )}
-                          </div>
-                          <div className="photo-box" id="last-child">
-                            {ride.photoId.exists ? (
-                              <img
-                                src={baseImgUrl + ride.photoId.path}
-                                alt="Loading..."
-                              />
-                            ) : (
-                              <img
-                                src={MissingPhoto}
-                                alt="Missing"
-                                className="missing"
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                      <li id="col-9">
-                        <div
-                          className="approve-btns"
-                          onChange={(e) => setApproval(e.target)}
-                        >
-                          <input
-                            type="radio"
-                            id={(index + 1) * 3 - 2}
-                            value="3"
-                            name={ride._id}
-                            className="accept"
-                            defaultChecked={
-                              approvalStates[ride._id]
-                                ? approvalStates[ride._id].stateToSet === '3'
-                                : false
-                            }
-                          ></input>
-                          <label htmlFor={(index + 1) * 3 - 2}></label>
-                          <input
-                            type="radio"
-                            id={(index + 1) * 3 - 1}
-                            value="4"
-                            name={ride._id}
-                            className="deny"
-                            defaultChecked={
-                              approvalStates[ride._id]
-                                ? approvalStates[ride._id].stateToSet === '4'
-                                : false
-                            }
-                          ></input>
-                          <label htmlFor={(index + 1) * 3 - 1}></label>
-                          <input
-                            type="radio"
-                            id={(index + 1) * 3}
-                            value="5"
-                            name={ride._id}
-                            className="unsure"
-                            defaultChecked={
-                              approvalStates[ride._id]
-                                ? approvalStates[ride._id].stateToSet === '5'
-                                : false
-                            }
-                          ></input>
-                          <label htmlFor={(index + 1) * 3}></label>
-                        </div>
-                        <div className="notes">
-                          <p>Notes:</p>
-                          <textarea
-                            name={ride._id}
-                            placeholder="
+                        <input
+                          type="radio"
+                          id={(index + 1) * 3 - 2}
+                          value="3"
+                          name={ride._id}
+                          className="accept"
+                          defaultChecked={
+                            approvalStates[ride._id]
+                              ? approvalStates[ride._id].stateToSet === '3'
+                              : false
+                          }
+                        ></input>
+                        <label htmlFor={(index + 1) * 3 - 2}></label>
+                        <input
+                          type="radio"
+                          id={(index + 1) * 3 - 1}
+                          value="4"
+                          name={ride._id}
+                          className="deny"
+                          defaultChecked={
+                            approvalStates[ride._id]
+                              ? approvalStates[ride._id].stateToSet === '4'
+                              : false
+                          }
+                        ></input>
+                        <label htmlFor={(index + 1) * 3 - 1}></label>
+                        <input
+                          type="radio"
+                          id={(index + 1) * 3}
+                          value="5"
+                          name={ride._id}
+                          className="unsure"
+                          defaultChecked={
+                            approvalStates[ride._id]
+                              ? approvalStates[ride._id].stateToSet === '5'
+                              : false
+                          }
+                        ></input>
+                        <label htmlFor={(index + 1) * 3}></label>
+                      </div>
+                      <div className="notes">
+                        <p>Notes:</p>
+                        <textarea
+                          name={ride._id}
+                          placeholder="
                           Write notes here..."
-                            defaultValue={
-                              notes[ride._id]
-                                ? notes[ride._id].notes
-                                : ride.notes
-                                ? ride.notes
-                                : ''
-                            }
-                            onChange={(e) => updateNotes(e.target)}
-                          ></textarea>
-                        </div>
-                      </li>
-                    </ul>
-                  ))
-                : ''}
+                          defaultValue={
+                            notes[ride._id]
+                              ? notes[ride._id].notes
+                              : ride.notes
+                              ? ride.notes
+                              : ''
+                          }
+                          onChange={(e) => updateNotes(e.target)}
+                        ></textarea>
+                      </div>
+                    </li>
+                  </ul>
+                ))
+              ) : (
+                <div className="no-rides-message">
+                  <span>You have no rides to approve.</span>
+                  <p>
+                    To begin approving rides, go to the{' '}
+                    <Link to={'/dashboard'}>dashboard</Link> and click the
+                    Approve Rides button. You can then specify the number of
+                    rides that you wish to approve.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="table-footer">

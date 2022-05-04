@@ -329,6 +329,29 @@
           }
         }
       }
+
+      .no-rides-message {
+        padding: 50px 12px;
+        text-align: center;
+
+        span {
+          font-weight: 500;
+        }
+
+        p {
+          margin-top: 22px;
+
+          a {
+            color: $dark-pink;
+            font-weight: 500;
+            transition: color 0.25s ease;
+          }
+
+          a:hover {
+            color: $dark-pink-hover;
+          }
+        }
+      }
     }
     .table-footer {
       .nav {
