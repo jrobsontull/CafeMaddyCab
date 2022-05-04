@@ -89,6 +89,14 @@ export default class RidesController {
         exists: true,
       };
 
+      // Check for duplicate
+      let isDuplicate = false;
+      if (await RidesDAO.checkForDuplicate(email)) {
+        isDuplicate = true;
+      }
+
+      console.log(isDuplicate);
+
       const ridesResponse = await RidesDAO.requestRide(
         shortId,
         dateRequested,
@@ -99,7 +107,8 @@ export default class RidesController {
         income,
         purpose,
         selfie,
-        photoId
+        photoId,
+        isDuplicate
       );
 
       res.json(ridesResponse);

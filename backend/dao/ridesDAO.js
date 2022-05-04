@@ -38,10 +38,11 @@ export default class RidesDAO {
     income,
     purpose,
     selfie,
-    photoId
+    photoId,
+    isDuplicate
   ) {
     try {
-      const rideDoc = {
+      let rideDoc = {
         shortId: shortId,
         dateRequested: dateRequested,
         firstName: firstName,
@@ -57,6 +58,7 @@ export default class RidesDAO {
         notes: '',
         coupon: null,
         status: { value: 1, text: 'New' },
+        isDuplicate: isDuplicate,
       };
 
       return await rides.insertOne(rideDoc);
@@ -525,6 +527,43 @@ export default class RidesDAO {
     } catch (e) {
       console.error('ridesDAO: Failed to get rides for downloading. ' + e);
       return { error: e };
+    }
+  }
+
+  // Check for possible ride duplicates before saving new ride to DB
+  static async checkForDuplicate(email) {
+    try {
+      const query = { email: email };
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.error(
+          'ridesDAO: Unable to issue find command with query ' +
+            query +
+            '\n' +
+            e.message
+        );
+        return false;
+      }
+
+      const foundRides = await cursor.toArray();
+      if (foundRides.length > 0) {
+        // Set found rides to duplicate status
+        for (const ride of foundRides) {
+          await rides.findOneAndUpdate(
+            { _id: ObjectId(ride._id) },
+            { $set: { isDuplicate: true } }
+          );
+        }
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      console.error('ridesDAO: Failed to find duplicates. ' + e);
+      return false;
     }
   }
 }

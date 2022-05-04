@@ -2016,7 +2016,7 @@ h1.page-title-no-logo#faq {
   border: 1px solid #e93a3a;
   margin-bottom: 14px; }
 
-.content .success {
+.content .success-msg {
   background-color: #48bb61;
   color: #f7f5fe;
   width: calc(80% - 36px);

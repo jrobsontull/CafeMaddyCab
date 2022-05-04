@@ -301,15 +301,15 @@ function RequestRide() {
     window.scrollTo(0, 0);
 
     // Open and close the form
-    setFormOpen(false);
+    setFormOpen(true);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
     /* COMMENTED OUT BEFORE LAUNCH
-    var today = new Date();
+    const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
-    var daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
-    var day = daylightSavingsDay.getDay();
+    const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
+    const day = daylightSavingsDay.getDay();
     // Form is only open Monday (1), Tuesday (2) and Wednesday (3)
     if (day > 0 && day < 4) {
       setFormOpen(true);

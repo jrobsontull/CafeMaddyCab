@@ -152,7 +152,7 @@ function RegisterUser() {
           </p>
 
           {successMessage ? (
-            <div className="success">User account successfully made.</div>
+            <div className="success-msg">User account successfully made.</div>
           ) : (
             ''
           )}
