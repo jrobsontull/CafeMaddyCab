@@ -180,6 +180,49 @@
             width: 10%;
           }
 
+          li#col-5.is-duplicate {
+            color: $error;
+            font-weight: 500;
+
+            .tooltip {
+              position: relative;
+              .tooltip-text {
+                visibility: hidden;
+                position: absolute;
+                width: 150px;
+                word-break: keep-all;
+                background-color: $light-form;
+                border: 1px solid $dark-blue;
+                color: $dark-blue;
+                padding: 8px;
+                border-radius: $border-radius;
+                font-weight: 400;
+                z-index: 2;
+                left: 50%;
+                margin-left: -83px;
+                top: 12px;
+                font-size: 16px;
+              }
+
+              .tooltip-text::after {
+                content: ' ';
+                position: absolute;
+                bottom: 100%; /* At the top of the tooltip */
+                left: 50%;
+                margin-left: -10px;
+                border-width: 10px;
+                border-style: solid;
+                border-color: transparent transparent $dark-blue transparent;
+              }
+            }
+          }
+
+          li#col-5.is-duplicate:hover {
+            .tooltip .tooltip-text {
+              visibility: visible;
+            }
+          }
+
           li#col-6 {
             width: 10%;
             word-break: normal;

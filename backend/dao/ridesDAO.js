@@ -550,11 +550,18 @@ export default class RidesDAO {
 
       const foundRides = await cursor.toArray();
       if (foundRides.length > 0) {
-        // Set found rides to duplicate status
-        for (const ride of foundRides) {
-          await rides.findOneAndUpdate(
-            { _id: ObjectId(ride._id) },
-            { $set: { isDuplicate: true } }
+        try {
+          // Set found rides to duplicate status
+          for (const ride of foundRides) {
+            await rides.findOneAndUpdate(
+              { _id: ObjectId(ride._id) },
+              { $set: { isDuplicate: true } }
+            );
+          }
+        } catch (e) {
+          console.error(
+            'ridesDAO: Failed to update found duplicates with isDuplicate = true. ' +
+              e
           );
         }
         return true;

@@ -95,8 +95,6 @@ export default class RidesController {
         isDuplicate = true;
       }
 
-      console.log(isDuplicate);
-
       const ridesResponse = await RidesDAO.requestRide(
         shortId,
         dateRequested,

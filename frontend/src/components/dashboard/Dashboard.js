@@ -39,6 +39,9 @@ function Dashboard() {
     done: 0,
   });
 
+  // For tracking search to refresh to when close windows
+  const [currentSearch, setCurrentSearch] = useState('');
+
   const [isAdmin, setIsAdmin] = useState(false);
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
@@ -133,22 +136,26 @@ function Dashboard() {
     setOpenDoneWindow(false);
   }
 
-  function searchRides(status = null) {
-    if (status) {
-      RidesAPI.getRides('status=' + status, user.user.token).then(
-        (response) => {
-          setRides(response.rides);
-          setRidesData({
-            totalRides: response.totalResults,
-            currentPage: 0,
-            totalPages: calculateTotalPageNums(
-              entiresPerPage,
-              response.totalResults
-            ),
-          });
-        }
-      );
+  function searchRides(params) {
+    if (params) {
+      // Update current search
+      setCurrentSearch(params);
+      // Perform search
+      RidesAPI.getRides(params, user.user.token).then((response) => {
+        setRides(response.rides);
+        setRidesData({
+          totalRides: response.totalResults,
+          currentPage: 0,
+          totalPages: calculateTotalPageNums(
+            entiresPerPage,
+            response.totalResults
+          ),
+        });
+      });
     } else {
+      // Update current search
+      setCurrentSearch('');
+      // Perform search
       RidesAPI.getRides(null, user.user.token).then((response) => {
         setRides(response.rides);
         setRidesData({
@@ -224,23 +231,26 @@ function Dashboard() {
                 <li onClick={() => searchRides()}>
                   All ride requests ({statusCount.all})
                 </li>
-                <li onClick={() => searchRides('1')}>
+                <li onClick={() => searchRides('status=1')}>
                   New requests ({statusCount.new})
                 </li>
-                <li onClick={() => searchRides('2')}>
+                <li onClick={() => searchRides('status=2')}>
                   In progress requests ({statusCount.inProgress})
                 </li>
-                <li onClick={() => searchRides('3')}>
+                <li onClick={() => searchRides('status=3')}>
                   Approved ({statusCount.approved})
                 </li>
-                <li onClick={() => searchRides('4')}>
+                <li onClick={() => searchRides('status=4')}>
                   Rejected ({statusCount.rejected})
                 </li>
-                <li onClick={() => searchRides('5')}>
+                <li onClick={() => searchRides('status=5')}>
                   Unsure ({statusCount.unsure})
                 </li>
-                <li onClick={() => searchRides('6')}>
+                <li onClick={() => searchRides('status=6')}>
                   Done ({statusCount.done})
+                </li>
+                <li onClick={() => searchRides('isDuplicate=true')}>
+                  Duplicates ({statusCount.duplicates})
                 </li>
               </ul>
             </div>
@@ -314,7 +324,19 @@ function Dashboard() {
                       <li id="col-2">{ride.shortId}</li>
                       <li id="col-3">{ride.firstName}</li>
                       <li id="col-4">{ride.lastName}</li>
-                      <li id="col-5">{ride.email}</li>
+                      {ride.isDuplicate ? (
+                        <li id="col-5" className="is-duplicate">
+                          {ride.email}
+                          <div className="tooltip">
+                            <span className="tooltip-text">
+                              This email is a possible duplicate of a ride
+                              awaiting a code.
+                            </span>
+                          </div>
+                        </li>
+                      ) : (
+                        <li id="col-5">{ride.email}</li>
+                      )}
                       <li id="col-6">{ride.identity.text}</li>
                       <li id="col-7">{ride.income ? 'yes' : 'no'}</li>
                       <li id="col-8">{ride.purpose.text}</li>

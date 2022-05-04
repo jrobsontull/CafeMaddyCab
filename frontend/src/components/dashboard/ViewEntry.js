@@ -146,6 +146,15 @@ function ViewEntry({ rideId, onClose }) {
           </div>
         </div>
         <div className="entry-content">
+          {rideDetails.isDuplicate ? (
+            <div className="error">
+              This ride is a possible duplicate. Use the search function to find
+              the duplicate or click the duplicates filter in the left-hand
+              column of the dashboard.
+            </div>
+          ) : (
+            ''
+          )}
           <div className="entry-content-columns">
             <ul id="first-child">
               <li>

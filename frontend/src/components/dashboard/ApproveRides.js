@@ -211,7 +211,19 @@ function ApproveRides() {
                       </li>
                       <li id="col-2">{ride.firstName}</li>
                       <li id="col-3">{ride.lastName}</li>
-                      <li id="col-4">{ride.email}</li>
+                      {ride.isDuplicate ? (
+                        <li id="col-4" className="is-duplicate">
+                          {ride.email}
+                          <div className="tooltip">
+                            <span className="tooltip-text">
+                              This email is a possible duplicate of a ride
+                              awaiting a code.
+                            </span>
+                          </div>
+                        </li>
+                      ) : (
+                        <li id="col-4">{ride.email}</li>
+                      )}
                       <li id="col-5">{ride.identity.text}</li>
                       <li id="col-6">{ride.income ? 'yes' : 'no'}</li>
                       <li id="col-7">{ride.purpose.text}</li>

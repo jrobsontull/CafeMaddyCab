@@ -1003,6 +1003,39 @@ h1.page-title-no-logo#request-ride {
           width: 7%; }
         .dashboard .table-content .table-entries .entry ul li#col-5 {
           width: 10%; }
+        .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate {
+          color: #e93a3a;
+          font-weight: 500; }
+          .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip {
+            position: relative; }
+            .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip .tooltip-text {
+              visibility: hidden;
+              position: absolute;
+              width: 150px;
+              word-break: keep-all;
+              background-color: #fefff3;
+              border: 1px solid #3b3b96;
+              color: #3b3b96;
+              padding: 8px;
+              border-radius: 8px;
+              font-weight: 400;
+              z-index: 2;
+              left: 50%;
+              margin-left: -83px;
+              top: 12px;
+              font-size: 16px; }
+            .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip .tooltip-text::after {
+              content: ' ';
+              position: absolute;
+              bottom: 100%;
+              /* At the top of the tooltip */
+              left: 50%;
+              margin-left: -10px;
+              border-width: 10px;
+              border-style: solid;
+              border-color: transparent transparent #3b3b96 transparent; }
+        .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate:hover .tooltip .tooltip-text {
+          visibility: visible; }
         .dashboard .table-content .table-entries .entry ul li#col-6 {
           width: 10%;
           word-break: normal; }
@@ -1105,6 +1138,10 @@ h1.page-title-no-logo#request-ride {
       flex-direction: column;
       align-items: center;
       justify-content: space-between; }
+      .react-container.view-entry .view-entry-window .entry-content .error {
+        width: calc(91.5% - 8px);
+        max-width: calc(91.5% - 8px);
+        margin: 12px 0 0 0; }
       .react-container.view-entry .view-entry-window .entry-content textarea.notes {
         background-color: #f7f5fe;
         width: 91.5%;
@@ -1586,6 +1623,41 @@ h1.page-title-no-logo#request-ride {
       width: 8%; }
     .dashboard.approve-rides .table-content .table-entries ul li#col-4 {
       width: 10%; }
+    .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate {
+      color: #e93a3a;
+      font-weight: 500; }
+      .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip {
+        position: relative; }
+        .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip .tooltip-text {
+          visibility: hidden;
+          position: absolute;
+          width: 150px;
+          word-break: keep-all;
+          background-color: #f7f5fe;
+          border: 1px solid #3b3b96;
+          color: #3b3b96;
+          padding: 8px;
+          border-radius: 8px;
+          font-weight: 400;
+          z-index: 2;
+          left: 50%;
+          margin-left: -83px;
+          top: 12px;
+          font-size: 16px; }
+        .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip .tooltip-text::after {
+          content: ' ';
+          position: absolute;
+          bottom: 100%;
+          /* At the top of the tooltip */
+          left: 50%;
+          margin-left: -10px;
+          border-width: 10px;
+          border-style: solid;
+          border-color: transparent transparent #3b3b96 transparent; }
+    .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate:hover {
+      cursor: pointer; }
+      .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate:hover .tooltip .tooltip-text {
+        visibility: visible; }
     .dashboard.approve-rides .table-content .table-entries ul li#col-5 {
       width: 10%;
       word-break: normal; }
