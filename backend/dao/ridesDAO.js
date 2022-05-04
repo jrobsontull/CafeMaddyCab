@@ -38,10 +38,11 @@ export default class RidesDAO {
     income,
     purpose,
     selfie,
-    photoId
+    photoId,
+    isDuplicate
   ) {
     try {
-      const rideDoc = {
+      let rideDoc = {
         shortId: shortId,
         dateRequested: dateRequested,
         firstName: firstName,
@@ -57,6 +58,7 @@ export default class RidesDAO {
         notes: '',
         coupon: null,
         status: { value: 1, text: 'New' },
+        isDuplicate: isDuplicate,
       };
 
       return await rides.insertOne(rideDoc);
@@ -81,6 +83,19 @@ export default class RidesDAO {
         query = {
           'status.value': filters['status'],
           'approver.id': filters['approverId'],
+        };
+      }
+
+      if ('isDuplicate' in filters) {
+        query = {
+          isDuplicate: filters['isDuplicate'] === 'true',
+          $or: [
+            { 'status.value': 1 },
+            { 'status.value': 2 },
+            { 'status.value': 3 },
+            { 'status.value': 4 },
+            { 'status.value': 5 },
+          ],
         };
       }
     }
@@ -180,6 +195,18 @@ export default class RidesDAO {
 
         count = await rides.count({ 'status.value': 6 });
         result.done = count;
+
+        count = await rides.count({
+          isDuplicate: true,
+          $or: [
+            { 'status.value': 1 },
+            { 'status.value': 2 },
+            { 'status.value': 3 },
+            { 'status.value': 4 },
+            { 'status.value': 5 },
+          ],
+        });
+        result.duplicates = count;
       } catch (e) {
         console.error('ridesDAO: Unable to issue count in getStats. ' + e);
         return { error: e };
@@ -525,6 +552,59 @@ export default class RidesDAO {
     } catch (e) {
       console.error('ridesDAO: Failed to get rides for downloading. ' + e);
       return { error: e };
+    }
+  }
+
+  // Check for possible ride duplicates before saving new ride to DB
+  static async checkForDuplicate(email) {
+    try {
+      const query = {
+        email: email,
+        $or: [
+          { 'status.value': 1 },
+          { 'status.value': 2 },
+          { 'status.value': 3 },
+          { 'status.value': 4 },
+          { 'status.value': 5 },
+        ],
+      };
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.error(
+          'ridesDAO: Unable to issue find command with query ' +
+            query +
+            '\n' +
+            e.message
+        );
+        return false;
+      }
+
+      const foundRides = await cursor.toArray();
+      if (foundRides.length > 0) {
+        try {
+          // Set found rides to duplicate status
+          for (const ride of foundRides) {
+            await rides.findOneAndUpdate(
+              { _id: ObjectId(ride._id) },
+              { $set: { isDuplicate: true } }
+            );
+          }
+        } catch (e) {
+          console.error(
+            'ridesDAO: Failed to update found duplicates with isDuplicate = true. ' +
+              e
+          );
+        }
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      console.error('ridesDAO: Failed to find duplicates. ' + e);
+      return false;
     }
   }
 }

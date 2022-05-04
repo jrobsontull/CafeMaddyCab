@@ -142,7 +142,7 @@ function Settings() {
           </p>
 
           {successMessage ? (
-            <div className="success">
+            <div className="success-msg">
               Your password has been changed successfully.
             </div>
           ) : (
