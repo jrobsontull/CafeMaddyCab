@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -35,17 +37,26 @@ function Faq() {
           <h3>How do I get a ride?</h3>
         </div>
         <div className="info-box">
-          For instructions and details, visit the &quot;How it Works&quot; page.
-          To fill out the Ride Request & Reimbursement Form, visit the
-          &quot;Request a Ride&quot; page.
+          For instructions and details, visit the{' '}
+          <Link to={'/how-to-ride'}>&quot;How it Works&quot;</Link> page. To
+          fill out the Ride Request & Reimbursement Form, visit the{' '}
+          <Link to={'/request-ride'}>&quot;Request a Ride&quot;</Link> page.
         </div>
 
         <div className="info-box-title">
           <h3>How do I donate?</h3>
         </div>
         <div className="info-box">
-          Click on any &quot;Donate&quot; button throughout the website. You
-          will be led to the GoFundMe page where you can make your contribution!
+          Click{' '}
+          <a
+            href="https://www.gofundme.com/f/cafemaddycab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>{' '}
+          or any &quot;Donate&quot; button throughout the website. You will be
+          led to the GoFundMe page where you can make your contribution!
         </div>
 
         <div className="info-box-title">
@@ -63,6 +74,24 @@ function Faq() {
         </div>
         <div className="info-box">
           The ride codes will be sent via email every Monday mornings.
+        </div>
+
+        <div className="info-box-title">
+          <h3>How will I know if my ride request gets accepted?</h3>
+        </div>
+        <div className="info-box">
+          If your ride request gets accepted, you will receive an email with the
+          ride code on the following Monday morning.
+        </div>
+
+        <div className="info-box-title">
+          <h3>Why wasn&apos;t my ride request accepted?</h3>
+        </div>
+        <div className="info-box">
+          After review, your ride request did not meet the eligibility
+          requirements. Please refer to the{' '}
+          <Link to={'/how-to-ride'}>&quot;How it Works&quot;</Link> section of
+          our website for more details.
         </div>
 
         <Footer />
