@@ -487,11 +487,11 @@ h1.page-title-no-logo#request-ride {
   .request-form h3 {
     font-size: 20px;
     margin: 14px 0 12px 0; }
-    .request-form h3 a {
+    .request-form h3 a#terms-link {
       color: #dc87cb;
       font-weight: 500;
       transition: color 0.25s ease; }
-    .request-form h3 a:hover {
+    .request-form h3 a#terms-link:hover {
       color: #e99fdc; }
   .request-form input {
     background-color: #fefff3;

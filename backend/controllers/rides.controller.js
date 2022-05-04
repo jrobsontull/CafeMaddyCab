@@ -131,6 +131,9 @@ export default class RidesController {
       if (req.query.approverId) {
         filters.approverId = req.query.approverId;
       }
+      if (req.query.isDuplicate) {
+        filters.isDuplicate = req.query.isDuplicate;
+      }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
         filters,

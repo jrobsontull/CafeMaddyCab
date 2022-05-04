@@ -85,6 +85,19 @@ export default class RidesDAO {
           'approver.id': filters['approverId'],
         };
       }
+
+      if ('isDuplicate' in filters) {
+        query = {
+          isDuplicate: filters['isDuplicate'] === 'true',
+          $or: [
+            { 'status.value': 1 },
+            { 'status.value': 2 },
+            { 'status.value': 3 },
+            { 'status.value': 4 },
+            { 'status.value': 5 },
+          ],
+        };
+      }
     }
 
     let cursor;
@@ -182,6 +195,18 @@ export default class RidesDAO {
 
         count = await rides.count({ 'status.value': 6 });
         result.done = count;
+
+        count = await rides.count({
+          isDuplicate: true,
+          $or: [
+            { 'status.value': 1 },
+            { 'status.value': 2 },
+            { 'status.value': 3 },
+            { 'status.value': 4 },
+            { 'status.value': 5 },
+          ],
+        });
+        result.duplicates = count;
       } catch (e) {
         console.error('ridesDAO: Unable to issue count in getStats. ' + e);
         return { error: e };
@@ -533,7 +558,16 @@ export default class RidesDAO {
   // Check for possible ride duplicates before saving new ride to DB
   static async checkForDuplicate(email) {
     try {
-      const query = { email: email };
+      const query = {
+        email: email,
+        $or: [
+          { 'status.value': 1 },
+          { 'status.value': 2 },
+          { 'status.value': 3 },
+          { 'status.value': 4 },
+          { 'status.value': 5 },
+        ],
+      };
       let cursor;
 
       try {

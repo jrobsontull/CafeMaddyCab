@@ -246,11 +246,11 @@ function Dashboard() {
                 <li onClick={() => searchRides('status=5')}>
                   Unsure ({statusCount.unsure})
                 </li>
+                <li onClick={() => searchRides('isDuplicate=true')}>
+                  Incomplete Duplicates ({statusCount.duplicates})
+                </li>
                 <li onClick={() => searchRides('status=6')}>
                   Done ({statusCount.done})
-                </li>
-                <li onClick={() => searchRides('isDuplicate=true')}>
-                  Duplicates ({statusCount.duplicates})
                 </li>
               </ul>
             </div>

@@ -589,7 +589,11 @@ function RequestRide() {
 
                 <h3>
                   Do you agree to our{' '}
-                  <Link to={'/terms-and-conditions'} target="_blank">
+                  <Link
+                    to={'/terms-and-conditions'}
+                    target="_blank"
+                    id="terms-link"
+                  >
                     Terms and Conditions
                   </Link>
                   ?

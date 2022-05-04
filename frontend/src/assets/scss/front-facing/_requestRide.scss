@@ -30,13 +30,13 @@ h1.page-title-no-logo#request-ride {
     font-size: 20px;
     margin: 14px 0 12px 0;
 
-    a {
+    a#terms-link {
       color: $dark-pink;
       font-weight: 500;
       transition: color 0.25s ease;
     }
 
-    a:hover {
+    a#terms-link:hover {
       color: $dark-pink-hover;
     }
   }
