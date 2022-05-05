@@ -21,46 +21,33 @@ function PressEntry() {
 
         <div className="press-entry">
           <h2 className="title">
-            Brooklyn woman pays for cab rides for Asian New Yorkers
+            快看世界／害怕坐紐約地鐵？亞裔搭出租車 她幫您報銷
           </h2>
           <img src={EntryPhoto} alt="Entry Header" className="entry-img" />
           <div className="entry-details">
-            <p className="author">By Arthur Chi&apos;en</p>
-            <p className="date">04/05/2021</p>
+            <p className="author">By 何卓賢</p>
+            <p className="date">04/14/2021</p>
           </div>
           <div className="press-text">
             <p>
-              On social media, Park&apos;s influencer account goes by
-              @cafemaddy, featuring a collection of stylish food-related posts.
-              Realizing she can opt for a cab while others don&apos;t have the
-              option because of their wallets, she started reimbursing people
-              for their cab rides with her own money.
+              在紐約地鐵,亞裔遭無故攻擊事件頻發,很多人不再敢坐地鐵,卻支付不起出租車費用。家住布魯克林的28歲亞裔Madeline
+              Park決定幫忙
             </p>
             <p>
-              When some people learned of her generosity, they donated money as
-              well. After just two days, she had to stop accepting donations.
+              一開始,她個人投入2000美金,鼓勵害怕坐地鐵但必須要出行的亞裔先搭出租車,後問她報銷車費。沒想到她的點子一夜間獲讚無數,她的Venmo賬號上不斷有人捐款,支持她的行動。
             </p>
             <p>
-              Park has now set up a separate Instagram account to organize the
-              effort: @cafemaddycab. Each night, after she and a couple of
-              friends finish their day jobs, they go through submissions that
-              come in on a Google form and reimburse rides for Asian women,
-              Asian seniors, and Asian members of the LGBTQ community.
-            </p>
-            <p>
-              Gratitude has been rolling in. From seniors who used @cafemaddycab
-              to get to a vaccine or doctor&apos;s appointment. From students
-              and volunteers finding an ally for their safety at a scary time.
+              現在,波士頓、舊金山和洛杉磯等城市也有志願者成立了類似的Instagram賬號,幫助有需要的亞裔。
             </p>
 
             <div className="read-more">
               Finish reading on{' '}
               <a
-                href="https://www.fox5ny.com/news/brooklyn-woman-pays-for-cab-rides-for-asian-new-yorkers"
+                href="https://www.worldjournal.com/wj/story/121469/5389175"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                FOX5 NY...
+                世界日報...
               </a>
             </div>
           </div>

@@ -21,39 +21,51 @@ function PressEntry() {
 
         <div className="press-entry">
           <h2 className="title">
-            How Crowdfunded Cabs Became A Beacon Of Hope In The Fight Against
-            AAPI Violence
+            &apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get Asian
+            Americans Home Safe
           </h2>
           <img src={EntryPhoto} alt="Entry Header" className="entry-img" />
           <div className="entry-details">
-            <p className="author">By Rose Minutaglio</p>
-            <p className="date">04/05/2021</p>
+            <p className="author">By Chloee Weiner</p>
+            <p className="date">04/09/2021</p>
           </div>
           <div className="press-text">
             <p>
-              After her grandmother passed away in January, Ivana Xie has been
-              keeping her 96-year-old grandfather company on weekends. She picks
-              up dim sum, and they spend hours playing very competitive games of
-              mahjong. Xie used to feel full—both in heart and stomach—after
-              leaving his apartment in the heart of New York City&apos;s
-              Chinatown. Now she just feels anxious.
+              Lately, Candy has been running to the bus stop on her way home
+              from work. The 26 year-old dance instructor said it&apos;s usually
+              dark outside by the time she finishes her shift at a studio in San
+              Francisco — and she&apos;s started to dread commuting in the
+              &quot;pitch black.&quot;
             </p>
             <p>
-              Two months ago, an Asian man was stabbed by a stranger two blocks
-              from where Xie&apos;s grandfather has lived since coming to the
-              U.S. from China 30 years ago.&quot;I hate that I&apos;m
-              scared,&quot; Xie, 21, tells ELLE.com. &quot;But it&apos;s true,
-              I&apos;m terrified.&quot;
+              Lately, Candy has been running to the bus stop on her way home
+              from work. The 26 year-old dance instructor said it&apos;s usually
+              dark outside by the time she finishes her shift at a studio in San
+              Francisco — and she&apos;s started to dread commuting in the
+              &quot;pitch black.&quot;
             </p>
+            <p>
+              &quot;I usually call my best friend who lives in New York,&quot;
+              she said. &quot;I have him on the phone with me while I run to the
+              bus stop and shiver, nervously waiting for the bus to come.&quot;
+            </p>
+            <p>
+              Candy, who&apos;s Filipina American and asked that NPR not use her
+              full name out of concern that she could be targeted, said the
+              recent wave of anti-Asian violence around the Bay Area and
+              elsewhere has made her fear for her own safety, especially when
+              walking alone in the city.
+            </p>
+            <p> Now, a new effort is helping to get her home safe.</p>
 
             <div className="read-more">
               Finish reading on{' '}
               <a
-                href="https://www.elle.com/culture/career-politics/a36289304/crowdfund-cabs-fight-against-aapi-violence/"
+                href="https://www.npr.org/2021/04/09/985698836/a-sigh-of-relief-crowdfunded-cab-rides-aim-to-get-asian-americans-home-safe"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Elle...
+                NPR...
               </a>
             </div>
           </div>

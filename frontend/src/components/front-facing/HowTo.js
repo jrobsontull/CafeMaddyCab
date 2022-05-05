@@ -31,9 +31,9 @@ function HowToPage() {
           <p>
             Thank you for choosing to stay safe. Cafe Maddy Cab is providing cab
             rides for eligible recipients. Uber codes will be emailed every{' '}
-            <span>Monday at 8AM</span> for submissions made{' '}
-            <span>Monday to Wednesday</span> each week, until codes are
-            depleted.
+            <span>Monday at 8AM</span> for submissions made between{' '}
+            <span>Monday and Wednesday of each prior week</span>, until codes
+            are depleted.
           </p>
           <p>
             Uber has generously donated ride codes to help protect the AAPI
@@ -54,7 +54,7 @@ function HowToPage() {
               <img src={HowTo1} alt="how-to-1" />
               <h3>Eligibility</h3>
               <p>
-                Asian female, LGBTQ, elderly pensioner in need of financial aid
+                Asian female, LGBTQ+, elderly pensioner in need of financial aid
                 for cab rides
               </p>
             </li>
@@ -68,7 +68,7 @@ function HowToPage() {
               <h3>Verification</h3>
               <p>
                 Cafe Maddy Cab volunteer reviews and verifies eligibility, then
-                sends Uber / Lyft code weekly
+                sends Uber code weekly
               </p>
             </li>
             <li id="responsive-no-pad">
@@ -99,7 +99,7 @@ function HowToPage() {
               entries for each ride request.
             </li>
             <li>
-              Each code is value of $25. The remaining balance does not roll
+              Each code has a value of $25. The remaining balance does not roll
               over.
             </li>
             <li>

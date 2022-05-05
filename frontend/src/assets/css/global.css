@@ -1969,6 +1969,12 @@ body,
     .info-box ol li:last-child {
       margin-bottom: 0; }
 
+.faq div.info-box a {
+  color: #3b3b96; }
+
+.faq div.info-box a:hover {
+  color: #5c5cb3; }
+
 h2.info-box-heading {
   width: 80%;
   max-width: 600px;

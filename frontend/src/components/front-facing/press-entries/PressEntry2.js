@@ -21,51 +21,45 @@ function PressEntry() {
 
         <div className="press-entry">
           <h2 className="title">
-            &apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get Asian
-            Americans Home Safe
+            Woman raises over $100k in 2 days to pay for Asian Americans&apos;
+            taxi rides amid rise in hate crimes
           </h2>
           <img src={EntryPhoto} alt="Entry Header" className="entry-img" />
           <div className="entry-details">
-            <p className="author">By Chloee Weiner</p>
-            <p className="date">04/09/2021</p>
+            <p className="author">By Jon Haworth</p>
+            <p className="date">04/06/2021</p>
           </div>
           <div className="press-text">
             <p>
-              Lately, Candy has been running to the bus stop on her way home
-              from work. The 26 year-old dance instructor said it&apos;s usually
-              dark outside by the time she finishes her shift at a studio in San
-              Francisco — and she&apos;s started to dread commuting in the
-              &quot;pitch black.&quot;
+              After seeing constant news reports and one shocking video after
+              another of the recent spate of hate crimes against Asian Americans
+              throughout the country, Maddy Park felt scared.
             </p>
             <p>
-              Lately, Candy has been running to the bus stop on her way home
-              from work. The 26 year-old dance instructor said it&apos;s usually
-              dark outside by the time she finishes her shift at a studio in San
-              Francisco — and she&apos;s started to dread commuting in the
-              &quot;pitch black.&quot;
+              &quot;Last week I took the train [in New York City]. It was a
+              30-minute commute and I realized every minute of that commute I
+              was terrified. I was scared that any moment in time someone might
+              say a racial slur or attack me. Worst of all I thought that if
+              something were to happen to me, nobody would stand up,&quot; Park
+              told ABC News&apos; New York City station WABC.
             </p>
             <p>
-              &quot;I usually call my best friend who lives in New York,&quot;
-              she said. &quot;I have him on the phone with me while I run to the
-              bus stop and shiver, nervously waiting for the bus to come.&quot;
+              According to Stop AAPI Hate, a nonprofit organization that tracks
+              such incidents, there were more than 3,795 hate incidents --
+              including verbal harassment and physical assault -- against Asian
+              Americans and Pacific Islanders in the United States from March
+              19, 2020 to Feb. 28, 2021.
             </p>
-            <p>
-              Candy, who&apos;s Filipina American and asked that NPR not use her
-              full name out of concern that she could be targeted, said the
-              recent wave of anti-Asian violence around the Bay Area and
-              elsewhere has made her fear for her own safety, especially when
-              walking alone in the city.
-            </p>
-            <p> Now, a new effort is helping to get her home safe.</p>
+            <p>This got her thinking.</p>
 
             <div className="read-more">
               Finish reading on{' '}
               <a
-                href="https://www.npr.org/2021/04/09/985698836/a-sigh-of-relief-crowdfunded-cab-rides-aim-to-get-asian-americans-home-safe"
+                href="https://abcnews.go.com/US/woman-raises-100k-days-pay-asian-americans-taxi/story?id=76895475"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                NPR...
+                ABC News...
               </a>
             </div>
           </div>
@@ -80,7 +74,6 @@ function PressEntry() {
             <div className="text">Donate</div>
           </a>
         </div>
-
         <Footer />
       </div>
     </div>

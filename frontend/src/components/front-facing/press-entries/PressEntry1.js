@@ -21,45 +21,46 @@ function PressEntry() {
 
         <div className="press-entry">
           <h2 className="title">
-            Woman raises over $100k in 2 days to pay for Asian Americans&apos;
-            taxi rides amid rise in hate crimes
+            Brooklyn woman pays for cab rides for Asian New Yorkers
           </h2>
           <img src={EntryPhoto} alt="Entry Header" className="entry-img" />
           <div className="entry-details">
-            <p className="author">By Jon Haworth</p>
-            <p className="date">04/06/2021</p>
+            <p className="author">By Arthur Chi&apos;en</p>
+            <p className="date">04/05/2021</p>
           </div>
           <div className="press-text">
             <p>
-              After seeing constant news reports and one shocking video after
-              another of the recent spate of hate crimes against Asian Americans
-              throughout the country, Maddy Park felt scared.
+              On social media, Park&apos;s influencer account goes by
+              @cafemaddy, featuring a collection of stylish food-related posts.
+              Realizing she can opt for a cab while others don&apos;t have the
+              option because of their wallets, she started reimbursing people
+              for their cab rides with her own money.
             </p>
             <p>
-              &quot;Last week I took the train [in New York City]. It was a
-              30-minute commute and I realized every minute of that commute I
-              was terrified. I was scared that any moment in time someone might
-              say a racial slur or attack me. Worst of all I thought that if
-              something were to happen to me, nobody would stand up,&quot; Park
-              told ABC News&apos; New York City station WABC.
+              When some people learned of her generosity, they donated money as
+              well. After just two days, she had to stop accepting donations.
             </p>
             <p>
-              According to Stop AAPI Hate, a nonprofit organization that tracks
-              such incidents, there were more than 3,795 hate incidents --
-              including verbal harassment and physical assault -- against Asian
-              Americans and Pacific Islanders in the United States from March
-              19, 2020 to Feb. 28, 2021.
+              Park has now set up a separate Instagram account to organize the
+              effort: @cafemaddycab. Each night, after she and a couple of
+              friends finish their day jobs, they go through submissions that
+              come in on a Google form and reimburse rides for Asian women,
+              Asian seniors, and Asian members of the LGBTQ community.
             </p>
-            <p>This got her thinking.</p>
+            <p>
+              Gratitude has been rolling in. From seniors who used @cafemaddycab
+              to get to a vaccine or doctor&apos;s appointment. From students
+              and volunteers finding an ally for their safety at a scary time.
+            </p>
 
             <div className="read-more">
               Finish reading on{' '}
               <a
-                href="https://abcnews.go.com/US/woman-raises-100k-days-pay-asian-americans-taxi/story?id=76895475"
+                href="https://www.fox5ny.com/news/brooklyn-woman-pays-for-cab-rides-for-asian-new-yorkers"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                ABC News...
+                FOX5 NY...
               </a>
             </div>
           </div>
@@ -74,6 +75,7 @@ function PressEntry() {
             <div className="text">Donate</div>
           </a>
         </div>
+
         <Footer />
       </div>
     </div>

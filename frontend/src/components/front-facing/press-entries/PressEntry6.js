@@ -21,33 +21,39 @@ function PressEntry() {
 
         <div className="press-entry">
           <h2 className="title">
-            快看世界／害怕坐紐約地鐵？亞裔搭出租車 她幫您報銷
+            How Crowdfunded Cabs Became A Beacon Of Hope In The Fight Against
+            AAPI Violence
           </h2>
           <img src={EntryPhoto} alt="Entry Header" className="entry-img" />
           <div className="entry-details">
-            <p className="author">By 何卓賢</p>
-            <p className="date">04/14/2021</p>
+            <p className="author">By Rose Minutaglio</p>
+            <p className="date">04/05/2021</p>
           </div>
           <div className="press-text">
             <p>
-              在紐約地鐵,亞裔遭無故攻擊事件頻發,很多人不再敢坐地鐵,卻支付不起出租車費用。家住布魯克林的28歲亞裔Madeline
-              Park決定幫忙
+              After her grandmother passed away in January, Ivana Xie has been
+              keeping her 96-year-old grandfather company on weekends. She picks
+              up dim sum, and they spend hours playing very competitive games of
+              mahjong. Xie used to feel full—both in heart and stomach—after
+              leaving his apartment in the heart of New York City&apos;s
+              Chinatown. Now she just feels anxious.
             </p>
             <p>
-              一開始,她個人投入2000美金,鼓勵害怕坐地鐵但必須要出行的亞裔先搭出租車,後問她報銷車費。沒想到她的點子一夜間獲讚無數,她的Venmo賬號上不斷有人捐款,支持她的行動。
-            </p>
-            <p>
-              現在,波士頓、舊金山和洛杉磯等城市也有志願者成立了類似的Instagram賬號,幫助有需要的亞裔。
+              Two months ago, an Asian man was stabbed by a stranger two blocks
+              from where Xie&apos;s grandfather has lived since coming to the
+              U.S. from China 30 years ago.&quot;I hate that I&apos;m
+              scared,&quot; Xie, 21, tells ELLE.com. &quot;But it&apos;s true,
+              I&apos;m terrified.&quot;
             </p>
 
             <div className="read-more">
               Finish reading on{' '}
               <a
-                href="https://www.worldjournal.com/wj/story/121469/5389175"
+                href="https://www.elle.com/culture/career-politics/a36289304/crowdfund-cabs-fight-against-aapi-violence/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                世界日報...
+                Elle...
               </a>
             </div>
           </div>

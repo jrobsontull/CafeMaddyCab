@@ -402,7 +402,7 @@ function RequestRide() {
                       value="4"
                     ></input>
                     <label htmlFor="4">
-                      I am submitting on behalf of an Asian Elderly person
+                      I am submitting on behalf of an Asian elderly person
                     </label>
                   </div>
                 </div>
@@ -545,7 +545,7 @@ function RequestRide() {
                 <h3>
                   I understand that the code is for 1 ride up to $25, and the
                   remaining balance does not roll over to the 2nd ride. I also
-                  understand that Cafemaddy CAB is not responsible for any
+                  understand that Cafe Maddy Cab is not responsible for any
                   incidents that may occur on the Uber ride.
                 </h3>
 
@@ -634,7 +634,8 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We will be taking ride submissions starting May 6th, 2022.
+              We are not yet taking ride requests! Check back with us soon for
+              more information.
             </div>
           )}
 

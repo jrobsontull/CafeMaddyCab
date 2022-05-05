@@ -8,7 +8,7 @@ import CMCLogo from '../../assets/img/logo.svg';
 function Faq() {
   return (
     <div className="react-container">
-      <div className="content frontend">
+      <div className="content frontend faq">
         <Navbar />
 
         <div className="title-logo">
@@ -19,10 +19,10 @@ function Faq() {
           Frequently Asked Questions
         </h1>
         <div className="info-box-title">
-          <h3>Who is Eligible?</h3>
+          <h3>Who is eligible?</h3>
         </div>
         <div className="info-box">
-          Low-income Asian LGBTQ, Women, and Elderly people who need financial
+          Low-income Asian LGBTQ+, Women, and elderly people who need financial
           support for an Uber ride for their safety.
         </div>
 
@@ -39,7 +39,7 @@ function Faq() {
         <div className="info-box">
           For instructions and details, visit the{' '}
           <Link to={'/how-to-ride'}>&quot;How it Works&quot;</Link> page. To
-          fill out the Ride Request & Reimbursement Form, visit the{' '}
+          fill out the Ride Request Form, visit the{' '}
           <Link to={'/request-ride'}>&quot;Request a Ride&quot;</Link> page.
         </div>
 

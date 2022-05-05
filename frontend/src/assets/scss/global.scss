@@ -206,6 +206,16 @@ body,
   }
 }
 
+.faq div.info-box {
+  a {
+    color: $dark-blue;
+  }
+
+  a:hover {
+    color: $blue-btn-hover;
+  }
+}
+
 h2.info-box-heading {
   width: $content-width;
   max-width: $max-width;

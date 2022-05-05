@@ -18,9 +18,10 @@ import InfoWhite from '../../assets/img/info_icon_white.svg';
 import Landing1 from '../../assets/img/landing-page-1.webp';
 import Landing2 from '../../assets/img/landing-page-2.webp';
 import LandingQuote from '../../assets/img/landing-quote.webp';
-import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
-import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
+import Entry5 from '../../assets/img/pressphotos/entry-5.jpeg';
+import Entry6 from '../../assets/img/pressphotos/entry-6.jpeg';
 import Entry7 from '../../assets/img/pressphotos/entry-7.jpeg';
+import Entry8 from '../../assets/img/pressphotos/entry-8.webp';
 
 function LandingPage() {
   // Scroll to top on component load/refresh
@@ -141,6 +142,15 @@ function LandingPage() {
         </div>
 
         <div className="entries">
+          <Link to={'/press/8'} className="press-thumb">
+            <img className="thumb" src={Entry8} alt="Entry 8" />
+            <p className="author">CNBC</p>
+            <h3 className="title">
+              This fund will give money to Asian, elderly and LGBTQ people who
+              need safe rides
+            </h3>
+          </Link>
+
           <Link to={'/press/7'} className="press-thumb">
             <img className="thumb" src={Entry7} alt="Entry 7" />
             <p className="author">NextShark</p>
@@ -150,20 +160,19 @@ function LandingPage() {
             </h3>
           </Link>
 
-          <Link to={'/press/1'} className="press-thumb">
-            <img className="thumb" src={Entry1} alt="Entry 1" />
-            <p className="author">ABCNEWS</p>
+          <Link to={'/press/6'} className="press-thumb">
+            <img className="thumb" src={Entry6} alt="Entry 6" />
+            <p className="author">ELLE</p>
             <h3 className="title">
-              Woman raises over $100k in 2 days to pay for Asian Americans&apos;
-              taxi rides amid rise in hate crimes
+              How Crowdfunded Cabs Became A Beacon Of Hope In The Fight Against
+              AAPI Violence
             </h3>
           </Link>
-          <Link to={'/press/2'} className="press-thumb">
-            <img className="thumb" src={Entry2} alt="Entry 2" />
-            <p className="author">NPR</p>
+          <Link to={'/press/5'} className="press-thumb">
+            <img className="thumb" src={Entry5} alt="Entry 5" />
+            <p className="author">世界日報</p>
             <h3 className="title">
-              &apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
-              Asian Americans Home Safe
+              快看世界／害怕坐紐約地鐵？亞裔搭出租車 她幫您報銷
             </h3>
           </Link>
         </div>
