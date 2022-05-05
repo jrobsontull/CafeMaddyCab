@@ -201,7 +201,7 @@ function ApproveRides() {
             </div>
 
             <div className="table-entries">
-              {rides === [] ? (
+              {rides.length > 0 ? (
                 rides.map((ride, index) => (
                   <ul key={ride._id}>
                     <li id="col-1">

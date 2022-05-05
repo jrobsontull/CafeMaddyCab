@@ -56,7 +56,7 @@ function PressEntry() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                NextShark
+                NextShark...
               </a>
             </div>
           </div>

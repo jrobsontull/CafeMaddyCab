@@ -1345,9 +1345,10 @@ h1.page-title-no-logo#request-ride {
           .react-container.view-entry .view-entry-window.send-codes .entry-content .photo-container .photo-boxes .photo-box#last-child,
           .react-container.view-entry .view-entry-window.done .entry-content .photo-container .photo-boxes .photo-box#last-child {
             border-width: 1px 1px 1px 0; }
-      .react-container.view-entry .view-entry-window.approve-window .entry-content .error,
-      .react-container.view-entry .view-entry-window.send-codes .entry-content .error,
-      .react-container.view-entry .view-entry-window.done .entry-content .error {
+      .react-container.view-entry .view-entry-window.approve-window .entry-content div.error,
+      .react-container.view-entry .view-entry-window.send-codes .entry-content div.error,
+      .react-container.view-entry .view-entry-window.done .entry-content div.error {
+        margin: 0 0 12px 0;
         width: 82%; }
   .react-container.view-entry .view-entry-window.send-codes .entry-content p {
     margin-bottom: 12px; }
