@@ -300,12 +300,9 @@ function RequestRide() {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
 
-    // Open and close the form
-    setFormOpen(true);
     /*TODO: add a more clear message in the info box to users before launch
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
-    /* COMMENTED OUT BEFORE LAUNCH
     const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
     const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
@@ -315,7 +312,7 @@ function RequestRide() {
       setFormOpen(true);
     } else {
       setFormOpen(false);
-    }*/
+    }
   }, []);
 
   return (
