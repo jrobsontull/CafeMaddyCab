@@ -488,11 +488,11 @@ h1.page-title-no-logo#request-ride {
   .request-form h3 {
     font-size: 20px;
     margin: 14px 0 12px 0; }
-    .request-form h3 a {
+    .request-form h3 a#terms-link {
       color: #dc87cb;
       font-weight: 500;
       transition: color 0.25s ease; }
-    .request-form h3 a:hover {
+    .request-form h3 a#terms-link:hover {
       color: #e99fdc; }
   .request-form input {
     background-color: #fefff3;
@@ -1004,6 +1004,39 @@ h1.page-title-no-logo#request-ride {
           width: 7%; }
         .dashboard .table-content .table-entries .entry ul li#col-5 {
           width: 10%; }
+        .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate {
+          color: #e93a3a;
+          font-weight: 500; }
+          .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip {
+            position: relative; }
+            .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip .tooltip-text {
+              visibility: hidden;
+              position: absolute;
+              width: 150px;
+              word-break: keep-all;
+              background-color: #fefff3;
+              border: 1px solid #3b3b96;
+              color: #3b3b96;
+              padding: 8px;
+              border-radius: 8px;
+              font-weight: 400;
+              z-index: 2;
+              left: 50%;
+              margin-left: -83px;
+              top: 12px;
+              font-size: 16px; }
+            .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip .tooltip-text::after {
+              content: ' ';
+              position: absolute;
+              bottom: 100%;
+              /* At the top of the tooltip */
+              left: 50%;
+              margin-left: -10px;
+              border-width: 10px;
+              border-style: solid;
+              border-color: transparent transparent #3b3b96 transparent; }
+        .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate:hover .tooltip .tooltip-text {
+          visibility: visible; }
         .dashboard .table-content .table-entries .entry ul li#col-6 {
           width: 10%;
           word-break: normal; }
@@ -1059,6 +1092,7 @@ h1.page-title-no-logo#request-ride {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.15); }
   .react-container.view-entry .view-entry-window {
+    top: 70px;
     width: 50%;
     min-width: 850px;
     background-color: #fefff3;
@@ -1106,6 +1140,10 @@ h1.page-title-no-logo#request-ride {
       flex-direction: column;
       align-items: center;
       justify-content: space-between; }
+      .react-container.view-entry .view-entry-window .entry-content .error {
+        width: calc(91.5% - 8px);
+        max-width: calc(91.5% - 8px);
+        margin: 12px 0 0 0; }
       .react-container.view-entry .view-entry-window .entry-content textarea.notes {
         background-color: #f7f5fe;
         width: 91.5%;
@@ -1587,6 +1625,41 @@ h1.page-title-no-logo#request-ride {
       width: 8%; }
     .dashboard.approve-rides .table-content .table-entries ul li#col-4 {
       width: 10%; }
+    .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate {
+      color: #e93a3a;
+      font-weight: 500; }
+      .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip {
+        position: relative; }
+        .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip .tooltip-text {
+          visibility: hidden;
+          position: absolute;
+          width: 150px;
+          word-break: keep-all;
+          background-color: #f7f5fe;
+          border: 1px solid #3b3b96;
+          color: #3b3b96;
+          padding: 8px;
+          border-radius: 8px;
+          font-weight: 400;
+          z-index: 2;
+          left: 50%;
+          margin-left: -83px;
+          top: 12px;
+          font-size: 16px; }
+        .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip .tooltip-text::after {
+          content: ' ';
+          position: absolute;
+          bottom: 100%;
+          /* At the top of the tooltip */
+          left: 50%;
+          margin-left: -10px;
+          border-width: 10px;
+          border-style: solid;
+          border-color: transparent transparent #3b3b96 transparent; }
+    .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate:hover {
+      cursor: pointer; }
+      .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate:hover .tooltip .tooltip-text {
+        visibility: visible; }
     .dashboard.approve-rides .table-content .table-entries ul li#col-5 {
       width: 10%;
       word-break: normal; }
@@ -1714,6 +1787,19 @@ h1.page-title-no-logo#request-ride {
           padding: 6px 8px; }
         .dashboard.approve-rides .table-content .table-entries ul li#col-9 .notes textarea::placeholder {
           color: #9696db; }
+  .dashboard.approve-rides .table-content .table-entries .no-rides-message {
+    padding: 50px 12px;
+    text-align: center; }
+    .dashboard.approve-rides .table-content .table-entries .no-rides-message span {
+      font-weight: 500; }
+    .dashboard.approve-rides .table-content .table-entries .no-rides-message p {
+      margin-top: 22px; }
+      .dashboard.approve-rides .table-content .table-entries .no-rides-message p a {
+        color: #dc87cb;
+        font-weight: 500;
+        transition: color 0.25s ease; }
+      .dashboard.approve-rides .table-content .table-entries .no-rides-message p a:hover {
+        color: #e99fdc; }
   .dashboard.approve-rides .table-content .table-footer .nav {
     width: 84%; }
   .dashboard.approve-rides .table-content .table-footer .cancel-btn {
@@ -2017,7 +2103,7 @@ h1.page-title-no-logo#faq {
   border: 1px solid #e93a3a;
   margin-bottom: 14px; }
 
-.content .success {
+.content .success-msg {
   background-color: #48bb61;
   color: #f7f5fe;
   width: calc(80% - 36px);
