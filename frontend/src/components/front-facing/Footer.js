@@ -1,6 +1,15 @@
 import Insta from '../../assets/img/insta_icon.svg';
 import Share from '../../assets/img/share_icon.svg';
 
+function share() {
+  console.log('clicked on share button');
+  // externalOpen(`https://twitter.com/intent/tweet?text=${t}&url=${l}`)
+  // const externalOpen = (URL) => window.open(URL, "_blank", "noopener");
+  // const l = 'https://cafemaddycab.org/';
+  // const URL = `https://www.facebook.com/sharer/sharer.php?u=${l}`;
+  // window.open(URL, '_blank', 'noopener');
+}
+
 function Footer() {
   return (
     <div className="footer">
@@ -12,8 +21,10 @@ function Footer() {
           </a>
         </li>
         <li>
-          <img src={Share} alt="Share" />
-          <p>Share</p>
+          <button onClick={() => share()}>
+            <img src={Share} alt="Share" />
+            <p>Share</p>
+          </button>
         </li>
       </ul>
       <p>

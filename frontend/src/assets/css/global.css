@@ -185,8 +185,7 @@
     color: #f7f5fe; }
     .content .footer ul li {
       display: flex;
-      flex-direction: row;
-      align-items: center; }
+      flex-direction: row; }
       .content .footer ul li img {
         width: 20px;
         height: auto;
@@ -200,11 +199,13 @@
       .content .footer ul li a:link,
       .content .footer ul li a:active {
         color: inherit; }
-      .content .footer ul li a {
+      .content .footer ul li a, .content .footer ul li button {
         display: flex;
         flex-direction: row;
-        transition: transform 0.25s ease; }
-      .content .footer ul li a:hover {
+        transition: transform 0.25s ease;
+        align-items: center;
+        background-color: #f7f5fe; }
+      .content .footer ul li a:hover, .content .footer ul li button:hover {
         transform: scale(1.04); }
   .content .footer p {
     color: #9696db;

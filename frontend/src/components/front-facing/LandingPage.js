@@ -20,7 +20,7 @@ import Landing2 from '../../assets/img/landing-page-2.webp';
 import LandingQuote from '../../assets/img/landing-quote.webp';
 import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
 import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
-import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
+import Entry7 from '../../assets/img/pressphotos/entry-7.jpeg';
 
 function LandingPage() {
   // Scroll to top on component load/refresh
@@ -141,6 +141,15 @@ function LandingPage() {
         </div>
 
         <div className="entries">
+          <Link to={'/press/7'} className="press-thumb">
+            <img className="thumb" src={Entry7} alt="Entry 7" />
+            <p className="author">NextShark</p>
+            <h3 className="title">
+              Cafe Maddy Cab: Program that pays cab fares for NYC AAPIs
+              vulnerable to hate crimes relaunches
+            </h3>
+          </Link>
+
           <Link to={'/press/1'} className="press-thumb">
             <img className="thumb" src={Entry1} alt="Entry 1" />
             <p className="author">ABCNEWS</p>
@@ -155,14 +164,6 @@ function LandingPage() {
             <h3 className="title">
               &apos;A Sigh Of Relief&apos;: Crowdfunded Cab Rides Aim To Get
               Asian Americans Home Safe
-            </h3>
-          </Link>
-          <Link to={'/press/3'} className="press-thumb">
-            <img className="thumb" src={Entry3} alt="Entry 3" />
-            <p className="author">COMPLEX</p>
-            <h3 className="title">
-              Brooklyn Woman Raises Over $100,000 to Provide Free Cab Rides for
-              Asian Americans
             </h3>
           </Link>
         </div>

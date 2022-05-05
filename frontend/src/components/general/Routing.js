@@ -53,6 +53,9 @@ const PressEntry5 = lazy(() =>
 const PressEntry6 = lazy(() =>
   import('../front-facing/press-entries/PressEntry6')
 );
+const PressEntry7 = lazy(() =>
+  import('../front-facing/press-entries/PressEntry7')
+);
 
 function Routing() {
   // Enable Google Analytics in production
@@ -135,6 +138,14 @@ function Routing() {
         element={
           <Suspense fallback={<Loading />}>
             <PressEntry6 />
+          </Suspense>
+        }
+      />
+      <Route
+        path={'/press/7'}
+        element={
+          <Suspense fallback={<Loading />}>
+            <PressEntry7 />
           </Suspense>
         }
       />
