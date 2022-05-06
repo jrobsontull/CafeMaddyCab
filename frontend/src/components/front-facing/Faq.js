@@ -19,6 +19,38 @@ function Faq() {
           Frequently Asked Questions
         </h1>
         <div className="info-box-title">
+          <h3>When can I request a ride?</h3>
+        </div>
+        <div className="info-box">
+          To be announced soon! We are fundraising to secure enough codes.
+          Please help spread the word by sharing this{' '}
+          <a
+            href="https://www.gofundme.com/f/cafemaddycab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GoFundMe link
+          </a>
+          !
+        </div>
+
+        <div className="info-box-title">
+          <h3>How do I donate?</h3>
+        </div>
+        <div className="info-box">
+          Click{' '}
+          <a
+            href="https://www.gofundme.com/f/cafemaddycab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>{' '}
+          or any &quot;Donate&quot; button throughout the website. You will be
+          led to the GoFundMe page where you can make your contribution!
+        </div>
+
+        <div className="info-box-title">
           <h3>Who is eligible?</h3>
         </div>
         <div className="info-box">
@@ -41,22 +73,6 @@ function Faq() {
           <Link to={'/how-to-ride'}>&quot;How it Works&quot;</Link> page. To
           fill out the Ride Request Form, visit the{' '}
           <Link to={'/request-ride'}>&quot;Request a Ride&quot;</Link> page.
-        </div>
-
-        <div className="info-box-title">
-          <h3>How do I donate?</h3>
-        </div>
-        <div className="info-box">
-          Click{' '}
-          <a
-            href="https://www.gofundme.com/f/cafemaddycab"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>{' '}
-          or any &quot;Donate&quot; button throughout the website. You will be
-          led to the GoFundMe page where you can make your contribution!
         </div>
 
         <div className="info-box-title">

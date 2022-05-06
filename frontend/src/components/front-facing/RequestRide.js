@@ -634,8 +634,16 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We are not yet taking ride requests! Check back with us soon for
-              more information.
+              We are not yet taking ride requests! We are fundraising to secure
+              enough codes. Please help spread the word by sharing this{' '}
+              <a
+                href="https://www.gofundme.com/f/cafemaddycab"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GoFundMe link
+              </a>
+              !
             </div>
           )}
 

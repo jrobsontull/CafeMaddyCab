@@ -28,14 +28,14 @@ function Footer() {
       await navigator.share(shareData);
     } else if (navigator.clipboard) {
       // Copy link to clipboard
-      await navigator.clipboard.writeText(
-        'https://cafemaddycab.org' + location.pathname
-      );
+      await navigator.clipboard.writeText(shareData.url);
       displayCopyTooltip(target);
     } else {
       // Browser is not compatible with Navigator API
-      window.prompt('Copy to your clipboard with Ctrl+C, Enter', shareData.url);
-      displayCopyTooltip(target);
+      window.prompt(
+        'Copy to your clipboard by highlighting the text and press Copy or Ctrl+C',
+        shareData.url
+      );
     }
   }
   return (
