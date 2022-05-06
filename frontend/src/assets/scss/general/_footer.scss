@@ -36,7 +36,8 @@
         color: inherit;
       }
 
-      a, button {
+      a,
+      div.share-btn {
         display: flex;
         flex-direction: row;
         transition: transform 0.25s ease;
@@ -44,8 +45,50 @@
         background-color: $lightest-pink;
       }
 
-      a:hover, button:hover {
+      a:hover,
+      div.share-btn:hover {
+        cursor: pointer;
         transform: scale(1.04);
+      }
+
+      .tooltip {
+        position: absolute;
+
+        .tooltip-text {
+          position: absolute;
+          color: $dark-blue;
+          border: 1px solid $dark-blue;
+          font-size: 14px;
+          width: 140px;
+          text-align: center;
+          word-break: keep-all;
+          background-color: $light-form;
+          padding: 4px 2px;
+          border-radius: $border-radius;
+          z-index: 2;
+          left: 50%;
+          margin-left: -40px;
+          bottom: 16px;
+          visibility: hidden;
+          opacity: 1;
+        }
+
+        .tooltip-text.hide {
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0s linear 0.5s, opacity 0.5s ease;
+        }
+
+        .tooltip-text::after {
+          content: ' ';
+          position: absolute;
+          top: 101%; /* At the bottom of the tooltip */
+          left: 50%;
+          margin-left: -10px;
+          border-width: 10px;
+          border-style: solid;
+          border-color: $dark-blue transparent transparent transparent;
+        }
       }
     }
   }

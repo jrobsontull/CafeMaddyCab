@@ -199,14 +199,50 @@
       .content .footer ul li a:link,
       .content .footer ul li a:active {
         color: inherit; }
-      .content .footer ul li a, .content .footer ul li button {
+      .content .footer ul li a,
+      .content .footer ul li div.share-btn {
         display: flex;
         flex-direction: row;
         transition: transform 0.25s ease;
         align-items: center;
         background-color: #f7f5fe; }
-      .content .footer ul li a:hover, .content .footer ul li button:hover {
+      .content .footer ul li a:hover,
+      .content .footer ul li div.share-btn:hover {
+        cursor: pointer;
         transform: scale(1.04); }
+      .content .footer ul li .tooltip {
+        position: absolute; }
+        .content .footer ul li .tooltip .tooltip-text {
+          position: absolute;
+          color: #3b3b96;
+          border: 1px solid #3b3b96;
+          font-size: 14px;
+          width: 140px;
+          text-align: center;
+          word-break: keep-all;
+          background-color: #fefff3;
+          padding: 4px 2px;
+          border-radius: 8px;
+          z-index: 2;
+          left: 50%;
+          margin-left: -40px;
+          bottom: 16px;
+          visibility: hidden;
+          opacity: 1; }
+        .content .footer ul li .tooltip .tooltip-text.hide {
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0s linear 0.5s, opacity 0.5s ease; }
+        .content .footer ul li .tooltip .tooltip-text::after {
+          content: ' ';
+          position: absolute;
+          top: 101%;
+          /* At the bottom of the tooltip */
+          left: 50%;
+          margin-left: -10px;
+          border-width: 10px;
+          border-style: solid;
+          border-color: #3b3b96 transparent transparent transparent; }
   .content .footer p {
     color: #9696db;
     text-align: center;

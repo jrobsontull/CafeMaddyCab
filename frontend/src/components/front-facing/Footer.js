@@ -13,34 +13,31 @@ function Footer() {
     url: 'https://cafemaddycab.org' + location.pathname,
   };
 
-  const share = async () => {
-    if (navigator.share) {
-      // navigator share feature
-      try {
-        await navigator.share(shareData);
-      } catch (e) {
-        console.warn(e);
-      }
-    } else if (navigator.clipboard) {
-      // copy link to clipboard
-      try {
-        await navigator.clipboard.writeText(
-          'https://cafemaddycab.org' + location.pathname
-        );
+  function displayCopyTooltip(target) {
+    const tooltip = target.parentNode.parentNode.childNodes[1].childNodes[0];
+    tooltip.classList.remove('hide');
+    tooltip.style.visibility = 'visible';
+    setTimeout(function () {
+      tooltip.classList.add('hide');
+    }, 2000);
+  }
 
-        setOpenShare(true);
-        setTimeout(function () {
-          setOpenShare(false);
-        }, 5000);
-      } catch (e) {
-        console.warn(e);
-      }
+  async function shareAsync(target) {
+    if (navigator.share) {
+      // Navigator share feature
+      await navigator.share(shareData);
+    } else if (navigator.clipboard) {
+      // Copy link to clipboard
+      await navigator.clipboard.writeText(
+        'https://cafemaddycab.org' + location.pathname
+      );
+      displayCopyTooltip(target);
     } else {
-      // browser is not compatible with web share api
-      console.log('browser is not compatible with our share feature');
-      // TODO: add alternate way to show share feature incompatible browsers
+      // Browser is not compatible with Navigator API
+      window.prompt('Copy to your clipboard with Ctrl+C, Enter', shareData.url);
+      displayCopyTooltip(target);
     }
-  };
+  }
   return (
     <div className="footer">
       <ul>
@@ -51,14 +48,15 @@ function Footer() {
           </a>
         </li>
         <li>
-          {!openShare ? (
-            <button onClick={share}>
-              <img src={Share} alt="Share" />
-              <p>Share</p>
-            </button>
-          ) : (
-            <p>Link to page copied to clipboard!</p>
-          )}
+          <div className="share-btn" onClick={(e) => shareAsync(e.target)}>
+            <img src={Share} alt="Share" />
+            <p>Share</p>
+          </div>
+          <div className="tooltip">
+            <div className="tooltip-text">
+              Link to page copied to clipboard!
+            </div>
+          </div>
         </li>
       </ul>
       <p>
