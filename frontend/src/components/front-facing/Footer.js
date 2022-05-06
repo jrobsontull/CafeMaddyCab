@@ -1,16 +1,46 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Insta from '../../assets/img/insta_icon.svg';
 import Share from '../../assets/img/share_icon.svg';
 
-function share() {
-  console.log('clicked on share button');
-  // externalOpen(`https://twitter.com/intent/tweet?text=${t}&url=${l}`)
-  // const externalOpen = (URL) => window.open(URL, "_blank", "noopener");
-  // const l = 'https://cafemaddycab.org/';
-  // const URL = `https://www.facebook.com/sharer/sharer.php?u=${l}`;
-  // window.open(URL, '_blank', 'noopener');
-}
-
 function Footer() {
+  const location = useLocation();
+  const [openShare, setOpenShare] = useState(false);
+
+  const shareData = {
+    title: 'Cafe Maddy Cab',
+    text: 'Check out Cafe Maddy Cab',
+    url: 'https://cafemaddycab.org' + location.pathname,
+  };
+
+  const share = async () => {
+    if (navigator.share) {
+      // navigator share feature
+      try {
+        await navigator.share(shareData);
+      } catch (e) {
+        console.warn(e);
+      }
+    } else if (navigator.clipboard) {
+      // copy link to clipboard
+      try {
+        await navigator.clipboard.writeText(
+          'https://cafemaddycab.org' + location.pathname
+        );
+
+        setOpenShare(true);
+        setTimeout(function () {
+          setOpenShare(false);
+        }, 5000);
+      } catch (e) {
+        console.warn(e);
+      }
+    } else {
+      // browser is not compatible with web share api
+      console.log('browser is not compatible with our share feature');
+      // TODO: add alternate way to show share feature incompatible browsers
+    }
+  };
   return (
     <div className="footer">
       <ul>
@@ -21,10 +51,14 @@ function Footer() {
           </a>
         </li>
         <li>
-          <button onClick={() => share()}>
-            <img src={Share} alt="Share" />
-            <p>Share</p>
-          </button>
+          {!openShare ? (
+            <button onClick={share}>
+              <img src={Share} alt="Share" />
+              <p>Share</p>
+            </button>
+          ) : (
+            <p>Link to page copied to clipboard!</p>
+          )}
         </li>
       </ul>
       <p>
