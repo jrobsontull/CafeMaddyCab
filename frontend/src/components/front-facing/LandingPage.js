@@ -18,7 +18,7 @@ import InfoWhite from '../../assets/img/info_icon_white.svg';
 import Landing1 from '../../assets/img/landing-page-1.webp';
 import Landing2 from '../../assets/img/landing-page-2.webp';
 import LandingQuote from '../../assets/img/landing-quote.webp';
-import Entry5 from '../../assets/img/pressphotos/entry-5.jpeg';
+import Entry5 from '../../assets/img/pressphotos/entry-5.webp';
 import Entry6 from '../../assets/img/pressphotos/entry-6.jpeg';
 import Entry7 from '../../assets/img/pressphotos/entry-7.jpeg';
 import Entry8 from '../../assets/img/pressphotos/entry-8.webp';

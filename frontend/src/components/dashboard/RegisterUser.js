@@ -131,7 +131,7 @@ function RegisterUser() {
     if (user.user.role !== 'admin') {
       navigate('/dashboard');
     }
-  }, [user.user]);
+  }, [user.user, navigate]);
 
   return (
     <div className="react-container">

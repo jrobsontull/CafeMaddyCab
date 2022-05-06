@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 
@@ -42,6 +42,7 @@ function Dashboard() {
   // For tracking search to refresh to when close windows
   const [currentSearch, setCurrentSearch] = useState('');
 
+  // For admin function visibility
   const [isAdmin, setIsAdmin] = useState(false);
 
   function calculateTotalPageNums(numPerPage, totalEntries) {
@@ -96,17 +97,7 @@ function Dashboard() {
 
   function closeRideEntryView() {
     setOpenRideEntryView(false);
-    RidesAPI.getRides(null, user.user.token).then((response) => {
-      setRides(response.rides);
-      setRidesData({
-        totalRides: response.totalResults,
-        currentPage: 0,
-        totalPages: calculateTotalPageNums(
-          entiresPerPage,
-          response.totalResults
-        ),
-      });
-    });
+    searchRides(currentSearch);
   }
 
   function openApproval() {
@@ -134,61 +125,60 @@ function Dashboard() {
 
   function closeMarkAsDone() {
     setOpenDoneWindow(false);
+    // Reset to all rides view
+    searchRides();
   }
 
-  function searchRides(params) {
-    if (params) {
-      // Update current search
-      setCurrentSearch(params);
-      // Perform search
-      RidesAPI.getRides(params, user.user.token).then((response) => {
-        setRides(response.rides);
-        setRidesData({
-          totalRides: response.totalResults,
-          currentPage: 0,
-          totalPages: calculateTotalPageNums(
-            entiresPerPage,
-            response.totalResults
-          ),
+  const searchRides = useCallback(
+    (params = null) => {
+      if (params) {
+        // Update current search
+        setCurrentSearch(params);
+        // Perform search
+        RidesAPI.getRides(params, user.user.token).then((response) => {
+          var { error } = response;
+          if (error) {
+            alert(error);
+          } else {
+            setRides(response.rides);
+            setRidesData({
+              totalRides: response.totalResults,
+              currentPage: 0,
+              totalPages: calculateTotalPageNums(
+                entiresPerPage,
+                response.totalResults
+              ),
+            });
+          }
         });
-      });
-    } else {
-      // Update current search
-      setCurrentSearch('');
-      // Perform search
-      RidesAPI.getRides(null, user.user.token).then((response) => {
-        setRides(response.rides);
-        setRidesData({
-          totalRides: response.totalResults,
-          currentPage: 0,
-          totalPages: calculateTotalPageNums(
-            entiresPerPage,
-            response.totalResults
-          ),
+      } else {
+        // Update current search
+        setCurrentSearch('');
+        // Perform search
+        RidesAPI.getRides(null, user.user.token).then((response) => {
+          var { error } = response;
+          if (error) {
+            alert(error);
+          } else {
+            setRides(response.rides);
+            setRidesData({
+              totalRides: response.totalResults,
+              currentPage: 0,
+              totalPages: calculateTotalPageNums(
+                entiresPerPage,
+                response.totalResults
+              ),
+            });
+          }
         });
-      });
-    }
-  }
+      }
+    },
+    [user.user.token]
+  );
 
   useEffect(() => {
     // Populate table with all rides
-    RidesAPI.getRides(null, user.user.token).then((response) => {
-      var { error } = response;
-      if (error) {
-        alert(error);
-      } else {
-        // Everything was all good
-        setRides(response.rides);
-        setRidesData({
-          totalRides: response.totalResults,
-          currentPage: 0,
-          totalPages: calculateTotalPageNums(
-            entiresPerPage,
-            response.totalResults
-          ),
-        });
-      }
-    });
+    searchRides();
 
     // Set status quantities in left menu - might be a CPU intensive process so be WARNED
     RidesAPI.getStats(null, user.user.token).then((response) => {
@@ -205,7 +195,7 @@ function Dashboard() {
     if (user.user.role === 'admin') {
       setIsAdmin(true);
     }
-  }, [user.user]);
+  }, [user.user, searchRides]);
 
   return (
     <div className="react-container">

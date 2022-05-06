@@ -5,11 +5,11 @@ import Navbar from './Navbar';
 import Logo from './Logo';
 import Footer from './Footer';
 
-import Entry1 from '../../assets/img/pressphotos/entry-1.jpeg';
+import Entry1 from '../../assets/img/pressphotos/entry-1.png';
 import Entry2 from '../../assets/img/pressphotos/entry-2.jpeg';
-import Entry3 from '../../assets/img/pressphotos/entry-3.jpeg';
-import Entry4 from '../../assets/img/pressphotos/entry-4.jpeg';
-import Entry5 from '../../assets/img/pressphotos/entry-5.jpeg';
+import Entry3 from '../../assets/img/pressphotos/entry-3.webp';
+import Entry4 from '../../assets/img/pressphotos/entry-4.webp';
+import Entry5 from '../../assets/img/pressphotos/entry-5.webp';
 import Entry6 from '../../assets/img/pressphotos/entry-6.jpeg';
 import Entry7 from '../../assets/img/pressphotos/entry-7.jpeg';
 import Entry8 from '../../assets/img/pressphotos/entry-8.webp';

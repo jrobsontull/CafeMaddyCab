@@ -13,6 +13,8 @@ function MarkAsDone({ onClose }) {
   });
   const [csvFile, setCsvFile] = useState({ file: null });
 
+  const [successMessage, setSuccessMessage] = useState(false);
+
   function selectFile(target) {
     const file = target.files[0];
 
@@ -33,14 +35,14 @@ function MarkAsDone({ onClose }) {
   function submitHandler() {
     if (csvFile.file) {
       // All good
+      setSuccessMessage(false);
       setErrorOnSubmit({ state: false, message: null });
       RidesAPI.markAsDone(csvFile.file, user.user.token).then((response) => {
         var { error } = response;
         if (error) {
           setErrorOnSubmit({ state: true, message: error });
         } else {
-          console.log(response);
-          // Do something else here
+          setSuccessMessage(true);
         }
       });
     } else {
@@ -68,6 +70,14 @@ function MarkAsDone({ onClose }) {
               {errorOnSubmit.message
                 ? errorOnSubmit.message
                 : 'An unknown error occurred.'}
+            </div>
+          ) : (
+            ''
+          )}
+
+          {successMessage ? (
+            <div className="success-msg">
+              These rides have been successfully marked as done.
             </div>
           ) : (
             ''

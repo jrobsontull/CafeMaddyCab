@@ -1152,9 +1152,17 @@ h1.page-title-no-logo#request-ride {
         background-color: #f7f5fe;
         color: #3b3b96;
         border: 1px solid #3b3b96;
-        resize: none; }
+        resize: none;
+        transition: all 0.25s ease; }
       .react-container.view-entry .view-entry-window .entry-content textarea.notes::placeholder {
         color: #9696db; }
+      .react-container.view-entry .view-entry-window .entry-content textarea.notes:hover {
+        box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
+      .react-container.view-entry .view-entry-window .entry-content textarea.notes:focus {
+        box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25); }
+      .react-container.view-entry .view-entry-window .entry-content textarea.notes.invalid {
+        border-color: #e93a3a;
+        color: #e93a3a; }
     .react-container.view-entry .view-entry-window .entry-content-columns {
       width: 94%;
       display: flex;
@@ -1262,6 +1270,10 @@ h1.page-title-no-logo#request-ride {
       padding: 22px 0;
       display: flex;
       justify-content: center; }
+      .react-container.view-entry .view-entry-window.approve-window .entry-content .success-msg,
+      .react-container.view-entry .view-entry-window.send-codes .entry-content .success-msg,
+      .react-container.view-entry .view-entry-window.done .entry-content .success-msg {
+        width: calc(90% - 36px); }
       .react-container.view-entry .view-entry-window.approve-window .entry-content p,
       .react-container.view-entry .view-entry-window.send-codes .entry-content p,
       .react-container.view-entry .view-entry-window.done .entry-content p {

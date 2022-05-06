@@ -4,7 +4,7 @@ import Navbar from '../Navbar';
 import Logo from '../Logo';
 import Footer from '../Footer';
 
-import EntryPhoto from '../../../assets/img/pressphotos/entry-1.jpeg';
+import EntryPhoto from '../../../assets/img/pressphotos/entry-1.png';
 import DonateWhite from '../../../assets/img/donate_icon_white.svg';
 
 function PressEntry() {

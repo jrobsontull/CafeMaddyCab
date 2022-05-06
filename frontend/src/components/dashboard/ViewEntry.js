@@ -17,6 +17,11 @@ function ViewEntry({ rideId, onClose }) {
     baseImgUrl = 'https://cafemaddycab.org:443/api/v1/image/';
   }
 
+  const [errorOnSubmit, setErrorOnSubmit] = useState({
+    state: false,
+    message: null,
+  });
+
   function updateGenericField(target, prop) {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
   }
@@ -95,6 +100,22 @@ function ViewEntry({ rideId, onClose }) {
     }
   }
 
+  function updateNotes(target) {
+    const note = target.value;
+    if (note.length > 1000) {
+      target.classList.add('invalid');
+      setErrorOnSubmit({
+        state: true,
+        message:
+          'Too many characters in the notes field! Our limit is 1000 characters.',
+      });
+    } else {
+      setRideDetails((prevDetails) => ({ ...prevDetails, notes: note }));
+      setErrorOnSubmit({ state: false, message: null });
+      target.classList.remove('invalid');
+    }
+  }
+
   function saveChanges() {
     const updatedRide = rideDetails;
     updatedRide.lastEditedBy = user.user.commonName;
@@ -152,6 +173,11 @@ function ViewEntry({ rideId, onClose }) {
               the duplicate or click the duplicates filter in the left-hand
               column of the dashboard.
             </div>
+          ) : (
+            ''
+          )}
+          {errorOnSubmit.state ? (
+            <div className="error">{errorOnSubmit.message}</div>
           ) : (
             ''
           )}
@@ -311,7 +337,7 @@ function ViewEntry({ rideId, onClose }) {
             className="notes"
             placeholder="Write notes here..."
             defaultValue={rideDetails.notes ? rideDetails.notes : ''}
-            onChange={(e) => updateGenericField(e.target, 'notes')}
+            onChange={(e) => updateNotes(e.target)}
             rows="3"
           ></textarea>
         </div>

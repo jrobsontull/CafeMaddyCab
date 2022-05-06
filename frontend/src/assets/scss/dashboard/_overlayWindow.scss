@@ -88,10 +88,24 @@
         color: $dark-blue;
         border: 1px solid $dark-blue;
         resize: none;
+        transition: all 0.25s ease;
       }
 
       textarea.notes::placeholder {
         color: $light-blue;
+      }
+
+      textarea.notes:hover {
+        box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+      }
+
+      textarea.notes:focus {
+        box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+      }
+
+      textarea.notes.invalid {
+        border-color: $error;
+        color: $error;
       }
     }
 
@@ -253,6 +267,10 @@
       padding: 22px 0;
       display: flex;
       justify-content: center;
+
+      .success-msg {
+        width: calc(90% - 36px);
+      }
 
       p {
         width: 90%;

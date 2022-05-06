@@ -47,6 +47,7 @@ function Loading({ loadMessage, pageTitle = 'Loading...' }) {
 
 Loading.propTypes = {
   loadMessage: PropTypes.string,
+  pageTitle: PropTypes.string,
 };
 
 export default Loading;
