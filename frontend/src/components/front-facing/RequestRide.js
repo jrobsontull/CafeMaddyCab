@@ -308,9 +308,15 @@ function RequestRide() {
     const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
     const day = daylightSavingsDay.getDay();
     // Form is only open Monday (1), Tuesday (2) and Wednesday (3)
-    if (day > 0 && day < 4) {
-      setFormOpen(true);
+    const openFormDate = new Date(Date.parse('2022-05-16T00:00:00-05:00'));
+    if (today > openFormDate) {
+      if (day > 0 && day < 4) {
+        setFormOpen(true);
+      } else {
+        setFormOpen(false);
+      }
     } else {
+      // Close form before 16th May
       setFormOpen(false);
     }
   }, []);
@@ -543,7 +549,7 @@ function RequestRide() {
                 </div>
 
                 <h3>
-                  I understand that the code is for 1 ride up to $25, and the
+                  I understand that the code is for 1 ride up to $30, and the
                   remaining balance does not roll over to the 2nd ride. I also
                   understand that Cafe Maddy Cab is not responsible for any
                   incidents that may occur on the Uber ride.

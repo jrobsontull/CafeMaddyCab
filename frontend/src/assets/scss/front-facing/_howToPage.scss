@@ -27,6 +27,15 @@
     }
   }
 
+  .info-box li a {
+    color: $dark-pink;
+    font-weight: 500;
+  }
+
+  .info-box li a:hover {
+    color: $dark-pink-hover;
+  }
+
   .btn-link {
     margin-top: 28px;
   }

@@ -481,6 +481,13 @@
   .how-to .info-box.how-to ul li p#last-child {
     margin-bottom: 0; }
 
+.how-to .info-box li a {
+  color: #dc87cb;
+  font-weight: 500; }
+
+.how-to .info-box li a:hover {
+  color: #e99fdc; }
+
 .how-to .btn-link {
   margin-top: 28px; }
 
