@@ -14,6 +14,8 @@ function RequestRide() {
   const [selfie, setSelfie] = useState({ file: null });
   const [photoId, setPhotoId] = useState({ file: null });
   const [otherPurpose, setOtherPurpose] = useState('');
+  const [storyText, setStoryText] = useState('');
+  const [storyCharCount, setStoryCharCount] = useState(0);
   const [formOpen, setFormOpen] = useState(true);
 
   const [errors, setErrors] = useState({
@@ -185,6 +187,12 @@ function RequestRide() {
     }
   }
 
+  // Updates Share Story textbox and char counter
+  function storyTextUpdate(target) {
+    setStoryText(target);
+    setStoryCharCount(target.length);
+  }
+
   function setCaptcha(event) {
     const gResponse = event;
     if (gResponse) {
@@ -299,11 +307,12 @@ function RequestRide() {
   useEffect(() => {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
+    setFormOpen(true);
 
     /*TODO: add a more clear message in the info box to users once website launches
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
-    const today = new Date();
+    /*const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
     const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
     const day = daylightSavingsDay.getDay();
@@ -319,7 +328,7 @@ function RequestRide() {
     } else {
       // Close form before 16th May
       setFormOpen(false);
-    }
+    }*/
   }, []);
 
   return (
@@ -615,6 +624,42 @@ function RequestRide() {
                     ></input>
                     <label htmlFor="15">
                       I have read and agree to the terms and conditions
+                    </label>
+                  </div>
+                </div>
+
+                <h3>
+                  Please feel free to share your story about how this ride is
+                  helping you. (optional)
+                </h3>
+
+                <textarea
+                  placeholder="Share your story here..."
+                  onChange={(e) => storyTextUpdate(e.target.value)}
+                  rows="10"
+                  maxLength="1000"
+                ></textarea>
+                <p className="char-count">{storyCharCount} / 1000</p>
+
+                <h3>
+                  If you agree to have the CMC team anonymously share your story
+                  for funraising purposes, please check this box. DO NOT check
+                  this box if you don't want your story shared anonymously.
+                </h3>
+
+                <div className="check">
+                  <div className="check-item">
+                    <input
+                      type="checkbox"
+                      name="understand-3"
+                      id="16"
+                      onChange={(e) =>
+                        validateUnderstand(e.target, 'understand3')
+                      }
+                    ></input>
+                    <label htmlFor="16">
+                      Yes, I agree to have the CMC team anonymously share this
+                      story for fundraising purposes.
                     </label>
                   </div>
                 </div>

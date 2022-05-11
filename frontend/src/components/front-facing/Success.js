@@ -12,6 +12,7 @@ function Success() {
 
   const [name, setName] = useState('');
   const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackCharCount, setCharCount] = useState(0);
   const [errorStateMessage, setErrorStateMessage] = useState({
     state: false,
     message: null,
@@ -21,13 +22,20 @@ function Success() {
   const rideId = useParams();
 
   useEffect(() => {
-    if (location.state) {
+    /*if (location.state) {
       setName(location.state.name);
     } else {
       navigate('/');
-    }
+    }*/
+    setName('Virginia');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Updates Share Story textbox and char counter
+  function feedbackTextUpdate(target) {
+    setFeedbackText(target);
+    setCharCount(target.length);
+  }
 
   function submitFeedback() {
     if (feedbackText === '') {
@@ -103,8 +111,9 @@ function Success() {
             <textarea
               className="info-box feedback-form"
               placeholder="Write feedback here..."
-              onChange={(e) => setFeedbackText(e.target.value)}
+              onChange={(e) => feedbackTextUpdate(e.target.value)}
               rows="3"
+              maxLength="500"
             ></textarea>
             <div
               className="btn submit send-feedback"
@@ -112,6 +121,7 @@ function Success() {
             >
               Send Feedback
             </div>
+            <p className="char-count">{feedbackCharCount} / 500</p>
           </div>
         ) : (
           <div className="info-box success" id="child-2">
