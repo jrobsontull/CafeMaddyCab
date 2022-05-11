@@ -22,16 +22,9 @@ function Faq() {
           <h3>When can I request a ride?</h3>
         </div>
         <div className="info-box">
-          To be announced soon! We are fundraising to secure enough codes.
-          Please help spread the word by sharing this{' '}
-          <a
-            href="https://www.gofundme.com/f/cafemaddycab"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GoFundMe link
-          </a>
-          !
+          We will be taking ride submissions starting Monday 5/16! The form will
+          be open each week from Mondays to Wednesdays, until codes are
+          depleted.
         </div>
 
         <div className="info-box-title">

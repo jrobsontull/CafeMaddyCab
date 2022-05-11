@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Insta from '../../assets/img/insta_icon.svg';
 import Share from '../../assets/img/share_icon.svg';
 
 function Footer() {
   const location = useLocation();
-  const [openShare, setOpenShare] = useState(false);
 
   const shareData = {
     title: 'Cafe Maddy Cab',

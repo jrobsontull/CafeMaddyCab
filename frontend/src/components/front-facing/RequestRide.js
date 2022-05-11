@@ -300,7 +300,7 @@ function RequestRide() {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
 
-    /*TODO: add a more clear message in the info box to users before launch
+    /*TODO: add a more clear message in the info box to users once website launches
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
     const today = new Date();
@@ -309,6 +309,7 @@ function RequestRide() {
     const day = daylightSavingsDay.getDay();
     // Form is only open Monday (1), Tuesday (2) and Wednesday (3)
     const openFormDate = new Date(Date.parse('2022-05-16T00:00:00-05:00'));
+    // remove if condition after May 16th
     if (today > openFormDate) {
       if (day > 0 && day < 4) {
         setFormOpen(true);
@@ -640,16 +641,7 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We are not yet taking ride requests! We are fundraising to secure
-              enough codes. Please help spread the word by sharing this{' '}
-              <a
-                href="https://www.gofundme.com/f/cafemaddycab"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GoFundMe link
-              </a>
-              !
+              We will be taking ride submissions starting Monday 5/16!
             </div>
           )}
 
