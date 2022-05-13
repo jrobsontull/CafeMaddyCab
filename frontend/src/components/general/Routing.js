@@ -86,7 +86,7 @@ function Routing() {
         }
       />
       <Route path={'/terms-and-conditions'} element={<TermsAndConditions />} />
-      <Route path={'/success/'} element={<Success />} />
+      <Route path={'/success/:id'} element={<Success />} />
       <Route
         path={'/login'}
         element={

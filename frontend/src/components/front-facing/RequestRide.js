@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
+import StoriesAPI from '../../utils/stories.api';
 
 import Loading from '../general/Loading';
 import Navbar from './Navbar';
@@ -16,6 +17,7 @@ function RequestRide() {
   const [otherPurpose, setOtherPurpose] = useState('');
   const [storyText, setStoryText] = useState('');
   const [storyCharCount, setStoryCharCount] = useState(0);
+  const [shareStory, setShareStory] = useState(false);
   const [formOpen, setFormOpen] = useState(true);
 
   const [errors, setErrors] = useState({
@@ -284,6 +286,21 @@ function RequestRide() {
     } else {
       setIsRequesting(true);
 
+      /*
+      without rideId but calls simult
+      const storyToReq = {
+        // rideId: rideId,
+        text: storyText,
+        share: shareStory,
+      }
+      Promise.all([
+        RidesAPI.requestRide(rideDetails, selfie.file, photoId.file),
+        StoriesAPI.submitStory(storyToReq),
+      ]).then((responses) => {
+        // response handling
+      });
+      */
+
       RidesAPI.requestRide(rideDetails, selfie.file, photoId.file).then(
         (response) => {
           var { error } = response;
@@ -294,6 +311,17 @@ function RequestRide() {
           } else if (response && response.data.acknowledged === true) {
             // All good
             const id = response.data.insertedId;
+            // submit story
+            if (storyText.length > 0) {
+              const storyToReq = {
+                rideId: id,
+                text: storyText,
+                share: shareStory,
+              };
+
+              StoriesAPI.submitStory(storyToReq);
+            }
+
             setIsRequesting(false);
             navigate('/success/' + id, {
               state: { name: rideDetails.firstName },
@@ -309,6 +337,7 @@ function RequestRide() {
     window.scrollTo(0, 0);
     setFormOpen(true);
 
+    // DON'T FORGET TO UNCOMMENT THIS!!
     /*TODO: add a more clear message in the info box to users once website launches
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
@@ -643,19 +672,17 @@ function RequestRide() {
 
                 <h3>
                   If you agree to have the CMC team anonymously share your story
-                  for funraising purposes, please check this box. DO NOT check
-                  this box if you don't want your story shared anonymously.
+                  for funraising purposes, please check this box. If you do not
+                  want your story shared anonymously, do not check this box.
                 </h3>
 
                 <div className="check">
                   <div className="check-item">
                     <input
                       type="checkbox"
-                      name="understand-3"
+                      name="share-story"
                       id="16"
-                      onChange={(e) =>
-                        validateUnderstand(e.target, 'understand3')
-                      }
+                      onChange={(e) => setShareStory(e.target.checked)}
                     ></input>
                     <label htmlFor="16">
                       Yes, I agree to have the CMC team anonymously share this

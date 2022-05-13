@@ -22,12 +22,11 @@ function Success() {
   const rideId = useParams();
 
   useEffect(() => {
-    /*if (location.state) {
+    if (location.state) {
       setName(location.state.name);
     } else {
       navigate('/');
-    }*/
-    setName('Virginia');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
