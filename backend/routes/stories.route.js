@@ -4,7 +4,10 @@ import validateHeader from '../middleware/validateHeader.js';
 
 const router = express.Router();
 
-router.route('/').get(validateHeader, StoriesController.apiGetStories);
+router
+  .route('/')
+  .get(validateHeader, StoriesController.apiGetStories)
+  .put(validateHeader, StoriesController.apiEditStoryById);
 router.route('/submit').post(StoriesController.apiPostStory);
 
 export default router;

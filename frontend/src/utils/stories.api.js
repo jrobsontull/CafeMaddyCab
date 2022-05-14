@@ -21,6 +21,16 @@ export default class StoriesAPI {
       return stories;
     }
   }
+
+  // Edit story details
+  static async editStoryById(story, token) {
+    const url = 'api/v1/stories';
+
+    const response = await putRequest(story, url, token);
+    if (response) {
+      return response;
+    }
+  }
 }
 
 async function postRequest(body, url) {
@@ -51,5 +61,24 @@ async function getRequest(url, token) {
   } catch (e) {
     console.log('Error: ' + e.message);
     return null;
+  }
+}
+
+// General PUT request
+async function putRequest(body, url, token) {
+  try {
+    const payload = body;
+    const response = await http.put(url, payload, {
+      headers: { token: token },
+    });
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error: ' + e.message);
+    return e.response;
   }
 }

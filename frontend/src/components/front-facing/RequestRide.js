@@ -286,21 +286,6 @@ function RequestRide() {
     } else {
       setIsRequesting(true);
 
-      /*
-      without rideId but calls simult
-      const storyToReq = {
-        // rideId: rideId,
-        text: storyText,
-        share: shareStory,
-      }
-      Promise.all([
-        RidesAPI.requestRide(rideDetails, selfie.file, photoId.file),
-        StoriesAPI.submitStory(storyToReq),
-      ]).then((responses) => {
-        // response handling
-      });
-      */
-
       RidesAPI.requestRide(rideDetails, selfie.file, photoId.file).then(
         (response) => {
           var { error } = response;
@@ -311,7 +296,7 @@ function RequestRide() {
           } else if (response && response.data.acknowledged === true) {
             // All good
             const id = response.data.insertedId;
-            // submit story
+            // submit story if Story entry isn't empty
             if (storyText.length > 0) {
               const storyToReq = {
                 rideId: id,
@@ -673,7 +658,8 @@ function RequestRide() {
                 <h3>
                   If you agree to have the CMC team anonymously share your story
                   for funraising purposes, please check this box. If you do not
-                  want your story shared anonymously, do not check this box.
+                  want your story shared anonymously, please do not check this
+                  box.
                 </h3>
 
                 <div className="check">

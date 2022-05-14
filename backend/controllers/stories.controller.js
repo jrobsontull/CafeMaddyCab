@@ -40,4 +40,42 @@ export default class StoriesController {
   catch(e) {
     res.status(500).json({ error: e.message });
   }
+
+  /* PUT request for making edits to specific story */
+  static async apiEditStoryById(req, res, next) {
+    try {
+      const id = req.body._id;
+      const rideId = req.body.rideId;
+      const text = req.body.text;
+      const share = req.body.share;
+      const bookmark = req.body.bookmark;
+
+      const storyResponse = await StoriesDAO.editStoryById(
+        id,
+        rideId,
+        text,
+        share,
+        bookmark
+      );
+
+      if (storyResponse.hasOwnProperty("'error'")) {
+        res.status(400).json({ error: error.message });
+        return;
+      }
+
+      if (storyResponse.value === null) {
+        /* story not updated */
+        throw new Error(
+          'StoriesController: Unable to update the story. Might be an auth problem.'
+        );
+      } else {
+        res.json({ status: 'success' });
+      }
+    } catch (e) {
+      console.log(
+        'StoriesController: Failed to edit story by ID. ' + e.message
+      );
+      res.status(500).json({ error: e });
+    }
+  }
 }

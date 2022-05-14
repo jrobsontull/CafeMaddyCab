@@ -1,5 +1,7 @@
 import mongodb from 'mongodb';
 
+const ObjectId = mongodb.ObjectId;
+
 let stories;
 
 export default class StoriesDAO {
@@ -56,11 +58,36 @@ export default class StoriesDAO {
         rideId: rideId,
         text: storyText,
         share: share,
+        bookmark: false,
       };
 
       return stories.insertOne(storiesResponse);
     } catch (e) {
       console.error('Unable to post stories: ' + e);
+      return { error: e };
+    }
+  }
+
+  // Edit rides by specific ID
+  static async editStoryById(id, rideId, text, share, bookmark) {
+    try {
+      const updateResponse = await stories.findOneAndUpdate(
+        {
+          _id: ObjectId(id),
+        },
+        {
+          $set: {
+            rideId: rideId,
+            text: text,
+            share: share,
+            bookmark: bookmark,
+          },
+        }
+      );
+
+      return updateResponse;
+    } catch (e) {
+      console.error('storiesDAO: Unable to update story (' + id + '). ' + e);
       return { error: e };
     }
   }
