@@ -44,14 +44,14 @@ function Success() {
       text: feedbackText,
     };
 
-    FeedbackAPI.submitFeedback(feedbackToReq).then((fResponse) => {
-      if (fResponse) {
-        setFeedbackConfirm(true);
-      } else {
+    FeedbackAPI.submitFeedback(feedbackToReq).then((response) => {
+      if (response.data.error) {
         setErrorStateMessage({
           state: true,
-          message: 'There was an error sending feedback. Please try again.',
+          message: response.data.error,
         });
+      } else {
+        setFeedbackConfirm(true);
       }
     });
   }
