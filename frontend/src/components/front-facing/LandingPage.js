@@ -81,6 +81,10 @@ function LandingPage() {
           </p>
         </div>
 
+        <h2 className="info-box-heading" id="uber">
+          Thank you Uber for partnering with us and donating!
+        </h2>
+
         <div className="btn-link inverted" id="landing-page">
           <a
             href="https://www.gofundme.com/f/cafemaddycab"

@@ -52,6 +52,12 @@ export default class FeedbackDAO {
 
   static async postFeedback(rideId, feedbackText) {
     try {
+      const feedbackExists = await feedback.findOne({ rideId: rideId.id });
+      if (feedbackExists) {
+        console.error('rideId for feedback already exists');
+        return { error: 'You have already submitted a feedback response.' };
+      }
+
       const feedbackResponse = {
         rideId: rideId.id,
         text: feedbackText,

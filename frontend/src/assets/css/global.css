@@ -459,6 +459,10 @@
     color: #9696db;
     margin-top: 8px; }
 
+.landing-page .info-box-heading#uber {
+  text-align: center;
+  margin: 6px 0 10px 0; }
+
 .landing-page .info-box#why {
   margin-bottom: 10px; }
 
