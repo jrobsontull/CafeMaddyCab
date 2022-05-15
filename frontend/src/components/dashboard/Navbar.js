@@ -15,6 +15,7 @@ function Header() {
       name: 'Approve Rides',
       path: '/dashboard/approve-rides/' + user.user._id,
     },
+    { name: 'View Stories', path: '/dashboard/view-stories' },
     { name: 'View Feedback', path: '/dashboard/view-feedback' },
     { name: 'How to Use', path: '/dashboard/how-to-use' },
     { name: 'Change Password', path: '/dashboard/change-password' },

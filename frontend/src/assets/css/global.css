@@ -647,6 +647,24 @@ h1.page-title-no-logo#request-ride {
     .request-form .upload .input-file + label:hover {
       cursor: pointer;
       background-color: #5c5cb3; }
+  .request-form textarea {
+    resize: vertical;
+    vertical-align: top;
+    border-radius: 8px;
+    border: 1px solid #3b3b96;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    color: #3b3b96;
+    background-color: #fefff3;
+    transition: box-shadow 0.25s ease; }
+  .request-form textarea::placeholder {
+    color: #9696db; }
+  .request-form textarea:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
+  .request-form textarea:focus {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25); }
+  .request-form .char-count {
+    margin: 5px 0 5px 5px; }
   @media screen and (max-width: 456px) {
     .request-form .upload input.upload-location {
       padding: 23px 18px; } }
@@ -802,7 +820,7 @@ h1.page-title-no-logo#request-ride {
     margin-bottom: 0; }
 
 .info-box.success {
-  text-align: justify; }
+  text-align: left; }
   .info-box.success .error {
     width: calc(100% - 36px); }
   .info-box.success .info-box.feedback-form {
@@ -823,6 +841,8 @@ h1.page-title-no-logo#request-ride {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
   .info-box.success textarea:focus {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25); }
+  .info-box.success .char-count {
+    margin: 5px 0 5px 5px; }
   .info-box.success .btn.send-feedback {
     border-radius: 0 0 8px 8px;
     padding: 10px 18px;
@@ -1642,6 +1662,135 @@ h1.page-title-no-logo#request-ride {
         text-align: center;
         width: 8%; }
       .feedback .table-content .table-footer .download-btn:hover {
+        background-color: #5c5cb3;
+        cursor: pointer; }
+
+/* Styling of table */
+.stories {
+  background-color: #fefff3;
+  width: 90%;
+  min-width: 1400px;
+  border-radius: 8px;
+  border: 1px solid #3b3b96;
+  margin-top: 36px;
+  margin-bottom: 36px;
+  display: flex;
+  justify-content: space-between;
+  /* Styling of table search functions and action btns */ }
+  .stories .menu {
+    background-color: #9696db;
+    border-radius: 8px 0 0 8px;
+    color: #f7f5fe;
+    width: 10%;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #3b3b96;
+    border-width: 0 1px 0 0; }
+    .stories .menu ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: center;
+      padding: 0 16px; }
+      .stories .menu ul li {
+        padding: 14px 0;
+        margin: 0 auto;
+        max-width: 120px;
+        transition: transform 0.25s ease; }
+      .stories .menu ul li:hover {
+        cursor: pointer;
+        transform: scale(1.04); }
+    .stories .menu .action-btns div {
+      background-color: #3b3b96;
+      text-align: center;
+      padding: 14px 16px;
+      border: 1px solid #9696db;
+      border-width: 0 0 1px 0;
+      transition: background-color 0.25s ease; }
+    .stories .menu .action-btns div#last-child {
+      border-radius: 0 0 0 8px;
+      border: 1px solid #3b3b96;
+      border-width: 1px 0 0 0; }
+    .stories .menu .action-btns div:hover {
+      cursor: pointer;
+      background-color: #5c5cb3; }
+  .stories .table-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Styling of table headings */
+    /* Styling of table entries */ }
+    .stories .table-content .table-headings {
+      border: 1px solid #3b3b96;
+      border-width: 0 0 1px 0; }
+      .stories .table-content .table-headings ul {
+        display: flex;
+        list-style-type: none;
+        padding-left: 0; }
+        .stories .table-content .table-headings ul li {
+          padding-left: 0;
+          text-align: center;
+          border: 1px solid #3b3b96;
+          padding: 14px 4px;
+          margin: auto; }
+        .stories .table-content .table-headings ul li#col-1 {
+          width: 10%;
+          border-width: 0 1px 0 0; }
+        .stories .table-content .table-headings ul li#col-2 {
+          width: 80%;
+          border-width: 0; }
+        .stories .table-content .table-headings ul li#col-3 {
+          width: 10%;
+          border-width: 0 0 0 1px; }
+    .stories .table-content .table-entries {
+      height: 100%; }
+      .stories .table-content .table-entries .entry ul {
+        display: flex;
+        list-style-type: none;
+        padding-left: 0;
+        transition: background-color 0.25s ease; }
+        .stories .table-content .table-entries .entry ul li {
+          padding-left: 0;
+          text-align: center;
+          padding: 12px;
+          word-break: break-all; }
+        .stories .table-content .table-entries .entry ul li#col-1 {
+          width: 10%; }
+        .stories .table-content .table-entries .entry ul li#col-2 {
+          text-align: left;
+          width: 80%; }
+        .stories .table-content .table-entries .entry ul li#col-3 {
+          width: 10%; }
+      .stories .table-content .table-entries .entry ul:hover {
+        cursor: pointer;
+        background-color: #f7f5fe; }
+    .stories .table-content .table-footer {
+      display: flex;
+      border: 1px solid #3b3b96;
+      border-width: 1px 0 0 0;
+      justify-content: space-between; }
+      .stories .table-content .table-footer .nav {
+        padding: 14px 0;
+        text-align: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .stories .table-content .table-footer .nav .arrow.left {
+          margin-right: 16px; }
+        .stories .table-content .table-footer .nav .arrow.right {
+          margin-left: 16px; }
+      .stories .table-content .table-footer .download-btn {
+        background-color: #3b3b96;
+        color: #f7f5fe;
+        padding: 14px 20px;
+        border-radius: 0 0 8px 0;
+        transition: background-color 0.25s ease;
+        text-align: center;
+        width: 8%; }
+      .stories .table-content .table-footer .download-btn:hover {
         background-color: #5c5cb3;
         cursor: pointer; }
 
