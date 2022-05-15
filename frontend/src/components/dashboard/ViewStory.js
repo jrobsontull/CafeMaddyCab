@@ -27,7 +27,6 @@ function ViewStory({ entry, onClose }) {
   }
 
   function saveChanges() {
-    console.log(storyDetails);
     if (selectedBookmark !== storyDetails.bookmark) {
       setErrorOnSubmit({ state: false, message: null });
       const updatedStory = storyDetails;

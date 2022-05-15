@@ -144,13 +144,7 @@ function Stories() {
                 <li onClick={() => searchStories('share=true')}>
                   Filter by share approved
                 </li>
-                <li>Search for story</li>
               </ul>
-            </div>
-            <div className="action-btns">
-              <div className="action" id="last-child">
-                Delete story
-              </div>
             </div>
           </div>
 
