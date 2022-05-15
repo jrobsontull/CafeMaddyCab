@@ -29,6 +29,7 @@ const Press = lazy(() => import('../front-facing/Press'));
 // Backend component imports
 const Login = lazy(() => import('../dashboard/Login'));
 const Dashboard = lazy(() => import('../dashboard/Dashboard'));
+const Stories = lazy(() => import('../dashboard/Stories'));
 const Feedback = lazy(() => import('../dashboard/Feedback'));
 const ApproveRides = lazy(() => import('../dashboard/ApproveRides'));
 const ChangePassword = lazy(() => import('../dashboard/ChangePassword'));
@@ -167,6 +168,16 @@ function Routing() {
           <ProtectedRoute>
             <Suspense fallback={<Loading />}>
               <Dashboard />
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/dashboard/view-stories'}
+        element={
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <Stories />
             </Suspense>
           </ProtectedRoute>
         }

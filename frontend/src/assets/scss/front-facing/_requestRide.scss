@@ -212,6 +212,34 @@ h2.request-ride-description {
     }
   }
 
+  textarea {
+    resize: vertical;
+    vertical-align: top;
+    border-radius: $border-radius;
+    border: 1px solid $dark-blue;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    color: $dark-blue;
+    background-color: #fefff3;
+    transition: box-shadow 0.25s ease;
+  }
+
+  textarea::placeholder {
+    color: $light-blue;
+  }
+
+  textarea:hover {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15);
+  }
+
+  textarea:focus {
+    box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+  }
+
+  .char-count {
+    margin: 5px 0 5px 5px;
+  }
+
   @media screen and (max-width: 456px) {
     .upload {
       input.upload-location {

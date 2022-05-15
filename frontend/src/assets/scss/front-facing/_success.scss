@@ -37,7 +37,7 @@
 }
 
 .info-box.success {
-  text-align: justify;
+  text-align: left;
 
   .error {
     width: calc(100% - 36px);
@@ -69,6 +69,10 @@
 
   textarea:focus {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
+  }
+
+  .char-count {
+    margin: 5px 0 5px 5px;
   }
 
   .btn.send-feedback {

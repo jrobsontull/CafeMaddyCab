@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
+import StoriesAPI from '../../utils/stories.api';
 
 import Loading from '../general/Loading';
 import Navbar from './Navbar';
@@ -14,6 +15,9 @@ function RequestRide() {
   const [selfie, setSelfie] = useState({ file: null });
   const [photoId, setPhotoId] = useState({ file: null });
   const [otherPurpose, setOtherPurpose] = useState('');
+  const [storyText, setStoryText] = useState('');
+  const [storyCharCount, setStoryCharCount] = useState(0);
+  const [shareStory, setShareStory] = useState(false);
   const [formOpen, setFormOpen] = useState(true);
 
   const [errors, setErrors] = useState({
@@ -185,6 +189,12 @@ function RequestRide() {
     }
   }
 
+  // Updates Share Story textbox and char counter
+  function storyTextUpdate(target) {
+    setStoryText(target);
+    setStoryCharCount(target.length);
+  }
+
   function setCaptcha(event) {
     const gResponse = event;
     if (gResponse) {
@@ -286,6 +296,17 @@ function RequestRide() {
           } else if (response && response.data.acknowledged === true) {
             // All good
             const id = response.data.insertedId;
+            // submit story if Story entry isn't empty
+            if (storyText.length > 0) {
+              const storyToReq = {
+                rideId: id,
+                text: storyText,
+                share: shareStory,
+              };
+
+              StoriesAPI.submitStory(storyToReq);
+            }
+
             setIsRequesting(false);
             navigate('/success/' + id, {
               state: { name: rideDetails.firstName },
@@ -311,14 +332,9 @@ function RequestRide() {
     // Form is only open Monday (1), Tuesday (2) and Wednesday (3)
     const openFormDate = new Date(Date.parse('2022-05-16T00:00:00-05:00'));
     // remove if condition after May 16th
-    if (today > openFormDate) {
-      if (day > 0 && day < 4) {
-        setFormOpen(true);
-      } else {
-        setFormOpen(false);
-      }
+    if (day > 0 && day < 4) {
+      setFormOpen(true);
     } else {
-      // Close form before 16th May
       setFormOpen(false);
     }*/
   }, []);
@@ -625,6 +641,41 @@ function RequestRide() {
                 </div>
 
                 <h3>
+                  Please feel free to share your story about how this ride is
+                  helping you. (optional)
+                </h3>
+
+                <textarea
+                  placeholder="Share your story here..."
+                  onChange={(e) => storyTextUpdate(e.target.value)}
+                  rows="10"
+                  maxLength="1000"
+                ></textarea>
+                <p className="char-count">{storyCharCount} / 1000</p>
+
+                <h3>
+                  If you agree to have the CMC team anonymously share your story
+                  for funraising purposes, please check this box. If you do not
+                  want your story shared anonymously, please do not check this
+                  box.
+                </h3>
+
+                <div className="check">
+                  <div className="check-item">
+                    <input
+                      type="checkbox"
+                      name="share-story"
+                      id="16"
+                      onChange={(e) => setShareStory(e.target.checked)}
+                    ></input>
+                    <label htmlFor="16">
+                      Yes, I agree to have the CMC team anonymously share this
+                      story for fundraising purposes.
+                    </label>
+                  </div>
+                </div>
+
+                <h3>
                   Thank you for choosing to stay safe! Codes will be emailed
                   every Monday morning at 8AM.
                 </h3>
@@ -646,7 +697,9 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We will be taking ride submissions starting Monday 5/16!
+              We will be taking ride submissions starting Monday 5/16! If you
+              have any questions, please refer to our{' '}
+              <Link to={'/faq'}>&quot;FAQ&quot;</Link> page.
             </div>
           )}
 
