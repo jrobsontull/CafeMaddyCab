@@ -299,11 +299,12 @@ function RequestRide() {
   useEffect(() => {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
+    setFormOpen(true);
 
     /*TODO: add a more clear message in the info box to users once website launches
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
-    const today = new Date();
+    /*const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
     const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
     const day = daylightSavingsDay.getDay();
@@ -319,7 +320,7 @@ function RequestRide() {
     } else {
       // Close form before 16th May
       setFormOpen(false);
-    }
+    }*/
   }, []);
 
   return (
@@ -338,6 +339,10 @@ function RequestRide() {
           <h1 className="page-title-no-logo" id="request-ride">
             Ride Request & Reimbursement Form
           </h1>
+          <h2 className="request-ride-description">
+            Ride codes will be emailed on the following Monday, starting 5/23
+            8am.
+          </h2>
 
           {errorOnSubmit.state ? (
             <div className="error">

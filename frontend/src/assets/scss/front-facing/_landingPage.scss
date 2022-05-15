@@ -44,9 +44,34 @@
     }
   }
 
-  .info-box-heading#uber {
-    text-align: center;
-    margin: 6px 0 10px 0;
+  .uber {
+    width: 80%;
+    align-items: center;
+    margin: 18px 0 22px 0;
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      margin: 0 0 8px 0;
+
+      .cmc-icon {
+        height: 50px;
+      }
+
+      .uber-icon {
+        height: 30px;
+        margin: auto 0 auto 0;
+      }
+
+      h1 {
+        margin: auto 16px auto 16px;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin: auto;
+    }
   }
 
   .info-box#why {
