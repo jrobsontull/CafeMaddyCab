@@ -320,29 +320,22 @@ function RequestRide() {
   useEffect(() => {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
-    setFormOpen(true);
 
-    // DON'T FORGET TO UNCOMMENT THIS!!
     /*TODO: add a more clear message in the info box to users once website launches
     ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
       Refer to this FAQ if you have any questions" */
-    /*const today = new Date();
+    const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
     const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
     const day = daylightSavingsDay.getDay();
     // Form is only open Monday (1), Tuesday (2) and Wednesday (3)
     const openFormDate = new Date(Date.parse('2022-05-16T00:00:00-05:00'));
     // remove if condition after May 16th
-    if (today > openFormDate) {
-      if (day > 0 && day < 4) {
-        setFormOpen(true);
-      } else {
-        setFormOpen(false);
-      }
+    if (day > 0 && day < 4) {
+      setFormOpen(true);
     } else {
-      // Close form before 16th May
       setFormOpen(false);
-    }*/
+    }
   }, []);
 
   return (
@@ -699,7 +692,9 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We will be taking ride submissions starting Monday 5/16!
+              We will be taking ride submissions starting Monday 5/16! If you
+              have any questions, please refer to our{' '}
+              <Link to={'/faq'}>&quot;FAQ&quot;</Link> page.
             </div>
           )}
 
