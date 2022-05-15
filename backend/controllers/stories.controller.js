@@ -8,7 +8,16 @@ export default class StoriesController {
         ? parseInt(req.query.entriesPerPage, 10)
         : 15;
       const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+
+      let filters = {};
+      if (req.query.bookmark) {
+        filters.bookmark = req.query.bookmark;
+      }
+      if (req.query.share) {
+        filters.share = req.query.share;
+      }
       const { storiesList, totalNumEntries } = await StoriesDAO.getStories(
+        filters,
         page,
         entriesPerPage
       );
@@ -16,6 +25,7 @@ export default class StoriesController {
       let response = {
         entries: storiesList,
         page: page,
+        filters: filters,
         entiresPerPage: entriesPerPage,
         totalResults: totalNumEntries,
       };

@@ -26,8 +26,21 @@ export default class StoriesDAO {
     }
   }
 
-  static async getStories(page = 0, entriesPerPage = 15) {
+  static async getStories(filters = null, page = 0, entriesPerPage = 15) {
     let query = {};
+
+    if (filters) {
+      if ('bookmark' in filters) {
+        /* Query documents by bookmark status */
+        query = { bookmark: filters['bookmark'] === 'true' };
+      }
+
+      if ('share' in filters) {
+        /* Query documents by bookmark status */
+        query = { share: filters['share'] === 'true' };
+      }
+    }
+
     let cursor;
     try {
       cursor = await stories.find(query);

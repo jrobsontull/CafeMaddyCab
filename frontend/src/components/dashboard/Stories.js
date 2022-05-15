@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import StoriesAPI from '../../utils/stories.api';
 import AuthContext from '../../utils/auth.context';
 
@@ -15,6 +15,8 @@ function Stories() {
   });
   const entiresPerPage = 15;
 
+  // For tracking search to refresh to when close windows
+  const [currentSearch, setCurrentSearch] = useState('');
   const [selectedStoryEntry, setSelectedStoryEntry] = useState(null);
   const [openStoryEntryView, setOpenStoryEntryView] = useState(false);
 
@@ -68,21 +70,59 @@ function Stories() {
 
   function closeStoryEntryView() {
     setOpenStoryEntryView(false);
+    searchStories(currentSearch);
   }
 
+  const searchStories = useCallback(
+    (params = null) => {
+      if (params) {
+        // Update current search
+        setCurrentSearch(params);
+        // Perform search with filter
+        StoriesAPI.getStories(params, user.user.token).then((response) => {
+          var { error } = response;
+          if (error) {
+            alert(error);
+          } else {
+            setEntries(response.entries);
+            setStoriesData({
+              totalEntries: response.totalResults,
+              currentPage: 0,
+              totalPages: calculateTotalPageNums(
+                entiresPerPage,
+                response.totalResults
+              ),
+            });
+          }
+        });
+      } else {
+        // Update current search
+        setCurrentSearch('');
+        // Perform search for all entries
+        StoriesAPI.getStories(null, user.user.token).then((response) => {
+          var { error } = response;
+          if (error) {
+            alert(error);
+          } else {
+            setEntries(response.entries);
+            setStoriesData({
+              totalEntries: response.totalResults,
+              currentPage: 0,
+              totalPages: calculateTotalPageNums(
+                entiresPerPage,
+                response.totalResults
+              ),
+            });
+          }
+        });
+      }
+    },
+    [user.user.token]
+  );
+
   useEffect(() => {
-    StoriesAPI.getStories(null, user.user.token).then((response) => {
-      setEntries(response.entries);
-      setStoriesData({
-        totalEntries: response.totalResults,
-        currentPage: 0,
-        totalPages: calculateTotalPageNums(
-          entiresPerPage,
-          response.totalResults
-        ),
-      });
-    });
-  }, [user.user.token]);
+    searchStories();
+  }, [searchStories]);
 
   return (
     <div className="react-container">
@@ -97,8 +137,13 @@ function Stories() {
           <div className="menu">
             <div className="search-options">
               <ul>
-                <li>All stories (X)</li>
-                <li>Filter by date</li>
+                <li onClick={() => searchStories()}>All stories</li>
+                <li onClick={() => searchStories('bookmark=true')}>
+                  Filter by bookmarked
+                </li>
+                <li onClick={() => searchStories('share=true')}>
+                  Filter by share approved
+                </li>
                 <li>Search for story</li>
               </ul>
             </div>

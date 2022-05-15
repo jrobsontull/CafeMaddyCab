@@ -63,7 +63,7 @@ function ViewStory({ entry, onClose }) {
         setUserDetails(null);
       }
     });
-  }, [storyDetails.rideId, user.user.token]);
+  }, [storyDetails.rideId, user.user.token, entry]);
 
   return (
     <div className="react-container view-entry">
