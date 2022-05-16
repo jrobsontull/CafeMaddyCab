@@ -103,7 +103,7 @@ function Feedback() {
           <div className="menu">
             <div className="search-options">
               <ul>
-                <li>All feedback (X)</li>
+                <li>All feedback</li>
                 <li>Filter by date</li>
                 <li>Search for feedback</li>
               </ul>

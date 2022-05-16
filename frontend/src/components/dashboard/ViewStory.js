@@ -19,9 +19,7 @@ function ViewStory({ entry, onClose }) {
   function updateBookmark(target) {
     let newValue = false;
     if (target && typeof target.value === 'string') {
-      if (target.value.toLowerCase() === 'true') {
-        newValue = true;
-      }
+      newValue = target.value.toLowerCase() === 'true';
     }
     setSelectedBookmark(newValue);
   }
@@ -54,6 +52,7 @@ function ViewStory({ entry, onClose }) {
 
   useEffect(() => {
     setStoryDetails(entry);
+    setSelectedBookmark(entry.bookmark);
     RidesAPI.getRideById(entry.rideId, user.user.token).then((response) => {
       if (response) {
         setUserDetails(response.ride);
