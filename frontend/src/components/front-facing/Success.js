@@ -11,8 +11,6 @@ function Success() {
 
   const [name, setName] = useState('');
 
-  const rideId = useParams();
-
   useEffect(() => {
     if (location.state) {
       setName(location.state.name);
