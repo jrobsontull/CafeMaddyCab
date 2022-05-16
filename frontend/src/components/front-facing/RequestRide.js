@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
-import StoriesAPI from '../../utils/stories.api';
 
 import Loading from '../general/Loading';
 import Navbar from './Navbar';
@@ -15,9 +14,6 @@ function RequestRide() {
   const [selfie, setSelfie] = useState({ file: null });
   const [photoId, setPhotoId] = useState({ file: null });
   const [otherPurpose, setOtherPurpose] = useState('');
-  const [storyText, setStoryText] = useState('');
-  const [storyCharCount, setStoryCharCount] = useState(0);
-  const [shareStory, setShareStory] = useState(false);
   const [formOpen, setFormOpen] = useState(true);
 
   const [errors, setErrors] = useState({
@@ -189,12 +185,6 @@ function RequestRide() {
     }
   }
 
-  // Updates Share Story textbox and char counter
-  function storyTextUpdate(target) {
-    setStoryText(target);
-    setStoryCharCount(target.length);
-  }
-
   function setCaptcha(event) {
     const gResponse = event;
     if (gResponse) {
@@ -296,17 +286,6 @@ function RequestRide() {
           } else if (response && response.data.acknowledged === true) {
             // All good
             const id = response.data.insertedId;
-            // submit story if Story entry isn't empty
-            if (storyText.length > 0) {
-              const storyToReq = {
-                rideId: id,
-                text: storyText,
-                share: shareStory,
-              };
-
-              StoriesAPI.submitStory(storyToReq);
-            }
-
             setIsRequesting(false);
             navigate('/success/' + id, {
               state: { name: rideDetails.firstName },
@@ -326,9 +305,9 @@ function RequestRide() {
       Refer to this FAQ if you have any questions" */
     const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
-    const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
-    const day = daylightSavingsDay.getDay();
-    const hour = daylightSavingsDay.getHours();
+    // const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
+    const day = today.getDay();
+    const hour = today.getHours();
 
     // Form is open from Mondays at 8am - Wedndesdays 11:59pm
     // Monday (1), Tuesday (2) and Wednesday (3)
@@ -643,41 +622,6 @@ function RequestRide() {
                     ></input>
                     <label htmlFor="15">
                       I have read and agree to the terms and conditions
-                    </label>
-                  </div>
-                </div>
-
-                <h3>
-                  Please feel free to share your story about how this ride is
-                  helping you. (optional)
-                </h3>
-
-                <textarea
-                  placeholder="Share your story here..."
-                  onChange={(e) => storyTextUpdate(e.target.value)}
-                  rows="10"
-                  maxLength="1000"
-                ></textarea>
-                <p className="char-count">{storyCharCount} / 1000</p>
-
-                <h3>
-                  If you agree to have the CMC team anonymously share your story
-                  for funraising purposes, please check this box. If you do not
-                  want your story shared anonymously, please do not check this
-                  box.
-                </h3>
-
-                <div className="check">
-                  <div className="check-item">
-                    <input
-                      type="checkbox"
-                      name="share-story"
-                      id="16"
-                      onChange={(e) => setShareStory(e.target.checked)}
-                    ></input>
-                    <label htmlFor="16">
-                      Yes, I agree to have the CMC team anonymously share this
-                      story for fundraising purposes.
                     </label>
                   </div>
                 </div>
