@@ -362,10 +362,6 @@ function RequestRide() {
           <h1 className="page-title-no-logo" id="request-ride">
             Ride Request & Reimbursement Form
           </h1>
-          <h2 className="request-ride-description">
-            Ride codes will be emailed on the following Monday, starting 5/23
-            8am.
-          </h2>
 
           {errorOnSubmit.state ? (
             <div className="error">
@@ -379,6 +375,10 @@ function RequestRide() {
 
           {formOpen ? (
             <div className="request-container">
+              <h2 className="request-ride-description">
+                Ride codes will be emailed on the following Monday, starting
+                5/23 8am.
+              </h2>
               <div className="request-form">
                 <input
                   type="text"
