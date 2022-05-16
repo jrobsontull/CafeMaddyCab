@@ -25,8 +25,11 @@ export default class ImageController {
       const fullPath = './uploads/' + req.params.folder + '/' + req.params.id;
       const deleteResponse = await ImageDAO.deleteImage(fullPath);
 
-      if (deleteResponse.hasOwnProperty("'error'")) {
-        res.status(500).json({ error: error });
+      if (
+        deleteResponse.hasOwnProperty("'error'") ||
+        deleteResponse.hasOwnProperty('error')
+      ) {
+        res.status(500).json({ error: deleteResponse.error });
       } else {
         res.json(deleteResponse);
       }

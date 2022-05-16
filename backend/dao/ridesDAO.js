@@ -406,7 +406,10 @@ export default class RidesDAO {
         const deleteResponse = await ImageDAO.bulkDelete(imagePaths);
         // And log any errors
         for (const response of deleteResponse) {
-          if (response[1].hasOwnProperty('error')) {
+          if (
+            response[1].hasOwnProperty('error') ||
+            response[1].hasOwnProperty("'error'")
+          ) {
             console.warn(
               'RideDAO: Failed to delete image ' +
                 response[0] +

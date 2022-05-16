@@ -161,8 +161,8 @@ export default class RidesController {
       let id = req.query.id || {};
       let ride = await RidesDAO.getRideById(id);
 
-      if (ride.hasOwnProperty("'error'")) {
-        res.status(400).json({ error: error.message });
+      if (ride.hasOwnProperty("'error'") || ride.hasOwnProperty('error')) {
+        res.status(400).json({ error: ride.error });
       } else {
         if (!ride.ride) {
           res.status(404).json({ error: 'Ride not found.' });
@@ -186,8 +186,11 @@ export default class RidesController {
 
       const statsResponse = await RidesDAO.getStats(filters);
 
-      if (statsResponse.hasOwnProperty("'error'")) {
-        res.status(400).json({ error: error.message });
+      if (
+        statsResponse.hasOwnProperty("'error'") ||
+        statsResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: statsResponse.error });
         return;
       }
 
@@ -225,8 +228,11 @@ export default class RidesController {
         notes
       );
 
-      if (rideResponse.hasOwnProperty("'error'")) {
-        res.status(400).json({ error: error.message });
+      if (
+        rideResponse.hasOwnProperty("'error'") ||
+        rideResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: rideResponse.error });
         return;
       }
 
@@ -258,8 +264,11 @@ export default class RidesController {
             approver
           );
 
-          if (response.hasOwnProperty("'error'")) {
-            res.status(500).json({ error: error });
+          if (
+            response.hasOwnProperty("'error'") ||
+            response.hasOwnProperty('error')
+          ) {
+            res.status(500).json({ error: response.error });
             return;
           }
 
@@ -288,8 +297,11 @@ export default class RidesController {
 
       const response = await RidesDAO.unsetRidesInProgress(approverId);
 
-      if (response.hasOwnProperty("'error'")) {
-        res.status(500).json({ error: error });
+      if (
+        response.hasOwnProperty("'error'") ||
+        response.hasOwnProperty('error')
+      ) {
+        res.status(500).json({ error: response.error });
         return;
       }
 
@@ -345,8 +357,11 @@ export default class RidesController {
           approver
         );
 
-        if (response.hasOwnProperty("'error'")) {
-          res.status(500).json({ error: error });
+        if (
+          response.hasOwnProperty("'error'") ||
+          response.hasOwnProperty('error')
+        ) {
+          res.status(500).json({ error: response.error });
           return;
         }
 
@@ -376,8 +391,11 @@ export default class RidesController {
         response = await RidesDAO.sendCodes();
       }
 
-      if (response.hasOwnProperty("'error'")) {
-        res.status(500).json({ error: error });
+      if (
+        response.hasOwnProperty("'error'") ||
+        response.hasOwnProperty('error')
+      ) {
+        res.status(500).json({ error: response.error });
         return;
       }
 
@@ -429,8 +447,11 @@ export default class RidesController {
 
       const response = await RidesDAO.markAsDone(parsedCsv);
 
-      if (response.hasOwnProperty("'error'")) {
-        res.status(500).json({ error: error });
+      if (
+        response.hasOwnProperty("'error'") ||
+        response.hasOwnProperty('error')
+      ) {
+        res.status(500).json({ error: response.error });
       } else {
         res.json(response);
       }

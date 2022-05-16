@@ -44,6 +44,10 @@ h2.request-ride-description {
     a#terms-link:hover {
       color: $dark-pink-hover;
     }
+
+    span {
+      font-weight: 500;
+    }
   }
 
   input {

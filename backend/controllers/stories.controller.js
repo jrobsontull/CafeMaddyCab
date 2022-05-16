@@ -68,8 +68,11 @@ export default class StoriesController {
         bookmark
       );
 
-      if (storyResponse.hasOwnProperty("'error'")) {
-        res.status(400).json({ error: error.message });
+      if (
+        storyResponse.hasOwnProperty("'error'") ||
+        storyResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: storyResponse.error });
         return;
       }
 

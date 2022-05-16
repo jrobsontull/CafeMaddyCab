@@ -356,7 +356,7 @@ function RequestRide() {
             <div className="request-container">
               <h2 className="request-ride-description">
                 Ride codes will be emailed on the following Monday, starting
-                5/23 8am.
+                5/23 at 8 AM.
               </h2>
               <div className="request-form">
                 <input
@@ -509,7 +509,8 @@ function RequestRide() {
                 <h3>
                   Please submit a selfie/photo of yourself. If you are
                   submitting on behalf of someone else, please submit their
-                  selfie/photo.
+                  selfie/photo. We have a max upload limit of <span>10 MB</span>{' '}
+                  per photo.
                 </h3>
 
                 <div className="upload">
@@ -533,7 +534,8 @@ function RequestRide() {
                 <h3>
                   Please submit a photo of your photo ID. If you are submitting
                   on behalf of someone else, please submit a photo of their
-                  photo ID.
+                  photo ID. We have a max upload limit of <span>10 MB</span> per
+                  photo.
                 </h3>
 
                 <div className="upload">

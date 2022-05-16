@@ -15,8 +15,11 @@ export default class AuthController {
         req.body.password
       );
       // Error handling
-      if (loginResponse.hasOwnProperty("'error'")) {
-        res.status(400).json({ error });
+      if (
+        loginResponse.hasOwnProperty("'error'") ||
+        loginResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: loginResponse.error });
       } else {
         // Create and sign token
         const user = loginResponse;
@@ -49,8 +52,11 @@ export default class AuthController {
       );
 
       // Error handling
-      if (registerResponse.hasOwnProperty("'error'")) {
-        res.status(400).json({ error });
+      if (
+        registerResponse.hasOwnProperty("'error'") ||
+        registerResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: registerResponse.error });
       } else {
         const user = registerResponse;
         user.token = generateToken(registerResponse._id);
@@ -86,8 +92,11 @@ export default class AuthController {
 
       const nameResponse = await AuthDAO.getUsername(_id);
 
-      if (nameResponse.hasOwnProperty("'error'")) {
-        res.status(400).json({ error: error.message });
+      if (
+        nameResponse.hasOwnProperty("'error'") ||
+        nameResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: nameResponse.error });
       } else {
         res.json(nameResponse);
       }
@@ -113,8 +122,11 @@ export default class AuthController {
           _id
         );
 
-        if (passResponse.hasOwnProperty("'error'")) {
-          res.status(400).json({ error: error });
+        if (
+          passResponse.hasOwnProperty("'error'") ||
+          passResponse.hasOwnProperty('error')
+        ) {
+          res.status(400).json({ error: passResponse.error });
         } else {
           res.json(passResponse);
         }

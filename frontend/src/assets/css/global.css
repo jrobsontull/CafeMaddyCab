@@ -559,6 +559,8 @@ h2.request-ride-description {
       transition: color 0.25s ease; }
     .request-form h3 a#terms-link:hover {
       color: #e99fdc; }
+    .request-form h3 span {
+      font-weight: 500; }
   .request-form input {
     background-color: #fefff3;
     padding: 8px 18px;
