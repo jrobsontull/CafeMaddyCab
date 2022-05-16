@@ -321,19 +321,27 @@ function RequestRide() {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
 
-    /*TODO: add a more clear message in the info box to users once website launches
-    ex. "We are currently accepting ride submissions between Mondays to Wednesdays. 
+    /*TODO: change copy of closed form description
+    ex. "We are currently accepting ride submissions between Mondays to Wednesdays.
       Refer to this FAQ if you have any questions" */
     const today = new Date();
     // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
     const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
     const day = daylightSavingsDay.getDay();
-    // Form is only open Monday (1), Tuesday (2) and Wednesday (3)
-    const openFormDate = new Date(Date.parse('2022-05-16T00:00:00-05:00'));
-    // remove if condition after May 16th
+    const hour = daylightSavingsDay.getHours();
+
+    // Form is open from Mondays at 8am - Wedndesdays 11:59pm
+    // Monday (1), Tuesday (2) and Wednesday (3)
     if (day > 0 && day < 4) {
-      setFormOpen(true);
+      if (day === 1 && hour < 8) {
+        // Mon before 8 am
+        setFormOpen(false);
+      } else {
+        // Mon 8 am - Wed 11:59pm
+        setFormOpen(true);
+      }
     } else {
+      // Thurs - Sun
       setFormOpen(false);
     }
   }, []);
@@ -367,6 +375,10 @@ function RequestRide() {
 
           {formOpen ? (
             <div className="request-container">
+              <h2 className="request-ride-description">
+                Ride codes will be emailed on the following Monday, starting
+                5/23 8am.
+              </h2>
               <div className="request-form">
                 <input
                   type="text"
@@ -692,8 +704,8 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We will be taking ride submissions starting Monday 5/16! If you
-              have any questions, please refer to our{' '}
+              We will be taking ride submissions starting Monday 5/16 at 8 am!
+              If you have any questions, please refer to our{' '}
               <Link to={'/faq'}>&quot;FAQ&quot;</Link> page.
             </div>
           )}

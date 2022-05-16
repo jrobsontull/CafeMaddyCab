@@ -13,6 +13,8 @@ import DonateBlue from '../../assets/img/donate_icon_blue.svg';
 import TaxiWhite from '../../assets/img/taxi_icon_white.svg';
 import TaxiBlue from '../../assets/img/taxi_icon_blue.svg';
 import InfoWhite from '../../assets/img/info_icon_white.svg';
+import CMCLogo from '../../assets/img/logo.svg';
+import Uber from '../../assets/img/uber_logo.png';
 
 // Img imports
 import Landing1 from '../../assets/img/landing-page-1.webp';
@@ -81,9 +83,16 @@ function LandingPage() {
           </p>
         </div>
 
-        <h2 className="info-box-heading" id="uber">
-          Thank you Uber for partnering with us and donating!
-        </h2>
+        <div className="uber">
+          <div className="icons">
+            <img src={CMCLogo} alt="CMCLogo" className="cmc-icon" />
+            <h1>X</h1>
+            <img src={Uber} alt="Uber" className="uber-icon" />
+          </div>
+          <h2 className="info-box-heading">
+            Thank you Uber for partnering with us and donating!
+          </h2>
+        </div>
 
         <div className="btn-link inverted" id="landing-page">
           <a
