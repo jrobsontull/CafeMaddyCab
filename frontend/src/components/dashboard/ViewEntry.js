@@ -159,8 +159,10 @@ function ViewEntry({ rideId, onClose }) {
             <div className="back-btn" onClick={onClose}>
               <img className="nav-arrow" src={Arrow} alt="arrow" />
             </div>
-
-            <p>Ride Request: John Doe ({rideDetails.shortId})</p>
+            <p>
+              Ride Request: {rideDetails.firstName} {rideDetails.lastName} (
+              {rideDetails.shortId})
+            </p>
           </div>
           <div className="save-changes-btn" onClick={() => saveChanges()}>
             Save changes
