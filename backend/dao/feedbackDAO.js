@@ -1,5 +1,3 @@
-import mongodb from 'mongodb';
-
 let feedback;
 
 export default class FeedbackDAO {
@@ -54,19 +52,18 @@ export default class FeedbackDAO {
     try {
       const feedbackExists = await feedback.findOne({ rideId: rideId.id });
       if (feedbackExists) {
-        console.error('rideId for feedback already exists');
         return { error: 'You have already submitted a feedback response.' };
       }
 
-      const feedbackResponse = {
+      const newEntry = {
         rideId: rideId.id,
         text: feedbackText,
       };
 
-      return feedback.insertOne(feedbackResponse);
+      return await feedback.insertOne(newEntry);
     } catch (e) {
-      console.error('Unable to post feedback: ' + e);
-      return { error: e };
+      console.error('FeedbackDAO: Unable to post feedback: ' + e.message);
+      return { error: e.message };
     }
   }
 }

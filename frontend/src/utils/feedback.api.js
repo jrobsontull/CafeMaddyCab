@@ -1,8 +1,9 @@
 import http from './http.common';
 
 export default class FeedbackAPI {
-  static async submitFeedback(feedback) {
-    const response = await postRequest(feedback, '/api/v1/feedback/submit');
+  static async submitFeedback(feedback, id) {
+    const body = { feedbackText: feedback, rideId: id };
+    const response = await postRequest(body, '/api/v1/feedback/submit');
     if (response) {
       return response;
     }
@@ -35,7 +36,7 @@ async function postRequest(body, url) {
     }
   } catch (e) {
     console.log('Error: ' + e.message);
-    return null;
+    return e.response;
   }
 }
 
