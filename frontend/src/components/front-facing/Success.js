@@ -28,6 +28,7 @@ function Success() {
         state: true,
         message: 'Your feedback message is too long, please shorten it.',
       });
+      setFeedback('');
     } else {
       const re =
         /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
@@ -74,7 +75,7 @@ function Success() {
     } else {
       navigate('/');
     }
-  }, [location]);
+  }, [location, navigate]);
 
   return (
     <div className="react-container">

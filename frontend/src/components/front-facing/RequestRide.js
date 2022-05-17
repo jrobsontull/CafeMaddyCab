@@ -16,6 +16,12 @@ function RequestRide() {
   const [otherPurpose, setOtherPurpose] = useState('');
   const [formOpen, setFormOpen] = useState(true);
 
+  const [story, setStory] = useState({
+    story: '',
+    charCount: 0,
+    shareStory: false,
+  });
+
   const [errors, setErrors] = useState({
     firstName: true,
     lastName: true,
@@ -185,6 +191,32 @@ function RequestRide() {
     }
   }
 
+  // Update personal story
+  function updateStory(target) {
+    const newStory = target.value;
+    if (newStory.length > 800) {
+      setStory((prevStory) => ({ ...prevStory, story: '' }));
+      target.classList.add('invalid');
+    } else {
+      const re =
+        /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+      if (re.test(newStory)) {
+        target.classList.remove('invalid');
+        setStory((prevStory) => ({
+          ...prevStory,
+          story: newStory,
+          charCount: newStory.length,
+        }));
+      } else {
+        setStory((prevStory) => ({
+          ...prevStory,
+          story: '',
+        }));
+        target.classList.add('invalid');
+      }
+    }
+  }
+
   function setCaptcha(event) {
     const gResponse = event;
     if (gResponse) {
@@ -276,7 +308,7 @@ function RequestRide() {
     } else {
       setIsRequesting(true);
 
-      RidesAPI.requestRide(rideDetails, selfie.file, photoId.file).then(
+      RidesAPI.requestRide(rideDetails, selfie.file, photoId.file, story).then(
         (response) => {
           var { error } = response;
           if (error) {
@@ -341,6 +373,10 @@ function RequestRide() {
           <h1 className="page-title-no-logo" id="request-ride">
             Ride Request & Reimbursement Form
           </h1>
+          <h2 className="description">
+            Ride codes will be emailed on the following Monday, starting 5/23 at
+            8 AM.
+          </h2>
 
           {errorOnSubmit.state ? (
             <div className="error">
@@ -354,10 +390,6 @@ function RequestRide() {
 
           {formOpen ? (
             <div className="request-container">
-              <h2 className="request-ride-description">
-                Ride codes will be emailed on the following Monday, starting
-                5/23 at 8 AM.
-              </h2>
               <div className="request-form">
                 <input
                   type="text"
@@ -629,6 +661,46 @@ function RequestRide() {
                 </div>
 
                 <h3>
+                  Please feel free to share your story about how this ride is
+                  helping you (optional).
+                </h3>
+
+                <textarea
+                  placeholder="Share your story here..."
+                  onChange={(e) => updateStory(e.target)}
+                  rows="4"
+                  maxLength="800"
+                ></textarea>
+                <p className="char-count">{story.charCount} / 800</p>
+
+                <h3>
+                  If you agree to have the CMC team anonymously share your story
+                  publically for funraising purposes, please check this box. If
+                  you do not want your story shared anonymously, please do not
+                  check this box.
+                </h3>
+
+                <div className="check story-check">
+                  <div className="check-item">
+                    <input
+                      type="checkbox"
+                      name="share-story"
+                      id="16"
+                      onChange={(e) =>
+                        setStory((prevStory) => ({
+                          ...prevStory,
+                          shareStory: e.target.checked,
+                        }))
+                      }
+                    ></input>
+                    <label htmlFor="16">
+                      Yes, I agree to have the CMC team anonymously share this
+                      story for fundraising purposes
+                    </label>
+                  </div>
+                </div>
+
+                <h3 id="thank-you">
                   Thank you for choosing to stay safe! Codes will be emailed
                   every Monday morning at 8AM.
                 </h3>

@@ -14,7 +14,7 @@ import TaxiWhite from '../../assets/img/taxi_icon_white.svg';
 import TaxiBlue from '../../assets/img/taxi_icon_blue.svg';
 import InfoWhite from '../../assets/img/info_icon_white.svg';
 import CMCLogo from '../../assets/img/logo.svg';
-import Uber from '../../assets/img/uber_logo.png';
+import Uber from '../../assets/img/uber_logo.svg';
 
 // Img imports
 import Landing1 from '../../assets/img/landing-page-1.webp';

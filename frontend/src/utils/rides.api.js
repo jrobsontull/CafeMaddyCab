@@ -3,7 +3,7 @@ import httpMulti from './http.upload.common';
 
 export default class RidesAPI {
   // Request a ride
-  static async requestRide(rideDetails, selfie, photoId) {
+  static async requestRide(rideDetails, selfie, photoId, story) {
     var formData = new FormData();
     formData.append('selfie', selfie);
     formData.append('photoId', photoId);
@@ -14,6 +14,8 @@ export default class RidesAPI {
     formData.append('income', rideDetails.income);
     formData.append('purpose', rideDetails.purpose.value);
     formData.append('purposeText', rideDetails.purpose.text);
+    formData.append('storyText', story.story);
+    formData.append('storySharable', story.shareStory);
 
     const response = await postRequestMulti(
       formData,
