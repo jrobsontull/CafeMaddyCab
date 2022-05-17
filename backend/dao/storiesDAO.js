@@ -21,7 +21,8 @@ export default class StoriesDAO {
       stories = await conn.db(db_uri).collection('stories');
     } catch (e) {
       console.error(
-        'Unable to establish a connection handle in storiesDAO: ' + e
+        'StoriesDAO: Unable to establish a connection handle in storiesDAO. ' +
+          e
       );
     }
   }
@@ -31,12 +32,12 @@ export default class StoriesDAO {
 
     if (filters) {
       if ('bookmark' in filters) {
-        /* Query documents by bookmark status */
+        // Query documents by bookmark status
         query = { bookmark: filters['bookmark'] === 'true' };
       }
 
       if ('share' in filters) {
-        /* Query documents by bookmark status */
+        // Query documents by bookmark status
         query = { share: filters['share'] === 'true' };
       }
     }
@@ -59,29 +60,31 @@ export default class StoriesDAO {
       return { storiesList, totalNumEntries };
     } catch (e) {
       console.error(
-        'Unable to convert cursor to array or problem counting documents.\n' + e
+        'StoriesDAO: Unable to convert cursor to array or problem counting documents. ' +
+          e
       );
       return { storiesList: [], totalNumEntries: 0 };
     }
   }
 
-  static async postStory(rideId, storyText, share) {
+  // Post a new story
+  static async postStory(storyText, rideId, share) {
     try {
-      const storiesResponse = {
-        rideId: rideId,
+      const newStory = {
+        rideNanoId: rideId,
         text: storyText,
         share: share,
         bookmark: false,
       };
 
-      return stories.insertOne(storiesResponse);
+      return stories.insertOne(newStory);
     } catch (e) {
-      console.error('Unable to post stories: ' + e);
+      console.error('StoriesDAO: Unable to post story. ' + e);
       return { error: e };
     }
   }
 
-  // Edit rides by specific ID
+  // Edit stories by specific ID
   static async editStoryById(id, rideId, text, share, bookmark) {
     try {
       const updateResponse = await stories.findOneAndUpdate(
@@ -100,7 +103,7 @@ export default class StoriesDAO {
 
       return updateResponse;
     } catch (e) {
-      console.error('storiesDAO: Unable to update story (' + id + '). ' + e);
+      console.error('StoriesDAO: Unable to update story (' + id + '). ' + e);
       return { error: e };
     }
   }

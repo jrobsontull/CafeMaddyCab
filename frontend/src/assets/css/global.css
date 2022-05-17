@@ -537,7 +537,7 @@
 h1.page-title-no-logo#request-ride {
   margin-bottom: 14px; }
 
-h2.request-ride-description {
+h2.description {
   text-align: center;
   margin-bottom: 22px; }
 
@@ -561,6 +561,8 @@ h2.request-ride-description {
       color: #e99fdc; }
     .request-form h3 span {
       font-weight: 500; }
+  .request-form h3#thank-you {
+    font-weight: 500; }
   .request-form input {
     background-color: #fefff3;
     padding: 8px 18px;
@@ -590,6 +592,8 @@ h2.request-ride-description {
     padding: 12px 18px;
     border-radius: 8px;
     transition: box-shadow 0.25s ease; }
+  .request-form .check.story-check {
+    margin-bottom: 8px; }
   .request-form .radio-check .check-item {
     margin-bottom: 4px; }
     .request-form .radio-check .check-item label.other-input input {
@@ -683,8 +687,15 @@ h2.request-ride-description {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.15); }
   .request-form textarea:focus {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25); }
+  .request-form textarea.invalid {
+    border-color: #e93a3a;
+    color: #e93a3a; }
+  .request-form textarea.invalid:hover {
+    box-shadow: 0px 0px 5px 1px rgba(233, 58, 58, 0.15); }
+  .request-form textarea.invalid:focus {
+    box-shadow: 0px 0px 5px 1px rgba(233, 58, 58, 0.15); }
   .request-form .char-count {
-    margin: 5px 0 5px 5px; }
+    margin: 5px 0 0 5px; }
   @media screen and (max-width: 456px) {
     .request-form .upload input.upload-location {
       padding: 23px 18px; } }

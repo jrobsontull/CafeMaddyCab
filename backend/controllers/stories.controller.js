@@ -16,13 +16,14 @@ export default class StoriesController {
       if (req.query.share) {
         filters.share = req.query.share;
       }
+
       const { storiesList, totalNumEntries } = await StoriesDAO.getStories(
         filters,
         page,
         entriesPerPage
       );
 
-      let response = {
+      const response = {
         entries: storiesList,
         page: page,
         filters: filters,
@@ -31,24 +32,48 @@ export default class StoriesController {
       };
       res.json(response);
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      console.log('StoriesController: Failed to get stories. ' + e.message);
+      res.status(500).json({ error: e });
     }
   }
 
   /* POST stories to MongoDB Stories collection */
-  static async apiPostStory(req, res, next) {
-    const rideId = req.body.rideId;
-    const storyText = req.body.text;
-    const share = req.body.share;
-    const storiesResponse = await StoriesDAO.postStory(
-      rideId,
-      storyText,
-      share
-    );
-    res.json(storiesResponse);
+  static async apiPostStory(story, rideId, shareable) {
+    try {
+      if (story.length > 800) {
+        return { error: 'Story too long. Please shorten before resubmitting.' };
+      } else {
+        const re =
+          /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+        if (re.test(story)) {
+          const storiesResponse = await StoriesDAO.postStory(
+            story,
+            rideId,
+            shareable
+          );
+          return storiesResponse;
+        } else {
+          return {
+            error:
+              'Your story contains invalid characters. Remove these before resubmitting.',
+          };
+        }
+      }
+    } catch (e) {
+      console.error(
+        'StoriesController: Failed to post new story. ' + e.message
+      );
+      res.status(500).json({ error: e });
+    }
   }
   catch(e) {
-    res.status(500).json({ error: e.message });
+    console.log(
+      'StoriesController: Failed to post new story from rideId ' +
+        rideId +
+        '. ' +
+        e.message
+    );
+    res.status(500).json({ error: e });
   }
 
   /* PUT request for making edits to specific story */

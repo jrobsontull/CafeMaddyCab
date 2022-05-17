@@ -15,7 +15,7 @@ h1.page-title-no-logo#request-ride {
   margin-bottom: 14px;
 }
 
-h2.request-ride-description {
+h2.description {
   text-align: center;
   margin-bottom: 22px;
 }
@@ -48,6 +48,10 @@ h2.request-ride-description {
     span {
       font-weight: 500;
     }
+  }
+
+  h3#thank-you {
+    font-weight: 500;
   }
 
   input {
@@ -93,6 +97,10 @@ h2.request-ride-description {
     padding: 12px 18px;
     border-radius: $border-radius;
     transition: box-shadow 0.25s ease;
+  }
+
+  .check.story-check {
+    margin-bottom: 8px;
   }
 
   .radio-check {
@@ -238,8 +246,21 @@ h2.request-ride-description {
     box-shadow: 0px 0px 5px 1px rgba(59, 59, 150, 0.25);
   }
 
+  textarea.invalid {
+    border-color: $error;
+    color: $error;
+  }
+
+  textarea.invalid:hover {
+    box-shadow: 0px 0px 5px 1px $error-shadow;
+  }
+
+  textarea.invalid:focus {
+    box-shadow: 0px 0px 5px 1px $error-shadow;
+  }
+
   .char-count {
-    margin: 5px 0 5px 5px;
+    margin: 5px 0 0 5px;
   }
 
   @media screen and (max-width: 456px) {

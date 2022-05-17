@@ -1,15 +1,40 @@
 import RidesDAO from '../dao/ridesDAO.js';
+import StoriesController from './stories.controller.js';
 import { nanoid } from 'nanoid/async';
 import { parseAsync } from 'json2csv';
 import { parse } from 'csv-parse';
 
 export default class RidesController {
-  /* POST request for single ride request */
+  // POST request for single ride request
   static async apiRequestRide(req, res, next) {
     try {
       // Async generate short ID for reference
       const shortId = await nanoid(10);
 
+      // POST story if present
+      let storyResponse;
+      try {
+        const storyText = req.body.storyText;
+        if (storyText !== '') {
+          const shareable = req.body.storySharable;
+          storyResponse = await StoriesController.apiPostStory(
+            storyText,
+            shortId || 'Error',
+            shareable
+          );
+        }
+      } catch (storyError) {
+        console.error('RidesDAO: Failed to post story. ' + storyError);
+      }
+      if (
+        storyResponse.hasOwnProperty("'error'") ||
+        storyResponse.hasOwnProperty('error')
+      ) {
+        res.status(400).json({ error: storyResponse.error });
+        return;
+      }
+
+      // Continue with rest of POST req elsewise
       // Get NYC current date/time
       const dateRequested = new Date();
 
@@ -116,7 +141,7 @@ export default class RidesController {
     }
   }
 
-  /* General GET request for ride quieries */
+  // General GET request for ride quieries
   static async apiGetRides(req, res, next) {
     try {
       const ridesPerPage = req.query.ridesPerPage
@@ -155,7 +180,7 @@ export default class RidesController {
     }
   }
 
-  /* GET request to get ride by _id */
+  // GET request to get ride by _id
   static async apiGetRideById(req, res, next) {
     try {
       let id = req.query.id || {};
@@ -176,7 +201,7 @@ export default class RidesController {
     }
   }
 
-  /* GET request for general DB stats on rides */
+  // GET request for general DB stats on rides
   static async apiGetStats(req, res, next) {
     try {
       let filters = {};
@@ -201,7 +226,7 @@ export default class RidesController {
     }
   }
 
-  /* PUT request for making edits to specific ride */
+  // PUT request for making edits to specific ride
   static async apiEditRideById(req, res, next) {
     try {
       const id = req.body._id;
@@ -250,7 +275,7 @@ export default class RidesController {
     }
   }
 
-  /* Set status of rides to in progress and get rides back */
+  // Set status of rides to in progress and get rides back
   static async apiSetRidesInProgress(req, res, next) {
     try {
       const newRides = await RidesDAO.getStats({ status: 1 });
