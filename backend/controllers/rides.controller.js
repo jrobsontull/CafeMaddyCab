@@ -22,16 +22,16 @@ export default class RidesController {
             shortId || 'Error',
             shareable
           );
+          if (
+            storyResponse.hasOwnProperty("'error'") ||
+            storyResponse.hasOwnProperty('error')
+          ) {
+            res.status(400).json({ error: storyResponse.error });
+            return;
+          }
         }
       } catch (storyError) {
         console.error('RidesDAO: Failed to post story. ' + storyError);
-      }
-      if (
-        storyResponse.hasOwnProperty("'error'") ||
-        storyResponse.hasOwnProperty('error')
-      ) {
-        res.status(400).json({ error: storyResponse.error });
-        return;
       }
 
       // Continue with rest of POST req elsewise
