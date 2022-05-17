@@ -34,6 +34,7 @@ function RequestRide() {
     understand1: true,
     understand2: true,
     understand3: true,
+    story: false,
     recaptcha: true,
   });
 
@@ -197,6 +198,7 @@ function RequestRide() {
     if (newStory.length > 800) {
       setStory((prevStory) => ({ ...prevStory, story: '' }));
       target.classList.add('invalid');
+      setErrors((prevErrors) => ({ ...prevErrors, story: true }));
     } else {
       const re =
         /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
@@ -207,12 +209,14 @@ function RequestRide() {
           story: newStory,
           charCount: newStory.length,
         }));
+        setErrors((prevErrors) => ({ ...prevErrors, story: false }));
       } else {
         setStory((prevStory) => ({
           ...prevStory,
           story: '',
         }));
         target.classList.add('invalid');
+        setErrors((prevErrors) => ({ ...prevErrors, story: true }));
       }
     }
   }
@@ -301,6 +305,12 @@ function RequestRide() {
         setErrorOnSubmit({
           state: true,
           message: 'Please complete the ReCAPTCHA before continuing.',
+        });
+      } else if (errors.story) {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'Your story contains invalid characters. Please remove before resubmitting.',
         });
       }
 

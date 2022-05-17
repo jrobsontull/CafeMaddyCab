@@ -12,12 +12,11 @@ export default class RidesController {
       const shortId = await nanoid(10);
 
       // POST story if present
-      let storyResponse;
       try {
         const storyText = req.body.storyText;
-        if (storyText !== '') {
+        if (storyText && storyText !== '') {
           const shareable = req.body.storySharable;
-          storyResponse = await StoriesController.apiPostStory(
+          const storyResponse = await StoriesController.apiPostStory(
             storyText,
             shortId || 'Error',
             shareable

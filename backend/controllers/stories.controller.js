@@ -41,18 +41,27 @@ export default class StoriesController {
   static async apiPostStory(story, rideId, shareable) {
     try {
       if (story.length > 800) {
+        // Test for length
         return { error: 'Story too long. Please shorten before resubmitting.' };
       } else {
+        // Test for bad characters
         const re =
           /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
         if (re.test(story)) {
+          // All good
+          let toShare = false;
+          if (shareable.toLowerCase() === 'true') {
+            // Convert to bool
+            toShare = true;
+          }
           const storiesResponse = await StoriesDAO.postStory(
             story,
             rideId,
-            shareable
+            toShare
           );
           return storiesResponse;
         } else {
+          // Bad characters present
           return {
             error:
               'Your story contains invalid characters. Remove these before resubmitting.',
@@ -63,17 +72,8 @@ export default class StoriesController {
       console.error(
         'StoriesController: Failed to post new story. ' + e.message
       );
-      res.status(500).json({ error: e });
+      return { error: 'An internal error occurred. Please try again.' };
     }
-  }
-  catch(e) {
-    console.log(
-      'StoriesController: Failed to post new story from rideId ' +
-        rideId +
-        '. ' +
-        e.message
-    );
-    res.status(500).json({ error: e });
   }
 
   /* PUT request for making edits to specific story */
