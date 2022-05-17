@@ -61,30 +61,38 @@ function Dashboard() {
       ridesData.totalPages - 1 !== ridesData.currentPage
     ) {
       const pageToScrollTo = ridesData.currentPage + 1;
-      RidesAPI.getRides('page=' + pageToScrollTo, user.user.token).then(
-        (response) => {
-          setRides(response.rides);
-          setRidesData((prevData) => ({
-            ...prevData,
-            currentPage: pageToScrollTo,
-          }));
-        }
-      );
+
+      let searchExpression = 'page=' + pageToScrollTo;
+      if (currentSearch !== '') {
+        searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
+      }
+
+      RidesAPI.getRides(searchExpression, user.user.token).then((response) => {
+        setRides(response.rides);
+        setRidesData((prevData) => ({
+          ...prevData,
+          currentPage: pageToScrollTo,
+        }));
+      });
     }
   }
 
   function prevPage() {
     if (ridesData.currentPage > 0) {
       const pageToScrollTo = ridesData.currentPage - 1;
-      RidesAPI.getRides('page=' + pageToScrollTo, user.user.token).then(
-        (response) => {
-          setRides(response.rides);
-          setRidesData((prevData) => ({
-            ...prevData,
-            currentPage: pageToScrollTo,
-          }));
-        }
-      );
+
+      let searchExpression = 'page=' + pageToScrollTo;
+      if (currentSearch !== '') {
+        searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
+      }
+
+      RidesAPI.getRides(searchExpression, user.user.token).then((response) => {
+        setRides(response.rides);
+        setRidesData((prevData) => ({
+          ...prevData,
+          currentPage: pageToScrollTo,
+        }));
+      });
     }
   }
 
