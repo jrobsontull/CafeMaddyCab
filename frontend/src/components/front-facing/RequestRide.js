@@ -201,7 +201,7 @@ function RequestRide() {
       setErrors((prevErrors) => ({ ...prevErrors, story: true }));
     } else {
       const re =
-        /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+        /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-+!?"]+$/u;
       if (re.test(newStory)) {
         target.classList.remove('invalid');
         setStory((prevStory) => ({
@@ -301,16 +301,16 @@ function RequestRide() {
           message:
             'You have not agreed to all our terms. You will need to do so to continue with a reimbursement request.',
         });
-      } else if (errors.recaptcha) {
-        setErrorOnSubmit({
-          state: true,
-          message: 'Please complete the ReCAPTCHA before continuing.',
-        });
       } else if (errors.story) {
         setErrorOnSubmit({
           state: true,
           message:
             'Your story contains invalid characters. Please remove before resubmitting.',
+        });
+      } else if (errors.recaptcha) {
+        setErrorOnSubmit({
+          state: true,
+          message: 'Please complete the ReCAPTCHA before continuing.',
         });
       }
 
