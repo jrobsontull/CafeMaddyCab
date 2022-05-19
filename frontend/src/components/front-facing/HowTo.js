@@ -54,8 +54,8 @@ function HowToPage() {
               <img src={HowTo1} alt="how-to-1" />
               <h3>Eligibility</h3>
               <p>
-                Asian female, LGBTQ+, elderly pensioner in need of financial aid
-                for cab rides
+                Asian female, LGBTQ+ or elderly in need of financial aid for cab
+                rides
               </p>
             </li>
             <li>
