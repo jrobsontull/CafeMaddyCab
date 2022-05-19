@@ -732,9 +732,9 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              We will be taking ride submissions starting Monday 5/16 at 8 am!
-              If you have any questions, please refer to our{' '}
-              <Link to={'/faq'}>&quot;FAQ&quot;</Link> page.
+              Our submission form is currently closed. We take submissions from
+              Monday to Wednesday each week. If you have any questions, please
+              refer to our <Link to={'/faq'}>FAQ</Link> page.
             </div>
           )}
 

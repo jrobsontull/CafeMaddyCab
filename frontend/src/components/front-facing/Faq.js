@@ -23,8 +23,7 @@ function Faq() {
         </div>
         <div className="info-box">
           We will be taking ride submissions starting Monday 5/16! The form will
-          be open each week from Mondays to Wednesdays, until codes are
-          depleted.
+          be open each week from Monday to Wednesday, until codes are depleted.
         </div>
 
         <div className="info-box-title">
@@ -39,16 +38,16 @@ function Faq() {
           >
             here
           </a>{' '}
-          or any &quot;Donate&quot; button throughout the website. You will be
-          led to the GoFundMe page where you can make your contribution!
+          or any donate button throughout the website. This will lead you to our
+          GoFundMe page where you can make a contribution!
         </div>
 
         <div className="info-box-title">
           <h3>Who is eligible?</h3>
         </div>
         <div className="info-box">
-          Low-income Asian LGBTQ+, Women, and elderly people who need financial
-          support for an Uber ride for their safety.
+          Low-income Asian women, LGBTQ+ and elderly who are in need of
+          financial support for an Uber ride, for their safety.
         </div>
 
         <div className="info-box-title">
@@ -62,10 +61,10 @@ function Faq() {
           <h3>How do I get a ride?</h3>
         </div>
         <div className="info-box">
-          For instructions and details, visit the{' '}
-          <Link to={'/how-to-ride'}>&quot;How it Works&quot;</Link> page. To
-          fill out the Ride Request Form, visit the{' '}
-          <Link to={'/request-ride'}>&quot;Request a Ride&quot;</Link> page.
+          For instructions on the ride request process, visit our{' '}
+          <Link to={'/how-to-ride'}>How it Works</Link> page. To request a ride,
+          please visit our <Link to={'/request-ride'}>Request a Ride</Link>{' '}
+          page.
         </div>
 
         <div className="info-box-title">
@@ -75,32 +74,31 @@ function Faq() {
         </div>
         <div className="info-box">
           Absolutely! In addition to your ride, you are eligible to request ride
-          codes for Asian Elderly people.
+          coupons for Asian elderly people.
         </div>
 
         <div className="info-box-title">
-          <h3>How soon can I get the ride after I submit a ride request?</h3>
+          <h3>How soon will I get my ride coupon after I submit a request?</h3>
         </div>
         <div className="info-box">
-          The ride codes will be sent via email every Monday mornings.
+          The ride coupons will be sent via email every Monday morning.
         </div>
 
         <div className="info-box-title">
-          <h3>How will I know if my ride request gets accepted?</h3>
+          <h3>How will I know if my ride request is accepted?</h3>
         </div>
         <div className="info-box">
-          If your ride request gets accepted, you will receive an email with the
-          ride code on the following Monday morning.
+          If your ride request is accepted, you will receive an email with the
+          ride coupon on the following Monday morning.
         </div>
 
         <div className="info-box-title">
           <h3>Why wasn&apos;t my ride request accepted?</h3>
         </div>
         <div className="info-box">
-          After review, your ride request did not meet the eligibility
-          requirements. Please refer to the{' '}
-          <Link to={'/how-to-ride'}>&quot;How it Works&quot;</Link> section of
-          our website for more details.
+          After review by our team of volunteers, your ride request did not meet
+          our eligibility requirements. Please refer to the{' '}
+          <Link to={'/how-to-ride'}>How it Works</Link> page for more details.
         </div>
 
         <Footer />
