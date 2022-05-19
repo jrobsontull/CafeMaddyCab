@@ -230,7 +230,10 @@ export default class RidesDAO {
     status,
     approver,
     coupon,
-    notes
+    notes,
+    photoId,
+    selfie,
+    verified
   ) {
     try {
       const updateResponse = await rides.findOneAndUpdate(
@@ -248,6 +251,9 @@ export default class RidesDAO {
             lastEditedBy: lastEditedBy,
             coupon: coupon,
             notes: notes,
+            photoId: photoId,
+            selfie: selfie,
+            verified: verified,
           },
         }
       );
@@ -383,27 +389,50 @@ export default class RidesDAO {
               break;
           }
 
-          rideResponses.push(
-            await rides.findOneAndUpdate(
-              { _id: ObjectId(ride._id) },
-              {
-                $set: {
-                  status: { value: newStatus, text: newStatusText },
-                  verified: true,
-                  'selfie.exists': false,
-                  'photoId.exists': false,
-                },
-              }
-            )
-          );
-
           const foundRide = await rides.findOne({ _id: ObjectId(ride._id) });
-          imagePaths.push('./uploads/' + foundRide.selfie.path);
-          imagePaths.push('./uploads/' + foundRide.photoId.path);
+
+          if (newStatus === 3 || newStatus === 4) {
+            // Marked as Approved or Rejected
+            rideResponses.push(
+              await rides.findOneAndUpdate(
+                { _id: ObjectId(ride._id) },
+                {
+                  $set: {
+                    status: { value: newStatus, text: newStatusText },
+                    verified: true,
+                    'selfie.exists': false,
+                    'photoId.exists': false,
+                  },
+                }
+              )
+            );
+
+            // Mark these images for deletion
+            if (foundRide.photoId.exists) {
+              imagePaths.push('./uploads/' + foundRide.photoId.path);
+            }
+            if (foundRide.selfie.exists) {
+              imagePaths.push('./uploads/' + foundRide.selfie.path);
+            }
+          } else {
+            // Marked as unsure and don't mark images for deletion
+            rideResponses.push(
+              await rides.findOneAndUpdate(
+                { _id: ObjectId(ride._id) },
+                {
+                  $set: {
+                    status: { value: newStatus, text: newStatusText },
+                    verified: true,
+                  },
+                }
+              )
+            );
+          }
         }
 
         // Now delete images
         const deleteResponse = await ImageDAO.bulkDelete(imagePaths);
+
         // And log any errors
         for (const response of deleteResponse) {
           if (

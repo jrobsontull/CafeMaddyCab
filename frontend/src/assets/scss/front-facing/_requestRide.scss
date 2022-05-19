@@ -18,6 +18,8 @@ h1.page-title-no-logo#request-ride {
 h2.description {
   text-align: center;
   margin-bottom: 22px;
+  width: $content-width;
+  max-width: $max-width;
 }
 
 .request-container {

@@ -1,4 +1,5 @@
 import RidesDAO from '../dao/ridesDAO.js';
+import ImageDAO from '../dao/imageDAO.js';
 import StoriesController from './stories.controller.js';
 import { nanoid } from 'nanoid/async';
 import { parseAsync } from 'json2csv';
@@ -238,7 +239,65 @@ export default class RidesController {
       const approver = req.body.approver;
       const coupon = req.body.coupon || null;
       const notes = req.body.notes || null;
+      let photoId = req.body.photoId;
+      let selfie = req.body.selfie;
+      let verified = req.body.verified;
 
+      // Delete image if status set to Approved or Rejected and photo exists
+      const newStatus = parseInt(status.value, 10);
+      let isPhotoIdDeleted = false;
+      let isSelfieDeleted = false;
+
+      if (newStatus === 3 || newStatus === 4) {
+        if (photoId.exists === true) {
+          const photoIdDeletion = await ImageDAO.deleteImage(
+            './uploads/' + photoId.path
+          );
+
+          if (
+            photoIdDeletion.hasOwnProperty('error') ||
+            photoIdDeletion.hasOwnProperty("'error'")
+          ) {
+            console.warn(
+              'RidesController: Failed to delete image on ride edit. ' +
+                photoIdDeletion.error
+            );
+          } else {
+            isPhotoIdDeleted = true;
+          }
+        }
+
+        if (selfie.exists === true) {
+          const selfieDeletion = await ImageDAO.deleteImage(
+            './uploads/' + selfie.path
+          );
+
+          if (
+            selfieDeletion.hasOwnProperty('error') ||
+            selfieDeletion.hasOwnProperty("'error'")
+          ) {
+            console.warn(
+              'RidesController: Failed to delete image on ride edit. ' +
+                selfieDeletion.error
+            );
+          } else {
+            isSelfieDeleted = true;
+          }
+        }
+      }
+
+      // And update photo OBJs
+      if (isPhotoIdDeleted) {
+        photoId.exists = false;
+        verified = true;
+      }
+
+      if (isSelfieDeleted) {
+        selfie.exists = false;
+        verified = true;
+      }
+
+      // Edit ride details
       const rideResponse = await RidesDAO.editRideById(
         id,
         lastEditedBy,
@@ -249,9 +308,13 @@ export default class RidesController {
         status,
         approver,
         coupon,
-        notes
+        notes,
+        photoId,
+        selfie,
+        verified
       );
 
+      // Return JSON after ride edit
       if (
         rideResponse.hasOwnProperty("'error'") ||
         rideResponse.hasOwnProperty('error')
