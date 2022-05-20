@@ -342,27 +342,24 @@ function RequestRide() {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
 
-    /*TODO: change copy of closed form description
-    ex. "We are currently accepting ride submissions between Mondays to Wednesdays.
-      Refer to this FAQ if you have any questions" */
     const today = new Date();
-    // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
-    // const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
-    const day = today.getDay();
-    const hour = today.getHours();
+    const day = today.getUTCDay();
+    const hour = today.getUTCHours();
 
-    // Form is open from Mondays at 8am - Wedndesdays 11:59pm
-    // Monday (1), Tuesday (2) and Wednesday (3)
-    if (day > 0 && day < 4) {
-      if (day === 1 && hour < 8) {
-        // Mon before 8 am
+    // Form is open from Mondays at 8am - Wedndesdays 11:59pm EST
+    // Monday (1), Tuesday (2), Wednesday (3)...
+    // UTC is +4 to EST
+    // UTC: Monday (DAY 1) HOUR 12 - Thurs (DAY 4) HOUR 4
+    if (day > 0 && day < 5) {
+      if ((day === 1 && hour < 12) || (day === 4 && hour >= 4)) {
+        // Mon before hour 12 or Thurs after hour 4 in UTC
         setFormOpen(false);
       } else {
-        // Mon 8 am - Wed 11:59pm
+        // Mon 8 am - Wed 11:59pm EST
         setFormOpen(true);
       }
     } else {
-      // Thurs - Sun
+      // Fri - Sun
       setFormOpen(false);
     }
   }, []);
