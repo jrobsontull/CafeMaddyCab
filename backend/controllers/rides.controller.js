@@ -166,7 +166,7 @@ export default class RidesController {
         filters.firstName = req.query.firstName;
       }
       if (req.query.lastName) {
-        filters.firstName = req.query.lastName;
+        filters.lastName = req.query.lastName;
       }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(

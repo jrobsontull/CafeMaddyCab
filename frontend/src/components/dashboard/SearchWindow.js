@@ -1,9 +1,8 @@
-import { useState, useContext } from 'react';
-import AuthContext from '../../utils/auth.context';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Arrow from '../../assets/img/arrow_right.svg';
 
 function Search({ onClose }) {
-  const { user } = useContext(AuthContext);
   const [errorOnSubmit, setErrorOnSubmit] = useState({
     state: false,
     message: null,
@@ -199,5 +198,9 @@ function Search({ onClose }) {
     </div>
   );
 }
+
+Search.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 export default Search;
