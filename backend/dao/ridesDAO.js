@@ -98,6 +98,17 @@ export default class RidesDAO {
           ],
         };
       }
+
+      // For searching rides with search window
+      if ('email' in filters) {
+        query.email = filters['email'];
+      }
+      if ('firstName' in filters) {
+        query.firstName = filters['firstName'];
+      }
+      if ('lastName' in filters) {
+        query.lastName = filters['lastName'];
+      }
     }
 
     let cursor;

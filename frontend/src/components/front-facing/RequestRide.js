@@ -672,7 +672,8 @@ function RequestRide() {
 
                 <h3>
                   Please feel free to share your story about how this ride is
-                  helping you (optional).
+                  helping you (optional). If you also want, please tell us which
+                  NYC borough you live in.
                 </h3>
 
                 <textarea

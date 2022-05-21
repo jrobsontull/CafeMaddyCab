@@ -7,6 +7,7 @@ import ViewEntry from './ViewEntry';
 import ApprovalWindow from './ApprovalWindow';
 import SendCodes from './SendCodes';
 import MarkAsDone from './MarkAsDone';
+import Search from './SearchWindow';
 
 function Dashboard() {
   // Global vars
@@ -27,6 +28,7 @@ function Dashboard() {
   const [openApprovalWindow, setOpenApprovalWindow] = useState(false);
   const [openSendCodesWindow, setOpenSendCodesWindow] = useState(false);
   const [openDoneWindow, setOpenDoneWindow] = useState(false);
+  const [openSearchWindow, setOpenSearchWindow] = useState(false);
 
   // Counts for status types
   const [statusCount, setStatusCount] = useState({
@@ -137,6 +139,18 @@ function Dashboard() {
     searchRides();
   }
 
+  function openSearch() {
+    window.scrollTo(0, 0);
+    setOpenSearchWindow(true);
+  }
+
+  function closeSearch(searchTerms) {
+    setOpenSearchWindow(false);
+    if (searchTerms) {
+      searchRides(searchTerms);
+    }
+  }
+
   const searchRides = useCallback(
     (params = null) => {
       if (params) {
@@ -222,6 +236,8 @@ function Dashboard() {
 
         {openDoneWindow ? <MarkAsDone onClose={closeMarkAsDone} /> : ''}
 
+        {openSearchWindow ? <Search onClose={closeSearch} /> : ''}
+
         <div className="dashboard">
           <div className="menu">
             <div className="search-options">
@@ -253,7 +269,9 @@ function Dashboard() {
               </ul>
             </div>
             <div className="action-btns">
-              <div className="action">Search requests</div>
+              <div className="action" onClick={() => openSearch()}>
+                Search requests
+              </div>
               <div className="action">Edit request</div>
 
               {isAdmin ? (

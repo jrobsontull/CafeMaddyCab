@@ -159,6 +159,15 @@ export default class RidesController {
       if (req.query.isDuplicate) {
         filters.isDuplicate = req.query.isDuplicate;
       }
+      if (req.query.email) {
+        filters.email = req.query.email;
+      }
+      if (req.query.firstName) {
+        filters.firstName = req.query.firstName;
+      }
+      if (req.query.lastName) {
+        filters.firstName = req.query.lastName;
+      }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
         filters,
