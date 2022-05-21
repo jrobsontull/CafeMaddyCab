@@ -154,6 +154,17 @@ export default class RidesAPI {
       return response.data;
     }
   }
+
+  // General dowload rides as CSV
+  static async downloadRides(searchTerms, token) {
+    const url = 'api/v1/rides/download';
+    const params = '?' + searchTerms;
+    const response = await getCsvRequest(url + params, token);
+
+    if (response) {
+      return response.data;
+    }
+  }
 }
 
 // POST request for multipart content - used for requesting rides

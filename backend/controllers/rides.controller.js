@@ -175,7 +175,7 @@ export default class RidesController {
         ridesPerPage
       );
 
-      let response = {
+      const response = {
         rides: ridesList,
         page: page,
         filters: filters,
@@ -560,9 +560,54 @@ export default class RidesController {
     }
   }
 
-  // API controller for getting all rides and converting to CSV for download
+  // API controller for downloading CSV file of rides based on search term
   static async apiDownloadRides(req, res, next) {
     try {
+      let filters = {};
+      if (req.query.status) {
+        filters.status = parseInt(req.query.status, 10);
+      }
+      if (req.query.approverId) {
+        filters.approverId = req.query.approverId;
+      }
+      if (req.query.isDuplicate) {
+        filters.isDuplicate = req.query.isDuplicate;
+      }
+      if (req.query.email) {
+        filters.email = req.query.email;
+      }
+      if (req.query.firstName) {
+        filters.firstName = req.query.firstName;
+      }
+      if (req.query.lastName) {
+        filters.lastName = req.query.lastName;
+      }
+
+      const searchResponse = await RidesDAO.getRides(filters, null, null, true);
+
+      // Convert JSON array to CSV
+      const fields = [
+        '_id',
+        'shortId',
+        'dateRequested',
+        'firstName',
+        'lastName',
+        'email',
+        'identity.text',
+        'income',
+        'purpose.text',
+        'approver.commonName',
+        'lastEditedBy',
+        'status.text',
+        'coupon',
+        'notes',
+      ];
+      const opts = { fields };
+      const csv = await parseAsync(searchResponse, opts);
+
+      // Send response
+      res.attachment('rides.csv');
+      res.send(csv);
     } catch (e) {
       console.log(
         'RidesController: Failed to get rides to download. ' + e.message

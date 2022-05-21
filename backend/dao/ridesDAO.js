@@ -69,7 +69,12 @@ export default class RidesDAO {
   }
 
   // Get all rides based on filters
-  static async getRides(filters = null, page = 0, ridesPerPage = 15) {
+  static async getRides(
+    filters = null,
+    page = 0,
+    ridesPerPage = 15,
+    returnCursor = false
+  ) {
     let query = {};
 
     if (filters) {
@@ -113,26 +118,41 @@ export default class RidesDAO {
 
     let cursor;
 
-    try {
-      cursor = await rides.find(query);
-    } catch (e) {
-      console.error('ridesDAO: Unable to issue find command. ' + e);
-      return { ridesList: [], totalNumRides: 0 };
-    }
+    if (returnCursor) {
+      // Return search cursor for further processing
+      try {
+        cursor = await rides.find(query);
+        const displayCursor = cursor.toArray();
+        return displayCursor;
+      } catch (e) {
+        console.error('ridesDAO: Unable to issue find command. ' + e);
+        return null;
+      }
+    } else {
+      // Return array of rides
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.error('ridesDAO: Unable to issue find command. ' + e);
+        return { ridesList: [], totalNumRides: 0 };
+      }
 
-    const displayCursor = cursor.limit(ridesPerPage).skip(ridesPerPage * page);
+      const displayCursor = cursor
+        .limit(ridesPerPage)
+        .skip(ridesPerPage * page);
 
-    try {
-      const ridesList = await displayCursor.toArray();
-      const totalNumRides = await rides.countDocuments(query);
+      try {
+        const ridesList = await displayCursor.toArray();
+        const totalNumRides = await rides.countDocuments(query);
 
-      return { ridesList, totalNumRides };
-    } catch (e) {
-      console.error(
-        'ridesDAO: Unable to convert cursor to array or problem counting documents.\n' +
-          e
-      );
-      return { ridesList: [], totalNumRides: 0 };
+        return { ridesList, totalNumRides };
+      } catch (e) {
+        console.error(
+          'ridesDAO: Unable to convert cursor to array or problem counting documents.\n' +
+            e
+        );
+        return { ridesList: [], totalNumRides: 0 };
+      }
     }
   }
 
@@ -585,15 +605,6 @@ export default class RidesDAO {
       console.error(
         'ridesDAO: Failed to mark rides as done and attach coupons. ' + e
       );
-      return { error: e };
-    }
-  }
-
-  // General function for downloading all rides from DB
-  static async downloadRides() {
-    try {
-    } catch (e) {
-      console.error('ridesDAO: Failed to get rides for downloading. ' + e);
       return { error: e };
     }
   }

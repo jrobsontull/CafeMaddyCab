@@ -4,6 +4,7 @@ import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 
 import Arrow from '../../assets/img/arrow_right.svg';
+import Spinner from '../general/Spinner';
 
 function MarkAsDone({ onClose }) {
   const { user } = useContext(AuthContext);
@@ -14,6 +15,7 @@ function MarkAsDone({ onClose }) {
   const [csvFile, setCsvFile] = useState({ file: null });
 
   const [successMessage, setSuccessMessage] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   function selectFile(target) {
     const file = target.files[0];
@@ -33,11 +35,13 @@ function MarkAsDone({ onClose }) {
   }
 
   function submitHandler() {
+    setShowSpinner(true);
     if (csvFile.file) {
       // All good
       setSuccessMessage(false);
       setErrorOnSubmit({ state: false, message: null });
       RidesAPI.markAsDone(csvFile.file, user.user.token).then((response) => {
+        setShowSpinner(false);
         var { error } = response;
         if (error) {
           setErrorOnSubmit({ state: true, message: error });
@@ -56,6 +60,7 @@ function MarkAsDone({ onClose }) {
   return (
     <div className="react-container view-entry">
       <div className="view-entry-window done">
+        {showSpinner ? <Spinner /> : ''}
         <div className="header">
           <div className="title">
             <div className="back-btn" onClick={onClose}>

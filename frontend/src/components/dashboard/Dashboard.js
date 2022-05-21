@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext, useCallback } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
+import { saveAs } from 'file-saver';
 
 import Navbar from './Navbar';
 import ViewEntry from './ViewEntry';
@@ -8,6 +9,7 @@ import ApprovalWindow from './ApprovalWindow';
 import SendCodes from './SendCodes';
 import MarkAsDone from './MarkAsDone';
 import Search from './SearchWindow';
+import Spinner from '../general/Spinner';
 
 function Dashboard() {
   // Global vars
@@ -29,6 +31,7 @@ function Dashboard() {
   const [openSendCodesWindow, setOpenSendCodesWindow] = useState(false);
   const [openDoneWindow, setOpenDoneWindow] = useState(false);
   const [openSearchWindow, setOpenSearchWindow] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   // Counts for status types
   const [statusCount, setStatusCount] = useState({
@@ -69,7 +72,9 @@ function Dashboard() {
         searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
       }
 
+      setShowSpinner(true);
       RidesAPI.getRides(searchExpression, user.user.token).then((response) => {
+        setShowSpinner(false);
         setRides(response.rides);
         setRidesData((prevData) => ({
           ...prevData,
@@ -88,7 +93,9 @@ function Dashboard() {
         searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
       }
 
+      setShowSpinner(true);
       RidesAPI.getRides(searchExpression, user.user.token).then((response) => {
+        setShowSpinner(false);
         setRides(response.rides);
         setRidesData((prevData) => ({
           ...prevData,
@@ -151,13 +158,35 @@ function Dashboard() {
     }
   }
 
+  function downloadRides() {
+    window.scrollTo(0, 0);
+    setShowSpinner(true);
+    RidesAPI.downloadRides(currentSearch, user.user.token).then((response) => {
+      setShowSpinner(false);
+      var { error } = response;
+      if (error) {
+        alert(error);
+      } else {
+        // All good
+        var blob = new Blob([response], { type: 'text/csv;charset=utf-8;' });
+
+        const downloadFileName = 'rides.csv';
+
+        saveAs(blob, downloadFileName);
+      }
+    });
+  }
+
   const searchRides = useCallback(
     (params = null) => {
       if (params) {
         // Update current search
         setCurrentSearch(params);
+        // Show spinner
+        setShowSpinner(true);
         // Perform search
         RidesAPI.getRides(params, user.user.token).then((response) => {
+          setShowSpinner(false);
           var { error } = response;
           if (error) {
             alert(error);
@@ -223,6 +252,8 @@ function Dashboard() {
     <div className="react-container">
       <div className="content backend">
         <Navbar />
+
+        {showSpinner ? <Spinner /> : ''}
 
         {openRideEntryView ? (
           <ViewEntry onClose={closeRideEntryView} rideId={selectedRideId} />
@@ -424,7 +455,13 @@ function Dashboard() {
                 </div>
               )}
 
-              {isAdmin ? <div className="download-btn">Download CSV</div> : ''}
+              {isAdmin ? (
+                <div className="download-btn" onClick={() => downloadRides()}>
+                  Download CSV
+                </div>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>

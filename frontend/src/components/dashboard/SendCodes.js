@@ -5,6 +5,7 @@ import AuthContext from '../../utils/auth.context';
 import PropTypes from 'prop-types';
 
 import Arrow from '../../assets/img/arrow_right.svg';
+import Spinner from '../general/Spinner';
 
 function SendCodes({ onClose }) {
   const { user } = useContext(AuthContext);
@@ -12,6 +13,7 @@ function SendCodes({ onClose }) {
     state: false,
     message: null,
   });
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const [useDates, setUseDates] = useState(false);
   const [fromDate, setFromDate] = useState(getClosestMon());
@@ -43,8 +45,12 @@ function SendCodes({ onClose }) {
 
   // Download CSV btn handler
   function downloadCSV() {
+    // Show spinner
+    setShowSpinner(true);
+    // Do work
     if (useDates) {
       RidesAPI.sendCodes(fromDate, toDate, user.user.token).then((response) => {
+        setShowSpinner(false);
         var { error } = response;
         if (error) {
           setErrorOnSubmit({
@@ -66,6 +72,7 @@ function SendCodes({ onClose }) {
       });
     } else {
       RidesAPI.sendCodes(null, null, user.user.token).then((response) => {
+        setShowSpinner(false);
         var { error } = response;
         if (error) {
           setErrorOnSubmit({
@@ -84,6 +91,7 @@ function SendCodes({ onClose }) {
   return (
     <div className="react-container view-entry">
       <div className="view-entry-window send-codes">
+        {showSpinner ? <Spinner /> : ''}
         <div className="header">
           <div className="title">
             <div className="back-btn" onClick={onClose}>
