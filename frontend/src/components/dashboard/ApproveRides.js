@@ -205,7 +205,14 @@ function ApproveRides() {
                 rides.map((ride, index) => (
                   <ul key={ride._id}>
                     <li id="col-1">
-                      {new Date(ride.dateRequested).toLocaleDateString('en-us')}
+                      {new Date(ride.dateRequested).toLocaleString('en-US', {
+                        timeZone: 'America/New_York',
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: '2-digit',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                      })}
                     </li>
                     <li id="col-2">{ride.firstName}</li>
                     <li id="col-3">{ride.lastName}</li>

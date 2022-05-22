@@ -210,9 +210,14 @@ function ViewEntry({ rideId, onClose }) {
               <li>
                 <div className="description">Date submitted:</div>
                 <div className="value">
-                  {new Date(rideDetails.dateRequested).toLocaleDateString(
-                    'en-us'
-                  )}
+                  {new Date(rideDetails.dateRequested).toLocaleString('en-US', {
+                    timeZone: 'America/New_York',
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: '2-digit',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                  })}
                 </div>
               </li>
               <li>

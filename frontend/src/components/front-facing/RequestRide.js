@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
+import TimeAPI from '../../utils/time.api';
 
 import Loading from '../general/Loading';
 import Navbar from './Navbar';
@@ -342,29 +343,23 @@ function RequestRide() {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
 
-    /*TODO: change copy of closed form description
-    ex. "We are currently accepting ride submissions between Mondays to Wednesdays.
-      Refer to this FAQ if you have any questions" */
-    const today = new Date();
-    // this accounts for daylight savings - change back when daylight savings ends (11/6/22)
-    // const daylightSavingsDay = new Date(today.getTime() - 60 * 60 * 1000);
-    const day = today.getDay();
-    const hour = today.getHours();
-
-    // Form is open from Mondays at 8am - Wedndesdays 11:59pm
-    // Monday (1), Tuesday (2) and Wednesday (3)
-    if (day > 0 && day < 4) {
-      if (day === 1 && hour < 8) {
-        // Mon before 8 am
+    // Get NYC time and set form state
+    TimeAPI.isFormOpen().then((response) => {
+      if (
+        Object.prototype.hasOwnProperty.call(response, "'error'") ||
+        Object.prototype.hasOwnProperty.call(response, 'error')
+      ) {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'Failed to check if form was open. Please contact the Cafe Maddy Cab team for help.',
+        });
         setFormOpen(false);
       } else {
-        // Mon 8 am - Wed 11:59pm
+        setFormOpen(response.open);
         setFormOpen(true);
       }
-    } else {
-      // Thurs - Sun
-      setFormOpen(false);
-    }
+    });
   }, []);
 
   return (
@@ -552,7 +547,8 @@ function RequestRide() {
                   Please submit a selfie/photo of yourself. If you are
                   submitting on behalf of someone else, please submit their
                   selfie/photo. We have a max upload limit of <span>10 MB</span>{' '}
-                  per photo.
+                  per photo and request that you{' '}
+                  <span>don&apos;t wear a mask</span> in the photo.
                 </h3>
 
                 <div className="upload">

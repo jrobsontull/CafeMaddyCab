@@ -13,6 +13,7 @@ import auth from './routes/auth.route.js';
 import image from './routes/image.route.js';
 import feedback from './routes/feedback.route.js';
 import stories from './routes/stories.route.js';
+import time from './routes/time.route.js';
 
 // Configure server
 dotenv.config();
@@ -87,6 +88,7 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/image', image);
 app.use('/api/v1/feedback', feedback);
 app.use('/api/v1/stories', stories);
+app.use('/api/v1/time', time);
 
 // Serve static files if production mode
 if (process.env.NODE_ENV === 'production') {
