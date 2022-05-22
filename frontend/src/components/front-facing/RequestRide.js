@@ -357,7 +357,6 @@ function RequestRide() {
         setFormOpen(false);
       } else {
         setFormOpen(response.open);
-        setFormOpen(true);
       }
     });
   }, []);
