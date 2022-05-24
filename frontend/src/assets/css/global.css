@@ -959,7 +959,8 @@ h2.description {
     position: relative;
     z-index: 2; }
     .backend .navbar .header .branding {
-      display: flex; }
+      display: flex;
+      align-items: flex-start; }
       .backend .navbar .header .branding .cmc {
         margin-right: 10px;
         font-size: 20px; }

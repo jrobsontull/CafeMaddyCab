@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import RidesAPI from '../../utils/rides.api';
 import AuthContext from '../../utils/auth.context';
 import PropTypes from 'prop-types';
+import Spinner from '../general/Spinner';
 
 import Arrow from '../../assets/img/arrow_right.svg';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
@@ -21,6 +22,7 @@ function ViewEntry({ rideId, onClose }) {
     state: false,
     message: null,
   });
+  const [showSpinner, setShowSpinner] = useState(false);
 
   function updateGenericField(target, prop) {
     setRideDetails((prevDetails) => ({ ...prevDetails, [prop]: target.value }));
@@ -120,7 +122,9 @@ function ViewEntry({ rideId, onClose }) {
     const updatedRide = rideDetails;
     updatedRide.lastEditedBy = user.user.commonName;
 
+    setShowSpinner(true);
     RidesAPI.editRideById(updatedRide, user.user.token).then((response) => {
+      setShowSpinner(false);
       var { error } = response;
       if (error) {
         alert(error);
@@ -132,7 +136,9 @@ function ViewEntry({ rideId, onClose }) {
   }
 
   useEffect(() => {
+    setShowSpinner(true);
     RidesAPI.getRideById(rideId, user.user.token).then((response) => {
+      setShowSpinner(false);
       var { error } = response;
       if (error) {
         alert(error);
@@ -154,6 +160,7 @@ function ViewEntry({ rideId, onClose }) {
   return (
     <div className="react-container view-entry">
       <div className="view-entry-window">
+        {showSpinner ? <Spinner /> : ''}
         <div className="header">
           <div className="title">
             <div className="back-btn" onClick={onClose}>

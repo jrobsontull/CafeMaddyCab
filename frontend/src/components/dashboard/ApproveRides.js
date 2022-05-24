@@ -5,6 +5,7 @@ import RidesAPI from '../../utils/rides.api';
 
 import Navbar from './Navbar';
 import PhotoView from './PhotoView';
+import Spinner from '../general/Spinner';
 
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
@@ -30,7 +31,9 @@ function ApproveRides() {
     lastName: null,
     selfie: null,
     photoId: null,
+    windowLocation: null,
   });
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const navigate = useNavigate();
 
@@ -55,11 +58,15 @@ function ApproveRides() {
       ridesData.totalPages > 1 &&
       ridesData.totalPages - 1 !== ridesData.currentPage
     ) {
+      // Start spinner
+      setShowSpinner(true);
+      // Do work
       const pageToScrollTo = ridesData.currentPage + 1;
       RidesAPI.getRides(
         'status=2&approverId=' + user.user._id + '&page=' + pageToScrollTo,
         user.user.token
       ).then((response) => {
+        setShowSpinner(false);
         setRides(response.rides);
         setRidesData((prevData) => ({
           ...prevData,
@@ -73,11 +80,15 @@ function ApproveRides() {
   // Go backward a page in the table
   function prevPage() {
     if (ridesData.currentPage > 0) {
+      // Start spinner
+      setShowSpinner(true);
+      // Do work
       const pageToScrollTo = ridesData.currentPage - 1;
       RidesAPI.getRides(
         'status=2&approverId=' + user.user._id + '&page=' + pageToScrollTo,
         user.user.token
       ).then((response) => {
+        setShowSpinner(false);
         setRides(response.rides);
         setRidesData((prevData) => ({
           ...prevData,
@@ -117,14 +128,24 @@ function ApproveRides() {
       lastName: lastName,
       selfie: selfie,
       photoId: photoId,
+      windowLocation: window.pageYOffset,
     });
     setOpenPhotoView(true);
   }
 
+  // Close handler for PhotoView
+  function closeVerificationView() {
+    setOpenPhotoView(false);
+    window.scrollTo(0, photoView.windowLocation);
+  }
+
   // Cancel button handler - unset in progress state on rides
   function cancelHandler() {
+    window.scrollTo(0, 0);
+    setShowSpinner(true);
     RidesAPI.unsetInProgress(user.user._id, user.user.token).then(
       (response) => {
+        setShowSpinner(false);
         var { error } = response;
         if (error) {
           alert(error);
@@ -137,8 +158,10 @@ function ApproveRides() {
 
   // Submit/save changes handler - push approvalState and notes to DB
   function submitHandler() {
+    setShowSpinner(true);
     RidesAPI.approveRides(approvalStates, notes, user.user.token).then(
       (response) => {
+        setShowSpinner(false);
         var { error } = response;
         if (error) {
           alert(error);
@@ -151,10 +174,12 @@ function ApproveRides() {
 
   // Run once when render complete - populate table
   useEffect(() => {
+    setShowSpinner(true);
     RidesAPI.getRides(
       'status=2&approverId=' + user.user._id,
       user.user.token
     ).then((response) => {
+      setShowSpinner(false);
       setRides(response.rides);
       setRidesData({
         totalRides: response.totalResults,
@@ -172,9 +197,11 @@ function ApproveRides() {
       <div className="content backend">
         <Navbar />
 
+        {showSpinner ? <Spinner /> : ''}
+
         {openPhotoView ? (
           <PhotoView
-            onClose={() => setOpenPhotoView(false)}
+            onClose={() => closeVerificationView()}
             firstName={photoView.firstName}
             lastName={photoView.lastName}
             selfie={photoView.selfie}

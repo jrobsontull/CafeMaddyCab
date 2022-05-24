@@ -72,15 +72,11 @@ function Dashboard() {
         searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
       }
 
-      setShowSpinner(true);
-      RidesAPI.getRides(searchExpression, user.user.token).then((response) => {
-        setShowSpinner(false);
-        setRides(response.rides);
-        setRidesData((prevData) => ({
-          ...prevData,
-          currentPage: pageToScrollTo,
-        }));
-      });
+      // Update current search
+      setCurrentSearch(searchExpression);
+
+      // Perform search
+      searchRides(searchExpression, pageToScrollTo);
     }
   }
 
@@ -93,15 +89,11 @@ function Dashboard() {
         searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
       }
 
-      setShowSpinner(true);
-      RidesAPI.getRides(searchExpression, user.user.token).then((response) => {
-        setShowSpinner(false);
-        setRides(response.rides);
-        setRidesData((prevData) => ({
-          ...prevData,
-          currentPage: pageToScrollTo,
-        }));
-      });
+      // Update current search
+      setCurrentSearch(searchExpression);
+
+      // Perform search
+      searchRides(searchExpression, pageToScrollTo);
     }
   }
 
@@ -178,7 +170,7 @@ function Dashboard() {
   }
 
   const searchRides = useCallback(
-    (params = null) => {
+    (params = null, updatePage = null) => {
       if (params) {
         // Update current search
         setCurrentSearch(params);
@@ -192,34 +184,65 @@ function Dashboard() {
             alert(error);
           } else {
             setRides(response.rides);
-            setRidesData({
-              totalRides: response.totalResults,
-              currentPage: 0,
-              totalPages: calculateTotalPageNums(
-                entiresPerPage,
-                response.totalResults
-              ),
-            });
+            // Update page stats
+            if (updatePage) {
+              // Update current page
+              setRidesData({
+                totalRides: response.totalResults,
+                currentPage: updatePage,
+                totalPages: calculateTotalPageNums(
+                  entiresPerPage,
+                  response.totalResults
+                ),
+              });
+            } else {
+              // Set to first page
+              setRidesData({
+                totalRides: response.totalResults,
+                currentPage: 0,
+                totalPages: calculateTotalPageNums(
+                  entiresPerPage,
+                  response.totalResults
+                ),
+              });
+            }
           }
         });
       } else {
         // Update current search
         setCurrentSearch('');
+        // Shpw spinner
+        setShowSpinner(true);
         // Perform search
         RidesAPI.getRides(null, user.user.token).then((response) => {
+          setShowSpinner(false);
           var { error } = response;
           if (error) {
             alert(error);
           } else {
             setRides(response.rides);
-            setRidesData({
-              totalRides: response.totalResults,
-              currentPage: 0,
-              totalPages: calculateTotalPageNums(
-                entiresPerPage,
-                response.totalResults
-              ),
-            });
+            // Update page stats
+            if (updatePage) {
+              // Update current page
+              setRidesData({
+                totalRides: response.totalResults,
+                currentPage: updatePage,
+                totalPages: calculateTotalPageNums(
+                  entiresPerPage,
+                  response.totalResults
+                ),
+              });
+            } else {
+              // Set to first page
+              setRidesData({
+                totalRides: response.totalResults,
+                currentPage: 0,
+                totalPages: calculateTotalPageNums(
+                  entiresPerPage,
+                  response.totalResults
+                ),
+              });
+            }
           }
         });
       }

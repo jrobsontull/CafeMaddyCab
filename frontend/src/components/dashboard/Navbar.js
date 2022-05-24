@@ -65,7 +65,9 @@ function Header() {
     <div className="navbar">
       <div className="header">
         <div className="branding">
-          <p className="cmc">CAFE MADDY CAB</p>
+          <p className="cmc">
+            <Link to={'/dashboard'}>CAFE MADDY CAB</Link>
+          </p>
           <p>&#124;</p>
           <p className="page-name">{pageName ? pageName : 'Unknown Page'}</p>
         </div>
