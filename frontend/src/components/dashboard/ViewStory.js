@@ -53,14 +53,16 @@ function ViewStory({ entry, onClose }) {
   useEffect(() => {
     setStoryDetails(entry);
     setSelectedBookmark(entry.bookmark);
-    RidesAPI.getRideById(entry.rideId, user.user.token).then((response) => {
-      if (response) {
-        setUserDetails(response.ride);
-      } else {
-        // when a ride cannot be found using rideId
-        setUserDetails(null);
+    RidesAPI.getRideByShortId(entry.rideNanoId, user.user.token).then(
+      (response) => {
+        if (response) {
+          setUserDetails(response.ride);
+        } else {
+          // When a ride cannot be found using shortId
+          setUserDetails(null);
+        }
       }
-    });
+    );
   }, [storyDetails.rideId, user.user.token, entry]);
 
   return (

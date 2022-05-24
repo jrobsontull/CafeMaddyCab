@@ -68,6 +68,11 @@ router
 // Get ride details by ID
 router.route('/getById').get(validateHeader, RidesController.apiGetRideById);
 
+// Get ride details by shortId
+router
+  .route('/getByShortId')
+  .get(validateHeader, RidesController.apiGetRideByShortId);
+
 // Get stats on all rides
 router.route('/getStats').get(validateHeader, RidesController.apiGetStats);
 

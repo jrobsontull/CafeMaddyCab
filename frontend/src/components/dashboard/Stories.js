@@ -65,6 +65,7 @@ function Stories() {
 
   function viewStoryEntry(entry) {
     setSelectedStoryEntry(entry);
+    window.scrollTo(0, 0);
     setOpenStoryEntryView(true);
   }
 
@@ -120,6 +121,7 @@ function Stories() {
     [user.user.token]
   );
 
+  // Search stories on load
   useEffect(() => {
     searchStories();
   }, [searchStories]);

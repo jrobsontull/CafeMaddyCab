@@ -168,6 +168,9 @@ export default class RidesController {
       if (req.query.lastName) {
         filters.lastName = req.query.lastName;
       }
+      if (req.query.shortId) {
+        filters.shortId = req.query.shortId;
+      }
 
       const { ridesList, totalNumRides } = await RidesDAO.getRides(
         filters,
@@ -206,6 +209,29 @@ export default class RidesController {
       }
     } catch (e) {
       console.log('RidesController: Failed to get ride by ID. ' + e.message);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  // GET request to get ride by shortId
+  static async apiGetRideByShortId(req, res, next) {
+    try {
+      let shortId = req.query.shortId || {};
+      let ride = await RidesDAO.getRideByShortId(shortId);
+
+      if (ride.hasOwnProperty("'error'") || ride.hasOwnProperty('error')) {
+        res.status(400).json({ error: ride.error });
+      } else {
+        if (!ride.ride) {
+          res.status(404).json({ error: 'Ride not found.' });
+        } else {
+          res.json(ride);
+        }
+      }
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to get ride by shortID. ' + e.message
+      );
       res.status(500).json({ error: e });
     }
   }

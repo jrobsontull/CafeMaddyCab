@@ -114,6 +114,9 @@ export default class RidesDAO {
       if ('lastName' in filters) {
         query.lastName = filters['lastName'];
       }
+      if ('shortId' in filters) {
+        query.shortId = filters['shortId'];
+      }
     }
 
     let cursor;
@@ -160,6 +163,32 @@ export default class RidesDAO {
   static async getRideById(id) {
     try {
       const query = { _id: ObjectId(id) };
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.error(
+          'ridesDAO: Unable to issue find command with query ' +
+            query +
+            '\n' +
+            e.message
+        );
+        return { error: e };
+      }
+
+      const rideList = await cursor.toArray();
+      return { ride: rideList[0] };
+    } catch (e) {
+      console.error('ridesDAO: Error getting recipe by ID. ' + e.message);
+      return { error: e };
+    }
+  }
+
+  // Get details about specific ride by shortID
+  static async getRideByShortId(shortId) {
+    try {
+      const query = { shortId: shortId };
       let cursor;
 
       try {

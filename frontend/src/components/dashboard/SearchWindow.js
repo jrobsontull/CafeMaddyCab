@@ -8,6 +8,7 @@ function Search({ onClose }) {
     message: null,
   });
 
+  const [shortId, setShortId] = useState('');
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -28,6 +29,9 @@ function Search({ onClose }) {
   function submitHandler() {
     let searchTerms = [];
 
+    if (shortId !== '') {
+      searchTerms.push('shortId=' + shortId);
+    }
     if (email !== '') {
       searchTerms.push('email=' + email);
     }
@@ -106,6 +110,14 @@ function Search({ onClose }) {
             status values!
           </p>
 
+          <div className="input-row">
+            <label htmlFor="shortId">ID:</label>
+            <input
+              type="text"
+              id="shortId"
+              onChange={(e) => setShortId(e.target.value)}
+            ></input>
+          </div>
           <div className="input-row">
             <label htmlFor="email">Email:</label>
             <input

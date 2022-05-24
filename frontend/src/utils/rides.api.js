@@ -53,6 +53,16 @@ export default class RidesAPI {
     }
   }
 
+  // Get ride details by shortId
+  static async getRideByShortId(shortId, token) {
+    const url = 'api/v1/rides/getByShortId?shortId=' + shortId;
+
+    const response = await getRequest(url, token);
+    if (response) {
+      return response.data;
+    }
+  }
+
   // Edit ride details
   static async editRideById(ride, token) {
     const url = 'api/v1/rides';
