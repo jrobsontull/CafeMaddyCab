@@ -32,6 +32,7 @@ function Dashboard() {
   const [openDoneWindow, setOpenDoneWindow] = useState(false);
   const [openSearchWindow, setOpenSearchWindow] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [lastScrollPos, setLastScrollPos] = useState(0);
 
   // Counts for status types
   const [statusCount, setStatusCount] = useState({
@@ -99,14 +100,16 @@ function Dashboard() {
 
   // Window open and close functions
   function viewRideEntry(rideId) {
-    window.scrollTo(0, 0);
     setSelectedRideId(rideId);
+    setLastScrollPos(window.scrollY);
+    window.scrollTo(0, 0);
     setOpenRideEntryView(true);
   }
 
   function closeRideEntryView() {
     setOpenRideEntryView(false);
-    searchRides(currentSearch);
+    window.scrollTo(0, lastScrollPos);
+    searchRides(currentSearch, ridesData.currentPage);
   }
 
   function openApproval() {
@@ -221,28 +224,14 @@ function Dashboard() {
             alert(error);
           } else {
             setRides(response.rides);
-            // Update page stats
-            if (updatePage) {
-              // Update current page
-              setRidesData({
-                totalRides: response.totalResults,
-                currentPage: updatePage,
-                totalPages: calculateTotalPageNums(
-                  entiresPerPage,
-                  response.totalResults
-                ),
-              });
-            } else {
-              // Set to first page
-              setRidesData({
-                totalRides: response.totalResults,
-                currentPage: 0,
-                totalPages: calculateTotalPageNums(
-                  entiresPerPage,
-                  response.totalResults
-                ),
-              });
-            }
+            setRidesData({
+              totalRides: response.totalResults,
+              currentPage: 0,
+              totalPages: calculateTotalPageNums(
+                entiresPerPage,
+                response.totalResults
+              ),
+            });
           }
         });
       }

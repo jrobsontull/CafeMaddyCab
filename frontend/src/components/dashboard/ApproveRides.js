@@ -128,7 +128,7 @@ function ApproveRides() {
       lastName: lastName,
       selfie: selfie,
       photoId: photoId,
-      windowLocation: window.pageYOffset,
+      windowLocation: window.scrollY,
     });
     setOpenPhotoView(true);
   }

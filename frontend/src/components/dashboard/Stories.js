@@ -4,9 +4,12 @@ import AuthContext from '../../utils/auth.context';
 
 import Navbar from './Navbar';
 import ViewStory from './ViewStory';
+import Spinner from '../general/Spinner';
 
 function Stories() {
   const { user } = useContext(AuthContext);
+  const [lastScrollPos, setLastScrollPos] = useState(0);
+  const [showSpinner, setShowSpinner] = useState(false);
   const [entries, setEntries] = useState([]);
   const [storiesData, setStoriesData] = useState({
     totalEntries: 0,
@@ -36,71 +39,88 @@ function Stories() {
       storiesData.totalPages - 1 !== storiesData.currentPage
     ) {
       const pageToScrollTo = storiesData.currentPage + 1;
-      StoriesAPI.getStories('page=' + pageToScrollTo, user.user.token).then(
-        (response) => {
-          setEntries(response.entries);
-          setStoriesData((prevData) => ({
-            ...prevData,
-            currentPage: pageToScrollTo,
-          }));
-        }
-      );
+
+      let searchExpression = 'page=' + pageToScrollTo;
+      if (currentSearch !== '') {
+        searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
+      }
+
+      setCurrentSearch(searchExpression);
+      searchStories(searchExpression, pageToScrollTo);
     }
   }
 
   function prevPage() {
     if (storiesData.currentPage > 0) {
       const pageToScrollTo = storiesData.currentPage - 1;
-      StoriesAPI.getStories('page=' + pageToScrollTo, user.user.token).then(
-        (response) => {
-          setEntries(response.entries);
-          setStoriesData((prevData) => ({
-            ...prevData,
-            currentPage: pageToScrollTo,
-          }));
-        }
-      );
+
+      let searchExpression = 'page=' + pageToScrollTo;
+      if (currentSearch !== '') {
+        searchExpression = 'page=' + pageToScrollTo + '&' + currentSearch;
+      }
+
+      setCurrentSearch(searchExpression);
+      searchStories(searchExpression, pageToScrollTo);
     }
   }
 
   function viewStoryEntry(entry) {
     setSelectedStoryEntry(entry);
+    setLastScrollPos(window.scrollY);
     window.scrollTo(0, 0);
     setOpenStoryEntryView(true);
   }
 
   function closeStoryEntryView() {
     setOpenStoryEntryView(false);
-    searchStories(currentSearch);
+    window.scrollTo(0, lastScrollPos);
+    searchStories(currentSearch, storiesData.currentPage);
   }
 
   const searchStories = useCallback(
-    (params = null) => {
+    (params = null, updatePage = null) => {
       if (params) {
         // Update current search
         setCurrentSearch(params);
+        // Show spinner
+        setShowSpinner(true);
         // Perform search with filter
         StoriesAPI.getStories(params, user.user.token).then((response) => {
+          setShowSpinner(false);
           var { error } = response;
           if (error) {
             alert(error);
           } else {
             setEntries(response.entries);
-            setStoriesData({
-              totalEntries: response.totalResults,
-              currentPage: 0,
-              totalPages: calculateTotalPageNums(
-                entiresPerPage,
-                response.totalResults
-              ),
-            });
+            if (updatePage) {
+              setStoriesData({
+                totalEntries: response.totalResults,
+                currentPage: updatePage,
+                totalPages: calculateTotalPageNums(
+                  entiresPerPage,
+                  response.totalResults
+                ),
+              });
+            } else {
+              setStoriesData({
+                totalEntries: response.totalResults,
+                currentPage: 0,
+                totalPages: calculateTotalPageNums(
+                  entiresPerPage,
+                  response.totalResults
+                ),
+              });
+            }
           }
         });
       } else {
         // Update current search
         setCurrentSearch('');
+        // Show spinner
+        setShowSpinner(true);
         // Perform search for all entries
         StoriesAPI.getStories(null, user.user.token).then((response) => {
+          setShowSpinner(false);
           var { error } = response;
           if (error) {
             alert(error);
@@ -130,6 +150,8 @@ function Stories() {
     <div className="react-container">
       <div className="content backend">
         <Navbar />
+
+        {showSpinner ? <Spinner /> : ''}
 
         {openStoryEntryView && (
           <ViewStory onClose={closeStoryEntryView} entry={selectedStoryEntry} />
