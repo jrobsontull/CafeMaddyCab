@@ -7,7 +7,7 @@ import Spinner from '../general/Spinner';
 import Arrow from '../../assets/img/arrow_right.svg';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
-function ViewEntry({ rideId, onClose }) {
+function ViewEntry({ rideId, onClose, openPhotoView }) {
   const { user } = useContext(AuthContext);
   const [rideDetails, setRideDetails] = useState({});
   const [selfie, setSelfie] = useState('/');
@@ -136,9 +136,7 @@ function ViewEntry({ rideId, onClose }) {
   }
 
   useEffect(() => {
-    setShowSpinner(true);
     RidesAPI.getRideById(rideId, user.user.token).then((response) => {
-      setShowSpinner(false);
       var { error } = response;
       if (error) {
         alert(error);
@@ -318,7 +316,17 @@ function ViewEntry({ rideId, onClose }) {
               </li>
               <li className="photo-comparison">
                 <div className="description">Photo comparison:</div>
-                <div className="photo-container">
+                <div
+                  className="photo-container"
+                  onClick={() =>
+                    openPhotoView(
+                      rideDetails.firstName,
+                      rideDetails.lastName,
+                      rideDetails.selfie,
+                      rideDetails.photoId
+                    )
+                  }
+                >
                   <div className="photo-box">
                     <div className="title">Selfie</div>
                     {selfie.exists ? (
@@ -363,6 +371,7 @@ function ViewEntry({ rideId, onClose }) {
 ViewEntry.propTypes = {
   rideId: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
+  openPhotoView: PropTypes.func.isRequired,
 };
 
 export default ViewEntry;

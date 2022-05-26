@@ -10,6 +10,7 @@ import SendCodes from './SendCodes';
 import MarkAsDone from './MarkAsDone';
 import Search from './SearchWindow';
 import Spinner from '../general/Spinner';
+import PhotoView from './PhotoView';
 
 function Dashboard() {
   // Global vars
@@ -25,6 +26,13 @@ function Dashboard() {
   // Edit ride window states
   const [selectedRideId, setSelectedRideId] = useState();
   const [openRideEntryView, setOpenRideEntryView] = useState(false);
+  const [openPhotoView, setOpenPhotoView] = useState(false);
+  const [photoViewRide, setPhotoViewRide] = useState({
+    firstName: null,
+    lastName: null,
+    selfie: null,
+    photoId: null,
+  });
 
   // Other window states
   const [openApprovalWindow, setOpenApprovalWindow] = useState(false);
@@ -110,6 +118,16 @@ function Dashboard() {
     setOpenRideEntryView(false);
     window.scrollTo(0, lastScrollPos);
     searchRides(currentSearch, ridesData.currentPage);
+  }
+
+  function openLargePhotoView(firstName, lastName, selfie, photoId) {
+    setPhotoViewRide({
+      firstName: firstName,
+      lastName: lastName,
+      selfie: selfie,
+      photoId: photoId,
+    });
+    setOpenPhotoView(true);
   }
 
   function openApproval() {
@@ -239,6 +257,7 @@ function Dashboard() {
     [user.user.token]
   );
 
+  // Populate dashboard on first render with rides and admin tools
   useEffect(() => {
     // Populate table with all rides
     searchRides();
@@ -254,7 +273,7 @@ function Dashboard() {
       }
     });
 
-    // Check if admin for displaying elements
+    // Check if admin for displaying extra tools
     if (user.user.role === 'admin') {
       setIsAdmin(true);
     }
@@ -267,8 +286,21 @@ function Dashboard() {
 
         {showSpinner ? <Spinner /> : ''}
 
+        {openPhotoView ? (
+          <PhotoView
+            onClose={() => setOpenPhotoView(false)}
+            photoViewRide={photoViewRide}
+          />
+        ) : (
+          ''
+        )}
+
         {openRideEntryView ? (
-          <ViewEntry onClose={closeRideEntryView} rideId={selectedRideId} />
+          <ViewEntry
+            onClose={closeRideEntryView}
+            rideId={selectedRideId}
+            openPhotoView={openLargePhotoView}
+          />
         ) : (
           ''
         )}

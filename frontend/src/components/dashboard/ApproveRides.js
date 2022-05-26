@@ -202,10 +202,7 @@ function ApproveRides() {
         {openPhotoView ? (
           <PhotoView
             onClose={() => closeVerificationView()}
-            firstName={photoView.firstName}
-            lastName={photoView.lastName}
-            selfie={photoView.selfie}
-            photoId={photoView.photoId}
+            photoViewRide={photoView}
           />
         ) : (
           ''

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Arrow from '../../assets/img/arrow_right.svg';
 import MissingPhoto from '../../assets/img/missing_photo_icon.svg';
 
-function PhotoView({ onClose, firstName, lastName, selfie, photoId }) {
+function PhotoView({ onClose, photoViewRide }) {
   //const { user } = useContext(AuthContext);
 
   let baseImgUrl = 'http://localhost:8080/api/v1/image/';
@@ -26,22 +26,28 @@ function PhotoView({ onClose, firstName, lastName, selfie, photoId }) {
               <img className="nav-arrow" src={Arrow} alt="arrow" />
             </div>
             <p>
-              ID Verification: <span>{firstName + ' ' + lastName}</span>
+              ID Verification:{' '}
+              <span>
+                {photoViewRide.firstName + ' ' + photoViewRide.lastName}
+              </span>
             </p>
           </div>
         </div>
         <div className="entry-content">
           <div className="photo-boxes">
             <div className="photo-box" id="selfie">
-              {selfie.exists ? (
-                <img src={baseImgUrl + selfie.path} alt="Selfie" />
+              {photoViewRide.selfie.exists ? (
+                <img
+                  src={baseImgUrl + photoViewRide.selfie.path}
+                  alt="Selfie"
+                />
               ) : (
                 <img src={MissingPhoto} className="missing" alt="Missing" />
               )}
             </div>
             <div className="photo-box" id="photoId">
-              {photoId.exists ? (
-                <img src={baseImgUrl + photoId.path} alt="ID" />
+              {photoViewRide.photoId.exists ? (
+                <img src={baseImgUrl + photoViewRide.photoId.path} alt="ID" />
               ) : (
                 <img src={MissingPhoto} className="missing" alt="Missing" />
               )}
@@ -55,10 +61,7 @@ function PhotoView({ onClose, firstName, lastName, selfie, photoId }) {
 
 PhotoView.propTypes = {
   onClose: PropTypes.func.isRequired,
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  selfie: PropTypes.object.isRequired,
-  photoId: PropTypes.object.isRequired,
+  photoViewRide: PropTypes.object.isRequired,
 };
 
 export default PhotoView;
