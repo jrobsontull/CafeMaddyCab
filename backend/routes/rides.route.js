@@ -123,6 +123,11 @@ router.route('/markAsDone').post(
   RidesController.apiMarkAsDone
 );
 
+// Archive rejected rides before following week
+router
+  .route('/archiveRejected')
+  .post(validateHeader, RidesController.apiArchiveRejected);
+
 // Download all rides
 router.route('/download').get(validateHeader, RidesController.apiDownloadRides);
 

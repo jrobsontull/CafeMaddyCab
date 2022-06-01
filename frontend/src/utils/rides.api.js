@@ -165,6 +165,15 @@ export default class RidesAPI {
     }
   }
 
+  // Archive rejected rides for this week
+  static async archiveRejected(token) {
+    const url = 'api/v1/rides/archiveRejected';
+    const response = await postRequest(url, {}, token);
+    if (response) {
+      return response.data;
+    }
+  }
+
   // General dowload rides as CSV
   static async downloadRides(searchTerms, token) {
     const url = 'api/v1/rides/download';

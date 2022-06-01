@@ -341,13 +341,15 @@ function Dashboard() {
                 <li onClick={() => searchRides('status=6')}>
                   Done ({statusCount.done})
                 </li>
+                <li onClick={() => searchRides('status=7')}>
+                  Rejected done ({statusCount.doneRejected})
+                </li>
               </ul>
             </div>
             <div className="action-btns">
               <div className="action" onClick={() => openSearch()}>
                 Search requests
               </div>
-              <div className="action">Edit request</div>
 
               {isAdmin ? (
                 <div className="action" onClick={() => openApproval()}>

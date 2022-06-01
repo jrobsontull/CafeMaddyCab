@@ -14,7 +14,10 @@ function MarkAsDone({ onClose }) {
   });
   const [csvFile, setCsvFile] = useState({ file: null });
 
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState({
+    state: false,
+    message: null,
+  });
   const [showSpinner, setShowSpinner] = useState(false);
 
   function selectFile(target) {
@@ -46,7 +49,10 @@ function MarkAsDone({ onClose }) {
         if (error) {
           setErrorOnSubmit({ state: true, message: error });
         } else {
-          setSuccessMessage(true);
+          setSuccessMessage({
+            state: true,
+            message: 'These rides have been successfully marked as done.',
+          });
         }
       });
     } else {
@@ -55,6 +61,22 @@ function MarkAsDone({ onClose }) {
         message: 'You need to select a CSV file for upload first.',
       });
     }
+  }
+
+  function archiveRejected() {
+    setShowSpinner(true);
+    RidesAPI.archiveRejected(user.user.token).then((response) => {
+      setShowSpinner(false);
+      var { error } = response;
+      if (error) {
+        setErrorOnSubmit({ state: true, message: error });
+      } else {
+        setSuccessMessage({
+          state: true,
+          message: 'Successfully archived rejected rides.',
+        });
+      }
+    });
   }
 
   return (
@@ -66,7 +88,7 @@ function MarkAsDone({ onClose }) {
             <div className="back-btn" onClick={onClose}>
               <img className="nav-arrow" src={Arrow} alt="arrow" />
             </div>
-            <p>Send Codes</p>
+            <p>Mark Rides as Done</p>
           </div>
         </div>
         <div className="entry-content">
@@ -80,10 +102,8 @@ function MarkAsDone({ onClose }) {
             ''
           )}
 
-          {successMessage ? (
-            <div className="success-msg">
-              These rides have been successfully marked as done.
-            </div>
+          {successMessage.state ? (
+            <div className="success-msg">{successMessage.message}</div>
           ) : (
             ''
           )}
@@ -111,10 +131,20 @@ function MarkAsDone({ onClose }) {
             <label htmlFor="csv">Upload CSV</label>
           </div>
           <p>
-            You can now press this button to save the changes to the database.
+            You can now press the &apos;Mark as done button&apos; to save the
+            changes to the database.
           </p>
-          <div className="submit-btn" onClick={() => submitHandler()}>
-            Mark rides as done
+          <p>
+            Use the &apos;Archive&apos; button to stash this week&apos;s
+            rejected rides.
+          </p>
+          <div className="btn-row">
+            <div className="submit-btn" onClick={() => submitHandler()}>
+              Mark rides as done
+            </div>
+            <div className="submit-btn" onClick={() => archiveRejected()}>
+              Archive rejected rides
+            </div>
           </div>
         </div>
       </div>

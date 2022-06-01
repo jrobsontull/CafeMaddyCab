@@ -1599,16 +1599,19 @@ h2.description {
     .react-container.view-entry .view-entry-window.done .entry-content .upload .input-file + label:hover {
       cursor: pointer;
       background-color: #5c5cb3; }
-  .react-container.view-entry .view-entry-window.done .entry-content .submit-btn {
-    background-color: #dc87cb;
-    color: #f7f5fe;
-    padding: 16px 22px;
-    border-radius: 8px;
-    border: 1px solid #3b3b96;
-    transition: background-color 0.25s ease; }
-  .react-container.view-entry .view-entry-window.done .entry-content .submit-btn:hover {
-    cursor: pointer;
-    background-color: #e99fdc; }
+  .react-container.view-entry .view-entry-window.done .entry-content .btn-row {
+    display: flex; }
+    .react-container.view-entry .view-entry-window.done .entry-content .btn-row .submit-btn {
+      background-color: #dc87cb;
+      color: #f7f5fe;
+      padding: 14px 10px;
+      border-radius: 8px;
+      border: 1px solid #3b3b96;
+      transition: background-color 0.25s ease;
+      margin: 0 10px; }
+    .react-container.view-entry .view-entry-window.done .entry-content .btn-row .submit-btn:hover {
+      cursor: pointer;
+      background-color: #e99fdc; }
   .react-container.view-entry .view-entry-window.verification {
     min-width: 1200px;
     z-index: 100; }

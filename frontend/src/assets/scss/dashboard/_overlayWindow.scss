@@ -490,18 +490,23 @@
         }
       }
 
-      .submit-btn {
-        background-color: $dark-pink;
-        color: $lightest-pink;
-        padding: 16px 22px;
-        border-radius: $border-radius;
-        border: 1px solid $dark-blue;
-        transition: background-color 0.25s ease;
-      }
+      .btn-row {
+        display: flex;
 
-      .submit-btn:hover {
-        cursor: pointer;
-        background-color: $dark-pink-hover;
+        .submit-btn {
+          background-color: $dark-pink;
+          color: $lightest-pink;
+          padding: 14px 10px;
+          border-radius: $border-radius;
+          border: 1px solid $dark-blue;
+          transition: background-color 0.25s ease;
+          margin: 0 10px;
+        }
+
+        .submit-btn:hover {
+          cursor: pointer;
+          background-color: $dark-pink-hover;
+        }
       }
     }
   }

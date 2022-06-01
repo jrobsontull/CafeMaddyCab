@@ -256,6 +256,9 @@ export default class RidesDAO {
         count = await rides.count({ 'status.value': 6 });
         result.done = count;
 
+        count = await rides.count({ 'status.value': 7 });
+        result.doneRejected = count;
+
         count = await rides.count({
           isDuplicate: true,
           $or: [
@@ -634,6 +637,53 @@ export default class RidesDAO {
       console.error(
         'ridesDAO: Failed to mark rides as done and attach coupons. ' + e
       );
+      return { error: e };
+    }
+  }
+
+  // Archive rejected rides as 'Done - Rejected'
+  static async archiveRejected(rejectedRides) {
+    try {
+      const query = { 'status.value': 4 };
+
+      let cursor;
+
+      try {
+        cursor = await rides.find(query);
+      } catch (e) {
+        console.error('ridesDAO: Unable to issue find command. ' + e);
+        return { error: e };
+      }
+
+      const rejectedRides = await cursor.toArray();
+
+      // Set rides by ID to correct status and approver fields
+      let responses = [];
+      for (const ride of rejectedRides) {
+        responses.push(
+          await rides.findOneAndUpdate(
+            { _id: ride._id },
+            {
+              $set: {
+                status: { value: 7, text: 'Done - rejected' },
+              },
+            }
+          )
+        );
+      }
+
+      if (responses.length === rejectedRides.length) {
+        return { status: 'success' };
+      } else {
+        console.warn(
+          'ridesDAO: Failed to set all rejected rides to Done - Rejected.'
+        );
+        return {
+          error: 'Not all rejected rides were set to Done - Rejected.',
+        };
+      }
+    } catch (e) {
+      console.error('ridesDAO: Unable to archive rejected rides. ' + e);
       return { error: e };
     }
   }

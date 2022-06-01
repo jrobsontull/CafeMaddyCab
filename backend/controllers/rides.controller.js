@@ -586,6 +586,28 @@ export default class RidesController {
     }
   }
 
+  // API controller for marking rejected rides as 'Done - Rejected'
+  static async apiArchiveRejected(req, res, next) {
+    try {
+      const response = await RidesDAO.archiveRejected();
+      if (
+        response.hasOwnProperty("'error'") ||
+        response.hasOwnProperty('error')
+      ) {
+        res.status(500).json({ error: response.error });
+        return;
+      }
+
+      res.json(response);
+    } catch (e) {
+      console.log(
+        'RidesController: Failed to archive rejected rides as done. ' +
+          e.message
+      );
+      res.status(500).json({ error: e });
+    }
+  }
+
   // API controller for downloading CSV file of rides based on search term
   static async apiDownloadRides(req, res, next) {
     try {
