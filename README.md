@@ -8,13 +8,17 @@ Cab rides for Asian women, Asian LGBTQ, Asian elderly in NYC in need. MERN stack
 
 ## Wireframes for Website
 
-User frames were designed in Figma. We will generally be following the ideas layed out [here](https://www.figma.com/file/XjOnppDlrB429hCCZqBMWp/CafeMaddyCab-Production).
+Web frames were initially designed in Figma, together with a designer. Higher quality frames can be viewed [here](https://www.figma.com/file/2FULSEWGQxaTDVjIg73pmY/CafeMaddyCab-Final-Designs?node-id=0%3A1).
+
+<img src="https://i.imgur.com/RCPUOju.png" width=600/>
+
+These frames were then used as a guide for all the frontend work.
 
 ## Local Machine Set Up
 
 ### Prerequisites
 
-1. Node and npm are installed. Here are the versions used to develop the app:
+Node and npm are installed. Here are the versions needed to run the app:
 
 
         $ node --version
@@ -56,7 +60,7 @@ User frames were designed in Figma. We will generally be following the ideas lay
 
 ### Set up environmental variables
 
-1. You will need to create a `.env` file and `google-credentials.json` file in the root of the backend folder. The format of these will follow the `.example` files in the backend folder.
+1. You will need to create a `.env` file file in the root of the backend folder. The format of these will follow the `.example` files in the backend folder.
 2. I will send you the contents of both files via Slack.
 3. These need to be set up before running the backend server.
 
@@ -79,6 +83,6 @@ User frames were designed in Figma. We will generally be following the ideas lay
                 
 The server status can be viewed at anytime with `pm2 status`.
 
-Server logs can be viewed at any time with `pm2 logs`. If you need to temporarily stop pm2, you can do so with `pm2 stop PROCESS_NAME`. In the future I will prepare build scripts for this process. You can kill the daemon process with `pm2 kill`.
+Server logs can be viewed at any time with `pm2 logs`. If you need to temporarily stop pm2, you can do so with `pm2 stop PROCESS_NAME`. The daemon process can be killed with `pm2 kill`.
 
 If you get an error saying that `pm2` cannot be found, run `npm install -g pm2`.
