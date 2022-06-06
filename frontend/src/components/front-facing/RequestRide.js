@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import RidesAPI from '../../utils/rides.api';
@@ -14,7 +14,9 @@ function RequestRide() {
   const [rideDetails, setRideDetails] = useState({});
   const [selfie, setSelfie] = useState({ file: null });
   const [photoId, setPhotoId] = useState({ file: null });
-  const [otherPurpose, setOtherPurpose] = useState('');
+  const [isOtherChecked, setIsOtherChecked] = useState(false);
+  const otherRef = useRef();
+
   const [formOpen, setFormOpen] = useState(true);
 
   const [story, setStory] = useState({
@@ -116,34 +118,52 @@ function RequestRide() {
       let purpose = {};
       if (target.value === '6') {
         // Other box checked
-        purpose = { value: target.value, text: otherPurpose };
+        setIsOtherChecked(true); // keeping track of check state for css styling
+        // Check if ok format
+        const newPurpose = otherRef.current.value;
+        if (newPurpose.length > 300 || newPurpose.length === 0) {
+          // Reject
+          purpose = { value: target.value, text: null };
+          setErrors((prevErrors) => ({ ...prevErrors, purpose: true }));
+          otherRef.current.classList.add('invalid');
+        } else {
+          purpose = { value: target.value, text: newPurpose };
+          setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
+          otherRef.current.classList.remove('invalid');
+        }
       } else {
         purpose = { value: target.value, text: null };
+        setIsOtherChecked(false); // keeping track of check state for css styling
+        setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
+        otherRef.current.classList.remove('invalid');
       }
       setRideDetails((prevDetails) => ({
         ...prevDetails,
         purpose: purpose,
       }));
-      setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
     }
   }
 
   // Update purpose field in rideDetails on change of input
   function otherPurposeUpdate(target) {
-    // Check if length too long
-    const newPurpose = target.value;
-    if (newPurpose.length > 300) {
-      // Reject
-      setErrors((prevErrors) => ({ ...prevErrors, purpose: true }));
-      target.classList.add('invalid');
+    if (isOtherChecked) {
+      // Process update
+      // Check if length too long
+      const newPurpose = target.value;
+      if (newPurpose.length > 300 || newPurpose.length === 0) {
+        // Reject
+        setErrors((prevErrors) => ({ ...prevErrors, purpose: true }));
+        target.classList.add('invalid');
+      } else {
+        // Update purpose state and option in rideDetails
+        setRideDetails((prevDetails) => ({
+          ...prevDetails,
+          purpose: { value: 6, text: newPurpose },
+        }));
+        setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
+        target.classList.remove('invalid');
+      }
     } else {
-      // Update purpose state and option in rideDetails
-      setOtherPurpose(newPurpose);
-      setRideDetails((prevDetails) => ({
-        ...prevDetails,
-        purpose: { value: 6, text: newPurpose },
-      }));
-      setErrors((prevErrors) => ({ ...prevErrors, purpose: false }));
       target.classList.remove('invalid');
     }
   }
@@ -378,8 +398,7 @@ function RequestRide() {
             Ride Request & Reimbursement Form
           </h1>
           <h2 className="description">
-            Ride codes will be emailed on the following Monday, starting 5/23 at
-            8 AM.
+            Ride codes will be emailed on the following Monday at 8 AM.
           </h2>
 
           {errorOnSubmit.state ? (
@@ -537,6 +556,7 @@ function RequestRide() {
                       <input
                         placeholder="Other"
                         onChange={(e) => otherPurposeUpdate(e.target)}
+                        ref={otherRef}
                       ></input>
                     </label>
                   </div>
