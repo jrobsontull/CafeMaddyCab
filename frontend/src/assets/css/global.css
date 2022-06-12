@@ -600,6 +600,8 @@ h2.description {
       color: #e99fdc; }
     .request-form h3 span {
       font-weight: 500; }
+    .request-form h3 span#mask-message {
+      color: #e93a3a; }
   .request-form h3#thank-you {
     font-weight: 500; }
   .request-form input {
@@ -1163,6 +1165,9 @@ h2.description {
               margin-left: -83px;
               top: 12px;
               font-size: 16px; }
+              .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip .tooltip-text strong#duplicate-num {
+                font-weight: 500;
+                color: #e93a3a; }
             .dashboard .table-content .table-entries .entry ul li#col-5.is-duplicate .tooltip .tooltip-text::after {
               content: ' ';
               position: absolute;
@@ -1992,6 +1997,9 @@ h2.description {
           margin-left: -83px;
           top: 12px;
           font-size: 16px; }
+          .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip .tooltip-text strong#duplicate-num {
+            font-weight: 500;
+            color: #e93a3a; }
         .dashboard.approve-rides .table-content .table-entries ul li#col-4.is-duplicate .tooltip .tooltip-text::after {
           content: ' ';
           position: absolute;

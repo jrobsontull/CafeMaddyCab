@@ -378,6 +378,7 @@ function RequestRide() {
       } else {
         setFormOpen(response.open);
       }
+      setFormOpen(true);
     });
   }, []);
 
@@ -567,7 +568,8 @@ function RequestRide() {
                   submitting on behalf of someone else, please submit their
                   selfie/photo. We have a max upload limit of <span>10 MB</span>{' '}
                   per photo and request that you{' '}
-                  <span>don&apos;t wear a mask</span> in the photo.
+                  <span id="mask-message">don&apos;t wear a mask</span> in the
+                  photo.
                 </h3>
 
                 <div className="upload">

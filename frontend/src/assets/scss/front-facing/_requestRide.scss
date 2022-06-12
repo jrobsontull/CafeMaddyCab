@@ -50,6 +50,10 @@ h2.description {
     span {
       font-weight: 500;
     }
+
+    span#mask-message {
+      color: $error;
+    }
   }
 
   h3#thank-you {

@@ -243,11 +243,21 @@ function ApproveRides() {
                     {ride.isDuplicate ? (
                       <li id="col-4" className="is-duplicate">
                         {ride.email}
+                        {ride.duplicateNum
+                          ? ` (` + ride.duplicateNum + `)`
+                          : ''}
                         <div className="tooltip">
                           <span className="tooltip-text">
-                            This email is already used for another ride
-                            requesting a code. We only allow 2 rides a week so
-                            double check this!
+                            This email is already in use by another ride request
+                            for this week.
+                            {ride.duplicateNum ? (
+                              <strong id="duplicate-num">
+                                <br />
+                                Duplicate number: {ride.duplicateNum}
+                              </strong>
+                            ) : (
+                              ''
+                            )}
                           </span>
                         </div>
                       </li>

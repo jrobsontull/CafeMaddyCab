@@ -58,7 +58,8 @@ export default class RidesDAO {
         notes: '',
         coupon: null,
         status: { value: 1, text: 'New' },
-        isDuplicate: isDuplicate,
+        isDuplicate: isDuplicate.isPresent,
+        duplicateNum: isDuplicate.numPresent,
       };
 
       return await rides.insertOne(rideDoc);
@@ -717,6 +718,7 @@ export default class RidesDAO {
 
       const foundRides = await cursor.toArray();
       if (foundRides.length > 0) {
+        const duplicateNum = foundRides.length;
         try {
           // Set found rides to duplicate status
           for (const ride of foundRides) {
@@ -731,13 +733,13 @@ export default class RidesDAO {
               e
           );
         }
-        return true;
+        return { isPresent: true, numPresent: duplicateNum };
       } else {
-        return false;
+        return { isPresent: false, numPresent: null };
       }
     } catch (e) {
       console.error('ridesDAO: Failed to find duplicates. ' + e);
-      return false;
+      return { isPresent: false, numPresent: null };
     }
   }
 }

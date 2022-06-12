@@ -176,9 +176,13 @@ function ViewEntry({ rideId, onClose, openPhotoView }) {
         <div className="entry-content">
           {rideDetails.isDuplicate ? (
             <div className="error">
-              This ride is a possible duplicate. Use the search function to find
-              the duplicate or click the duplicates filter in the left-hand
-              column of the dashboard.
+              This ride is a duplicate
+              {rideDetails.duplicateNum
+                ? ` (` + rideDetails.duplicateNum + `)`
+                : ''}
+              . Use the search function to find rides by email or click the
+              duplicates filter in the left-hand column of the dashboard, to
+              investigate further.
             </div>
           ) : (
             ''

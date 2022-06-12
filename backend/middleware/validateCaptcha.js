@@ -35,7 +35,8 @@ async function verifyCaptcha(req, res, next) {
   } catch (e) {
     console.warn('verifyCaptcha: Error verifying reCAPTCHA. ' + e.message);
     res.status(500).json({
-      error: 'Internal server error. Please contact the Cafe Maddy Cab team.',
+      error:
+        'Internal server error. Please try again or contact the Cafe Maddy Cab team.',
     });
   }
 }
