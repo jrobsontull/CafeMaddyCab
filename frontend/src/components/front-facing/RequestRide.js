@@ -378,7 +378,6 @@ function RequestRide() {
       } else {
         setFormOpen(response.open);
       }
-      setFormOpen(true);
     });
   }, []);
 
