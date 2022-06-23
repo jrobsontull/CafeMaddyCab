@@ -15,6 +15,8 @@ cd frontend/
 npm install
 echo -e "\e[32m[DEPLOY]\e[0m Building frontend"
 npm run build
+echo -e "\e[32m[DEPLOY]\e[0m Purging CSS"
+npm run postbuild
 cd ..
 cd backend/
 echo -e "\e[32m[DEPLOY]\e[0m Installing backend modules"

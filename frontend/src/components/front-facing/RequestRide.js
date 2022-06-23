@@ -364,21 +364,23 @@ function RequestRide() {
     window.scrollTo(0, 0);
 
     // Get NYC time and set form state
-    TimeAPI.isFormOpen().then((response) => {
-      if (
-        Object.prototype.hasOwnProperty.call(response, "'error'") ||
-        Object.prototype.hasOwnProperty.call(response, 'error')
-      ) {
-        setErrorOnSubmit({
-          state: true,
-          message:
-            'Failed to check if form was open. Please contact the Cafe Maddy Cab team for help.',
-        });
-        setFormOpen(false);
-      } else {
-        setFormOpen(response.open);
-      }
-    });
+    // TimeAPI.isFormOpen().then((response) => {
+    //   if (
+    //     Object.prototype.hasOwnProperty.call(response, "'error'") ||
+    //     Object.prototype.hasOwnProperty.call(response, 'error')
+    //   ) {
+    //     setErrorOnSubmit({
+    //       state: true,
+    //       message:
+    //         'Failed to check if form was open. Please contact the Cafe Maddy Cab team for help.',
+    //     });
+    //     setFormOpen(false);
+    //   } else {
+    //     setFormOpen(response.open);
+    //   }
+    // });
+
+    setFormOpen(false);
   }, []);
 
   return (
@@ -749,9 +751,13 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              Our submission form is currently closed. We take submissions from
+              {/* Our submission form is currently closed. We take submissions from
               Monday to Wednesday each week. If you have any questions, please
-              refer to our <Link to={'/faq'}>FAQ</Link> page.
+              refer to our <Link to={'/faq'}>FAQ</Link> page. */}
+              We&apos;re sorry, but our submission form will be closed from{' '}
+              <span>6/27/2022</span> to <span>7/1/2022</span> whilst we obtain
+              more Uber codes for the following weeks!
+              <p>Thank you for your patience.</p>
             </div>
           )}
 
