@@ -17,7 +17,7 @@ function RequestRide() {
   const [isOtherChecked, setIsOtherChecked] = useState(false);
   const otherRef = useRef();
 
-  const [formOpen, setFormOpen] = useState(true);
+  const [formOpen, setFormOpen] = useState(false);
 
   const [story, setStory] = useState({
     story: '',
@@ -45,7 +45,10 @@ function RequestRide() {
     state: false,
     message: null,
   });
-  const [isRequesting, setIsRequesting] = useState(false);
+  const [isRequesting, setIsRequesting] = useState({
+    state: false,
+    message: null,
+  });
 
   const navigate = useNavigate();
 
@@ -337,19 +340,23 @@ function RequestRide() {
 
       window.scrollTo(0, 0);
     } else {
-      setIsRequesting(true);
+      setIsRequesting({
+        state: true,
+        message:
+          "We're sending your request right now! This page will automatically refresh when your request has sent.",
+      });
 
       RidesAPI.requestRide(rideDetails, selfie.file, photoId.file, story).then(
         (response) => {
           var { error } = response;
           if (error) {
-            setIsRequesting(false);
+            setIsRequesting({ state: false, message: null });
             setErrorOnSubmit({ state: true, message: error });
             window.scrollTo(0, 0);
           } else if (response && response.data.acknowledged === true) {
             // All good
             const id = response.data.insertedId;
-            setIsRequesting(false);
+            setIsRequesting({ state: false, message: null });
             navigate('/success/' + id, {
               state: { name: rideDetails.firstName },
             });
@@ -363,9 +370,24 @@ function RequestRide() {
     // Scroll to top on component load/refresh
     window.scrollTo(0, 0);
 
+    // Set loading to true
+    setIsRequesting({
+      state: true,
+      message:
+        "We're loading this page right now and it will automatically refresh when complete.",
+    });
+
     // Get NYC time and set form state
     TimeAPI.isFormOpen().then((response) => {
-      if (
+      setIsRequesting(false);
+      if (typeof response !== 'object') {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'Failed to check if form was open. Please contact the Cafe Maddy Cab team for help.',
+        });
+        setFormOpen(false);
+      } else if (
         Object.prototype.hasOwnProperty.call(response, "'error'") ||
         Object.prototype.hasOwnProperty.call(response, 'error')
       ) {
@@ -384,12 +406,10 @@ function RequestRide() {
 
   return (
     <div className="react-container">
-      {isRequesting ? (
+      {isRequesting.state ? (
         <Loading
           pageTitle="Ride Request & Reimbursement Form"
-          loadMessage={
-            "We're sending your request right now! This page will automatically refresh when your request has sent."
-          }
+          loadMessage={isRequesting.message}
         />
       ) : (
         <div className="content frontend">
@@ -750,12 +770,14 @@ function RequestRide() {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : !errorOnSubmit.state ? (
             <div className="info-box no-title">
               Our submission form is currently closed. We take submissions from
               Monday to Wednesday each week. If you have any questions, please
               refer to our <Link to={'/faq'}>FAQ</Link> page.
             </div>
+          ) : (
+            ''
           )}
 
           <Footer />
