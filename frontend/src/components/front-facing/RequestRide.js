@@ -364,23 +364,22 @@ function RequestRide() {
     window.scrollTo(0, 0);
 
     // Get NYC time and set form state
-    // TimeAPI.isFormOpen().then((response) => {
-    //   if (
-    //     Object.prototype.hasOwnProperty.call(response, "'error'") ||
-    //     Object.prototype.hasOwnProperty.call(response, 'error')
-    //   ) {
-    //     setErrorOnSubmit({
-    //       state: true,
-    //       message:
-    //         'Failed to check if form was open. Please contact the Cafe Maddy Cab team for help.',
-    //     });
-    //     setFormOpen(false);
-    //   } else {
-    //     setFormOpen(response.open);
-    //   }
-    // });
-
-    setFormOpen(false);
+    TimeAPI.isFormOpen().then((response) => {
+      if (
+        Object.prototype.hasOwnProperty.call(response, "'error'") ||
+        Object.prototype.hasOwnProperty.call(response, 'error')
+      ) {
+        setErrorOnSubmit({
+          state: true,
+          message:
+            'Failed to check if form was open. Please contact the Cafe Maddy Cab team for help.',
+        });
+        setFormOpen(false);
+      } else {
+        setFormOpen(response.open);
+      }
+      setFormOpen(true);
+    });
   }, []);
 
   return (
@@ -400,7 +399,9 @@ function RequestRide() {
             Ride Request & Reimbursement Form
           </h1>
           <h2 className="description">
-            Ride codes will be emailed on the following Monday at 8 AM.
+            Ride codes will be emailed on the following Monday at 8 AM. Please
+            note that due to limited codes, $30 ride vouchers are now limited to
+            1 ride per person per week, while supplies last.
           </h2>
 
           {errorOnSubmit.state ? (
@@ -751,13 +752,9 @@ function RequestRide() {
             </div>
           ) : (
             <div className="info-box no-title">
-              {/* Our submission form is currently closed. We take submissions from
+              Our submission form is currently closed. We take submissions from
               Monday to Wednesday each week. If you have any questions, please
-              refer to our <Link to={'/faq'}>FAQ</Link> page. */}
-              We&apos;re sorry, but our submission form will be closed from{' '}
-              <span>6/27/2022</span> to <span>7/1/2022</span> whilst we obtain
-              more Uber codes for the following weeks!
-              <p>Thank you for your patience.</p>
+              refer to our <Link to={'/faq'}>FAQ</Link> page.
             </div>
           )}
 

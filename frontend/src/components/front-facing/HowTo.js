@@ -95,8 +95,8 @@ function HowToPage() {
         <div className="info-box" id="child-2">
           <ol>
             <li>
-              Everyone is eligible for 2 rides per week. Please submit separate
-              entries for each ride request.
+              Everyone is currently eligible for 1 ride per week. Please submit
+              separate entries for each ride request.
             </li>
             <li>
               Each code has a value of $30. The remaining balance does not roll
