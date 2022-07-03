@@ -85,6 +85,10 @@ function ViewEntry({ rideId, onClose, openPhotoView }) {
         newStatus = { value: 6, text: 'Done' };
         setApprover = false;
         break;
+      case 7:
+        newStatus = { value: 7, text: 'Done - rejected' };
+        setApprover = false;
+        break;
       // no default
     }
 
@@ -293,6 +297,7 @@ function ViewEntry({ rideId, onClose, openPhotoView }) {
                   <option value="4">Rejected</option>
                   <option value="5">Unsure</option>
                   <option value="6">Done</option>
+                  <option value="7">Done - rejected</option>
                 </select>
               </li>
               <li>
