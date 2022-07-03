@@ -436,8 +436,6 @@ export default class RidesDAO {
 
       // Update the status of rides
       if (ridesToUpdate) {
-        let imagePaths = [];
-
         for (const ride of ridesToUpdate) {
           let newStatusText;
           const newStatus = parseInt(ride.stateToSet, 10);
@@ -453,63 +451,18 @@ export default class RidesDAO {
               break;
           }
 
-          const foundRide = await rides.findOne({ _id: ObjectId(ride._id) });
-
-          if (newStatus === 3 || newStatus === 4) {
-            // Marked as Approved or Rejected
-            rideResponses.push(
-              await rides.findOneAndUpdate(
-                { _id: ObjectId(ride._id) },
-                {
-                  $set: {
-                    status: { value: newStatus, text: newStatusText },
-                    verified: true,
-                    'selfie.exists': false,
-                    'photoId.exists': false,
-                  },
-                }
-              )
-            );
-
-            // Mark these images for deletion
-            if (foundRide.photoId.exists) {
-              imagePaths.push('./uploads/' + foundRide.photoId.path);
-            }
-            if (foundRide.selfie.exists) {
-              imagePaths.push('./uploads/' + foundRide.selfie.path);
-            }
-          } else {
-            // Marked as unsure and don't mark images for deletion
-            rideResponses.push(
-              await rides.findOneAndUpdate(
-                { _id: ObjectId(ride._id) },
-                {
-                  $set: {
-                    status: { value: newStatus, text: newStatusText },
-                    verified: true,
-                  },
-                }
-              )
-            );
-          }
-        }
-
-        // Now delete images
-        const deleteResponse = await ImageDAO.bulkDelete(imagePaths);
-
-        // And log any errors
-        for (const response of deleteResponse) {
-          if (
-            response[1].hasOwnProperty('error') ||
-            response[1].hasOwnProperty("'error'")
-          ) {
-            console.warn(
-              'RideDAO: Failed to delete image ' +
-                response[0] +
-                '. ' +
-                response[1].error
-            );
-          }
+          // Marked as Approved or Rejected
+          rideResponses.push(
+            await rides.findOneAndUpdate(
+              { _id: ObjectId(ride._id) },
+              {
+                $set: {
+                  status: { value: newStatus, text: newStatusText },
+                  verified: true,
+                },
+              }
+            )
+          );
         }
       }
 
@@ -610,20 +563,58 @@ export default class RidesDAO {
   // Mark rides as done and attach coupon codes
   static async markAsDone(ridesToUpdate) {
     try {
-      let responses = [];
+      const responses = [];
+      const imagePaths = [];
+
       for (const ride of ridesToUpdate) {
         const _id = ride[0];
         const coupon = ride[5];
 
+        // Delete images if they exist
+        const foundRide = await rides.findOne({ _id: ObjectId(_id) });
+
+        if (foundRide.photoId.exists) {
+          imagePaths.push('./uploads/' + foundRide.photoId.path);
+        }
+        if (foundRide.selfie.exists) {
+          imagePaths.push('./uploads/' + foundRide.selfie.path);
+        }
+
+        // Update status
         responses.push(
           await rides.findOneAndUpdate(
             { _id: ObjectId(_id) },
-            { $set: { status: { value: 6, text: 'Done' }, coupon: coupon } }
+            {
+              $set: {
+                status: { value: 6, text: 'Done' },
+                coupon: coupon,
+                'selfie.exists': false,
+                'photoId.exists': false,
+              },
+            }
           )
         );
       }
 
-      // Error checking
+      // Now delete images
+      const deleteResponses = await ImageDAO.bulkDelete(imagePaths);
+
+      // And log any errors
+      for (const response of deleteResponses) {
+        if (
+          response[1].hasOwnProperty('error') ||
+          response[1].hasOwnProperty("'error'")
+        ) {
+          console.warn(
+            'RideDAO: Failed to delete image ' +
+              response[0] +
+              '. ' +
+              response[1].error
+          );
+        }
+      }
+
+      // Error checking of document edit responses
       if (responses.length === ridesToUpdate.length) {
         return { status: 'success' };
       } else {
@@ -659,20 +650,54 @@ export default class RidesDAO {
       const rejectedRides = await cursor.toArray();
 
       // Set rides by ID to correct status and approver fields
-      let responses = [];
+      const responses = [];
+      const imagePaths = [];
+
       for (const ride of rejectedRides) {
+        // Set images for deletion if they exist
+        const foundRide = await rides.findOne({ _id: ObjectId(ride._id) });
+
+        if (foundRide.photoId.exists) {
+          imagePaths.push('./uploads/' + foundRide.photoId.path);
+        }
+        if (foundRide.selfie.exists) {
+          imagePaths.push('./uploads/' + foundRide.selfie.path);
+        }
+
+        // Update status
         responses.push(
           await rides.findOneAndUpdate(
             { _id: ride._id },
             {
               $set: {
                 status: { value: 7, text: 'Done - rejected' },
+                'selfie.exists': false,
+                'photoId.exists': false,
               },
             }
           )
         );
       }
 
+      // Now delete images
+      const deleteResponses = await ImageDAO.bulkDelete(imagePaths);
+
+      // And log any errors
+      for (const response of deleteResponses) {
+        if (
+          response[1].hasOwnProperty('error') ||
+          response[1].hasOwnProperty("'error'")
+        ) {
+          console.warn(
+            'RideDAO: Failed to delete image ' +
+              response[0] +
+              '. ' +
+              response[1].error
+          );
+        }
+      }
+
+      // And check status of edit responses
       if (responses.length === rejectedRides.length) {
         return { status: 'success' };
       } else {

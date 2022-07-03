@@ -280,7 +280,8 @@ export default class RidesController {
       let isPhotoIdDeleted = false;
       let isSelfieDeleted = false;
 
-      if (newStatus === 3 || newStatus === 4) {
+      // Delete photos if status moved to Done (6) or Rejected done (7)
+      if (newStatus === 6 || newStatus === 7) {
         if (photoId.exists === true) {
           const photoIdDeletion = await ImageDAO.deleteImage(
             './uploads/' + photoId.path
