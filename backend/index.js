@@ -31,6 +31,7 @@ MongoClient.connect(db_uri, {
     await AuthDAO.injectAuthDB(client);
     await FeedbackDAO.injectFeedbackDB(client);
     await StoriesDAO.injectStoriesDB(client);
+    await RidesDAO.loadRestrictedList();
 
     app.listen(port, () => {
       console.log('Listening on port ' + port);

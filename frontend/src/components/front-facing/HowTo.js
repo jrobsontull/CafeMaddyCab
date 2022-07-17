@@ -99,7 +99,7 @@ function HowToPage() {
               separate entries for each ride request.
             </li>
             <li>
-              Each code has a value of $30. The remaining balance does not roll
+              Each code has a value of $20. The remaining balance does not roll
               over.
             </li>
             <li>

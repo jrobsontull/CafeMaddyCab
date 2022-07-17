@@ -3,6 +3,7 @@
 /frontend/node_modules
 /backend/.env
 /frontend/.env
+/backend/config/restricted.json
 
 # dependencies
 /node_modules

@@ -419,7 +419,7 @@ function RequestRide() {
           </h1>
           <h2 className="description">
             Ride codes will be emailed on the following Monday at 8 AM. Please
-            note that due to limited codes, $30 ride vouchers are now limited to
+            note that due to limited codes, $20 ride vouchers are now limited to
             1 ride per person per week, while supplies last.
           </h2>
 
@@ -639,8 +639,8 @@ function RequestRide() {
                 </div>
 
                 <h3>
-                  I understand that the code is for 1 ride up to $30, and the
-                  remaining balance does not roll over to the 2nd ride. I also
+                  I understand that the code is for 1 ride up to $20, and the
+                  remaining balance does not roll over to a 2nd ride. I also
                   understand that Cafe Maddy Cab is not responsible for any
                   incidents that may occur on the Uber ride.
                 </h3>

@@ -1,9 +1,11 @@
 import mongodb from 'mongodb';
+import fs from 'fs';
 import ImageDAO from './imageDAO.js';
 
 const ObjectId = mongodb.ObjectId;
 
 let rides;
+let restricted;
 
 export default class RidesDAO {
   // Establish DB connection
@@ -61,6 +63,12 @@ export default class RidesDAO {
         isDuplicate: isDuplicate.isPresent,
         duplicateNum: isDuplicate.numPresent,
       };
+
+      // Automatically set requests to rejected if restricted email
+      if (this.checkIfRestricted(email)) {
+        rideDoc.status = { value: 4, text: 'Rejected' };
+        rideDoc.notes = 'Automated rejection: email in restricted list';
+      }
 
       return await rides.insertOne(rideDoc);
     } catch (e) {
@@ -766,5 +774,40 @@ export default class RidesDAO {
       console.error('ridesDAO: Failed to find duplicates. ' + e);
       return { isPresent: false, numPresent: null };
     }
+  }
+
+  // Load in list of restricted emails for checking against
+  static async loadRestrictedList() {
+    try {
+      const location = './config/restricted.json';
+      // Check if exists
+      if (
+        (await fs.promises.access(location, fs.constants.F_OK)) === undefined
+      ) {
+        const stream = await fs.promises.readFile(location, 'utf-8');
+        const restricedEmails = JSON.parse(stream).emails;
+        restricted = restricedEmails;
+      } else {
+        console.log('ridesDAO: No restricted list exits. Setting empty.');
+        restricted = [];
+      }
+    } catch (e) {
+      console.error('ridesDAO: Failed to load restricted emails list. ' + e);
+      restricted = [];
+    }
+  }
+
+  // Check if email is a restricted email
+  static checkIfRestricted(email) {
+    let foundEmail = false;
+    if (restricted) {
+      restricted.forEach((restrictedEmail) => {
+        if (email === restrictedEmail) {
+          foundEmail = true;
+          return;
+        }
+      });
+    }
+    return foundEmail;
   }
 }
