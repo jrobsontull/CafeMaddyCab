@@ -26,7 +26,7 @@ else
 cd frontend/
 echo -e "\e[32m[DEPLOY]\e[0m Building frontend"
 npm run build
-cd ../backend/
+cd ..
 fi
 
 echo -e "\e[32m[DEPLOY]\e[0m Starting daemon process"
