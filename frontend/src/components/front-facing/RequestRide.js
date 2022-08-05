@@ -418,9 +418,11 @@ function RequestRide() {
             Ride Request & Reimbursement Form
           </h1>
           <h2 className="description">
-            Ride codes will be emailed on the following Monday at 8 AM. Please
-            note that due to limited codes, $20 ride vouchers are now limited to
-            1 ride per person per week, while supplies last.
+            Ride codes will be emailed on the following Monday at 8 AM. $20 ride
+            vouchers are currently limited to 1 ride per person per week, with a
+            maximum of 100 available each week. Codes will be distributed on a
+            first come, first served basis. This is until we secure further
+            funding. Thank you for your patience.
           </h2>
 
           {errorOnSubmit.state ? (

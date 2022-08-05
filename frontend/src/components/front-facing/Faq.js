@@ -101,6 +101,17 @@ function Faq() {
           <Link to={'/how-to-ride'}>How it Works</Link> page for more details.
         </div>
 
+        <div className="info-box-title">
+          <h3>Why didn&apos;t I receive a code?</h3>
+        </div>
+        <div className="info-box">
+          If you met all of our eligibility critera, please note that we have
+          limited stocks of codes until we secure further funding. Codes are
+          currently limited to one $20 voucher per person per week. We are only
+          distributiung 100 codes per week on a first come, first served basis.
+          Thank you for your patience.
+        </div>
+
         <Footer />
       </div>
     </div>
