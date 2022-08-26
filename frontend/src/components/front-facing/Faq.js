@@ -108,7 +108,7 @@ function Faq() {
           If you met all of our eligibility critera, please note that we have
           limited stocks of codes until we secure further funding. Codes are
           currently limited to one $20 voucher per person per week. We are only
-          distributiung 100 codes per week on a first come, first served basis.
+          distributiung 180 codes per week on a first come, first served basis.
           Thank you for your patience.
         </div>
 

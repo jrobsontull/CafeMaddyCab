@@ -420,7 +420,7 @@ function RequestRide() {
           <h2 className="description">
             Ride codes will be emailed on the following Monday at 8 AM. $20 ride
             vouchers are currently limited to 1 ride per person per week, with a
-            maximum of 100 available each week. Codes will be distributed on a
+            maximum of 180 available each week. Codes will be distributed on a
             first come, first served basis. This is until we secure further
             funding. Thank you for your patience.
           </h2>
