@@ -7,6 +7,7 @@ import verifyCaptcha from '../middleware/validateCaptcha.js';
 import apiLimitRequestRides from '../middleware/rateLimitter.js';
 import validateHeader from '../middleware/validateHeader.js';
 import csvUpload from '../middleware/csvUpload.js';
+import validateTimeWindow from '../middleware/validateTimeWindow.js';
 
 // Controller
 import RidesController from '../controllers/rides.controller.js';
@@ -18,6 +19,7 @@ router
   .route('/')
   .post(
     apiLimitRequestRides,
+    validateTimeWindow,
     verifyCaptcha,
     function (req, res, next) {
       multiImageUpload(
