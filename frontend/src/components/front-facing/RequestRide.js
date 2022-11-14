@@ -400,6 +400,7 @@ function RequestRide() {
       } else {
         setFormOpen(response.open);
       }
+      setFormOpen(false); // close for foreseeable future
     });
   }, []);
 
@@ -418,11 +419,16 @@ function RequestRide() {
             Ride Request & Reimbursement Form
           </h1>
           <h2 className="description">
-            Ride codes will be emailed on the following Monday at 8 AM. $20 ride
-            vouchers are currently limited to 1 ride per person per week, with a
-            maximum of 180 available each week. Codes will be distributed on a
-            first come, first served basis. This is until we secure further
-            funding. Thank you for your patience.
+            Cafe Maddy Cab is currently no longer provide vouchers. This is
+            until we secure further funding. Thank you for your patience and
+            your continued support. Keep a lookout on our{' '}
+            <Link
+              to={'https://www.instagram.com/cafemaddycab/'}
+              style={{ fontWeight: 600 }}
+            >
+              Instagram
+            </Link>{' '}
+            page for more information.
           </h2>
 
           {errorOnSubmit.state ? (
@@ -773,9 +779,8 @@ function RequestRide() {
             </div>
           ) : !errorOnSubmit.state ? (
             <div className="info-box no-title">
-              Our submission form is currently closed. We take submissions from
-              Monday to Wednesday each week. If you have any questions, please
-              refer to our <Link to={'/faq'}>FAQ</Link> page.
+              Our submission form is currently closed. If you have any
+              questions, please refer to our <Link to={'/faq'}>FAQ</Link> page.
             </div>
           ) : (
             ''
