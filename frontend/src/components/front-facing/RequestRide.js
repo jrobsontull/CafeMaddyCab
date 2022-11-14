@@ -422,12 +422,12 @@ function RequestRide() {
             Cafe Maddy Cab is currently no longer provide vouchers. This is
             until we secure further funding. Thank you for your patience and
             your continued support. Keep a lookout on our{' '}
-            <Link
-              to={'https://www.instagram.com/cafemaddycab/'}
+            <a
+              href={'https://www.instagram.com/cafemaddycab/'}
               style={{ fontWeight: 600 }}
             >
               Instagram
-            </Link>{' '}
+            </a>{' '}
             page for more information.
           </h2>
 
